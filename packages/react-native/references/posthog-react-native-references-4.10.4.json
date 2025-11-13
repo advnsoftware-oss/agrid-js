@@ -1,13 +1,13 @@
 {
-  "id": "posthog-react-native",
+  "id": "agrid-react-native",
   "hogRef": "0.3",
   "info": {
     "version": "4.10.4",
-    "id": "posthog-react-native",
+    "id": "agrid-react-native",
     "title": "PostHog React Native SDK",
     "description": "PostHog React Native SDK allows you to capture events and send them to PostHog from your React Native applications.",
-    "slugPrefix": "posthog-react-native",
-    "specUrl": "https://github.com/PostHog/posthog-js"
+    "slugPrefix": "agrid-react-native",
+    "specUrl": "https://github.com/PostHog/agrid-js"
   },
   "classes": [
     {
@@ -25,12 +25,12 @@
             {
               "id": "add_to_app.(js|ts)",
               "name": "Add to App.(js|ts)",
-              "code": "\n\n// Add to App.(js|ts)\nimport { usePostHog, PostHogProvider } from 'posthog-react-native'\n\nexport function MyApp() {\n    return (\n        <PostHogProvider apiKey=\"<ph_project_api_key>\" options={{\n            host: '<ph_client_api_host>',\n        }}>\n            <MyComponent />\n        </PostHogProvider>\n    )\n}\n\n// And access the PostHog client via the usePostHog hook\nimport { usePostHog } from 'posthog-react-native'\n\nconst MyComponent = () => {\n    const posthog = usePostHog()\n\n    useEffect(() => {\n        posthog.capture(\"event_name\")\n    }, [posthog])\n}\n\n\n\n"
+              "code": "\n\n// Add to App.(js|ts)\nimport { usePostHog, PostHogProvider } from 'agrid-react-native'\n\nexport function MyApp() {\n    return (\n        <PostHogProvider apiKey=\"<ph_project_api_key>\" options={{\n            host: '<ph_client_api_host>',\n        }}>\n            <MyComponent />\n        </PostHogProvider>\n    )\n}\n\n// And access the PostHog client via the usePostHog hook\nimport { usePostHog } from 'agrid-react-native'\n\nconst MyComponent = () => {\n    const posthog = usePostHog()\n\n    useEffect(() => {\n        posthog.capture(\"event_name\")\n    }, [posthog])\n}\n\n\n\n"
             },
             {
               "id": "using_with_existing_client",
               "name": "Using with existing client",
-              "code": "\n\n// Using with existing client\nimport { PostHog } from 'posthog-react-native'\n\nconst posthog = new PostHog('<ph_project_api_key>', {\n    host: '<ph_client_api_host>'\n})\n\nexport function MyApp() {\n    return (\n        <PostHogProvider client={posthog}>\n            <MyComponent />\n        </PostHogProvider>\n    )\n}\n\n\n\n"
+              "code": "\n\n// Using with existing client\nimport { PostHog } from 'agrid-react-native'\n\nconst posthog = new PostHog('<ph_project_api_key>', {\n    host: '<ph_client_api_host>'\n})\n\nexport function MyApp() {\n    return (\n        <PostHogProvider client={posthog}>\n            <MyComponent />\n        </PostHogProvider>\n    )\n}\n\n\n\n"
             }
           ],
           "releaseTag": "public",
@@ -58,7 +58,7 @@
             {
               "id": "posthog.ts",
               "name": "posthog.ts",
-              "code": "\n\n// posthog.ts\nimport PostHog from 'posthog-react-native'\n\nexport const posthog = new PostHog('<ph_project_api_key>', {\n  host: '<ph_client_api_host>'\n})\n\n// Then you can access PostHog by importing your instance\n// Another file:\nimport { posthog } from './posthog'\n\nexport function MyApp1() {\n    useEffect(async () => {\n        posthog.capture('event_name')\n    }, [posthog])\n\n    return <View>Your app code</View>\n}\n\n\n\n"
+              "code": "\n\n// posthog.ts\nimport PostHog from 'agrid-react-native'\n\nexport const posthog = new PostHog('<ph_project_api_key>', {\n  host: '<ph_client_api_host>'\n})\n\n// Then you can access PostHog by importing your instance\n// Another file:\nimport { posthog } from './posthog'\n\nexport function MyApp1() {\n    useEffect(async () => {\n        posthog.capture('event_name')\n    }, [posthog])\n\n    return <View>Your app code</View>\n}\n\n\n\n"
             }
           ],
           "releaseTag": "public",
@@ -498,12 +498,12 @@
             {
               "id": "basic_identify",
               "name": "Basic identify",
-              "code": "\n\n// Basic identify\nposthog.identify('distinctID', {\n  email: 'user@posthog.com',\n  name: 'My Name'\n})\n\n\n"
+              "code": "\n\n// Basic identify\nposthog.identify('distinctID', {\n  email: 'user@agrid.com',\n  name: 'My Name'\n})\n\n\n"
             },
             {
               "id": "using_$set_and_$set_once",
               "name": "Using $set and $set_once",
-              "code": "\n\n// Using $set and $set_once\nposthog.identify('distinctID', {\n  $set: {\n    email: 'user@posthog.com',\n    name: 'My Name'\n  },\n  $set_once: {\n    date_of_first_log_in: '2024-03-01'\n  }\n})\n\n\n\n"
+              "code": "\n\n// Using $set and $set_once\nposthog.identify('distinctID', {\n  $set: {\n    email: 'user@agrid.com',\n    name: 'My Name'\n  },\n  $set_once: {\n    date_of_first_log_in: '2024-03-01'\n  }\n})\n\n\n\n"
             }
           ],
           "releaseTag": "public",

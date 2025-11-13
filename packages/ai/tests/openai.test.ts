@@ -1,4 +1,4 @@
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import PostHogOpenAI from '../src/openai'
 import openaiModule from 'openai'
 import type { ChatCompletion, ChatCompletionChunk } from 'openai/resources/chat/completions'

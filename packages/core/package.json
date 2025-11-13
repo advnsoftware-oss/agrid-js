@@ -1,5 +1,5 @@
 {
-  "name": "@posthog/core",
+  "name": "@agrid/core",
   "version": "1.5.2",
   "license": "MIT",
   "main": "dist/index.js",
@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PostHog/posthog-js.git",
+    "url": "https://github.com/agrid/agrid-js.git",
     "directory": "packages/core"
   },
   "files": [
@@ -57,7 +57,7 @@
     }
   },
   "devDependencies": {
-    "@posthog-tooling/tsconfig-base": "workspace:*",
+    "@agrid-tooling/tsconfig-base": "workspace:*",
     "@rslib/core": "catalog:",
     "@types/cross-spawn": "^6.0.6",
     "jest": "catalog:"

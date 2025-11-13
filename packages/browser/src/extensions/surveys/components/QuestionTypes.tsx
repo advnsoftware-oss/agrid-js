@@ -8,7 +8,7 @@ import {
     SurveyAppearance,
     SurveyQuestionType,
 } from '../../../posthog-surveys-types'
-import { isArray, isNull, isNumber, isString } from '@posthog/core'
+import { isArray, isNull, isNumber, isString } from '@agrid/core'
 import { dissatisfiedEmoji, neutralEmoji, satisfiedEmoji, veryDissatisfiedEmoji, verySatisfiedEmoji } from '../icons'
 import { getDisplayOrderChoices, useSurveyContext } from '../surveys-extension-utils'
 import { BottomSection } from './BottomSection'

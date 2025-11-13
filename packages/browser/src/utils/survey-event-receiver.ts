@@ -6,7 +6,7 @@ import { PostHog } from '../posthog-core'
 import { CaptureResult } from '../types'
 import { SURVEY_LOGGER as logger } from './survey-utils'
 import { propertyComparisons } from './property-utils'
-import { isNull, isUndefined } from '@posthog/core'
+import { isNull, isUndefined } from '@agrid/core'
 
 export class SurveyEventReceiver {
     // eventToSurveys is a mapping of event name to all the surveys that are activated by it

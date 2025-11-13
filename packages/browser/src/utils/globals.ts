@@ -12,7 +12,7 @@ import {
 // eslint-disable-next-line posthog-js/no-external-replay-imports
 import type { SessionRecordingStatus, TriggerType } from '../extensions/replay/external/triggerMatching'
 import { eventWithTime } from '../extensions/replay/types/rrweb-types'
-import { ErrorTracking } from '@posthog/core'
+import { ErrorTracking } from '@agrid/core'
 
 /*
  * Global helpers to protect access to browser globals in a way that is safer for different targets

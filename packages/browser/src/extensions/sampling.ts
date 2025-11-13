@@ -1,4 +1,4 @@
-import { isArray, isUndefined, clampToRange } from '@posthog/core'
+import { isArray, isUndefined, clampToRange } from '@agrid/core'
 import { logger } from '../utils/logger'
 
 export function appendArray(currentValue: string[] | undefined, sampleType: string | string[]): string[] {

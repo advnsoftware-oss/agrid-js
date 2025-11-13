@@ -1,4 +1,4 @@
-import { isFunction, isUndefined, includes } from '@posthog/core'
+import { isFunction, isUndefined, includes } from '@agrid/core'
 
 /**
  * this device detection code is (at time of writing) about 3% of the size of the entire library

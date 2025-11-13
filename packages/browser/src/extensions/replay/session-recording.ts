@@ -10,7 +10,7 @@ import { PostHog } from '../../posthog-core'
 import { Properties, RemoteConfig, SessionRecordingPersistedConfig, SessionStartReason } from '../../types'
 import { type eventWithTime } from './types/rrweb-types'
 
-import { isNullish, isUndefined } from '@posthog/core'
+import { isNullish, isUndefined } from '@agrid/core'
 import { createLogger } from '../../utils/logger'
 import {
     assignableWindow,

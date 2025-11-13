@@ -1,4 +1,4 @@
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import { withTracing } from '../src/index'
 import { generateText, wrapLanguageModel } from 'ai'
 import type { LanguageModelV2, LanguageModelV2CallOptions, LanguageModelV2StreamPart } from '@ai-sdk/provider'

@@ -1,7 +1,7 @@
 import type { recordOptions } from './extensions/replay/types/rrweb'
 import type { SegmentAnalytics } from './extensions/segment-integration'
 import { PostHog } from './posthog-core'
-import { KnownUnsafeEditableEvent } from '@posthog/core'
+import { KnownUnsafeEditableEvent } from '@agrid/core'
 import { Survey, SurveyConfig } from './posthog-surveys-types'
 // only importing types here, so won't affect the bundle
 // eslint-disable-next-line posthog-js/no-external-replay-imports

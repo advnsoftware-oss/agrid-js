@@ -1,6 +1,6 @@
 import { window } from './utils/globals'
 import { PostHog } from './posthog-core'
-import { clampToRange, isUndefined } from '@posthog/core'
+import { clampToRange, isUndefined } from '@agrid/core'
 import { extend } from './utils'
 import { logger } from './utils/logger'
 

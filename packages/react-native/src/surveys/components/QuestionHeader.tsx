@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-import { SurveyQuestionDescriptionContentType } from '@posthog/core'
+import { SurveyQuestionDescriptionContentType } from '@agrid/core'
 import { shouldRenderDescription } from '../surveys-utils'
 
 export function QuestionHeader({

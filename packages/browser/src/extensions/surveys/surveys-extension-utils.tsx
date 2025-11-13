@@ -20,7 +20,7 @@ import {
     setSurveySeenOnLocalStorage,
     SURVEY_IN_PROGRESS_PREFIX,
 } from '../../utils/survey-utils'
-import { isArray, isNullish } from '@posthog/core'
+import { isArray, isNullish } from '@agrid/core'
 
 import { detectDeviceType } from '../../utils/user-agent-utils'
 import { propertyComparisons } from '../../utils/property-utils'

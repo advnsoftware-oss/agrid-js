@@ -1,7 +1,7 @@
 import { assignableWindow, window } from '../utils/globals'
 import { ErrorEventArgs } from '../types'
 import { createLogger } from '../utils/logger'
-import type { ErrorTracking } from '@posthog/core'
+import type { ErrorTracking } from '@agrid/core'
 import { buildErrorPropertiesBuilder } from '../posthog-exceptions'
 
 const logger = createLogger('[ExceptionAutocapture]')

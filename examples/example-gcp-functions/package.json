@@ -11,6 +11,6 @@
     "license": "ISC",
     "dependencies": {
         "@google-cloud/functions-framework": "^3.4.0",
-        "posthog-node": "*"
+        "agrid-node": "*"
     }
 }

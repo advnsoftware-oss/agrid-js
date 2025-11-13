@@ -1,7 +1,7 @@
 import Config from '../config'
-import { isUndefined } from '@posthog/core'
+import { isUndefined } from '@agrid/core'
 import { assignableWindow, window } from './globals'
-import type { Logger } from '@posthog/core'
+import type { Logger } from '@agrid/core'
 
 type PosthogJsLogger = Omit<Logger, 'createLogger'> & {
     _log: (level: 'log' | 'warn' | 'error', ...args: any[]) => void

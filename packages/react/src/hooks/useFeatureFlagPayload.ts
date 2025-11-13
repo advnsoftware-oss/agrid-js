@@ -1,4 +1,4 @@
-import { JsonType } from 'posthog-js'
+import { JsonType } from 'agrid-js'
 import { useContext, useEffect, useState } from 'react'
 import { PostHogContext } from '../context'
 

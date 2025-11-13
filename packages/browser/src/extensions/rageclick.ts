@@ -2,7 +2,7 @@
 // over clickCount clicks with max timeoutMs between clicks, it's
 // counted as a rage click
 
-import { isObject } from '@posthog/core'
+import { isObject } from '@agrid/core'
 import { RageclickConfig } from '../types'
 
 const DEFAULT_THRESHOLD_PX = 30

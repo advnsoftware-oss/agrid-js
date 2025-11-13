@@ -1,5 +1,5 @@
 import OpenAIOrignal, { AzureOpenAI } from 'openai'
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import { AIEvent, formatResponseOpenAI, MonitoringParams, sendEventToPosthog, withPrivacyMode } from '../utils'
 import type { APIPromise } from 'openai'
 import type { Stream } from 'openai/streaming'

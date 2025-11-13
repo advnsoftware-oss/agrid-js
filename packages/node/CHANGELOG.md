@@ -1,63 +1,63 @@
-# posthog-node
+# agrid-node
 
 ## 5.11.2
 
 ### Patch Changes
 
-- Updated dependencies [[`87f9604`](https://github.com/PostHog/posthog-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
-  - @posthog/core@1.5.2
+- Updated dependencies [[`87f9604`](https://github.com/PostHog/agrid-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
+  - @agrid/core@1.5.2
 
 ## 5.11.1
 
 ### Patch Changes
 
-- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/posthog-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
-  - @posthog/core@1.5.1
+- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/agrid-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
+  - @agrid/core@1.5.1
 
 ## 5.11.0
 
 ### Minor Changes
 
-- [#2520](https://github.com/PostHog/posthog-js/pull/2520) [`068d55e`](https://github.com/PostHog/posthog-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606) Thanks [@lricoy](https://github.com/lricoy)! - Add bot pageview collection behind preview flag. Enables tracking bot traffic as `$bot_pageview` events when the `__preview_capture_bot_pageviews` flag is enabled.
+- [#2520](https://github.com/PostHog/agrid-js/pull/2520) [`068d55e`](https://github.com/PostHog/agrid-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606) Thanks [@lricoy](https://github.com/lricoy)! - Add bot pageview collection behind preview flag. Enables tracking bot traffic as `$bot_pageview` events when the `__preview_capture_bot_pageviews` flag is enabled.
 
 ### Patch Changes
 
-- Updated dependencies [[`068d55e`](https://github.com/PostHog/posthog-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
-  - @posthog/core@1.5.0
+- Updated dependencies [[`068d55e`](https://github.com/PostHog/agrid-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
+  - @agrid/core@1.5.0
 
 ## 5.10.4
 
 ### Patch Changes
 
-- Updated dependencies [[`751b440`](https://github.com/PostHog/posthog-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
-  - @posthog/core@1.4.0
+- Updated dependencies [[`751b440`](https://github.com/PostHog/agrid-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
+  - @agrid/core@1.4.0
 
 ## 5.10.3
 
 ### Patch Changes
 
-- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/posthog-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
-  - @posthog/core@1.3.1
+- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/agrid-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
+  - @agrid/core@1.3.1
 
 ## 5.10.2
 
 ### Patch Changes
 
-- [#2470](https://github.com/PostHog/posthog-js/pull/2470) [`a581328`](https://github.com/PostHog/posthog-js/commit/a581328156d6ee50804cd740aa84c05d4e9c1f22) Thanks [@luke-belton](https://github.com/luke-belton)! - Fix crash caused by calling `getFeatureFlagPayloads` for a flag that depends on a static cohort
+- [#2470](https://github.com/PostHog/agrid-js/pull/2470) [`a581328`](https://github.com/PostHog/agrid-js/commit/a581328156d6ee50804cd740aa84c05d4e9c1f22) Thanks [@luke-belton](https://github.com/luke-belton)! - Fix crash caused by calling `getFeatureFlagPayloads` for a flag that depends on a static cohort
 
 ## 5.10.1
 
 ### Patch Changes
 
-- [#2465](https://github.com/PostHog/posthog-js/pull/2465) [`1721aba`](https://github.com/PostHog/posthog-js/commit/1721aba7e30d1f4a3f5a3f9c1ce35af5af0a4583) Thanks [@haacked](https://github.com/haacked)! - Fix bug where flag doesn't fallback to the server correctly when one condition is a static cohort condition but a later condition matches.
+- [#2465](https://github.com/PostHog/agrid-js/pull/2465) [`1721aba`](https://github.com/PostHog/agrid-js/commit/1721aba7e30d1f4a3f5a3f9c1ce35af5af0a4583) Thanks [@haacked](https://github.com/haacked)! - Fix bug where flag doesn't fallback to the server correctly when one condition is a static cohort condition but a later condition matches.
 
 ## 5.10.0
 
 ### Minor Changes
 
-- [#2417](https://github.com/PostHog/posthog-js/pull/2417) [`daf919b`](https://github.com/PostHog/posthog-js/commit/daf919be225527ee4ad026d806dec195b75e44aa) Thanks [@dmarticus](https://github.com/dmarticus)! - feat: Add evaluation environments support for feature flags
+- [#2417](https://github.com/PostHog/agrid-js/pull/2417) [`daf919b`](https://github.com/PostHog/agrid-js/commit/daf919be225527ee4ad026d806dec195b75e44aa) Thanks [@dmarticus](https://github.com/dmarticus)! - feat: Add evaluation environments support for feature flags
 
-  This PR implements support for evaluation environments in the posthog-node SDK, allowing users to specify which environment tags their SDK instance should use when evaluating feature flags.
+  This PR implements support for evaluation environments in the agrid-node SDK, allowing users to specify which environment tags their SDK instance should use when evaluating feature flags.
 
   Users can now configure the SDK with an `evaluationEnvironments` option:
 
@@ -72,67 +72,67 @@
 
 ### Patch Changes
 
-- [#2431](https://github.com/PostHog/posthog-js/pull/2431) [`7d45a7a`](https://github.com/PostHog/posthog-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682) Thanks [@marandaneto](https://github.com/marandaneto)! - fix: remove deprecated attribute $exception_personURL from exception events
+- [#2431](https://github.com/PostHog/agrid-js/pull/2431) [`7d45a7a`](https://github.com/PostHog/agrid-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682) Thanks [@marandaneto](https://github.com/marandaneto)! - fix: remove deprecated attribute $exception_personURL from exception events
 
-- Updated dependencies [[`daf919b`](https://github.com/PostHog/posthog-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/posthog-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
-  - @posthog/core@1.3.0
+- Updated dependencies [[`daf919b`](https://github.com/PostHog/agrid-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/agrid-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
+  - @agrid/core@1.3.0
 
 ## 5.9.5
 
 ### Patch Changes
 
-- Updated dependencies [[`10da2ee`](https://github.com/PostHog/posthog-js/commit/10da2ee0b8862ad0e32b68e452fae1bc77620bbf)]:
-  - @posthog/core@1.2.4
+- Updated dependencies [[`10da2ee`](https://github.com/PostHog/agrid-js/commit/10da2ee0b8862ad0e32b68e452fae1bc77620bbf)]:
+  - @agrid/core@1.2.4
 
 ## 5.9.4
 
 ### Patch Changes
 
-- [#2414](https://github.com/PostHog/posthog-js/pull/2414) [`e19a384`](https://github.com/PostHog/posthog-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b) Thanks [@hpouillot](https://github.com/hpouillot)! - create a common logger for node and react-native
+- [#2414](https://github.com/PostHog/agrid-js/pull/2414) [`e19a384`](https://github.com/PostHog/agrid-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b) Thanks [@hpouillot](https://github.com/hpouillot)! - create a common logger for node and react-native
 
-- Updated dependencies [[`e19a384`](https://github.com/PostHog/posthog-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b)]:
-  - @posthog/core@1.2.3
+- Updated dependencies [[`e19a384`](https://github.com/PostHog/agrid-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b)]:
+  - @agrid/core@1.2.3
 
 ## 5.9.3
 
 ### Patch Changes
 
-- [#2406](https://github.com/PostHog/posthog-js/pull/2406) [`ea58d34`](https://github.com/PostHog/posthog-js/commit/ea58d34c62e139f11d5b41bf67b52624308deffa) Thanks [@dmarticus](https://github.com/dmarticus)! - Use `SubtleCrypto` directly to compute SHA-1 hashes, fix "module not found" warning in edge runtimes.
+- [#2406](https://github.com/PostHog/agrid-js/pull/2406) [`ea58d34`](https://github.com/PostHog/agrid-js/commit/ea58d34c62e139f11d5b41bf67b52624308deffa) Thanks [@dmarticus](https://github.com/dmarticus)! - Use `SubtleCrypto` directly to compute SHA-1 hashes, fix "module not found" warning in edge runtimes.
 
 ## 5.9.2
 
 ### Patch Changes
 
-- [#2370](https://github.com/PostHog/posthog-js/pull/2370) [`5820942`](https://github.com/PostHog/posthog-js/commit/582094255fa87009b02a4e193c3e63ef4621d9d0) Thanks [@hpouillot](https://github.com/hpouillot)! - remove testing from posthog-core
+- [#2370](https://github.com/PostHog/agrid-js/pull/2370) [`5820942`](https://github.com/PostHog/agrid-js/commit/582094255fa87009b02a4e193c3e63ef4621d9d0) Thanks [@hpouillot](https://github.com/hpouillot)! - remove testing from posthog-core
 
-- Updated dependencies [[`5820942`](https://github.com/PostHog/posthog-js/commit/582094255fa87009b02a4e193c3e63ef4621d9d0)]:
-  - @posthog/core@1.2.2
+- Updated dependencies [[`5820942`](https://github.com/PostHog/agrid-js/commit/582094255fa87009b02a4e193c3e63ef4621d9d0)]:
+  - @agrid/core@1.2.2
 
 ## 5.9.1
 
 ### Patch Changes
 
-- [#2356](https://github.com/PostHog/posthog-js/pull/2356) [`caecb94`](https://github.com/PostHog/posthog-js/commit/caecb94493f6b85003ecbd6750a81e27139b1fa5) Thanks [@hpouillot](https://github.com/hpouillot)! - use core error tracking processing
+- [#2356](https://github.com/PostHog/agrid-js/pull/2356) [`caecb94`](https://github.com/PostHog/agrid-js/commit/caecb94493f6b85003ecbd6750a81e27139b1fa5) Thanks [@hpouillot](https://github.com/hpouillot)! - use core error tracking processing
 
-- Updated dependencies [[`caecb94`](https://github.com/PostHog/posthog-js/commit/caecb94493f6b85003ecbd6750a81e27139b1fa5)]:
-  - @posthog/core@1.2.1
+- Updated dependencies [[`caecb94`](https://github.com/PostHog/agrid-js/commit/caecb94493f6b85003ecbd6750a81e27139b1fa5)]:
+  - @agrid/core@1.2.1
 
 ## 5.9.0
 
 ### Minor Changes
 
-- [#2348](https://github.com/PostHog/posthog-js/pull/2348) [`ac48d8f`](https://github.com/PostHog/posthog-js/commit/ac48d8fda3a4543f300ced705bce314a206cce6f) Thanks [@hpouillot](https://github.com/hpouillot)! - chore: align js syntax with package support
+- [#2348](https://github.com/PostHog/agrid-js/pull/2348) [`ac48d8f`](https://github.com/PostHog/agrid-js/commit/ac48d8fda3a4543f300ced705bce314a206cce6f) Thanks [@hpouillot](https://github.com/hpouillot)! - chore: align js syntax with package support
 
 ### Patch Changes
 
-- Updated dependencies [[`ac48d8f`](https://github.com/PostHog/posthog-js/commit/ac48d8fda3a4543f300ced705bce314a206cce6f)]:
-  - @posthog/core@1.2.0
+- Updated dependencies [[`ac48d8f`](https://github.com/PostHog/agrid-js/commit/ac48d8fda3a4543f300ced705bce314a206cce6f)]:
+  - @agrid/core@1.2.0
 
 ## 5.8.8
 
 ### Patch Changes
 
-- [#2350](https://github.com/PostHog/posthog-js/pull/2350) [`a1ae750`](https://github.com/PostHog/posthog-js/commit/a1ae750ee37fad9b91579dc38310e23e790b2fcd) Thanks [@andyzzhao](https://github.com/andyzzhao)! - feature flag local evaluation will not sort condition sets with variant overrides to the top
+- [#2350](https://github.com/PostHog/agrid-js/pull/2350) [`a1ae750`](https://github.com/PostHog/agrid-js/commit/a1ae750ee37fad9b91579dc38310e23e790b2fcd) Thanks [@andyzzhao](https://github.com/andyzzhao)! - feature flag local evaluation will not sort condition sets with variant overrides to the top
 
 ## 5.8.7
 
@@ -144,60 +144,60 @@
 
 ### Patch Changes
 
-- [#2346](https://github.com/PostHog/posthog-js/pull/2346) [`117b150`](https://github.com/PostHog/posthog-js/commit/117b15034e2740f5714b9bb249d8701c3f14c688) Thanks [@marandaneto](https://github.com/marandaneto)! - fix: node onException autocapture safely access the exception_List
+- [#2346](https://github.com/PostHog/agrid-js/pull/2346) [`117b150`](https://github.com/PostHog/agrid-js/commit/117b15034e2740f5714b9bb249d8701c3f14c688) Thanks [@marandaneto](https://github.com/marandaneto)! - fix: node onException autocapture safely access the exception_List
 
 ## 5.8.5
 
 ### Patch Changes
 
-- Updated dependencies [[`da07e41`](https://github.com/PostHog/posthog-js/commit/da07e41ac2307803c302557a12b459491657a75f)]:
-  - @posthog/core@1.1.0
+- Updated dependencies [[`da07e41`](https://github.com/PostHog/agrid-js/commit/da07e41ac2307803c302557a12b459491657a75f)]:
+  - @agrid/core@1.1.0
 
 ## 5.8.4
 
 ### Patch Changes
 
-- [#2312](https://github.com/PostHog/posthog-js/pull/2312) [`dff84c6`](https://github.com/PostHog/posthog-js/commit/dff84c6c21af9a8f4e3bfb58b4fb85ae2cbcdbc6) Thanks [@daibhin](https://github.com/daibhin)! - chore: allow PostHog exception capture to be skipped in Sentry integration
+- [#2312](https://github.com/PostHog/agrid-js/pull/2312) [`dff84c6`](https://github.com/PostHog/agrid-js/commit/dff84c6c21af9a8f4e3bfb58b4fb85ae2cbcdbc6) Thanks [@daibhin](https://github.com/daibhin)! - chore: allow PostHog exception capture to be skipped in Sentry integration
 
 ## 5.8.3
 
 ### Patch Changes
 
-- [#2306](https://github.com/PostHog/posthog-js/pull/2306) [`30873bc`](https://github.com/PostHog/posthog-js/commit/30873bcc6ee8a46a4c2811684a24ced425ecc6fc) Thanks [@haacked](https://github.com/haacked)! - Fix memory leak when calling getAllFlags and getAllFlagsAndPayloads
+- [#2306](https://github.com/PostHog/agrid-js/pull/2306) [`30873bc`](https://github.com/PostHog/agrid-js/commit/30873bcc6ee8a46a4c2811684a24ced425ecc6fc) Thanks [@haacked](https://github.com/haacked)! - Fix memory leak when calling getAllFlags and getAllFlagsAndPayloads
 
 ## 5.8.2
 
 ### Patch Changes
 
-- [#2285](https://github.com/PostHog/posthog-js/pull/2285) [`20c1b38`](https://github.com/PostHog/posthog-js/commit/20c1b38147242989ed805462ff87eb770843ef10) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - `getFeatureFlag` and `isFeatureEnabled` now respect the `sendFeatureFlagEvent` client option if not explicitly specified when called.
+- [#2285](https://github.com/PostHog/agrid-js/pull/2285) [`20c1b38`](https://github.com/PostHog/agrid-js/commit/20c1b38147242989ed805462ff87eb770843ef10) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - `getFeatureFlag` and `isFeatureEnabled` now respect the `sendFeatureFlagEvent` client option if not explicitly specified when called.
 
-- [#2285](https://github.com/PostHog/posthog-js/pull/2285) [`20c1b38`](https://github.com/PostHog/posthog-js/commit/20c1b38147242989ed805462ff87eb770843ef10) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - The `sendFeatureFlagEvents` option for `getFeatureFlagPayload` is now marked as deprecated as it is not used.
+- [#2285](https://github.com/PostHog/agrid-js/pull/2285) [`20c1b38`](https://github.com/PostHog/agrid-js/commit/20c1b38147242989ed805462ff87eb770843ef10) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - The `sendFeatureFlagEvents` option for `getFeatureFlagPayload` is now marked as deprecated as it is not used.
 
 ## 5.8.1
 
 ### Patch Changes
 
-- [#2243](https://github.com/PostHog/posthog-js/pull/2243) [`1981815`](https://github.com/PostHog/posthog-js/commit/19818159b7074098150bc79cfa2962761a14cb46) Thanks [@hpouillot](https://github.com/hpouillot)! - - fix error handling on process crash
+- [#2243](https://github.com/PostHog/agrid-js/pull/2243) [`1981815`](https://github.com/PostHog/agrid-js/commit/19818159b7074098150bc79cfa2962761a14cb46) Thanks [@hpouillot](https://github.com/hpouillot)! - - fix error handling on process crash
   - fix exception flushing
-- Updated dependencies [[`1981815`](https://github.com/PostHog/posthog-js/commit/19818159b7074098150bc79cfa2962761a14cb46)]:
-  - @posthog/core@1.0.2
+- Updated dependencies [[`1981815`](https://github.com/PostHog/agrid-js/commit/19818159b7074098150bc79cfa2962761a14cb46)]:
+  - @agrid/core@1.0.2
 
 ## 5.8.0
 
 ### Minor Changes
 
-- [#2219](https://github.com/PostHog/posthog-js/pull/2219) [`44d10c4`](https://github.com/PostHog/posthog-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994) Thanks [@daibhin](https://github.com/daibhin)! - add exception rate limiter
+- [#2219](https://github.com/PostHog/agrid-js/pull/2219) [`44d10c4`](https://github.com/PostHog/agrid-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994) Thanks [@daibhin](https://github.com/daibhin)! - add exception rate limiter
 
 ### Patch Changes
 
-- Updated dependencies [[`44d10c4`](https://github.com/PostHog/posthog-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994)]:
-  - @posthog/core@1.0.1
+- Updated dependencies [[`44d10c4`](https://github.com/PostHog/agrid-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994)]:
+  - @agrid/core@1.0.1
 
 ## 5.7.0
 
 ### Minor Changes
 
-- [#2218](https://github.com/PostHog/posthog-js/pull/2218) [`cfe1e94`](https://github.com/PostHog/posthog-js/commit/cfe1e9416a26919b096b0bf8a4e363f1fa448e7c) Thanks [@oliverb123](https://github.com/oliverb123)! - Added before_send function
+- [#2218](https://github.com/PostHog/agrid-js/pull/2218) [`cfe1e94`](https://github.com/PostHog/agrid-js/commit/cfe1e9416a26919b096b0bf8a4e363f1fa448e7c) Thanks [@oliverb123](https://github.com/oliverb123)! - Added before_send function
 
 ## 5.6.0 – 2025-07-15
 
@@ -576,7 +576,7 @@ Switch from rusha to native (node:crypto) sha1 implementation
 
 ## 3.1.1 - 2023-04-26
 
-1. Replace crypto library with pure-js rusha library which makes posthog-node work with Cloudflare Workers in Next.js edge runtime.
+1. Replace crypto library with pure-js rusha library which makes agrid-node work with Cloudflare Workers in Next.js edge runtime.
 
 ## 3.1.0 - 2023-04-19
 
@@ -627,7 +627,7 @@ const posthog = new PostHog(PH_API_KEY, {
 
 ## 2.5.0 - 2023-02-15
 
-1. Removes shared client from `posthog-node`, getting rid of some race condition bugs when capturing events.
+1. Removes shared client from `agrid-node`, getting rid of some race condition bugs when capturing events.
 2. Sets minimum version of node.js to 15
 
 ## 2.4.0 - 2023-02-02

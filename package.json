@@ -2,7 +2,7 @@
     "private": true,
     "packageManager": "pnpm@10.12.4",
     "scripts": {
-        "build-rollup": "pnpm --filter=posthog-js build-rollup",
+        "build-rollup": "pnpm --filter=agrid-js build-rollup",
         "clean": "turbo clean",
         "clean:dep": "rm -rf node_modules && pnpm -r exec rm -rf node_modules",
         "lint": "turbo lint",
@@ -15,7 +15,7 @@
         "dev": "turbo dev",
         "package": "export PACKAGE_DEST=$(pwd)/target && turbo package",
         "package:watch": "export PACKAGE_DEST=$(pwd)/target && turbo watch package",
-        "generate-references": "turbo posthog-js#generate-references posthog-node#generate-references posthog-react-native#generate-references"
+        "generate-references": "turbo agrid-js#generate-references agrid-node#generate-references agrid-react-native#generate-references"
     },
     "pnpm": {
         "patchedDependencies": {
@@ -32,12 +32,12 @@
         "@typescript-eslint/eslint-plugin": "^8.29.1",
         "@typescript-eslint/parser": "^8.29.1",
         "eslint": "8.57.0",
-        "eslint-config-posthog-js": "workspace:./tooling/eslint-plugin-posthog-js",
+        "eslint-config-agrid-js": "workspace:./tooling/eslint-plugin-agrid-js",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-compat": "^6.0.1",
         "eslint-plugin-jest": "^28.8.3",
         "eslint-plugin-no-only-tests": "^3.1.0",
-        "eslint-plugin-posthog-js": "workspace:./tooling/eslint-plugin-posthog-js",
+        "eslint-plugin-agrid-js": "workspace:./tooling/eslint-plugin-agrid-js",
         "eslint-plugin-prettier": "^5.2.1",
         "eslint-plugin-react": "^7.30.1",
         "eslint-plugin-react-hooks": "^4.6.0",

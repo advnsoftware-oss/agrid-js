@@ -7,7 +7,7 @@ import { window } from './utils/globals'
 
 import { createLogger } from './utils/logger'
 
-import { isArray, isNumber, isUndefined, clampToRange } from '@posthog/core'
+import { isArray, isNumber, isUndefined, clampToRange } from '@agrid/core'
 import { PostHog } from './posthog-core'
 import { addEventListener } from './utils'
 import { SimpleEventEmitter } from './utils/simple-event-emitter'

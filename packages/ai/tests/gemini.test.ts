@@ -1,4 +1,4 @@
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import PostHogGemini from '../src/gemini'
 import { version } from '../package.json'
 

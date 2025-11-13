@@ -12,7 +12,7 @@ From the project root directory:
 # Install deps
 pnpm install
 
-# Build local version of posthog-js
+# Build local version of agrid-js
 pnpm run build-posthog
 ```
 

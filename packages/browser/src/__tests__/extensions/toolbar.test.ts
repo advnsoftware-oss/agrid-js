@@ -1,5 +1,5 @@
 import { Toolbar } from '../../extensions/toolbar'
-import { isString, isUndefined } from '@posthog/core'
+import { isString, isUndefined } from '@agrid/core'
 import { PostHog } from '../../posthog-core'
 import { PostHogConfig, ToolbarParams } from '../../types'
 import { assignableWindow, window } from '../../utils/globals'

@@ -4,7 +4,7 @@ import { PostHog } from '../posthog-core'
 import { defaultPostHog } from './helpers/posthog-instance'
 import { uuidv7 } from '../uuidv7'
 
-import { isNull } from '@posthog/core'
+import { isNull } from '@agrid/core'
 import { document, assignableWindow, navigator } from '../utils/globals'
 import { PostHogConfig } from '../types'
 

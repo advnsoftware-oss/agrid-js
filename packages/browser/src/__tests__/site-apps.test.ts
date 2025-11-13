@@ -7,7 +7,7 @@ import { PostHog } from '../posthog-core'
 import { PostHogConfig, Properties, CaptureResult, RemoteConfig } from '../types'
 import { assignableWindow } from '../utils/globals'
 import '../entrypoints/external-scripts-loader'
-import { isFunction } from '@posthog/core'
+import { isFunction } from '@agrid/core'
 
 describe('SiteApps', () => {
     let posthog: PostHog

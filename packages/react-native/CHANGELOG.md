@@ -1,48 +1,48 @@
-# posthog-react-native
+# agrid-react-native
 
 ## 4.11.0
 
 ### Minor Changes
 
-- [#2564](https://github.com/PostHog/posthog-js/pull/2564) [`ee01b17`](https://github.com/PostHog/posthog-js/commit/ee01b1727c5d4fb5cf2e2c8bb57062907e498445) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - feat: Properties sent via `identify` and `group` are cached for flags calls
+- [#2564](https://github.com/PostHog/agrid-js/pull/2564) [`ee01b17`](https://github.com/PostHog/agrid-js/commit/ee01b1727c5d4fb5cf2e2c8bb57062907e498445) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - feat: Properties sent via `identify` and `group` are cached for flags calls
 
-- [#2564](https://github.com/PostHog/posthog-js/pull/2564) [`ee01b17`](https://github.com/PostHog/posthog-js/commit/ee01b1727c5d4fb5cf2e2c8bb57062907e498445) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - feat: `setDefaultPersonProperties` config option (default true) automatically includes common device and app properties in feature flag evaluation.
+- [#2564](https://github.com/PostHog/agrid-js/pull/2564) [`ee01b17`](https://github.com/PostHog/agrid-js/commit/ee01b1727c5d4fb5cf2e2c8bb57062907e498445) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - feat: `setDefaultPersonProperties` config option (default true) automatically includes common device and app properties in feature flag evaluation.
 
 ## 4.10.8
 
 ### Patch Changes
 
-- Updated dependencies [[`87f9604`](https://github.com/PostHog/posthog-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
-  - @posthog/core@1.5.2
+- Updated dependencies [[`87f9604`](https://github.com/PostHog/agrid-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
+  - @agrid/core@1.5.2
 
 ## 4.10.7
 
 ### Patch Changes
 
-- [#2541](https://github.com/PostHog/posthog-js/pull/2541) [`b3a62d0`](https://github.com/PostHog/posthog-js/commit/b3a62d01aa62cc96cd4270adf1168a219f620ee7) Thanks [@marandaneto](https://github.com/marandaneto)! - chore: deprecate navigationRef autocapture
+- [#2541](https://github.com/PostHog/agrid-js/pull/2541) [`b3a62d0`](https://github.com/PostHog/agrid-js/commit/b3a62d01aa62cc96cd4270adf1168a219f620ee7) Thanks [@marandaneto](https://github.com/marandaneto)! - chore: deprecate navigationRef autocapture
 
-- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/posthog-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
-  - @posthog/core@1.5.1
+- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/agrid-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
+  - @agrid/core@1.5.1
 
 ## 4.10.6
 
 ### Patch Changes
 
-- Updated dependencies [[`068d55e`](https://github.com/PostHog/posthog-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
-  - @posthog/core@1.5.0
+- Updated dependencies [[`068d55e`](https://github.com/PostHog/agrid-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
+  - @agrid/core@1.5.0
 
 ## 4.10.5
 
 ### Patch Changes
 
-- Updated dependencies [[`751b440`](https://github.com/PostHog/posthog-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
-  - @posthog/core@1.4.0
+- Updated dependencies [[`751b440`](https://github.com/PostHog/agrid-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
+  - @agrid/core@1.4.0
 
 ## 4.10.4
 
 ### Patch Changes
 
-- [#2493](https://github.com/PostHog/posthog-js/pull/2493) [`7ec7be5`](https://github.com/PostHog/posthog-js/commit/7ec7be5917090ae00f988035ff1e0f6f727e6660) Thanks [@ordehi](https://github.com/ordehi)! - **Bug Fixes:**
+- [#2493](https://github.com/PostHog/agrid-js/pull/2493) [`7ec7be5`](https://github.com/PostHog/agrid-js/commit/7ec7be5917090ae00f988035ff1e0f6f727e6660) Thanks [@ordehi](https://github.com/ordehi)! - **Bug Fixes:**
 
   - Fixed surveys with URL or CSS selector targeting incorrectly showing in React Native
     - **Breaking behavior change**: Surveys configured with URL or CSS selector targeting will no longer appear in React Native apps (this was always the intended behavior)
@@ -52,28 +52,28 @@
 
 ### Patch Changes
 
-- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/posthog-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
-  - @posthog/core@1.3.1
+- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/agrid-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
+  - @agrid/core@1.3.1
 
 ## 4.10.2
 
 ### Patch Changes
 
-- [#2457](https://github.com/PostHog/posthog-js/pull/2457) [`7f5e94b`](https://github.com/PostHog/posthog-js/commit/7f5e94b3839e9c6ef8363b9296993ca11e3319ad) Thanks [@daibhin](https://github.com/daibhin)! - correctly export error tracking files
+- [#2457](https://github.com/PostHog/agrid-js/pull/2457) [`7f5e94b`](https://github.com/PostHog/agrid-js/commit/7f5e94b3839e9c6ef8363b9296993ca11e3319ad) Thanks [@daibhin](https://github.com/daibhin)! - correctly export error tracking files
 
 ## 4.10.1
 
 ### Patch Changes
 
-- [#2415](https://github.com/PostHog/posthog-js/pull/2415) [`ab30675`](https://github.com/PostHog/posthog-js/commit/ab30675f9fcb9323dfbc8447fd5b244a0a631983) Thanks [@ioannisj](https://github.com/ioannisj)! - fix surveys only appear on subsequent app launches after being loaded and cached
+- [#2415](https://github.com/PostHog/agrid-js/pull/2415) [`ab30675`](https://github.com/PostHog/agrid-js/commit/ab30675f9fcb9323dfbc8447fd5b244a0a631983) Thanks [@ioannisj](https://github.com/ioannisj)! - fix surveys only appear on subsequent app launches after being loaded and cached
 
 ## 4.10.0
 
 ### Minor Changes
 
-- [#2417](https://github.com/PostHog/posthog-js/pull/2417) [`daf919b`](https://github.com/PostHog/posthog-js/commit/daf919be225527ee4ad026d806dec195b75e44aa) Thanks [@dmarticus](https://github.com/dmarticus)! - feat: Add evaluation environments support for feature flags
+- [#2417](https://github.com/PostHog/agrid-js/pull/2417) [`daf919b`](https://github.com/PostHog/agrid-js/commit/daf919be225527ee4ad026d806dec195b75e44aa) Thanks [@dmarticus](https://github.com/dmarticus)! - feat: Add evaluation environments support for feature flags
 
-  This PR implements support for evaluation environments in the posthog-react-native SDK, allowing users to specify which environment tags their SDK instance should use when evaluating feature flags.
+  This PR implements support for evaluation environments in the agrid-react-native SDK, allowing users to specify which environment tags their SDK instance should use when evaluating feature flags.
 
   Users can now configure the SDK with an `evaluationEnvironments` option:
 
@@ -88,130 +88,130 @@
 
 ### Patch Changes
 
-- [#2431](https://github.com/PostHog/posthog-js/pull/2431) [`7d45a7a`](https://github.com/PostHog/posthog-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682) Thanks [@marandaneto](https://github.com/marandaneto)! - fix: remove deprecated attribute $exception_personURL from exception events
+- [#2431](https://github.com/PostHog/agrid-js/pull/2431) [`7d45a7a`](https://github.com/PostHog/agrid-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682) Thanks [@marandaneto](https://github.com/marandaneto)! - fix: remove deprecated attribute $exception_personURL from exception events
 
-- Updated dependencies [[`daf919b`](https://github.com/PostHog/posthog-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/posthog-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
-  - @posthog/core@1.3.0
+- Updated dependencies [[`daf919b`](https://github.com/PostHog/agrid-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/agrid-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
+  - @agrid/core@1.3.0
 
 ## 4.9.1
 
 ### Patch Changes
 
-- Updated dependencies [[`10da2ee`](https://github.com/PostHog/posthog-js/commit/10da2ee0b8862ad0e32b68e452fae1bc77620bbf)]:
-  - @posthog/core@1.2.4
+- Updated dependencies [[`10da2ee`](https://github.com/PostHog/agrid-js/commit/10da2ee0b8862ad0e32b68e452fae1bc77620bbf)]:
+  - @agrid/core@1.2.4
 
 ## 4.9.0
 
 ### Minor Changes
 
-- [#2410](https://github.com/PostHog/posthog-js/pull/2410) [`1f294ec`](https://github.com/PostHog/posthog-js/commit/1f294ecb3c816b283f04c0dacc01739d79a5805c) Thanks [@hpouillot](https://github.com/hpouillot)! - add error tracking autocapture
+- [#2410](https://github.com/PostHog/agrid-js/pull/2410) [`1f294ec`](https://github.com/PostHog/agrid-js/commit/1f294ecb3c816b283f04c0dacc01739d79a5805c) Thanks [@hpouillot](https://github.com/hpouillot)! - add error tracking autocapture
 
 ## 4.8.1
 
 ### Patch Changes
 
-- [#2414](https://github.com/PostHog/posthog-js/pull/2414) [`e19a384`](https://github.com/PostHog/posthog-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b) Thanks [@hpouillot](https://github.com/hpouillot)! - create a common logger for node and react-native
+- [#2414](https://github.com/PostHog/agrid-js/pull/2414) [`e19a384`](https://github.com/PostHog/agrid-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b) Thanks [@hpouillot](https://github.com/hpouillot)! - create a common logger for node and react-native
 
-- Updated dependencies [[`e19a384`](https://github.com/PostHog/posthog-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b)]:
-  - @posthog/core@1.2.3
+- Updated dependencies [[`e19a384`](https://github.com/PostHog/agrid-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b)]:
+  - @agrid/core@1.2.3
 
 ## 4.8.0
 
 ### Minor Changes
 
-- [#2360](https://github.com/PostHog/posthog-js/pull/2360) [`8ea1ce8`](https://github.com/PostHog/posthog-js/commit/8ea1ce8a9d02de35e2c1bea3f49518455fb53ffe) Thanks [@hpouillot](https://github.com/hpouillot)! - add stacktrace to exceptions
+- [#2360](https://github.com/PostHog/agrid-js/pull/2360) [`8ea1ce8`](https://github.com/PostHog/agrid-js/commit/8ea1ce8a9d02de35e2c1bea3f49518455fb53ffe) Thanks [@hpouillot](https://github.com/hpouillot)! - add stacktrace to exceptions
 
 ## 4.7.1
 
 ### Patch Changes
 
-- Updated dependencies [[`5820942`](https://github.com/PostHog/posthog-js/commit/582094255fa87009b02a4e193c3e63ef4621d9d0)]:
-  - @posthog/core@1.2.2
+- Updated dependencies [[`5820942`](https://github.com/PostHog/agrid-js/commit/582094255fa87009b02a4e193c3e63ef4621d9d0)]:
+  - @agrid/core@1.2.2
 
 ## 4.7.0
 
 ### Minor Changes
 
-- [#2352](https://github.com/PostHog/posthog-js/pull/2352) [`c01c728`](https://github.com/PostHog/posthog-js/commit/c01c728616673e20cd4b91a6050c0e194908c4b3) Thanks [@marandaneto](https://github.com/marandaneto)! - chore: rn surveys use the new response question id format
+- [#2352](https://github.com/PostHog/agrid-js/pull/2352) [`c01c728`](https://github.com/PostHog/agrid-js/commit/c01c728616673e20cd4b91a6050c0e194908c4b3) Thanks [@marandaneto](https://github.com/marandaneto)! - chore: rn surveys use the new response question id format
 
 ## 4.6.3
 
 ### Patch Changes
 
-- Updated dependencies [[`caecb94`](https://github.com/PostHog/posthog-js/commit/caecb94493f6b85003ecbd6750a81e27139b1fa5)]:
-  - @posthog/core@1.2.1
+- Updated dependencies [[`caecb94`](https://github.com/PostHog/agrid-js/commit/caecb94493f6b85003ecbd6750a81e27139b1fa5)]:
+  - @agrid/core@1.2.1
 
 ## 4.6.2
 
 ### Patch Changes
 
-- Updated dependencies [[`ac48d8f`](https://github.com/PostHog/posthog-js/commit/ac48d8fda3a4543f300ced705bce314a206cce6f)]:
-  - @posthog/core@1.2.0
+- Updated dependencies [[`ac48d8f`](https://github.com/PostHog/agrid-js/commit/ac48d8fda3a4543f300ced705bce314a206cce6f)]:
+  - @agrid/core@1.2.0
 
 ## 4.6.1
 
 ### Patch Changes
 
-- Updated dependencies [[`da07e41`](https://github.com/PostHog/posthog-js/commit/da07e41ac2307803c302557a12b459491657a75f)]:
-  - @posthog/core@1.1.0
+- Updated dependencies [[`da07e41`](https://github.com/PostHog/agrid-js/commit/da07e41ac2307803c302557a12b459491657a75f)]:
+  - @agrid/core@1.1.0
 
 ## 4.6.0
 
 ### Minor Changes
 
-- [#2328](https://github.com/PostHog/posthog-js/pull/2328) [`83196aa`](https://github.com/PostHog/posthog-js/commit/83196aa4bb7f7a1642b722cbfa19af1bb13379ae) Thanks [@marandaneto](https://github.com/marandaneto)! - chore: add support for throttleDelayMs
+- [#2328](https://github.com/PostHog/agrid-js/pull/2328) [`83196aa`](https://github.com/PostHog/agrid-js/commit/83196aa4bb7f7a1642b722cbfa19af1bb13379ae) Thanks [@marandaneto](https://github.com/marandaneto)! - chore: add support for throttleDelayMs
 
 ## 4.5.1
 
 ### Patch Changes
 
-- [#2325](https://github.com/PostHog/posthog-js/pull/2325) [`a9121df`](https://github.com/PostHog/posthog-js/commit/a9121dfbbe4c549e786124b1a8905c598fada757) Thanks [@marandaneto](https://github.com/marandaneto)! - surveys on react native web renders and get focused correctly
+- [#2325](https://github.com/PostHog/agrid-js/pull/2325) [`a9121df`](https://github.com/PostHog/agrid-js/commit/a9121dfbbe4c549e786124b1a8905c598fada757) Thanks [@marandaneto](https://github.com/marandaneto)! - surveys on react native web renders and get focused correctly
 
 ## 4.5.0
 
 ### Minor Changes
 
-- [#2239](https://github.com/PostHog/posthog-js/pull/2239) [`637f6fd`](https://github.com/PostHog/posthog-js/commit/637f6fd3817eac5c9c91cd55ee3e24a252ed5669) Thanks [@ioannisj](https://github.com/ioannisj)! - add support for conditional survey questions
+- [#2239](https://github.com/PostHog/agrid-js/pull/2239) [`637f6fd`](https://github.com/PostHog/agrid-js/commit/637f6fd3817eac5c9c91cd55ee3e24a252ed5669) Thanks [@ioannisj](https://github.com/ioannisj)! - add support for conditional survey questions
 
 ## 4.4.3
 
 ### Patch Changes
 
-- Updated dependencies [[`1981815`](https://github.com/PostHog/posthog-js/commit/19818159b7074098150bc79cfa2962761a14cb46)]:
-  - @posthog/core@1.0.2
+- Updated dependencies [[`1981815`](https://github.com/PostHog/agrid-js/commit/19818159b7074098150bc79cfa2962761a14cb46)]:
+  - @agrid/core@1.0.2
 
 ## 4.4.2
 
 ### Patch Changes
 
-- [#2219](https://github.com/PostHog/posthog-js/pull/2219) [`44d10c4`](https://github.com/PostHog/posthog-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994) Thanks [@daibhin](https://github.com/daibhin)! - update @posthog/core
+- [#2219](https://github.com/PostHog/agrid-js/pull/2219) [`44d10c4`](https://github.com/PostHog/agrid-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994) Thanks [@daibhin](https://github.com/daibhin)! - update @agrid/core
 
-- Updated dependencies [[`44d10c4`](https://github.com/PostHog/posthog-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994)]:
-  - @posthog/core@1.0.1
+- Updated dependencies [[`44d10c4`](https://github.com/PostHog/agrid-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994)]:
+  - @agrid/core@1.0.1
 
 ## 4.4.1
 
 ### Patch Changes
 
-- [#2234](https://github.com/PostHog/posthog-js/pull/2234) [`9ef2193`](https://github.com/PostHog/posthog-js/commit/9ef21939209a822a2f974dfb6604368ec2e44c49) Thanks [@marandaneto](https://github.com/marandaneto)! - expo-43 and new expo-file-system APIs with back compatibility support
+- [#2234](https://github.com/PostHog/agrid-js/pull/2234) [`9ef2193`](https://github.com/PostHog/agrid-js/commit/9ef21939209a822a2f974dfb6604368ec2e44c49) Thanks [@marandaneto](https://github.com/marandaneto)! - expo-43 and new expo-file-system APIs with back compatibility support
 
 ## 4.4.0
 
 ### Minor Changes
 
-- [#2192](https://github.com/PostHog/posthog-js/pull/2192) [`dec3f44`](https://github.com/PostHog/posthog-js/commit/dec3f443465787216ee3015aa254c5312659ad3f) Thanks [@marandaneto](https://github.com/marandaneto)! - survey support for feature flag variants
+- [#2192](https://github.com/PostHog/agrid-js/pull/2192) [`dec3f44`](https://github.com/PostHog/agrid-js/commit/dec3f443465787216ee3015aa254c5312659ad3f) Thanks [@marandaneto](https://github.com/marandaneto)! - survey support for feature flag variants
 
 ## 4.3.1
 
 ### Patch Changes
 
-- [#2180](https://github.com/PostHog/posthog-js/pull/2180) [`7c849d5`](https://github.com/PostHog/posthog-js/commit/7c849d5482e537c17b6fa2a1eb8e5d70e8c830bb) Thanks [@ioannisj](https://github.com/ioannisj)! - fix emoji rating row wrap
+- [#2180](https://github.com/PostHog/agrid-js/pull/2180) [`7c849d5`](https://github.com/PostHog/agrid-js/commit/7c849d5482e537c17b6fa2a1eb8e5d70e8c830bb) Thanks [@ioannisj](https://github.com/ioannisj)! - fix emoji rating row wrap
 
 ## 4.3.0
 
 ### Minor Changes
 
-- [#2129](https://github.com/PostHog/posthog-js/pull/2129) [`a3d1267`](https://github.com/PostHog/posthog-js/commit/a3d1267b7904171ee132ce8d0d2a59a0936e1a4e) Thanks [@marandaneto](https://github.com/marandaneto)! - Remove legacy migration code, left over from the V1 to V2 migration
+- [#2129](https://github.com/PostHog/agrid-js/pull/2129) [`a3d1267`](https://github.com/PostHog/agrid-js/commit/a3d1267b7904171ee132ce8d0d2a59a0936e1a4e) Thanks [@marandaneto](https://github.com/marandaneto)! - Remove legacy migration code, left over from the V1 to V2 migration
 
 ## 4.2.2 - 2025-07-23
 
@@ -318,7 +318,7 @@
 
 1. chore: migrate to bundle using rollup
 
-Do not use this version, please use [3.15.1](https://github.com/PostHog/posthog-js-lite/releases/tag/posthog-react-native-v3.15.1) instead.
+Do not use this version, please use [3.15.1](https://github.com/PostHog/agrid-js-lite/releases/tag/agrid-react-native-v3.15.1) instead.
 
 ## 3.14.0 – 2025-04-17
 
@@ -536,9 +536,9 @@ export const posthog = new PostHog('apiKey...', {
 Install Session Replay for React-Native:
 
 ```bash
-yarn add posthog-react-native-session-replay
+yarn add agrid-react-native-session-replay
 ## or npm
-npm i -s posthog-react-native-session-replay
+npm i -s agrid-react-native-session-replay
 ```
 
 Enable Session Replay for React-Native:
@@ -684,8 +684,8 @@ Or using the `PostHogProvider`
 
 ## 2.9.0 - 2023-12-04
 
-1. Renamed `personProperties` to `setPersonPropertiesForFlags` to match `posthog-js` and more clearly indicated what it does
-2. Renamed `groupProperties` to `setGroupPropertiesForFlags` to match `posthog-js` and more clearly indicated what it does
+1. Renamed `personProperties` to `setPersonPropertiesForFlags` to match `agrid-js` and more clearly indicated what it does
+2. Renamed `groupProperties` to `setGroupPropertiesForFlags` to match `agrid-js` and more clearly indicated what it does
 
 ## 2.8.1 - 2023-10-09
 

@@ -1,5 +1,5 @@
 import { LangChainCallbackHandler } from '../src/langchain/callbacks'
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import { AIMessage } from '@langchain/core/messages'
 import { version } from '../package.json'
 

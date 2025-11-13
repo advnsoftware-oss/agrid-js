@@ -1,5 +1,5 @@
 // src/posthog.js
-import posthog from 'posthog-js'
+import posthog from 'agrid-js'
 
 posthog.init(process.env.POSTHOG_TOKEN, {
     api_host: process.env.POSTHOG_API_HOST,

@@ -5,7 +5,7 @@ import {
   Part,
   GenerateContentResponseUsageMetadata,
 } from '@google/genai'
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import {
   MonitoringParams,
   sendEventToPosthog,

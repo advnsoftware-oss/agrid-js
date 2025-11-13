@@ -1,4 +1,4 @@
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import PostHogAnthropic from '../src/anthropic'
 import AnthropicOriginal from '@anthropic-ai/sdk'
 import { version } from '../package.json'

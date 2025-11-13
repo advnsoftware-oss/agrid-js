@@ -1,10 +1,10 @@
 {
-  "name": "posthog-node",
+  "name": "agrid-node",
   "version": "5.11.2",
   "description": "PostHog Node.js integration",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PostHog/posthog-js.git",
+    "url": "git+https://github.com/agrid/agrid-js.git",
     "directory": "packages/node"
   },
   "scripts": {
@@ -30,18 +30,18 @@
   "license": "MIT",
   "author": {
     "name": "PostHog",
-    "email": "hey@posthog.com",
+    "email": "hey@agrid.com",
     "url": "https://posthog.com"
   },
   "main": "dist/entrypoints/index.node.js",
   "module": "dist/entrypoints/index.node.mjs",
   "types": "dist/entrypoints/index.node.d.ts",
   "dependencies": {
-    "@posthog/core": "workspace:*"
+    "@agrid/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@posthog-tooling/tsconfig-base": "workspace:*",
+    "@agrid-tooling/tsconfig-base": "workspace:*",
     "jest": "catalog:",
     "@rslib/core": "catalog:"
   },

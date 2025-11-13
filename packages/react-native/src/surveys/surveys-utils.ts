@@ -9,7 +9,7 @@ import {
   SurveyAppearance,
   SurveyPosition,
   SurveyQuestionDescriptionContentType,
-} from '@posthog/core'
+} from '@agrid/core'
 
 /**
  * Utility function to check if some value is an integer

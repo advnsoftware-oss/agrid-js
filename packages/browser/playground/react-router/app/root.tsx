@@ -1,4 +1,4 @@
-import type { PostHogConfig } from 'posthog-js'
+import type { PostHogConfig } from 'agrid-js'
 import { PostHogProvider } from 'posthog-js/react'
 
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'

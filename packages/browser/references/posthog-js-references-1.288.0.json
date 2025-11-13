@@ -1,13 +1,13 @@
 {
-  "id": "posthog-js",
+  "id": "agrid-js",
   "hogRef": "0.3",
   "info": {
     "version": "1.288.0",
-    "id": "posthog-js",
+    "id": "agrid-js",
     "title": "PostHog JavaScript Web SDK",
     "description": "Posthog-js allows you to automatically capture usage and send events to PostHog.",
-    "slugPrefix": "posthog-js",
-    "specUrl": "https://github.com/PostHog/posthog-js"
+    "slugPrefix": "agrid-js",
+    "specUrl": "https://github.com/PostHog/agrid-js"
   },
   "classes": [
     {
@@ -947,7 +947,7 @@
         {
           "category": "Initialization",
           "description": "Initializes a new instance of the PostHog capturing object.",
-          "details": "All new instances are added to the main posthog object as sub properties (such as `posthog.library_name`) and also returned by this function. [Learn more about configuration options](https://github.com/posthog/posthog-js/blob/6e0e873/src/posthog-core.js#L57-L91)",
+          "details": "All new instances are added to the main posthog object as sub properties (such as `posthog.library_name`) and also returned by this function. [Learn more about configuration options](https://github.com/posthog/agrid-js/blob/6e0e873/src/posthog-core.js#L57-L91)",
           "id": "init",
           "showDocs": true,
           "title": "init",
@@ -2653,7 +2653,7 @@
           "name": "__preview_capture_bot_pageviews"
         },
         {
-          "description": "Prevents posthog-js from using the `navigator.sendBeacon` API to send events. Enabling this option may hurt the reliability of sending $pageleave events",
+          "description": "Prevents agrid-js from using the `navigator.sendBeacon` API to send events. Enabling this option may hurt the reliability of sending $pageleave events",
           "type": "boolean",
           "name": "__preview_disable_beacon"
         },

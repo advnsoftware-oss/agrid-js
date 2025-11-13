@@ -1,267 +1,267 @@
-# @posthog/nuxt
+# @agrid/nuxt
 
 ## 1.1.5
 
 ### Patch Changes
 
-- Updated dependencies [[`7c16ff7`](https://github.com/PostHog/posthog-js/commit/7c16ff7f3d7d8152ffbdde6839fee6fc513a8c55)]:
-  - posthog-js@1.292.0
+- Updated dependencies [[`7c16ff7`](https://github.com/PostHog/agrid-js/commit/7c16ff7f3d7d8152ffbdde6839fee6fc513a8c55)]:
+  - agrid-js@1.292.0
 
 ## 1.1.4
 
 ### Patch Changes
 
-- Updated dependencies [[`c8c7de2`](https://github.com/PostHog/posthog-js/commit/c8c7de247eae0a688c6eca49d364b89243b2bac8)]:
-  - posthog-js@1.291.0
+- Updated dependencies [[`c8c7de2`](https://github.com/PostHog/agrid-js/commit/c8c7de247eae0a688c6eca49d364b89243b2bac8)]:
+  - agrid-js@1.291.0
 
 ## 1.1.3
 
 ### Patch Changes
 
-- [#2563](https://github.com/PostHog/posthog-js/pull/2563) [`4d833a0`](https://github.com/PostHog/posthog-js/commit/4d833a036c05bb0afc1dadfa80f12c302e21a454) Thanks [@hpouillot](https://github.com/hpouillot)! - fix output directory when using presets
+- [#2563](https://github.com/PostHog/agrid-js/pull/2563) [`4d833a0`](https://github.com/PostHog/agrid-js/commit/4d833a036c05bb0afc1dadfa80f12c302e21a454) Thanks [@hpouillot](https://github.com/hpouillot)! - fix output directory when using presets
 
 ## 1.1.2
 
 ### Patch Changes
 
-- Updated dependencies [[`8a2b790`](https://github.com/PostHog/posthog-js/commit/8a2b790a61611c54e5e84a2954ae19d89d754afc)]:
-  - posthog-js@1.290.0
+- Updated dependencies [[`8a2b790`](https://github.com/PostHog/agrid-js/commit/8a2b790a61611c54e5e84a2954ae19d89d754afc)]:
+  - agrid-js@1.290.0
 
 ## 1.1.1
 
 ### Patch Changes
 
-- Updated dependencies [[`10be1b0`](https://github.com/PostHog/posthog-js/commit/10be1b071ab30da45749b91cfdeff913912e7bbb)]:
-  - posthog-js@1.289.0
+- Updated dependencies [[`10be1b0`](https://github.com/PostHog/agrid-js/commit/10be1b071ab30da45749b91cfdeff913912e7bbb)]:
+  - agrid-js@1.289.0
 
 ## 1.1.0
 
 ### Minor Changes
 
-- [#2552](https://github.com/PostHog/posthog-js/pull/2552) [`87f9604`](https://github.com/PostHog/posthog-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9) Thanks [@hpouillot](https://github.com/hpouillot)! - expose cliBinaryPath and logLevel options
+- [#2552](https://github.com/PostHog/agrid-js/pull/2552) [`87f9604`](https://github.com/PostHog/agrid-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9) Thanks [@hpouillot](https://github.com/hpouillot)! - expose cliBinaryPath and logLevel options
 
 ### Patch Changes
 
-- Updated dependencies [[`87f9604`](https://github.com/PostHog/posthog-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
-  - @posthog/core@1.5.2
-  - posthog-js@1.288.1
-  - posthog-node@5.11.2
+- Updated dependencies [[`87f9604`](https://github.com/PostHog/agrid-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
+  - @agrid/core@1.5.2
+  - agrid-js@1.288.1
+  - agrid-node@5.11.2
 
 ## 1.0.3
 
 ### Patch Changes
 
-- Updated dependencies [[`392b190`](https://github.com/PostHog/posthog-js/commit/392b19061bcee86926d165ce3cd7742df1c474d5)]:
-  - posthog-js@1.288.0
+- Updated dependencies [[`392b190`](https://github.com/PostHog/agrid-js/commit/392b19061bcee86926d165ce3cd7742df1c474d5)]:
+  - agrid-js@1.288.0
 
 ## 1.0.2
 
 ### Patch Changes
 
-- Updated dependencies [[`ec65577`](https://github.com/PostHog/posthog-js/commit/ec6557796219502c8d6a04fc5943721dafef140b)]:
-  - posthog-js@1.287.0
+- Updated dependencies [[`ec65577`](https://github.com/PostHog/agrid-js/commit/ec6557796219502c8d6a04fc5943721dafef140b)]:
+  - agrid-js@1.287.0
 
 ## 1.0.1
 
 ### Patch Changes
 
-- Updated dependencies [[`cd8bcd7`](https://github.com/PostHog/posthog-js/commit/cd8bcd79e4e41e51bcf9b40890708207ac927e72)]:
-  - posthog-js@1.286.0
+- Updated dependencies [[`cd8bcd7`](https://github.com/PostHog/agrid-js/commit/cd8bcd79e4e41e51bcf9b40890708207ac927e72)]:
+  - agrid-js@1.286.0
 
 ## 1.0.0
 
 ### Major Changes
 
-- [#2544](https://github.com/PostHog/posthog-js/pull/2544) [`e64445b`](https://github.com/PostHog/posthog-js/commit/e64445bb1d0f5fbc81ab2b829c88d307c79f668f) Thanks [@hpouillot](https://github.com/hpouillot)! - use provided build dir to inject sourcemaps
+- [#2544](https://github.com/PostHog/agrid-js/pull/2544) [`e64445b`](https://github.com/PostHog/agrid-js/commit/e64445bb1d0f5fbc81ab2b829c88d307c79f668f) Thanks [@hpouillot](https://github.com/hpouillot)! - use provided build dir to inject sourcemaps
 
 ### Patch Changes
 
-- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/posthog-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
-  - @posthog/core@1.5.1
-  - posthog-js@1.285.2
-  - posthog-node@5.11.1
+- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/agrid-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
+  - @agrid/core@1.5.1
+  - agrid-js@1.285.2
+  - agrid-node@5.11.1
 
 ## 0.0.27
 
 ### Patch Changes
 
-- Updated dependencies [[`c26a12c`](https://github.com/PostHog/posthog-js/commit/c26a12cc55932ff5a014c57a01a25c06715a24a1)]:
-  - posthog-js@1.285.1
+- Updated dependencies [[`c26a12c`](https://github.com/PostHog/agrid-js/commit/c26a12cc55932ff5a014c57a01a25c06715a24a1)]:
+  - agrid-js@1.285.1
 
 ## 0.0.26
 
 ### Patch Changes
 
-- Updated dependencies [[`e95a9d5`](https://github.com/PostHog/posthog-js/commit/e95a9d5075891861982e69ddcf09f1d6241ae088)]:
-  - posthog-js@1.285.0
+- Updated dependencies [[`e95a9d5`](https://github.com/PostHog/agrid-js/commit/e95a9d5075891861982e69ddcf09f1d6241ae088)]:
+  - agrid-js@1.285.0
 
 ## 0.0.25
 
 ### Patch Changes
 
-- Updated dependencies [[`882d823`](https://github.com/PostHog/posthog-js/commit/882d823ca7bf9b31aa5bdcb0512d9109096bcba7)]:
-  - posthog-js@1.284.0
+- Updated dependencies [[`882d823`](https://github.com/PostHog/agrid-js/commit/882d823ca7bf9b31aa5bdcb0512d9109096bcba7)]:
+  - agrid-js@1.284.0
 
 ## 0.0.24
 
 ### Patch Changes
 
-- Updated dependencies [[`068d55e`](https://github.com/PostHog/posthog-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
-  - posthog-js@1.283.0
-  - @posthog/core@1.5.0
-  - posthog-node@5.11.0
+- Updated dependencies [[`068d55e`](https://github.com/PostHog/agrid-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
+  - agrid-js@1.283.0
+  - @agrid/core@1.5.0
+  - agrid-node@5.11.0
 
 ## 0.0.23
 
 ### Patch Changes
 
-- Updated dependencies [[`46e3ca6`](https://github.com/PostHog/posthog-js/commit/46e3ca600ca478db1b319b36695dea090aa60f98), [`46e3ca6`](https://github.com/PostHog/posthog-js/commit/46e3ca600ca478db1b319b36695dea090aa60f98)]:
-  - posthog-js@1.282.0
+- Updated dependencies [[`46e3ca6`](https://github.com/PostHog/agrid-js/commit/46e3ca600ca478db1b319b36695dea090aa60f98), [`46e3ca6`](https://github.com/PostHog/agrid-js/commit/46e3ca600ca478db1b319b36695dea090aa60f98)]:
+  - agrid-js@1.282.0
 
 ## 0.0.22
 
 ### Patch Changes
 
-- Updated dependencies [[`71ae0d2`](https://github.com/PostHog/posthog-js/commit/71ae0d2a55cbf69a2b60ac3ee29906f379408898), [`751b440`](https://github.com/PostHog/posthog-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
-  - posthog-js@1.281.0
-  - @posthog/core@1.4.0
-  - posthog-node@5.10.4
+- Updated dependencies [[`71ae0d2`](https://github.com/PostHog/agrid-js/commit/71ae0d2a55cbf69a2b60ac3ee29906f379408898), [`751b440`](https://github.com/PostHog/agrid-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
+  - agrid-js@1.281.0
+  - @agrid/core@1.4.0
+  - agrid-node@5.10.4
 
 ## 0.0.21
 
 ### Patch Changes
 
-- Updated dependencies [[`2b13291`](https://github.com/PostHog/posthog-js/commit/2b13291db4098f076e209caae71019ab10861956), [`130c9e0`](https://github.com/PostHog/posthog-js/commit/130c9e0677dbce372986e72fca65075c4a4d78de), [`d7dced1`](https://github.com/PostHog/posthog-js/commit/d7dced1772e9b2954a250c3ace8a21e74a4e8668)]:
-  - posthog-js@1.280.1
+- Updated dependencies [[`2b13291`](https://github.com/PostHog/agrid-js/commit/2b13291db4098f076e209caae71019ab10861956), [`130c9e0`](https://github.com/PostHog/agrid-js/commit/130c9e0677dbce372986e72fca65075c4a4d78de), [`d7dced1`](https://github.com/PostHog/agrid-js/commit/d7dced1772e9b2954a250c3ace8a21e74a4e8668)]:
+  - agrid-js@1.280.1
 
 ## 0.0.20
 
 ### Patch Changes
 
-- Updated dependencies [[`5c14af2`](https://github.com/PostHog/posthog-js/commit/5c14af20818f8639dbe127de0ef7fddca06ed86b)]:
-  - posthog-js@1.280.0
+- Updated dependencies [[`5c14af2`](https://github.com/PostHog/agrid-js/commit/5c14af20818f8639dbe127de0ef7fddca06ed86b)]:
+  - agrid-js@1.280.0
 
 ## 0.0.19
 
 ### Patch Changes
 
-- [#2474](https://github.com/PostHog/posthog-js/pull/2474) [`5c89f78`](https://github.com/PostHog/posthog-js/commit/5c89f7828a39963b0fee23d0d9b8381bd87b0bf4) Thanks [@oliverb123](https://github.com/oliverb123)! - Bumps to depending on latest posthog-cli version, includes critical fix for sourcemap processing bug
+- [#2474](https://github.com/PostHog/agrid-js/pull/2474) [`5c89f78`](https://github.com/PostHog/agrid-js/commit/5c89f7828a39963b0fee23d0d9b8381bd87b0bf4) Thanks [@oliverb123](https://github.com/oliverb123)! - Bumps to depending on latest posthog-cli version, includes critical fix for sourcemap processing bug
 
 ## 0.0.18
 
 ### Patch Changes
 
-- Updated dependencies [[`04ba023`](https://github.com/PostHog/posthog-js/commit/04ba0230785ea118fe5016057b97813d1fa76d11)]:
-  - posthog-js@1.279.3
+- Updated dependencies [[`04ba023`](https://github.com/PostHog/agrid-js/commit/04ba0230785ea118fe5016057b97813d1fa76d11)]:
+  - agrid-js@1.279.3
 
 ## 0.0.17
 
 ### Patch Changes
 
-- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/posthog-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
-  - @posthog/core@1.3.1
-  - posthog-js@1.279.2
-  - posthog-node@5.10.3
+- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/agrid-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
+  - @agrid/core@1.3.1
+  - agrid-js@1.279.2
+  - agrid-node@5.10.3
 
 ## 0.0.16
 
 ### Patch Changes
 
-- Updated dependencies [[`b161bb3`](https://github.com/PostHog/posthog-js/commit/b161bb3258b6dae879f76fd828a438ff6c07797f)]:
-  - posthog-js@1.279.1
+- Updated dependencies [[`b161bb3`](https://github.com/PostHog/agrid-js/commit/b161bb3258b6dae879f76fd828a438ff6c07797f)]:
+  - agrid-js@1.279.1
 
 ## 0.0.15
 
 ### Patch Changes
 
-- Updated dependencies [[`a581328`](https://github.com/PostHog/posthog-js/commit/a581328156d6ee50804cd740aa84c05d4e9c1f22)]:
-  - posthog-node@5.10.2
+- Updated dependencies [[`a581328`](https://github.com/PostHog/agrid-js/commit/a581328156d6ee50804cd740aa84c05d4e9c1f22)]:
+  - agrid-node@5.10.2
 
 ## 0.0.14
 
 ### Patch Changes
 
-- Updated dependencies [[`3075888`](https://github.com/PostHog/posthog-js/commit/3075888be97e03b0485d2596f9fad2bd2ba7e192)]:
-  - posthog-js@1.279.0
+- Updated dependencies [[`3075888`](https://github.com/PostHog/agrid-js/commit/3075888be97e03b0485d2596f9fad2bd2ba7e192)]:
+  - agrid-js@1.279.0
 
 ## 0.0.13
 
 ### Patch Changes
 
-- Updated dependencies [[`b0f1390`](https://github.com/PostHog/posthog-js/commit/b0f1390d66c46c7abd308ffd88397d0ece7d5f82)]:
-  - posthog-js@1.278.0
+- Updated dependencies [[`b0f1390`](https://github.com/PostHog/agrid-js/commit/b0f1390d66c46c7abd308ffd88397d0ece7d5f82)]:
+  - agrid-js@1.278.0
 
 ## 0.0.12
 
 ### Patch Changes
 
-- Updated dependencies [[`1721aba`](https://github.com/PostHog/posthog-js/commit/1721aba7e30d1f4a3f5a3f9c1ce35af5af0a4583)]:
-  - posthog-node@5.10.1
+- Updated dependencies [[`1721aba`](https://github.com/PostHog/agrid-js/commit/1721aba7e30d1f4a3f5a3f9c1ce35af5af0a4583)]:
+  - agrid-node@5.10.1
 
 ## 0.0.11
 
 ### Patch Changes
 
-- Updated dependencies [[`52da336`](https://github.com/PostHog/posthog-js/commit/52da3364ace5b879e1a7c64c8970ffb6fab439b6)]:
-  - posthog-js@1.277.0
+- Updated dependencies [[`52da336`](https://github.com/PostHog/agrid-js/commit/52da3364ace5b879e1a7c64c8970ffb6fab439b6)]:
+  - agrid-js@1.277.0
 
 ## 0.0.10
 
 ### Patch Changes
 
-- [#2456](https://github.com/PostHog/posthog-js/pull/2456) [`450c39e`](https://github.com/PostHog/posthog-js/commit/450c39e39998fad54cf568635c70fb1f08d39c81) Thanks [@ablaszkiewicz](https://github.com/ablaszkiewicz)! - fix nuxt build process hang
+- [#2456](https://github.com/PostHog/agrid-js/pull/2456) [`450c39e`](https://github.com/PostHog/agrid-js/commit/450c39e39998fad54cf568635c70fb1f08d39c81) Thanks [@ablaszkiewicz](https://github.com/ablaszkiewicz)! - fix nuxt build process hang
 
 ## 0.0.9
 
 ### Patch Changes
 
-- [#2448](https://github.com/PostHog/posthog-js/pull/2448) [`5b17b10`](https://github.com/PostHog/posthog-js/commit/5b17b1078130200a1e1bb89089d08cdf3ad255c5) Thanks [@ablaszkiewicz](https://github.com/ablaszkiewicz)! - use new cli (v0.5.1)
+- [#2448](https://github.com/PostHog/agrid-js/pull/2448) [`5b17b10`](https://github.com/PostHog/agrid-js/commit/5b17b1078130200a1e1bb89089d08cdf3ad255c5) Thanks [@ablaszkiewicz](https://github.com/ablaszkiewicz)! - use new cli (v0.5.1)
 
 ## 0.0.8
 
 ### Patch Changes
 
-- [#2450](https://github.com/PostHog/posthog-js/pull/2450) [`4ef7051`](https://github.com/PostHog/posthog-js/commit/4ef7051bc1d29a4013227f910b6a060969486136) Thanks [@daibhin](https://github.com/daibhin)! - bump the @posthog/cli version
+- [#2450](https://github.com/PostHog/agrid-js/pull/2450) [`4ef7051`](https://github.com/PostHog/agrid-js/commit/4ef7051bc1d29a4013227f910b6a060969486136) Thanks [@daibhin](https://github.com/daibhin)! - bump the @agrid/cli version
 
 ## 0.0.7
 
 ### Patch Changes
 
-- Updated dependencies [[`d50899e`](https://github.com/PostHog/posthog-js/commit/d50899e9e86cd0ad6a43b3f6e840ee9638394992)]:
-  - posthog-js@1.276.0
+- Updated dependencies [[`d50899e`](https://github.com/PostHog/agrid-js/commit/d50899e9e86cd0ad6a43b3f6e840ee9638394992)]:
+  - agrid-js@1.276.0
 
 ## 0.0.6
 
 ### Patch Changes
 
-- Updated dependencies [[`10b3d23`](https://github.com/PostHog/posthog-js/commit/10b3d232b3c6ce38de5500654e6f8aa3e80c280a)]:
-  - posthog-js@1.275.3
+- Updated dependencies [[`10b3d23`](https://github.com/PostHog/agrid-js/commit/10b3d232b3c6ce38de5500654e6f8aa3e80c280a)]:
+  - agrid-js@1.275.3
 
 ## 0.0.5
 
 ### Patch Changes
 
-- Updated dependencies [[`daf919b`](https://github.com/PostHog/posthog-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`daf919b`](https://github.com/PostHog/posthog-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/posthog-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
-  - @posthog/core@1.3.0
-  - posthog-node@5.10.0
-  - posthog-js@1.275.2
+- Updated dependencies [[`daf919b`](https://github.com/PostHog/agrid-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`daf919b`](https://github.com/PostHog/agrid-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/agrid-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
+  - @agrid/core@1.3.0
+  - agrid-node@5.10.0
+  - agrid-js@1.275.2
 
 ## 0.0.4
 
 ### Patch Changes
 
-- Updated dependencies [[`4e15fda`](https://github.com/PostHog/posthog-js/commit/4e15fdada76201eaceb407c3260a8fef025c87d0)]:
-  - posthog-js@1.275.1
+- Updated dependencies [[`4e15fda`](https://github.com/PostHog/agrid-js/commit/4e15fdada76201eaceb407c3260a8fef025c87d0)]:
+  - agrid-js@1.275.1
 
 ## 0.0.3
 
 ### Patch Changes
 
-- Updated dependencies [[`ae941c2`](https://github.com/PostHog/posthog-js/commit/ae941c27673e50d01cecdbf55364cffa894379c4)]:
-  - posthog-js@1.275.0
+- Updated dependencies [[`ae941c2`](https://github.com/PostHog/agrid-js/commit/ae941c27673e50d01cecdbf55364cffa894379c4)]:
+  - agrid-js@1.275.0
 
 ## 0.0.2
 
 ### Patch Changes
 
-- [#2372](https://github.com/PostHog/posthog-js/pull/2372) [`30ac39d`](https://github.com/PostHog/posthog-js/commit/30ac39d39b6cbcd6d07975537a47b98855c744c7) Thanks [@ablaszkiewicz](https://github.com/ablaszkiewicz)! - add posthog nuxt package
+- [#2372](https://github.com/PostHog/agrid-js/pull/2372) [`30ac39d`](https://github.com/PostHog/agrid-js/commit/30ac39d39b6cbcd6d07975537a47b98855c744c7) Thanks [@ablaszkiewicz](https://github.com/ablaszkiewicz)! - add posthog nuxt package

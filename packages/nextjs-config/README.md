@@ -8,7 +8,7 @@ Please see the main [PostHog Error Tracking docs](https://posthog.com/docs/error
 
 ```typescript
 // next.config.ts
-import { withPostHogConfig } from "@posthog/nextjs-config";
+import { withPostHogConfig } from "@agrid/nextjs-config";
 
 const nextConfig = {
   // Your Next.js configuration here

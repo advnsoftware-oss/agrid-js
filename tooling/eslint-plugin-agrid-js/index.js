@@ -1,7 +1,7 @@
 const { readdirSync } = require('fs')
 const { basename } = require('path')
 
-const projectName = 'posthog-js'
+const projectName = 'agrid-js'
 const ruleFiles = readdirSync(__dirname).filter(
     (file) => file.endsWith('.js') && file !== 'index.js' && file !== '.eslintrc.js' && !file.endsWith('test.js')
 )

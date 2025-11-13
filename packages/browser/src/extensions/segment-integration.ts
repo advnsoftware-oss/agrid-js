@@ -20,7 +20,7 @@ import { PostHog } from '../posthog-core'
 import { createLogger } from '../utils/logger'
 
 import { USER_STATE } from '../constants'
-import { isFunction } from '@posthog/core'
+import { isFunction } from '@agrid/core'
 import { uuidv7 } from '../uuidv7'
 
 const logger = createLogger('[SegmentIntegration]')

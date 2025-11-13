@@ -4,7 +4,7 @@ import {
 } from '../../../constants'
 import { PostHog } from '../../../posthog-core'
 import { FlagVariant, RemoteConfig, SessionRecordingPersistedConfig, SessionRecordingUrlTrigger } from '../../../types'
-import { isNullish, isBoolean, isString, isObject } from '@posthog/core'
+import { isNullish, isBoolean, isString, isObject } from '@agrid/core'
 import { window } from '../../../utils/globals'
 
 export const DISABLED = 'disabled'

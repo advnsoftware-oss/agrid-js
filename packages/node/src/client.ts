@@ -12,7 +12,7 @@ import {
   PostHogCaptureOptions,
   isPlainObject,
   isBlockedUA,
-} from '@posthog/core'
+} from '@agrid/core'
 import {
   EventMessage,
   GroupIdentifyMessage,
@@ -21,14 +21,14 @@ import {
   PostHogOptions,
   SendFeatureFlagsOptions,
 } from './types'
-import { FeatureFlagDetail, FeatureFlagValue, getFeatureFlagValue } from '@posthog/core'
+import { FeatureFlagDetail, FeatureFlagValue, getFeatureFlagValue } from '@agrid/core'
 import {
   FeatureFlagsPoller,
   RequiresServerEvaluation,
   InconclusiveMatchError,
 } from './extensions/feature-flags/feature-flags'
 import ErrorTracking from './extensions/error-tracking'
-import { safeSetTimeout, PostHogEventProperties } from '@posthog/core'
+import { safeSetTimeout, PostHogEventProperties } from '@agrid/core'
 import { PostHogMemoryStorage } from './storage-memory'
 
 // Standard local evaluation rate limit is 600 per minute (10 per second),

@@ -89,7 +89,7 @@ The `/src/extensions/` directory contains modular features:
 ### Package Management
 
 - Uses **pnpm** (not npm) for dependency management
-- Workspace setup with `@posthog/core` internal dependency
+- Workspace setup with `@agrid/core` internal dependency
 - Optional peer dependencies for Angular compiler support
 
 ### Important Notes

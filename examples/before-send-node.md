@@ -13,7 +13,7 @@ The `before_send` feature allows you to modify or drop events before they are se
 Pass a `before_send` function to the PostHog constructor:
 
 ```javascript
-const { PostHog } = require('posthog-node')
+const { PostHog } = require('agrid-node')
 
 const posthog = new PostHog('YOUR_API_KEY', {
     host: 'https://us.i.posthog.com',

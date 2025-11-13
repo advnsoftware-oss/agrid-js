@@ -10,7 +10,7 @@ Please see the main [PostHog Error tracking docs](https://posthog.com/docs/error
 1. Install the package
 
 ```
-pnpm add @posthog/nuxt
+pnpm add @agrid/nuxt
 ```
 
 2. Configure posthog module
@@ -18,7 +18,7 @@ pnpm add @posthog/nuxt
 ```typescript
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['@posthog/nuxt'], // Add module reference
+  modules: ['@agrid/nuxt'], // Add module reference
 
   sourcemap: { client: 'hidden' }, // Make sure to set it (otherwise client sourcemaps will not be generated)
 
@@ -33,8 +33,8 @@ export default defineNuxtConfig({
   posthogConfig: {
     host: 'http://localhost:8010', // (optional) Host URL, defaults to https://us.posthog.com
     publicKey: 'public api key', // Your public web snippet key. You can find it in settings
-    clientConfig?: Partial<PostHogConfig> // (optional) It will be passed to the posthog-js client on init in vue
-    serverConfig?: PostHogOptions // (optional) It will be passed to the posthog-node client on init in nitro. Please note that this client instance is intended for error-tracking purposes only
+    clientConfig?: Partial<PostHogConfig> // (optional) It will be passed to the agrid-js client on init in vue
+    serverConfig?: PostHogOptions // (optional) It will be passed to the agrid-node client on init in nitro. Please note that this client instance is intended for error-tracking purposes only
     sourceMaps: {
       enabled: true, // Enables sourcemaps generation and upload
       envId: '2', // Environment ID, see https://app.posthog.com/settings/environment#variables

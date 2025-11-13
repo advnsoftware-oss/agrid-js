@@ -53,7 +53,7 @@ The playground is excluded from the workspace (see `pnpm-workspace.yaml`). Depen
 
 ### Testing cross-subdomain tracking
 
-We can locally debug the cross-domain behaviour of posthog-js by editing our /etc/hosts file to point some fake
+We can locally debug the cross-domain behaviour of agrid-js by editing our /etc/hosts file to point some fake
 subdomains to localhost. There are a few steps required to do this, these are the instructions for doing this on MacOS
 with Chrome:
 

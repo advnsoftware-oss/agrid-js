@@ -11,7 +11,7 @@ const rules = {
     'no-empty': 'off',
     'no-console': 'error',
     'no-only-tests/no-only-tests': 'error',
-    'posthog-js/no-external-replay-imports': 'error',
+    'agrid-js/no-external-replay-imports': 'error',
     '@typescript-eslint/naming-convention': [
         'error',
         {
@@ -28,7 +28,7 @@ const extend = [
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:compat/recommended',
-    'plugin:posthog-js/all',
+    'plugin:agrid-js/all',
 ]
 
 module.exports = {
@@ -79,15 +79,15 @@ module.exports = {
                 'no-console': 'off',
                 '@typescript-eslint/no-unused-vars': 'off',
                 '@typescript-eslint/naming-convention': 'off',
-                'posthog-js/no-direct-undefined-check': 'off',
-                'posthog-js/no-direct-boolean-check': 'off',
-                'posthog-js/no-direct-null-check': 'off',
-                'posthog-js/no-direct-function-check': 'off',
-                'posthog-js/no-direct-number-check': 'off',
-                'posthog-js/no-direct-date-check': 'off',
-                'posthog-js/no-direct-array-check': 'off',
+                'agrid-js/no-direct-undefined-check': 'off',
+                'agrid-js/no-direct-boolean-check': 'off',
+                'agrid-js/no-direct-null-check': 'off',
+                'agrid-js/no-direct-function-check': 'off',
+                'agrid-js/no-direct-number-check': 'off',
+                'agrid-js/no-direct-date-check': 'off',
+                'agrid-js/no-direct-array-check': 'off',
                 '@typescript-eslint/ban-ts-comment': 'off',
-                'posthog-js/no-add-event-listener': 'off',
+                'agrid-js/no-add-event-listener': 'off',
                 'no-constant-condition': 'off',
                 'compat/compat': 'off',
             },

@@ -14,7 +14,7 @@
         "build-posthog": "cd ../../.. && NODE_ENV=dev pnpm i && pnpm run build"
     },
     "dependencies": {
-        "posthog-js": "link:../../..",
+        "agrid-js": "link:../../..",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },

@@ -1,6 +1,6 @@
 # PostHog React Playground
 
-This is a Next.js playground application that demonstrates the `@posthog/react` SDK.
+This is a Next.js playground application that demonstrates the `@agrid/react` SDK.
 
 ## Features
 

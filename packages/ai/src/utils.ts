@@ -1,4 +1,4 @@
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import { Buffer } from 'buffer'
 import OpenAIOrignal from 'openai'
 import AnthropicOriginal from '@anthropic-ai/sdk'

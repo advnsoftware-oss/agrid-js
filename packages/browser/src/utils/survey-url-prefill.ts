@@ -1,7 +1,7 @@
 import { Survey, SurveyQuestion, SurveyQuestionType } from '../posthog-surveys-types'
 import { getSurveyResponseKey } from '../extensions/surveys/surveys-extension-utils'
 import { logger } from './logger'
-import { isUndefined } from '@posthog/core'
+import { isUndefined } from '@agrid/core'
 
 /**
  * Extracted URL prefill parameters by question index

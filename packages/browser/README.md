@@ -1,6 +1,6 @@
 # PostHog Browser JS Library
 
-[![npm package](https://img.shields.io/npm/v/posthog-js?style=flat-square)](https://www.npmjs.com/package/posthog-js)
+[![npm package](https://img.shields.io/npm/v/agrid-js?style=flat-square)](https://www.npmjs.com/package/agrid-js)
 [![MIT License](https://img.shields.io/badge/License-MIT-red.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 For information on using this library in your app, [see PostHog Docs](https://posthog.com/docs/libraries/js).
@@ -57,7 +57,7 @@ After all this, you'll be able to run through the below steps:
 
 ### Running local create react app example
 
-You can use the create react app setup in `packages/browser/playground/nextjs` to test posthog-js as an npm module in a Nextjs application.
+You can use the create react app setup in `packages/browser/playground/nextjs` to test agrid-js as an npm module in a Nextjs application.
 
 1. Run `posthog` locally on port 8000 (`DEBUG=1 TEST=1 ./bin/start`).
 1. Run `python manage.py setup_dev --no-data` on posthog repo, which sets up a demo account.
@@ -74,7 +74,7 @@ You can use the create react app setup in `packages/browser/playground/nextjs` t
 
 ## Developing together with another project
 
-Install pnpm to link a local version of `posthog-js` in another JS project: `npm install -g pnpm`
+Install pnpm to link a local version of `agrid-js` in another JS project: `npm install -g pnpm`
 
 ### Run this to link the local version
 
@@ -83,14 +83,14 @@ We have 2 options for linking this project to your local version: via [pnpm link
 #### local paths (preferred)
 
 - run `pnpm build` and `pnpm package` in the root of this repo to generate a tarball of this project.
-- run `pnpm -r update posthog-js@file:[ABSOLUTE_PATH_TO_POSTHOG_JS_REPO]/target/posthog-js.tgz` in the root of the repo that you want to link to (e.g. the posthog main repo).
+- run `pnpm -r update agrid-js@file:[ABSOLUTE_PATH_TO_POSTHOG_JS_REPO]/target/agrid-js.tgz` in the root of the repo that you want to link to (e.g. the posthog main repo).
 - run `pnpm install` in that same repo
 - run `cd frontend && pnpm run copy-scripts` if the repo that you want to link to is the posthog main repo.
 
-Then, once this link has been created, any time you need to make a change to `posthog-js`, you can run `pnpm build && pnpm package` from the `posthog-js` root and the changes will appear in the other repo.
+Then, once this link has been created, any time you need to make a change to `agrid-js`, you can run `pnpm build && pnpm package` from the `agrid-js` root and the changes will appear in the other repo.
 
 #### `pnpm link`
 
-- In the `posthog-js` directory: `pnpm link --global`
-- (for `posthog` this means: `pnpm link --global posthog-js && pnpm i && pnpm copy-scripts`)
-- You can then remove the link by, e.g., running `pnpm link --global posthog-js` from within `posthog`
+- In the `agrid-js` directory: `pnpm link --global`
+- (for `posthog` this means: `pnpm link --global agrid-js && pnpm i && pnpm copy-scripts`)
+- You can then remove the link by, e.g., running `pnpm link --global agrid-js` from within `posthog`

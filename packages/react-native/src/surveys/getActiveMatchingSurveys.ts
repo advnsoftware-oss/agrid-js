@@ -1,6 +1,6 @@
 import { canActivateRepeatedly, hasEvents } from './surveys-utils'
 import { currentDeviceType } from '../native-deps'
-import { FeatureFlagValue, Survey, SurveyMatchType } from '@posthog/core'
+import { FeatureFlagValue, Survey, SurveyMatchType } from '@agrid/core'
 
 const ANY_FLAG_VARIANT = 'any'
 

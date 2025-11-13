@@ -15,14 +15,14 @@ _Please describe._
 ## Related sub-libraries
 
 - [ ] All of them
-- [ ] posthog-js (web)
-- [ ] posthog-js-lite (web lite)
-- [ ] posthog-node
-- [ ] posthog-react-native
-- [ ] @posthog/react
-- [ ] @posthog/ai
-- [ ] @posthog/nextjs-config
-- [ ] @posthog/nuxt
+- [ ] agrid-js (web)
+- [ ] agrid-js-lite (web lite)
+- [ ] agrid-node
+- [ ] agrid-react-native
+- [ ] @agrid/react
+- [ ] @agrid/ai
+- [ ] @agrid/nextjs-config
+- [ ] @agrid/nuxt
 
 ## Additional context
 

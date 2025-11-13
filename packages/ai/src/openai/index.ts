@@ -1,5 +1,5 @@
 import { OpenAI as OpenAIOrignal, ClientOptions } from 'openai'
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import {
   formatResponseOpenAI,
   MonitoringParams,

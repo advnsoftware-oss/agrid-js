@@ -14,7 +14,7 @@ import {
   logFlushError,
   maybeAdd,
   FeatureFlagValue,
-} from '@posthog/core'
+} from '@agrid/core'
 import { PostHogRNStorage, PostHogRNSyncMemoryStorage } from './storage'
 import { version } from './version'
 import { buildOptimisiticAsyncStorage, getAppProperties } from './native-deps'
@@ -289,7 +289,7 @@ export class PostHog extends PostHogCore {
   }
 
   getLibraryId(): string {
-    return 'posthog-react-native'
+    return 'agrid-react-native'
   }
 
   getLibraryVersion(): string {

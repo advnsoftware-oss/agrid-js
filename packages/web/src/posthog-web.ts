@@ -1,12 +1,12 @@
 import { version } from './version'
 
-import { PostHogCore, getFetch } from '@posthog/core'
+import { PostHogCore, getFetch } from '@agrid/core'
 import type {
   PostHogEventProperties,
   PostHogFetchOptions,
   PostHogFetchResponse,
   PostHogPersistedProperty,
-} from '@posthog/core'
+} from '@agrid/core'
 
 import { getContext } from './context'
 import { PostHogStorage, getStorage } from './storage'
@@ -22,7 +22,7 @@ export class PostHog extends PostHogCore {
   constructor(apiKey: string, options?: PostHogOptions) {
     super(apiKey, options)
 
-    // posthog-js stores options in one object on
+    // agrid-js stores options in one object on
     this._storageKey = options?.persistence_name ? `ph_${options.persistence_name}` : `ph_${apiKey}_posthog`
 
     this._storage = getStorage(options?.persistence || 'localStorage', this.getWindow())
@@ -76,7 +76,7 @@ export class PostHog extends PostHogCore {
   }
 
   getLibraryId(): string {
-    return 'posthog-js-lite'
+    return 'agrid-js-lite'
   }
 
   getLibraryVersion(): string {

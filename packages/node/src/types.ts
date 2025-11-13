@@ -4,7 +4,7 @@ import type {
   JsonType,
   PostHogFetchOptions,
   PostHogFetchResponse,
-} from '@posthog/core'
+} from '@agrid/core'
 
 export interface IdentifyMessage {
   distinctId: string

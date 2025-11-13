@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@posthog/cli':
-      specifier: ~0.5.8
-      version: 0.5.8
+      specifier: ~0.5.9
+      version: 0.5.10
     '@rslib/core':
       specifier: ^0.10.5
       version: 0.10.6
@@ -82,12 +82,15 @@ importers:
       eslint:
         specifier: 8.57.0
         version: 8.57.0
-      eslint-config-posthog-js:
-        specifier: workspace:./tooling/eslint-plugin-posthog-js
-        version: link:tooling/eslint-plugin-posthog-js
+      eslint-config-agrid-js:
+        specifier: workspace:./tooling/eslint-plugin-agrid-js
+        version: link:tooling/eslint-plugin-agrid-js
       eslint-config-prettier:
         specifier: ^8.5.0
         version: 8.5.0(eslint@8.57.0)
+      eslint-plugin-agrid-js:
+        specifier: workspace:./tooling/eslint-plugin-agrid-js
+        version: link:tooling/eslint-plugin-agrid-js
       eslint-plugin-compat:
         specifier: ^6.0.1
         version: 6.0.1(eslint@8.57.0)
@@ -97,9 +100,6 @@ importers:
       eslint-plugin-no-only-tests:
         specifier: ^3.1.0
         version: 3.1.0
-      eslint-plugin-posthog-js:
-        specifier: workspace:./tooling/eslint-plugin-posthog-js
-        version: link:tooling/eslint-plugin-posthog-js
       eslint-plugin-prettier:
         specifier: ^5.2.1
         version: 5.2.1(@types/eslint@8.44.6)(eslint-config-prettier@8.5.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.4.2)
@@ -161,25 +161,25 @@ importers:
         specifier: ^4.1.8
         version: 4.1.12
     devDependencies:
-      '@posthog-tooling/rollup-utils':
+      '@agrid-tooling/rollup-utils':
         specifier: workspace:*
         version: link:../../tooling/rollup-utils
-      '@posthog-tooling/tsconfig-base':
+      '@agrid-tooling/tsconfig-base':
         specifier: workspace:*
         version: link:../../tooling/tsconfig-base
+      agrid-node:
+        specifier: workspace:*
+        version: link:../node
       jest:
         specifier: 'catalog:'
         version: 29.7.0(@types/node@22.17.0)(node-notifier@8.0.2)(ts-node@10.9.2(@types/node@22.17.0)(typescript@5.8.2))
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
-      posthog-node:
-        specifier: workspace:*
-        version: link:../node
 
   packages/browser:
     dependencies:
-      '@posthog/core':
+      '@agrid/core':
         specifier: workspace:*
         version: link:../core
       core-js:
@@ -195,6 +195,9 @@ importers:
         specifier: ^4.2.4
         version: 4.2.4
     devDependencies:
+      '@agrid-tooling/rollup-utils':
+        specifier: workspace:*
+        version: link:../../tooling/rollup-utils
       '@babel/core':
         specifier: 7.27.1
         version: 7.27.1
@@ -222,9 +225,6 @@ importers:
       '@playwright/test':
         specifier: ^1.52.0
         version: 1.52.0
-      '@posthog-tooling/rollup-utils':
-        specifier: workspace:*
-        version: link:../../tooling/rollup-utils
       '@posthog/rrweb-plugin-console-record':
         specifier: ^0.0.27
         version: 0.0.27(@posthog/rrweb-utils@0.0.9)(@posthog/rrweb@0.0.9)
@@ -291,6 +291,9 @@ importers:
       '@types/web':
         specifier: ^0.0.222
         version: 0.0.222
+      agrid-js:
+        specifier: 'link:'
+        version: 'link:'
       babel-jest:
         specifier: ^29.7.0
         version: 29.7.0(@babel/core@7.27.1)
@@ -354,9 +357,6 @@ importers:
       postcss-nesting:
         specifier: ^13.0.1
         version: 13.0.1(postcss@8.5.3)
-      posthog-js:
-        specifier: 'link:'
-        version: 'link:'
       preact-render-to-string:
         specifier: ^6.3.1
         version: 6.3.1(preact@10.19.3)
@@ -400,7 +400,7 @@ importers:
         specifier: ^7.0.6
         version: 7.0.6
     devDependencies:
-      '@posthog-tooling/tsconfig-base':
+      '@agrid-tooling/tsconfig-base':
         specifier: workspace:*
         version: link:../../tooling/tsconfig-base
       '@rslib/core':
@@ -415,20 +415,20 @@ importers:
 
   packages/nextjs-config:
     dependencies:
-      '@posthog/cli':
-        specifier: 'catalog:'
-        version: 0.5.8
-      '@posthog/core':
+      '@agrid/core':
         specifier: workspace:*
         version: link:../core
+      '@posthog/cli':
+        specifier: 'catalog:'
+        version: 0.5.10
       semver:
         specifier: ^7.7.2
         version: 7.7.2
     devDependencies:
-      '@posthog-tooling/rollup-utils':
+      '@agrid-tooling/rollup-utils':
         specifier: workspace:*
         version: link:../../tooling/rollup-utils
-      '@posthog-tooling/tsconfig-base':
+      '@agrid-tooling/tsconfig-base':
         specifier: workspace:*
         version: link:../../tooling/tsconfig-base
       '@rslib/core':
@@ -452,11 +452,11 @@ importers:
 
   packages/node:
     dependencies:
-      '@posthog/core':
+      '@agrid/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
-      '@posthog-tooling/tsconfig-base':
+      '@agrid-tooling/tsconfig-base':
         specifier: workspace:*
         version: link:../../tooling/tsconfig-base
       '@rslib/core':
@@ -471,19 +471,19 @@ importers:
 
   packages/nuxt:
     dependencies:
+      '@agrid/core':
+        specifier: workspace:*
+        version: link:../core
       '@nuxt/kit':
         specifier: '>=3.7.0'
         version: 4.1.3(magicast@0.3.5)
       '@posthog/cli':
         specifier: 'catalog:'
-        version: 0.5.8
-      '@posthog/core':
-        specifier: workspace:*
-        version: link:../core
-      posthog-js:
+        version: 0.5.10
+      agrid-js:
         specifier: workspace:*
         version: link:../browser
-      posthog-node:
+      agrid-node:
         specifier: workspace:*
         version: link:../node
     devDependencies:
@@ -511,12 +511,12 @@ importers:
 
   packages/react:
     devDependencies:
+      '@agrid-tooling/rollup-utils':
+        specifier: workspace:*
+        version: link:../../tooling/rollup-utils
       '@babel/preset-react':
         specifier: ^7.18.6
         version: 7.27.1(@babel/core@7.28.4)
-      '@posthog-tooling/rollup-utils':
-        specifier: workspace:*
-        version: link:../../tooling/rollup-utils
       '@rollup/plugin-inject':
         specifier: ^4.0.2
         version: 4.0.4(rollup@2.79.2)
@@ -535,6 +535,9 @@ importers:
       '@types/react':
         specifier: ^17.0.0
         version: 17.0.87
+      agrid-js:
+        specifier: workspace:*
+        version: link:../browser
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -544,9 +547,6 @@ importers:
       jest-environment-jsdom:
         specifier: 'catalog:'
         version: 29.7.0
-      posthog-js:
-        specifier: workspace:*
-        version: link:../browser
       react:
         specifier: ^17.0.1
         version: 17.0.2
@@ -571,22 +571,22 @@ importers:
 
   packages/react-native:
     dependencies:
-      '@posthog/core':
+      '@agrid/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
+      '@agrid-tooling/rollup-utils':
+        specifier: workspace:*
+        version: link:../../tooling/rollup-utils
+      '@agrid-tooling/tsconfig-base':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig-base
       '@babel/cli':
         specifier: ^7.19.3
         version: 7.28.0(@babel/core@7.27.1)
       '@babel/plugin-transform-private-property-in-object':
         specifier: ^7.27.1
         version: 7.27.1(@babel/core@7.27.1)
-      '@posthog-tooling/rollup-utils':
-        specifier: workspace:*
-        version: link:../../tooling/rollup-utils
-      '@posthog-tooling/tsconfig-base':
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig-base
       '@react-native-async-storage/async-storage':
         specifier: ^1.17.10
         version: 1.24.0(react-native@0.69.12(@babel/core@7.27.1)(@babel/preset-env@7.27.2(@babel/core@7.27.1))(react@18.2.0))
@@ -659,14 +659,14 @@ importers:
 
   packages/web:
     dependencies:
-      '@posthog/core':
+      '@agrid/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
-      '@posthog-tooling/rollup-utils':
+      '@agrid-tooling/rollup-utils':
         specifier: workspace:*
         version: link:../../tooling/rollup-utils
-      '@posthog-tooling/tsconfig-base':
+      '@agrid-tooling/tsconfig-base':
         specifier: workspace:*
         version: link:../../tooling/tsconfig-base
       jest:
@@ -675,6 +675,8 @@ importers:
       jest-environment-jsdom:
         specifier: 'catalog:'
         version: 29.7.0
+
+  tooling/eslint-plugin-agrid-js: {}
 
   tooling/eslint-plugin-posthog-js: {}
 
@@ -3257,8 +3259,8 @@ packages:
   '@poppinss/exception@1.2.2':
     resolution: {integrity: sha512-m7bpKCD4QMlFCjA/nKTs23fuvoVFoA83brRKmObCUNmi/9tVu8Ve3w4YQAnJu4q3Tjf5fr685HYIC/IA2zHRSg==}
 
-  '@posthog/cli@0.5.8':
-    resolution: {integrity: sha512-CO+Rl5J29W9jN0bnsr9Ugl/vhMNl17o9i7EC3hSMGf0Dizi2FqNP7hTh9nZTxWs6lOR+XhIXotiakmXF0HE19A==}
+  '@posthog/cli@0.5.10':
+    resolution: {integrity: sha512-AJlCebe/oerSeAAzxfAu0upbWFgX7SxXBor2nsH9yyf8rai1tl7hzerRcRNHL+Iz+SPndv7Kvg2g0rO8S0a1cw==}
     engines: {node: '>=14', npm: '>=6'}
     hasBin: true
 
@@ -16734,7 +16736,7 @@ snapshots:
 
   '@poppinss/exception@1.2.2': {}
 
-  '@posthog/cli@0.5.8':
+  '@posthog/cli@0.5.10':
     dependencies:
       axios: 1.12.2
       axios-proxy-builder: 0.1.2

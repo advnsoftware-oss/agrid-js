@@ -1,5 +1,5 @@
 import { convertToURL, getQueryParam, maskQueryParams } from './request-utils'
-import { isNull, stripLeadingDollar } from '@posthog/core'
+import { isNull, stripLeadingDollar } from '@agrid/core'
 import { Properties } from '../types'
 import Config from '../config'
 import { each, extend, extendArray, stripEmptyProperties } from './index'

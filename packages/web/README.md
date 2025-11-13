@@ -1,23 +1,23 @@
 # PostHog Web
 
-> 🚧 This is a reduced feature set package. Currently the only officially supported feature complete way of using PostHog on the web is [posthog-js](https://github.com/PostHog/posthog-js)
+> 🚧 This is a reduced feature set package. Currently the only officially supported feature complete way of using PostHog on the web is [agrid-js](https://github.com/PostHog/agrid-js)
 
-This package is currently published to npm as [posthog-js-lite](https://www.npmjs.com/package/posthog-js-lite) and is a simplified version of the recommended and officially supported `posthog-js`.
+This package is currently published to npm as [agrid-js-lite](https://www.npmjs.com/package/agrid-js-lite) and is a simplified version of the recommended and officially supported `agrid-js`.
 
 You'd want to use this only if you're very conscious about package sizes, and this reduced feature set (only analytics and feature flags) works for your use case. The most common use case is in chrome extensions.
 
 ## Installation
 
 ```bash
-npm i -s posthog-js-lite
+npm i -s agrid-js-lite
 # or
-yarn add posthog-js-lite
+yarn add agrid-js-lite
 ```
 
 It is entirely written in Typescript and has a minimal API as follows:
 
 ```ts
-import PostHog from 'posthog-js-lite'
+import PostHog from 'agrid-js-lite'
 
 const posthog = new PostHog('my-api-key', {
   /* options, e.g. for self-hosted users */
@@ -28,9 +28,9 @@ const posthog = new PostHog('my-api-key', {
 posthog.capture('my-event', { myProperty: 'foo' })
 
 // Identify a user (e.g. on login)
-posthog.identify('my-unique-user-id', { email: 'example@posthog.com', name: 'Jane Doe' })
+posthog.identify('my-unique-user-id', { email: 'example@agrid.com', name: 'Jane Doe' })
 // ...or with Set Once additional properties
-posthog.identify('my-unique-user-id', { $set: { email: 'example@posthog.com', name: 'Jane Doe' }, $set_once: { vip: true } })
+posthog.identify('my-unique-user-id', { $set: { email: 'example@agrid.com', name: 'Jane Doe' }, $set_once: { vip: true } })
 
 // Reset a user (e.g. on logout)
 posthog.reset()

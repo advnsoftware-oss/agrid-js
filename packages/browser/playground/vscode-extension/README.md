@@ -13,17 +13,17 @@ This is a playground to test PostHog integration within a VS Code extension's we
 
 ## Configuration
 
-### Running with a local posthog-js build
+### Running with a local agrid-js build
 
-By default, the playground is configured to use a local build of `posthog-js`. In `src/extension.js`, the `runningLocally` constant is set to `true`. This will load `array.full.js` from the `packages/browser/dist` directory.
+By default, the playground is configured to use a local build of `agrid-js`. In `src/extension.js`, the `runningLocally` constant is set to `true`. This will load `array.full.js` from the `packages/browser/dist` directory.
 
 To use the production snippet from the PostHog CDN, you will need to set `runningLocally` to `false`.
 
 ### Environment Variables
 
-The PostHog project key and API host are loaded from a `.env` file in the root of the `posthog-js` repository.
+The PostHog project key and API host are loaded from a `.env` file in the root of the `agrid-js` repository.
 
-1.  If you don't already have one, create a `.env` file at the root of the `posthog-js` project.
+1.  If you don't already have one, create a `.env` file at the root of the `agrid-js` project.
 2.  Add your PostHog Project Key to the `.env` file:
     ```
     POSTHOG_PROJECT_KEY=<your-project-key>

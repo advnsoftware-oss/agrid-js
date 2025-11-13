@@ -1,10 +1,10 @@
 {
-  "name": "@posthog/ai",
+  "name": "@agrid/ai",
   "version": "7.0.0",
   "description": "PostHog Node.js AI integrations",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PostHog/posthog-js.git",
+    "url": "git+https://github.com/agrid/agrid-js.git",
     "directory": "packages/ai"
   },
   "main": "dist/index.cjs",
@@ -22,11 +22,11 @@
     "package": "pnpm pack --out $PACKAGE_DEST/%s.tgz"
   },
   "devDependencies": {
-    "@posthog-tooling/rollup-utils": "workspace:*",
-    "@posthog-tooling/tsconfig-base": "workspace:*",
+    "@agrid-tooling/rollup-utils": "workspace:*",
+    "@agrid-tooling/tsconfig-base": "workspace:*",
     "jest": "catalog:",
     "node-fetch": "^3.3.2",
-    "posthog-node": "workspace:*"
+    "agrid-node": "workspace:*"
   },
   "keywords": [
     "posthog",
@@ -52,7 +52,7 @@
     "zod": "^4.1.8"
   },
   "peerDependencies": {
-    "posthog-node": "^5.0.0"
+    "agrid-node": "^5.0.0"
   },
   "files": [
     "dist"
@@ -95,7 +95,7 @@
   },
   "author": "PostHog",
   "bugs": {
-    "url": "https://github.com/PostHog/posthog-js-lite/issues"
+    "url": "https://github.com/PostHog/agrid-js-lite/issues"
   },
-  "homepage": "https://github.com/PostHog/posthog-js-lite#readme"
+  "homepage": "https://github.com/PostHog/agrid-js-lite#readme"
 }

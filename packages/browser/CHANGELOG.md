@@ -1,78 +1,78 @@
-# posthog-js
+# agrid-js
 
 ## 1.292.0
 
 ### Minor Changes
 
-- [#2519](https://github.com/PostHog/posthog-js/pull/2519) [`7c16ff7`](https://github.com/PostHog/posthog-js/commit/7c16ff7f3d7d8152ffbdde6839fee6fc513a8c55) Thanks [@rodrigomarcolin](https://github.com/rodrigomarcolin)! - Made rageclick detection fully parametrizable with configurable threshold_px, timeout_ms, and click_count, while preserving previous default behavior.
+- [#2519](https://github.com/PostHog/agrid-js/pull/2519) [`7c16ff7`](https://github.com/PostHog/agrid-js/commit/7c16ff7f3d7d8152ffbdde6839fee6fc513a8c55) Thanks [@rodrigomarcolin](https://github.com/rodrigomarcolin)! - Made rageclick detection fully parametrizable with configurable threshold_px, timeout_ms, and click_count, while preserving previous default behavior.
 
 ## 1.291.0
 
 ### Minor Changes
 
-- [#2557](https://github.com/PostHog/posthog-js/pull/2557) [`c8c7de2`](https://github.com/PostHog/posthog-js/commit/c8c7de247eae0a688c6eca49d364b89243b2bac8) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: support strict minimum duration (more accurate on full page load)
+- [#2557](https://github.com/PostHog/agrid-js/pull/2557) [`c8c7de2`](https://github.com/PostHog/agrid-js/commit/c8c7de247eae0a688c6eca49d364b89243b2bac8) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: support strict minimum duration (more accurate on full page load)
 
 ## 1.290.0
 
 ### Minor Changes
 
-- [#2553](https://github.com/PostHog/posthog-js/pull/2553) [`8a2b790`](https://github.com/PostHog/posthog-js/commit/8a2b790a61611c54e5e84a2954ae19d89d754afc) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: yield to the main thread during posthog init
+- [#2553](https://github.com/PostHog/agrid-js/pull/2553) [`8a2b790`](https://github.com/PostHog/agrid-js/commit/8a2b790a61611c54e5e84a2954ae19d89d754afc) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: yield to the main thread during posthog init
 
 ## 1.289.0
 
 ### Minor Changes
 
-- [#2551](https://github.com/PostHog/posthog-js/pull/2551) [`10be1b0`](https://github.com/PostHog/posthog-js/commit/10be1b071ab30da45749b91cfdeff913912e7bbb) Thanks [@dmarticus](https://github.com/dmarticus)! - Support bootstrapping feature flags during SSR in ReactJS
+- [#2551](https://github.com/PostHog/agrid-js/pull/2551) [`10be1b0`](https://github.com/PostHog/agrid-js/commit/10be1b071ab30da45749b91cfdeff913912e7bbb) Thanks [@dmarticus](https://github.com/dmarticus)! - Support bootstrapping feature flags during SSR in ReactJS
 
 ## 1.288.1
 
 ### Patch Changes
 
-- Updated dependencies [[`87f9604`](https://github.com/PostHog/posthog-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
-    - @posthog/core@1.5.2
+- Updated dependencies [[`87f9604`](https://github.com/PostHog/agrid-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
+    - @agrid/core@1.5.2
 
 ## 1.288.0
 
 ### Minor Changes
 
-- [#2433](https://github.com/PostHog/posthog-js/pull/2433) [`392b190`](https://github.com/PostHog/posthog-js/commit/392b19061bcee86926d165ce3cd7742df1c474d5) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - feat: Add `flags_api_host` config option
+- [#2433](https://github.com/PostHog/agrid-js/pull/2433) [`392b190`](https://github.com/PostHog/agrid-js/commit/392b19061bcee86926d165ce3cd7742df1c474d5) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - feat: Add `flags_api_host` config option
 
 ## 1.287.0
 
 ### Minor Changes
 
-- [#2525](https://github.com/PostHog/posthog-js/pull/2525) [`ec65577`](https://github.com/PostHog/posthog-js/commit/ec6557796219502c8d6a04fc5943721dafef140b) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: track flushed size per session
+- [#2525](https://github.com/PostHog/agrid-js/pull/2525) [`ec65577`](https://github.com/PostHog/agrid-js/commit/ec6557796219502c8d6a04fc5943721dafef140b) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: track flushed size per session
 
 ## 1.286.0
 
 ### Minor Changes
 
-- [#2547](https://github.com/PostHog/posthog-js/pull/2547) [`cd8bcd7`](https://github.com/PostHog/posthog-js/commit/cd8bcd79e4e41e51bcf9b40890708207ac927e72) Thanks [@TueHaulund](https://github.com/TueHaulund)! - Fixed a bug where configuration overrides for session recording would not be applied if the recorder module was still loading
+- [#2547](https://github.com/PostHog/agrid-js/pull/2547) [`cd8bcd7`](https://github.com/PostHog/agrid-js/commit/cd8bcd79e4e41e51bcf9b40890708207ac927e72) Thanks [@TueHaulund](https://github.com/TueHaulund)! - Fixed a bug where configuration overrides for session recording would not be applied if the recorder module was still loading
 
 ## 1.285.2
 
 ### Patch Changes
 
-- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/posthog-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
-    - @posthog/core@1.5.1
+- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/agrid-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
+    - @agrid/core@1.5.1
 
 ## 1.285.1
 
 ### Patch Changes
 
-- [#2545](https://github.com/PostHog/posthog-js/pull/2545) [`c26a12c`](https://github.com/PostHog/posthog-js/commit/c26a12cc55932ff5a014c57a01a25c06715a24a1) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: allow session ending payload when recording is idle
+- [#2545](https://github.com/PostHog/agrid-js/pull/2545) [`c26a12c`](https://github.com/PostHog/agrid-js/commit/c26a12cc55932ff5a014c57a01a25c06715a24a1) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: allow session ending payload when recording is idle
 
 ## 1.285.0
 
 ### Minor Changes
 
-- [#2503](https://github.com/PostHog/posthog-js/pull/2503) [`e95a9d5`](https://github.com/PostHog/posthog-js/commit/e95a9d5075891861982e69ddcf09f1d6241ae088) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: store previous and next session id in session recording
+- [#2503](https://github.com/PostHog/agrid-js/pull/2503) [`e95a9d5`](https://github.com/PostHog/agrid-js/commit/e95a9d5075891861982e69ddcf09f1d6241ae088) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: store previous and next session id in session recording
 
 ## 1.284.0
 
 ### Minor Changes
 
-- [#2529](https://github.com/PostHog/posthog-js/pull/2529) [`882d823`](https://github.com/PostHog/posthog-js/commit/882d823ca7bf9b31aa5bdcb0512d9109096bcba7) Thanks [@MattBro](https://github.com/MattBro)! - feat(surveys): add URL prefill and auto-submit support
+- [#2529](https://github.com/PostHog/agrid-js/pull/2529) [`882d823`](https://github.com/PostHog/agrid-js/commit/882d823ca7bf9b31aa5bdcb0512d9109096bcba7) Thanks [@MattBro](https://github.com/MattBro)! - feat(surveys): add URL prefill and auto-submit support
 
     Surveys can now be prefilled and automatically submitted via URL parameters.
 
@@ -111,514 +111,514 @@
 
 ### Minor Changes
 
-- [#2520](https://github.com/PostHog/posthog-js/pull/2520) [`068d55e`](https://github.com/PostHog/posthog-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606) Thanks [@lricoy](https://github.com/lricoy)! - Add bot pageview collection behind preview flag. Enables tracking bot traffic as `$bot_pageview` events when the `__preview_capture_bot_pageviews` flag is enabled.
+- [#2520](https://github.com/PostHog/agrid-js/pull/2520) [`068d55e`](https://github.com/PostHog/agrid-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606) Thanks [@lricoy](https://github.com/lricoy)! - Add bot pageview collection behind preview flag. Enables tracking bot traffic as `$bot_pageview` events when the `__preview_capture_bot_pageviews` flag is enabled.
 
 ### Patch Changes
 
-- Updated dependencies [[`068d55e`](https://github.com/PostHog/posthog-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
-    - @posthog/core@1.5.0
+- Updated dependencies [[`068d55e`](https://github.com/PostHog/agrid-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
+    - @agrid/core@1.5.0
 
 ## 1.282.0
 
 ### Minor Changes
 
-- [#2517](https://github.com/PostHog/posthog-js/pull/2517) [`46e3ca6`](https://github.com/PostHog/posthog-js/commit/46e3ca600ca478db1b319b36695dea090aa60f98) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: add a component that will wrap your components and capture an event when they are in view in the browser
+- [#2517](https://github.com/PostHog/agrid-js/pull/2517) [`46e3ca6`](https://github.com/PostHog/agrid-js/commit/46e3ca600ca478db1b319b36695dea090aa60f98) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: add a component that will wrap your components and capture an event when they are in view in the browser
 
 ### Patch Changes
 
-- [#2517](https://github.com/PostHog/posthog-js/pull/2517) [`46e3ca6`](https://github.com/PostHog/posthog-js/commit/46e3ca600ca478db1b319b36695dea090aa60f98) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: complete react sdk featureflag component refactor
+- [#2517](https://github.com/PostHog/agrid-js/pull/2517) [`46e3ca6`](https://github.com/PostHog/agrid-js/commit/46e3ca600ca478db1b319b36695dea090aa60f98) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: complete react sdk featureflag component refactor
 
 ## 1.281.0
 
 ### Minor Changes
 
-- [#2502](https://github.com/PostHog/posthog-js/pull/2502) [`751b440`](https://github.com/PostHog/posthog-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: bucketed rate limiter can calculate tokens without a timer
+- [#2502](https://github.com/PostHog/agrid-js/pull/2502) [`751b440`](https://github.com/PostHog/agrid-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: bucketed rate limiter can calculate tokens without a timer
 
 ### Patch Changes
 
-- [#2500](https://github.com/PostHog/posthog-js/pull/2500) [`71ae0d2`](https://github.com/PostHog/posthog-js/commit/71ae0d2a55cbf69a2b60ac3ee29906f379408898) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: don't poll surveys while the page is hidden
+- [#2500](https://github.com/PostHog/agrid-js/pull/2500) [`71ae0d2`](https://github.com/PostHog/agrid-js/commit/71ae0d2a55cbf69a2b60ac3ee29906f379408898) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: don't poll surveys while the page is hidden
 
-- Updated dependencies [[`751b440`](https://github.com/PostHog/posthog-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
-    - @posthog/core@1.4.0
+- Updated dependencies [[`751b440`](https://github.com/PostHog/agrid-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
+    - @agrid/core@1.4.0
 
 ## 1.280.1
 
 ### Patch Changes
 
-- [#2492](https://github.com/PostHog/posthog-js/pull/2492) [`2b13291`](https://github.com/PostHog/posthog-js/commit/2b13291db4098f076e209caae71019ab10861956) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: extendUrlParams should always replace unless the caller says otherwise
+- [#2492](https://github.com/PostHog/agrid-js/pull/2492) [`2b13291`](https://github.com/PostHog/agrid-js/commit/2b13291db4098f076e209caae71019ab10861956) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: extendUrlParams should always replace unless the caller says otherwise
 
-- [#2491](https://github.com/PostHog/posthog-js/pull/2491) [`130c9e0`](https://github.com/PostHog/posthog-js/commit/130c9e0677dbce372986e72fca65075c4a4d78de) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: correctly update the retry count URL parameter
+- [#2491](https://github.com/PostHog/agrid-js/pull/2491) [`130c9e0`](https://github.com/PostHog/agrid-js/commit/130c9e0677dbce372986e72fca65075c4a4d78de) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: correctly update the retry count URL parameter
 
-- [#2485](https://github.com/PostHog/posthog-js/pull/2485) [`d7dced1`](https://github.com/PostHog/posthog-js/commit/d7dced1772e9b2954a250c3ace8a21e74a4e8668) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: stop polling when the retry queue is empty
+- [#2485](https://github.com/PostHog/agrid-js/pull/2485) [`d7dced1`](https://github.com/PostHog/agrid-js/commit/d7dced1772e9b2954a250c3ace8a21e74a4e8668) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: stop polling when the retry queue is empty
 
 ## 1.280.0
 
 ### Minor Changes
 
-- [#2430](https://github.com/PostHog/posthog-js/pull/2430) [`5c14af2`](https://github.com/PostHog/posthog-js/commit/5c14af20818f8639dbe127de0ef7fddca06ed86b) Thanks [@daibhin](https://github.com/daibhin)! - exclude capture of exceptions thrown from the PostHog SDK
+- [#2430](https://github.com/PostHog/agrid-js/pull/2430) [`5c14af2`](https://github.com/PostHog/agrid-js/commit/5c14af20818f8639dbe127de0ef7fddca06ed86b) Thanks [@daibhin](https://github.com/daibhin)! - exclude capture of exceptions thrown from the PostHog SDK
 
 ## 1.279.3
 
 ### Patch Changes
 
-- [#2482](https://github.com/PostHog/posthog-js/pull/2482) [`04ba023`](https://github.com/PostHog/posthog-js/commit/04ba0230785ea118fe5016057b97813d1fa76d11) Thanks [@robbie-c](https://github.com/robbie-c)! - Fix https://github.com/PostHog/posthog-js/issues/2471
+- [#2482](https://github.com/PostHog/agrid-js/pull/2482) [`04ba023`](https://github.com/PostHog/agrid-js/commit/04ba0230785ea118fe5016057b97813d1fa76d11) Thanks [@robbie-c](https://github.com/robbie-c)! - Fix https://github.com/PostHog/agrid-js/issues/2471
 
 ## 1.279.2
 
 ### Patch Changes
 
-- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/posthog-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
-    - @posthog/core@1.3.1
+- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/agrid-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
+    - @agrid/core@1.3.1
 
 ## 1.279.1
 
 ### Patch Changes
 
-- [#2469](https://github.com/PostHog/posthog-js/pull/2469) [`b161bb3`](https://github.com/PostHog/posthog-js/commit/b161bb3258b6dae879f76fd828a438ff6c07797f) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: stop heatmap buffer interval when hidden
+- [#2469](https://github.com/PostHog/agrid-js/pull/2469) [`b161bb3`](https://github.com/PostHog/agrid-js/commit/b161bb3258b6dae879f76fd828a438ff6c07797f) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: stop heatmap buffer interval when hidden
 
 ## 1.279.0
 
 ### Minor Changes
 
-- [#2463](https://github.com/PostHog/posthog-js/pull/2463) [`3075888`](https://github.com/PostHog/posthog-js/commit/3075888be97e03b0485d2596f9fad2bd2ba7e192) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: remove rrweb types as a peer dependency
+- [#2463](https://github.com/PostHog/agrid-js/pull/2463) [`3075888`](https://github.com/PostHog/agrid-js/commit/3075888be97e03b0485d2596f9fad2bd2ba7e192) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: remove rrweb types as a peer dependency
 
 ## 1.278.0
 
 ### Minor Changes
 
-- [#2467](https://github.com/PostHog/posthog-js/pull/2467) [`b0f1390`](https://github.com/PostHog/posthog-js/commit/b0f1390d66c46c7abd308ffd88397d0ece7d5f82) Thanks [@lricoy](https://github.com/lricoy)! - Includes warning on advanced_disable_flags with extra examples on what it disables
+- [#2467](https://github.com/PostHog/agrid-js/pull/2467) [`b0f1390`](https://github.com/PostHog/agrid-js/commit/b0f1390d66c46c7abd308ffd88397d0ece7d5f82) Thanks [@lricoy](https://github.com/lricoy)! - Includes warning on advanced_disable_flags with extra examples on what it disables
 
 ## 1.277.0
 
 ### Minor Changes
 
-- [#2460](https://github.com/PostHog/posthog-js/pull/2460) [`52da336`](https://github.com/PostHog/posthog-js/commit/52da3364ace5b879e1a7c64c8970ffb6fab439b6) Thanks [@TueHaulund](https://github.com/TueHaulund)! - Bump posthog-rrweb
+- [#2460](https://github.com/PostHog/agrid-js/pull/2460) [`52da336`](https://github.com/PostHog/agrid-js/commit/52da3364ace5b879e1a7c64c8970ffb6fab439b6) Thanks [@TueHaulund](https://github.com/TueHaulund)! - Bump posthog-rrweb
 
 ## 1.276.0
 
 ### Minor Changes
 
-- [#2444](https://github.com/PostHog/posthog-js/pull/2444) [`d50899e`](https://github.com/PostHog/posthog-js/commit/d50899e9e86cd0ad6a43b3f6e840ee9638394992) Thanks [@pauldambra](https://github.com/pauldambra)! - chore: bump posthog rrweb version - not generally used yet
+- [#2444](https://github.com/PostHog/agrid-js/pull/2444) [`d50899e`](https://github.com/PostHog/agrid-js/commit/d50899e9e86cd0ad6a43b3f6e840ee9638394992) Thanks [@pauldambra](https://github.com/pauldambra)! - chore: bump posthog rrweb version - not generally used yet
 
 ## 1.275.3
 
 ### Patch Changes
 
-- [#2434](https://github.com/PostHog/posthog-js/pull/2434) [`10b3d23`](https://github.com/PostHog/posthog-js/commit/10b3d232b3c6ce38de5500654e6f8aa3e80c280a) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: allow turning off debug mode
+- [#2434](https://github.com/PostHog/agrid-js/pull/2434) [`10b3d23`](https://github.com/PostHog/agrid-js/commit/10b3d232b3c6ce38de5500654e6f8aa3e80c280a) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: allow turning off debug mode
 
 ## 1.275.2
 
 ### Patch Changes
 
-- [#2431](https://github.com/PostHog/posthog-js/pull/2431) [`7d45a7a`](https://github.com/PostHog/posthog-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682) Thanks [@marandaneto](https://github.com/marandaneto)! - fix: remove deprecated attribute $exception_personURL from exception events
+- [#2431](https://github.com/PostHog/agrid-js/pull/2431) [`7d45a7a`](https://github.com/PostHog/agrid-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682) Thanks [@marandaneto](https://github.com/marandaneto)! - fix: remove deprecated attribute $exception_personURL from exception events
 
-- Updated dependencies [[`daf919b`](https://github.com/PostHog/posthog-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/posthog-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
-    - @posthog/core@1.3.0
+- Updated dependencies [[`daf919b`](https://github.com/PostHog/agrid-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/agrid-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
+    - @agrid/core@1.3.0
 
 ## 1.275.1
 
 ### Patch Changes
 
-- [#2422](https://github.com/PostHog/posthog-js/pull/2422) [`4e15fda`](https://github.com/PostHog/posthog-js/commit/4e15fdada76201eaceb407c3260a8fef025c87d0) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: possible memory leak in session id replacement in cookieless mode
+- [#2422](https://github.com/PostHog/agrid-js/pull/2422) [`4e15fda`](https://github.com/PostHog/agrid-js/commit/4e15fdada76201eaceb407c3260a8fef025c87d0) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: possible memory leak in session id replacement in cookieless mode
 
 ## 1.275.0
 
 ### Minor Changes
 
-- [#2426](https://github.com/PostHog/posthog-js/pull/2426) [`ae941c2`](https://github.com/PostHog/posthog-js/commit/ae941c27673e50d01cecdbf55364cffa894379c4) Thanks [@thmsobrmlr](https://github.com/thmsobrmlr)! - Apply $current_url masking in web vitals and heatmaps extensions.
+- [#2426](https://github.com/PostHog/agrid-js/pull/2426) [`ae941c2`](https://github.com/PostHog/agrid-js/commit/ae941c27673e50d01cecdbf55364cffa894379c4) Thanks [@thmsobrmlr](https://github.com/thmsobrmlr)! - Apply $current_url masking in web vitals and heatmaps extensions.
 
 ## 1.274.3
 
 ### Patch Changes
 
-- [#2423](https://github.com/PostHog/posthog-js/pull/2423) [`2d4eac4`](https://github.com/PostHog/posthog-js/commit/2d4eac4cef765bec996a887f0c1124fe7db759a7) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: another small potential memory leak in the recorder wrapping code"
+- [#2423](https://github.com/PostHog/agrid-js/pull/2423) [`2d4eac4`](https://github.com/PostHog/agrid-js/commit/2d4eac4cef765bec996a887f0c1124fe7db759a7) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: another small potential memory leak in the recorder wrapping code"
 
 ## 1.274.2
 
 ### Patch Changes
 
-- [#2421](https://github.com/PostHog/posthog-js/pull/2421) [`43b8029`](https://github.com/PostHog/posthog-js/commit/43b80293301bae1a2b97a3c0b2a967ff88506904) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: potential source of memory leak in recorder mutation throttler
+- [#2421](https://github.com/PostHog/agrid-js/pull/2421) [`43b8029`](https://github.com/PostHog/agrid-js/commit/43b80293301bae1a2b97a3c0b2a967ff88506904) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: potential source of memory leak in recorder mutation throttler
 
 ## 1.274.1
 
 ### Patch Changes
 
-- Updated dependencies [[`10da2ee`](https://github.com/PostHog/posthog-js/commit/10da2ee0b8862ad0e32b68e452fae1bc77620bbf)]:
-    - @posthog/core@1.2.4
+- Updated dependencies [[`10da2ee`](https://github.com/PostHog/agrid-js/commit/10da2ee0b8862ad0e32b68e452fae1bc77620bbf)]:
+    - @agrid/core@1.2.4
 
 ## 1.274.0
 
 ### Minor Changes
 
-- [#2404](https://github.com/PostHog/posthog-js/pull/2404) [`39ace01`](https://github.com/PostHog/posthog-js/commit/39ace016839ceaf2dac9a224612c78e45e26620c) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: remove eager loaded replay and reduce bundle size by 14.8%
+- [#2404](https://github.com/PostHog/agrid-js/pull/2404) [`39ace01`](https://github.com/PostHog/agrid-js/commit/39ace016839ceaf2dac9a224612c78e45e26620c) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: remove eager loaded replay and reduce bundle size by 14.8%
 
 ### Patch Changes
 
-- Updated dependencies [[`e19a384`](https://github.com/PostHog/posthog-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b)]:
-    - @posthog/core@1.2.3
+- Updated dependencies [[`e19a384`](https://github.com/PostHog/agrid-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b)]:
+    - @agrid/core@1.2.3
 
 ## 1.273.1
 
 ### Patch Changes
 
-- [#2412](https://github.com/PostHog/posthog-js/pull/2412) [`25a8846`](https://github.com/PostHog/posthog-js/commit/25a88461136ba453492bb277f8771ad0584873c1) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: rely on 'state' less when reporting replay status
+- [#2412](https://github.com/PostHog/agrid-js/pull/2412) [`25a8846`](https://github.com/PostHog/agrid-js/commit/25a88461136ba453492bb277f8771ad0584873c1) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: rely on 'state' less when reporting replay status
 
 ## 1.273.0
 
 ### Minor Changes
 
-- [#2408](https://github.com/PostHog/posthog-js/pull/2408) [`66b12f8`](https://github.com/PostHog/posthog-js/commit/66b12f827c272f878839c3eacbc9783db0ce0916) Thanks [@thmsobrmlr](https://github.com/thmsobrmlr)! - Fixes an issue where the event queue was not started until a page reload after calling `opt_in_capturing()`
+- [#2408](https://github.com/PostHog/agrid-js/pull/2408) [`66b12f8`](https://github.com/PostHog/agrid-js/commit/66b12f827c272f878839c3eacbc9783db0ce0916) Thanks [@thmsobrmlr](https://github.com/thmsobrmlr)! - Fixes an issue where the event queue was not started until a page reload after calling `opt_in_capturing()`
 
 ## 1.272.1
 
 ### Patch Changes
 
-- [#2395](https://github.com/PostHog/posthog-js/pull/2395) [`4a39a10`](https://github.com/PostHog/posthog-js/commit/4a39a10efe606170d48a43e5eb97b8c37cb5a182) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: increase max depth for app state diffing
+- [#2395](https://github.com/PostHog/agrid-js/pull/2395) [`4a39a10`](https://github.com/PostHog/agrid-js/commit/4a39a10efe606170d48a43e5eb97b8c37cb5a182) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: increase max depth for app state diffing
 
 ## 1.272.0
 
 ### Minor Changes
 
-- [#2405](https://github.com/PostHog/posthog-js/pull/2405) [`cdfbd6d`](https://github.com/PostHog/posthog-js/commit/cdfbd6dba8bf212067d94cf5e3eaae3f0648473e) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: session recording config can be false, correct the types
+- [#2405](https://github.com/PostHog/agrid-js/pull/2405) [`cdfbd6d`](https://github.com/PostHog/agrid-js/commit/cdfbd6dba8bf212067d94cf5e3eaae3f0648473e) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: session recording config can be false, correct the types
 
 ## 1.271.0
 
 ### Minor Changes
 
-- [#2385](https://github.com/PostHog/posthog-js/pull/2385) [`7373238`](https://github.com/PostHog/posthog-js/commit/7373238d8b2e0d8777131ffc93caae0ff4dd3bad) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: switch replay to lazy loaded by default"
+- [#2385](https://github.com/PostHog/agrid-js/pull/2385) [`7373238`](https://github.com/PostHog/agrid-js/commit/7373238d8b2e0d8777131ffc93caae0ff4dd3bad) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: switch replay to lazy loaded by default"
 
 ## 1.270.1
 
 ### Patch Changes
 
-- [#2390](https://github.com/PostHog/posthog-js/pull/2390) [`244b3ad`](https://github.com/PostHog/posthog-js/commit/244b3ad2f6dea8086747046044245b1514bd658b) Thanks [@hpouillot](https://github.com/hpouillot)! - fix react sourcemaps
+- [#2390](https://github.com/PostHog/agrid-js/pull/2390) [`244b3ad`](https://github.com/PostHog/agrid-js/commit/244b3ad2f6dea8086747046044245b1514bd658b) Thanks [@hpouillot](https://github.com/hpouillot)! - fix react sourcemaps
 
 ## 1.270.0
 
 ### Minor Changes
 
-- [#2355](https://github.com/PostHog/posthog-js/pull/2355) [`9eccbab`](https://github.com/PostHog/posthog-js/commit/9eccbabbd219cee062b52fadd3b0c7ba55773f7a) Thanks [@lucasheriques](https://github.com/lucasheriques)! - fix: use persistence for surveys if localStorage usage is enabled
+- [#2355](https://github.com/PostHog/agrid-js/pull/2355) [`9eccbab`](https://github.com/PostHog/agrid-js/commit/9eccbabbd219cee062b52fadd3b0c7ba55773f7a) Thanks [@lucasheriques](https://github.com/lucasheriques)! - fix: use persistence for surveys if localStorage usage is enabled
 
 ### Patch Changes
 
-- [#2396](https://github.com/PostHog/posthog-js/pull/2396) [`13c6667`](https://github.com/PostHog/posthog-js/commit/13c6667d22edf8b0d1c1ff11ef3e8b32ac5cb2a2) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: no need to estimate the size of all rrweb events before compressing some of them
+- [#2396](https://github.com/PostHog/agrid-js/pull/2396) [`13c6667`](https://github.com/PostHog/agrid-js/commit/13c6667d22edf8b0d1c1ff11ef3e8b32ac5cb2a2) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: no need to estimate the size of all rrweb events before compressing some of them
 
 ## 1.269.1
 
 ### Patch Changes
 
-- [#2393](https://github.com/PostHog/posthog-js/pull/2393) [`a3b64e6`](https://github.com/PostHog/posthog-js/commit/a3b64e6788527acca485f0e6bfca8e207b72bb2c) Thanks [@pauldambra](https://github.com/pauldambra)! - chore: variable rename so i can trigger a releas
+- [#2393](https://github.com/PostHog/agrid-js/pull/2393) [`a3b64e6`](https://github.com/PostHog/agrid-js/commit/a3b64e6788527acca485f0e6bfca8e207b72bb2c) Thanks [@pauldambra](https://github.com/pauldambra)! - chore: variable rename so i can trigger a releas
 
 ## 1.269.0
 
 ### Minor Changes
 
-- [#2369](https://github.com/PostHog/posthog-js/pull/2369) [`2a6ea65`](https://github.com/PostHog/posthog-js/commit/2a6ea65333460027f163d186ab6b241488c4c750) Thanks [@dmarticus](https://github.com/dmarticus)! - This PR implements support for evaluation environments in the posthog-js SDK, allowing users to specify which environment tags their SDK instance should use when evaluating feature flags.
+- [#2369](https://github.com/PostHog/agrid-js/pull/2369) [`2a6ea65`](https://github.com/PostHog/agrid-js/commit/2a6ea65333460027f163d186ab6b241488c4c750) Thanks [@dmarticus](https://github.com/dmarticus)! - This PR implements support for evaluation environments in the agrid-js SDK, allowing users to specify which environment tags their SDK instance should use when evaluating feature flags.
 
 ### Patch Changes
 
-- [#2381](https://github.com/PostHog/posthog-js/pull/2381) [`06a79f9`](https://github.com/PostHog/posthog-js/commit/06a79f99e7bebcbf669e9ce37ef4441224339e9a) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: remove xhr event listener when handling it to avoid potential memory leak
-- [#2374](https://github.com/PostHog/posthog-js/pull/2374) [`5af6e2d`](https://github.com/PostHog/posthog-js/commit/5af6e2d1fb1694cecfa4ef515cac192fb194fa4e) Thanks [@hpouillot](https://github.com/hpouillot)! - fix react sourcemaps
+- [#2381](https://github.com/PostHog/agrid-js/pull/2381) [`06a79f9`](https://github.com/PostHog/agrid-js/commit/06a79f99e7bebcbf669e9ce37ef4441224339e9a) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: remove xhr event listener when handling it to avoid potential memory leak
+- [#2374](https://github.com/PostHog/agrid-js/pull/2374) [`5af6e2d`](https://github.com/PostHog/agrid-js/commit/5af6e2d1fb1694cecfa4ef515cac192fb194fa4e) Thanks [@hpouillot](https://github.com/hpouillot)! - fix react sourcemaps
 
 ## 1.268.11
 
 - failed release due to an error in CI, included in 1.269.0
 
-* [#2381](https://github.com/PostHog/posthog-js/pull/2381) [`06a79f9`](https://github.com/PostHog/posthog-js/commit/06a79f99e7bebcbf669e9ce37ef4441224339e9a) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: remove xhr event listener when handling it to avoid potential memory leak
+* [#2381](https://github.com/PostHog/agrid-js/pull/2381) [`06a79f9`](https://github.com/PostHog/agrid-js/commit/06a79f99e7bebcbf669e9ce37ef4441224339e9a) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: remove xhr event listener when handling it to avoid potential memory leak
 
 ## 1.268.10
 
 - failed release due to an error in CI, included in 1.269.0
 
-* [#2374](https://github.com/PostHog/posthog-js/pull/2374) [`5af6e2d`](https://github.com/PostHog/posthog-js/commit/5af6e2d1fb1694cecfa4ef515cac192fb194fa4e) Thanks [@hpouillot](https://github.com/hpouillot)! - fix react sourcemaps
+* [#2374](https://github.com/PostHog/agrid-js/pull/2374) [`5af6e2d`](https://github.com/PostHog/agrid-js/commit/5af6e2d1fb1694cecfa4ef515cac192fb194fa4e) Thanks [@hpouillot](https://github.com/hpouillot)! - fix react sourcemaps
 
 ## 1.268.9
 
 ### Patch Changes
 
-- [#2378](https://github.com/PostHog/posthog-js/pull/2378) [`b920bac`](https://github.com/PostHog/posthog-js/commit/b920bac4f4c561981eb4651dc02a841a5f87cfb0) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: don't mangle to $ in no external or es5 builds
+- [#2378](https://github.com/PostHog/agrid-js/pull/2378) [`b920bac`](https://github.com/PostHog/agrid-js/commit/b920bac4f4c561981eb4651dc02a841a5f87cfb0) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: don't mangle to $ in no external or es5 builds
 
-- [#2376](https://github.com/PostHog/posthog-js/pull/2376) [`b5eb605`](https://github.com/PostHog/posthog-js/commit/b5eb605f193684c1e6dd9b698717810e8ac233a8) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: rotating buffer while trigger pending
+- [#2376](https://github.com/PostHog/agrid-js/pull/2376) [`b5eb605`](https://github.com/PostHog/agrid-js/commit/b5eb605f193684c1e6dd9b698717810e8ac233a8) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: rotating buffer while trigger pending
 
 ## 1.268.8
 
 ### Patch Changes
 
-- Updated dependencies [[`5820942`](https://github.com/PostHog/posthog-js/commit/582094255fa87009b02a4e193c3e63ef4621d9d0)]:
-    - @posthog/core@1.2.2
+- Updated dependencies [[`5820942`](https://github.com/PostHog/agrid-js/commit/582094255fa87009b02a4e193c3e63ef4621d9d0)]:
+    - @agrid/core@1.2.2
 
 ## 1.268.7
 
 ### Patch Changes
 
-- [#2373](https://github.com/PostHog/posthog-js/pull/2373) [`aff9455`](https://github.com/PostHog/posthog-js/commit/aff94552ccf9257c73c3704f0ad81815436460e0) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: 2 small conditional recording fixes
+- [#2373](https://github.com/PostHog/agrid-js/pull/2373) [`aff9455`](https://github.com/PostHog/agrid-js/commit/aff94552ccf9257c73c3704f0ad81815436460e0) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: 2 small conditional recording fixes
 
 ## 1.268.6
 
 ### Patch Changes
 
-- [#2368](https://github.com/PostHog/posthog-js/pull/2368) [`2102ee4`](https://github.com/PostHog/posthog-js/commit/2102ee4ad300dfa1f6ee9260b332b27d780ff583) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: recorder behaviour when idle session is force terminated then restarted
+- [#2368](https://github.com/PostHog/agrid-js/pull/2368) [`2102ee4`](https://github.com/PostHog/agrid-js/commit/2102ee4ad300dfa1f6ee9260b332b27d780ff583) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: recorder behaviour when idle session is force terminated then restarted
 
 ## 1.268.5
 
 ### Patch Changes
 
-- [#2362](https://github.com/PostHog/posthog-js/pull/2362) [`8b570b8`](https://github.com/PostHog/posthog-js/commit/8b570b832532d2827fd03a7da0d5554028ce7d77) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: over eager rename left a couple of old versions trying to call onRemoteConfig that doesn't exist
+- [#2362](https://github.com/PostHog/agrid-js/pull/2362) [`8b570b8`](https://github.com/PostHog/agrid-js/commit/8b570b832532d2827fd03a7da0d5554028ce7d77) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: over eager rename left a couple of old versions trying to call onRemoteConfig that doesn't exist
 
 ## 1.268.4
 
 ### Patch Changes
 
-- Updated dependencies [[`caecb94`](https://github.com/PostHog/posthog-js/commit/caecb94493f6b85003ecbd6750a81e27139b1fa5)]:
-    - @posthog/core@1.2.1
+- Updated dependencies [[`caecb94`](https://github.com/PostHog/agrid-js/commit/caecb94493f6b85003ecbd6750a81e27139b1fa5)]:
+    - @agrid/core@1.2.1
 
 ## 1.268.3
 
 ### Patch Changes
 
-- [#2357](https://github.com/PostHog/posthog-js/pull/2357) [`d5d523c`](https://github.com/PostHog/posthog-js/commit/d5d523cdd86732827a48a9c7c39e6c5fceccab78) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: app state logging diff performance
+- [#2357](https://github.com/PostHog/agrid-js/pull/2357) [`d5d523c`](https://github.com/PostHog/agrid-js/commit/d5d523cdd86732827a48a9c7c39e6c5fceccab78) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: app state logging diff performance
 
 ## 1.268.2
 
 ### Patch Changes
 
-- Updated dependencies [[`ac48d8f`](https://github.com/PostHog/posthog-js/commit/ac48d8fda3a4543f300ced705bce314a206cce6f)]:
-    - @posthog/core@1.2.0
+- Updated dependencies [[`ac48d8f`](https://github.com/PostHog/agrid-js/commit/ac48d8fda3a4543f300ced705bce314a206cce6f)]:
+    - @agrid/core@1.2.0
 
 ## 1.268.1
 
 ### Patch Changes
 
-- [#2315](https://github.com/PostHog/posthog-js/pull/2315) [`fd2c51d`](https://github.com/PostHog/posthog-js/commit/fd2c51db4383779aabf9c2dc7fc619bd88ff10f4) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: lazy loaded replay relies on remote config having been persisted in storage to avoid race with config on restart
+- [#2315](https://github.com/PostHog/agrid-js/pull/2315) [`fd2c51d`](https://github.com/PostHog/agrid-js/commit/fd2c51db4383779aabf9c2dc7fc619bd88ff10f4) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: lazy loaded replay relies on remote config having been persisted in storage to avoid race with config on restart
 
 ## 1.268.0
 
 ### Minor Changes
 
-- [#2345](https://github.com/PostHog/posthog-js/pull/2345) [`4f37e77`](https://github.com/PostHog/posthog-js/commit/4f37e773107b518d22d29450a11b1439b87a96e7) Thanks [@lucasheriques](https://github.com/lucasheriques)! - feat: surveys matching on event properties
+- [#2345](https://github.com/PostHog/agrid-js/pull/2345) [`4f37e77`](https://github.com/PostHog/agrid-js/commit/4f37e773107b518d22d29450a11b1439b87a96e7) Thanks [@lucasheriques](https://github.com/lucasheriques)! - feat: surveys matching on event properties
 
 ## 1.267.0
 
 ### Minor Changes
 
-- [#2347](https://github.com/PostHog/posthog-js/pull/2347) [`5d13bed`](https://github.com/PostHog/posthog-js/commit/5d13beda6661f389bd75c103728c7d45a241e1b1) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: allow ignoring rageclicks on elements by css selector
+- [#2347](https://github.com/PostHog/agrid-js/pull/2347) [`5d13bed`](https://github.com/PostHog/agrid-js/commit/5d13beda6661f389bd75c103728c7d45a241e1b1) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: allow ignoring rageclicks on elements by css selector
 
 ## 1.266.3
 
 ### Patch Changes
 
-- [#2344](https://github.com/PostHog/posthog-js/pull/2344) [`3d3fc37`](https://github.com/PostHog/posthog-js/commit/3d3fc37bfe351d9a464e652d8ec347192596769d) Thanks [@lucasheriques](https://github.com/lucasheriques)! - chore: mark renderSurvey as deprecated
+- [#2344](https://github.com/PostHog/agrid-js/pull/2344) [`3d3fc37`](https://github.com/PostHog/agrid-js/commit/3d3fc37bfe351d9a464e652d8ec347192596769d) Thanks [@lucasheriques](https://github.com/lucasheriques)! - chore: mark renderSurvey as deprecated
 
 ## 1.266.2
 
 ### Patch Changes
 
-- [#2341](https://github.com/PostHog/posthog-js/pull/2341) [`1cb3b42`](https://github.com/PostHog/posthog-js/commit/1cb3b42ca1db5d2a7824bd506967a00d292ad58f) Thanks [@hpouillot](https://github.com/hpouillot)! - fix exception loop
+- [#2341](https://github.com/PostHog/agrid-js/pull/2341) [`1cb3b42`](https://github.com/PostHog/agrid-js/commit/1cb3b42ca1db5d2a7824bd506967a00d292ad58f) Thanks [@hpouillot](https://github.com/hpouillot)! - fix exception loop
 
 ## 1.266.1
 
 ### Patch Changes
 
-- [#2330](https://github.com/PostHog/posthog-js/pull/2330) [`da07e41`](https://github.com/PostHog/posthog-js/commit/da07e41ac2307803c302557a12b459491657a75f) Thanks [@hpouillot](https://github.com/hpouillot)! - use error tracking processing from core
+- [#2330](https://github.com/PostHog/agrid-js/pull/2330) [`da07e41`](https://github.com/PostHog/agrid-js/commit/da07e41ac2307803c302557a12b459491657a75f) Thanks [@hpouillot](https://github.com/hpouillot)! - use error tracking processing from core
 
-- Updated dependencies [[`da07e41`](https://github.com/PostHog/posthog-js/commit/da07e41ac2307803c302557a12b459491657a75f)]:
-    - @posthog/core@1.1.0
+- Updated dependencies [[`da07e41`](https://github.com/PostHog/agrid-js/commit/da07e41ac2307803c302557a12b459491657a75f)]:
+    - @agrid/core@1.1.0
 
 ## 1.266.0
 
 ### Minor Changes
 
-- [#2321](https://github.com/PostHog/posthog-js/pull/2321) [`b81e152`](https://github.com/PostHog/posthog-js/commit/b81e15236115aec3629f93baa552b768b327904f) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: expose rrweb custom events on the public interface of the recorder. not intended for arbitrary public use but useful for internal purposes
+- [#2321](https://github.com/PostHog/agrid-js/pull/2321) [`b81e152`](https://github.com/PostHog/agrid-js/commit/b81e15236115aec3629f93baa552b768b327904f) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: expose rrweb custom events on the public interface of the recorder. not intended for arbitrary public use but useful for internal purposes
 
 ## 1.265.1
 
 ### Patch Changes
 
-- [#2318](https://github.com/PostHog/posthog-js/pull/2318) [`e0f26ff`](https://github.com/PostHog/posthog-js/commit/e0f26ffbda97d36085c8604fdb7bc496642e0c9c) Thanks [@robbie-c](https://github.com/robbie-c)! - Add option to disable sendBeacon and xhr credentials
+- [#2318](https://github.com/PostHog/agrid-js/pull/2318) [`e0f26ff`](https://github.com/PostHog/agrid-js/commit/e0f26ffbda97d36085c8604fdb7bc496642e0c9c) Thanks [@robbie-c](https://github.com/robbie-c)! - Add option to disable sendBeacon and xhr credentials
 
 ## 1.265.0
 
 ### Minor Changes
 
-- [#2032](https://github.com/PostHog/posthog-js/pull/2032) [`822d8df`](https://github.com/PostHog/posthog-js/commit/822d8dfb74e0fdbe78a45bc6fc04fb86896ba2eb) Thanks [@lucasheriques](https://github.com/lucasheriques)! - feat: allow display surveys popups on demand
+- [#2032](https://github.com/PostHog/agrid-js/pull/2032) [`822d8df`](https://github.com/PostHog/agrid-js/commit/822d8dfb74e0fdbe78a45bc6fc04fb86896ba2eb) Thanks [@lucasheriques](https://github.com/lucasheriques)! - feat: allow display surveys popups on demand
 
 ## 1.264.2
 
 ### Patch Changes
 
-- [#2314](https://github.com/PostHog/posthog-js/pull/2314) [`5836a2f`](https://github.com/PostHog/posthog-js/commit/5836a2f6bbc32fa8717157edf1a29da29549691a) Thanks [@ordehi](https://github.com/ordehi)! - Fixed a bug that prevented surveys from loading in cookieless mode using the on_reject option. Surveys now correctly initialize when consent is given.
+- [#2314](https://github.com/PostHog/agrid-js/pull/2314) [`5836a2f`](https://github.com/PostHog/agrid-js/commit/5836a2f6bbc32fa8717157edf1a29da29549691a) Thanks [@ordehi](https://github.com/ordehi)! - Fixed a bug that prevented surveys from loading in cookieless mode using the on_reject option. Surveys now correctly initialize when consent is given.
 
 ## 1.264.1
 
 ### Patch Changes
 
-- [#2312](https://github.com/PostHog/posthog-js/pull/2312) [`dff84c6`](https://github.com/PostHog/posthog-js/commit/dff84c6c21af9a8f4e3bfb58b4fb85ae2cbcdbc6) Thanks [@daibhin](https://github.com/daibhin)! - chore: allow PostHog exception capture to be skipped in Sentry integration
+- [#2312](https://github.com/PostHog/agrid-js/pull/2312) [`dff84c6`](https://github.com/PostHog/agrid-js/commit/dff84c6c21af9a8f4e3bfb58b4fb85ae2cbcdbc6) Thanks [@daibhin](https://github.com/daibhin)! - chore: allow PostHog exception capture to be skipped in Sentry integration
 
 ## 1.264.0
 
 ### Minor Changes
 
-- [#2310](https://github.com/PostHog/posthog-js/pull/2310) [`2eace6f`](https://github.com/PostHog/posthog-js/commit/2eace6f7efce6901ac8b51060bb2e6be834571b5) Thanks [@robbie-c](https://github.com/robbie-c)! - Add support for partitioned cookies
+- [#2310](https://github.com/PostHog/agrid-js/pull/2310) [`2eace6f`](https://github.com/PostHog/agrid-js/commit/2eace6f7efce6901ac8b51060bb2e6be834571b5) Thanks [@robbie-c](https://github.com/robbie-c)! - Add support for partitioned cookies
 
 ## 1.263.0
 
 ### Minor Changes
 
-- [#2294](https://github.com/PostHog/posthog-js/pull/2294) [`5137440`](https://github.com/PostHog/posthog-js/commit/513744038f99b533f97c68235a730a1fefb6c330) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: add a redux logging middleware to posthog-js
+- [#2294](https://github.com/PostHog/agrid-js/pull/2294) [`5137440`](https://github.com/PostHog/agrid-js/commit/513744038f99b533f97c68235a730a1fefb6c330) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: add a redux logging middleware to agrid-js
 
 ## 1.262.1
 
 ### Patch Changes
 
-- [#2309](https://github.com/PostHog/posthog-js/pull/2309) [`28223c1`](https://github.com/PostHog/posthog-js/commit/28223c149a965882e4a47a50a29f8cb4eb322d30) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: default to eager loading replay while investigating trigger bug reports
+- [#2309](https://github.com/PostHog/agrid-js/pull/2309) [`28223c1`](https://github.com/PostHog/agrid-js/commit/28223c149a965882e4a47a50a29f8cb4eb322d30) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: default to eager loading replay while investigating trigger bug reports
 
 ## 1.262.0
 
 ### Minor Changes
 
-- [#2296](https://github.com/PostHog/posthog-js/pull/2296) [`f9fe3ba`](https://github.com/PostHog/posthog-js/commit/f9fe3ba56c96ae3b6c0716ec24de68123422643f) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: switch replay default to lazy loading
+- [#2296](https://github.com/PostHog/agrid-js/pull/2296) [`f9fe3ba`](https://github.com/PostHog/agrid-js/commit/f9fe3ba56c96ae3b6c0716ec24de68123422643f) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: switch replay default to lazy loading
 
 ## 1.261.8
 
 ### Patch Changes
 
-- [#2276](https://github.com/PostHog/posthog-js/pull/2276) [`97961e4`](https://github.com/PostHog/posthog-js/commit/97961e4b7a0914385bcb200cc0c32302ce911cae) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - `isFeatureEnabled` now returns `undefined` (instead of `false`) for missing or disabled feature flags, aligning with the documentation. Previously, `undefined` was returned only before flags had loaded, and missing/disabled flags returned `false`. This change clarifies the difference between flags that exist but don't match (`false`) and flags that don’t exist or are disabled (`undefined`).
+- [#2276](https://github.com/PostHog/agrid-js/pull/2276) [`97961e4`](https://github.com/PostHog/agrid-js/commit/97961e4b7a0914385bcb200cc0c32302ce911cae) Thanks [@dustinbyrne](https://github.com/dustinbyrne)! - `isFeatureEnabled` now returns `undefined` (instead of `false`) for missing or disabled feature flags, aligning with the documentation. Previously, `undefined` was returned only before flags had loaded, and missing/disabled flags returned `false`. This change clarifies the difference between flags that exist but don't match (`false`) and flags that don’t exist or are disabled (`undefined`).
 
 ## 1.261.7
 
 ### Patch Changes
 
-- [#2284](https://github.com/PostHog/posthog-js/pull/2284) [`bdfe450`](https://github.com/PostHog/posthog-js/commit/bdfe4501899e57879cbda677f84d2a21a4ea9a7c) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: order of operations when replay does pageview fallback
+- [#2284](https://github.com/PostHog/agrid-js/pull/2284) [`bdfe450`](https://github.com/PostHog/agrid-js/commit/bdfe4501899e57879cbda677f84d2a21a4ea9a7c) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: order of operations when replay does pageview fallback
 
 ## 1.261.6
 
 ### Patch Changes
 
-- [#2274](https://github.com/PostHog/posthog-js/pull/2274) [`50fe70a`](https://github.com/PostHog/posthog-js/commit/50fe70ae4f22c08c7afe6fabd4430dbe7b946c67) Thanks [@robbie-c](https://github.com/robbie-c)! - Fix initial pageview not firing when using cookieless_mode: "always"
+- [#2274](https://github.com/PostHog/agrid-js/pull/2274) [`50fe70a`](https://github.com/PostHog/agrid-js/commit/50fe70ae4f22c08c7afe6fabd4430dbe7b946c67) Thanks [@robbie-c](https://github.com/robbie-c)! - Fix initial pageview not firing when using cookieless_mode: "always"
 
 ## 1.261.5
 
 ### Patch Changes
 
-- [#2270](https://github.com/PostHog/posthog-js/pull/2270) [`980f5c4`](https://github.com/PostHog/posthog-js/commit/980f5c483f059bc3551975c9094f19ff04a985b0) Thanks [@lucasheriques](https://github.com/lucasheriques)! - fix: hosted surveys should ignore any delays
+- [#2270](https://github.com/PostHog/agrid-js/pull/2270) [`980f5c4`](https://github.com/PostHog/agrid-js/commit/980f5c483f059bc3551975c9094f19ff04a985b0) Thanks [@lucasheriques](https://github.com/lucasheriques)! - fix: hosted surveys should ignore any delays
 
 ## 1.261.4
 
 ### Patch Changes
 
-- [#2268](https://github.com/PostHog/posthog-js/pull/2268) [`999c63f`](https://github.com/PostHog/posthog-js/commit/999c63f56dea80efc32d45ffbdf897b20aa97547) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: session recorder wrapper had private field that should be public"
+- [#2268](https://github.com/PostHog/agrid-js/pull/2268) [`999c63f`](https://github.com/PostHog/agrid-js/commit/999c63f56dea80efc32d45ffbdf897b20aa97547) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: session recorder wrapper had private field that should be public"
 
 ## 1.261.3
 
 ### Patch Changes
 
-- [#2267](https://github.com/PostHog/posthog-js/pull/2267) [`f2ac956`](https://github.com/PostHog/posthog-js/commit/f2ac9569d80a10961919d51a8132e0153b471a69) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: allow testing of the new lazy loaded session recorder
+- [#2267](https://github.com/PostHog/agrid-js/pull/2267) [`f2ac956`](https://github.com/PostHog/agrid-js/commit/f2ac9569d80a10961919d51a8132e0153b471a69) Thanks [@pauldambra](https://github.com/pauldambra)! - feat: allow testing of the new lazy loaded session recorder
 
 ## 1.261.2
 
 ### Patch Changes
 
-- [#2266](https://github.com/PostHog/posthog-js/pull/2266) [`9470d97`](https://github.com/PostHog/posthog-js/commit/9470d974dde28648559b3d853ab20331f6ef36b1) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: don't mangle variables to `# posthog-js
+- [#2266](https://github.com/PostHog/agrid-js/pull/2266) [`9470d97`](https://github.com/PostHog/agrid-js/commit/9470d974dde28648559b3d853ab20331f6ef36b1) Thanks [@pauldambra](https://github.com/pauldambra)! - fix: don't mangle variables to `# agrid-js
 
-- [#2265](https://github.com/PostHog/posthog-js/pull/2265) [`2487d12`](https://github.com/PostHog/posthog-js/commit/2487d12548699e10f7a7f0f6917b3ae602bf80d9) Thanks [@pauldambra](https://github.com/pauldambra)! - chore: update to latest rollup and terser
+- [#2265](https://github.com/PostHog/agrid-js/pull/2265) [`2487d12`](https://github.com/PostHog/agrid-js/commit/2487d12548699e10f7a7f0f6917b3ae602bf80d9) Thanks [@pauldambra](https://github.com/pauldambra)! - chore: update to latest rollup and terser
 
 ## 1.261.1
 
 ### Patch Changes
 
-- [#2263](https://github.com/PostHog/posthog-js/pull/2263) [`41d3890`](https://github.com/PostHog/posthog-js/commit/41d3890b72b880576a57d1e1133fdd16744835d4) Thanks [@pauldambra](https://github.com/pauldambra)! - chore: add unused lazy loaded session recorder to prime CDN
+- [#2263](https://github.com/PostHog/agrid-js/pull/2263) [`41d3890`](https://github.com/PostHog/agrid-js/commit/41d3890b72b880576a57d1e1133fdd16744835d4) Thanks [@pauldambra](https://github.com/pauldambra)! - chore: add unused lazy loaded session recorder to prime CDN
 
 ## 1.261.0
 
 ### Minor Changes
 
-- [#2238](https://github.com/PostHog/posthog-js/pull/2238) [`be2104b`](https://github.com/PostHog/posthog-js/commit/be2104bbafc0a78dfd5c735aae4ae126e3a3253e) Thanks [@robbie-c](https://github.com/robbie-c)! - Improve Consent APIs
+- [#2238](https://github.com/PostHog/agrid-js/pull/2238) [`be2104b`](https://github.com/PostHog/agrid-js/commit/be2104bbafc0a78dfd5c735aae4ae126e3a3253e) Thanks [@robbie-c](https://github.com/robbie-c)! - Improve Consent APIs
 
 ### Patch Changes
 
-- Updated dependencies [[`1981815`](https://github.com/PostHog/posthog-js/commit/19818159b7074098150bc79cfa2962761a14cb46)]:
-    - @posthog/core@1.0.2
+- Updated dependencies [[`1981815`](https://github.com/PostHog/agrid-js/commit/19818159b7074098150bc79cfa2962761a14cb46)]:
+    - @agrid/core@1.0.2
 
 ## 1.260.3
 
 ### Patch Changes
 
-- [#2219](https://github.com/PostHog/posthog-js/pull/2219) [`44d10c4`](https://github.com/PostHog/posthog-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994) Thanks [@daibhin](https://github.com/daibhin)! - add @posthog/core dependency
+- [#2219](https://github.com/PostHog/agrid-js/pull/2219) [`44d10c4`](https://github.com/PostHog/agrid-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994) Thanks [@daibhin](https://github.com/daibhin)! - add @agrid/core dependency
 
-- Updated dependencies [[`44d10c4`](https://github.com/PostHog/posthog-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994)]:
-    - @posthog/core@1.0.1
+- Updated dependencies [[`44d10c4`](https://github.com/PostHog/agrid-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994)]:
+    - @agrid/core@1.0.1
 
 ## 1.260.2
 
 ### Patch Changes
 
-- [#2236](https://github.com/PostHog/posthog-js/pull/2236) [`f3269f3`](https://github.com/PostHog/posthog-js/commit/f3269f3f26447ef7f032f925de7b1082b213867a) Thanks [@lucasheriques](https://github.com/lucasheriques)! - fix: set survey person properties on SDK <1.249.2
+- [#2236](https://github.com/PostHog/agrid-js/pull/2236) [`f3269f3`](https://github.com/PostHog/agrid-js/commit/f3269f3f26447ef7f032f925de7b1082b213867a) Thanks [@lucasheriques](https://github.com/lucasheriques)! - fix: set survey person properties on SDK <1.249.2
 
 ## 1.260.1
 
 ### Patch Changes
 
-- [#2215](https://github.com/PostHog/posthog-js/pull/2215) [`1e95d47`](https://github.com/PostHog/posthog-js/commit/1e95d47669af8c5824c4105906f0727bd67610c1) Thanks [@lucasheriques](https://github.com/lucasheriques)! - fix: always set surveySeen on local storage for old posthog-js versions
+- [#2215](https://github.com/PostHog/agrid-js/pull/2215) [`1e95d47`](https://github.com/PostHog/agrid-js/commit/1e95d47669af8c5824c4105906f0727bd67610c1) Thanks [@lucasheriques](https://github.com/lucasheriques)! - fix: always set surveySeen on local storage for old agrid-js versions
 
 ## 1.260.0
 
 ### Minor Changes
 
-- [#2185](https://github.com/PostHog/posthog-js/pull/2185) [`fda2932`](https://github.com/PostHog/posthog-js/commit/fda2932d0c4835d205fe0e0d0efb724b964f9f9b) Thanks [@robbie-c](https://github.com/robbie-c)! - Support 2 cookieless modes - 'always' and 'on_reject'
+- [#2185](https://github.com/PostHog/agrid-js/pull/2185) [`fda2932`](https://github.com/PostHog/agrid-js/commit/fda2932d0c4835d205fe0e0d0efb724b964f9f9b) Thanks [@robbie-c](https://github.com/robbie-c)! - Support 2 cookieless modes - 'always' and 'on_reject'
 
 ### Patch Changes
 
-- [#2200](https://github.com/PostHog/posthog-js/pull/2200) [`4387da4`](https://github.com/PostHog/posthog-js/commit/4387da42148a6b96c7bf1f9f5a2c529a3eb4dd8a) Thanks [@daibhin](https://github.com/daibhin)! - expose captured exception to React error boundary fallback
+- [#2200](https://github.com/PostHog/agrid-js/pull/2200) [`4387da4`](https://github.com/PostHog/agrid-js/commit/4387da42148a6b96c7bf1f9f5a2c529a3eb4dd8a) Thanks [@daibhin](https://github.com/daibhin)! - expose captured exception to React error boundary fallback
 
 ## 1.259.0
 
 ### Minor Changes
 
-- [#2192](https://github.com/PostHog/posthog-js/pull/2192) [`dec3f44`](https://github.com/PostHog/posthog-js/commit/dec3f443465787216ee3015aa254c5312659ad3f) Thanks [@marandaneto](https://github.com/marandaneto)! - survey support for feature flag variants
+- [#2192](https://github.com/PostHog/agrid-js/pull/2192) [`dec3f44`](https://github.com/PostHog/agrid-js/commit/dec3f443465787216ee3015aa254c5312659ad3f) Thanks [@marandaneto](https://github.com/marandaneto)! - survey support for feature flag variants
 
 ## 1.258.6
 
 ### Patch Changes
 
-- [#2194](https://github.com/PostHog/posthog-js/pull/2194) [`faa2f28`](https://github.com/PostHog/posthog-js/commit/faa2f2868762c527148d9a59098d4eae7f0b3ffb) Thanks [@realguse](https://github.com/realguse)! - block vercel screenshot bot
+- [#2194](https://github.com/PostHog/agrid-js/pull/2194) [`faa2f28`](https://github.com/PostHog/agrid-js/commit/faa2f2868762c527148d9a59098d4eae7f0b3ffb) Thanks [@realguse](https://github.com/realguse)! - block vercel screenshot bot
 
 ## 1.258.5
 
 ### Patch Changes
 
-- [#2178](https://github.com/PostHog/posthog-js/pull/2178) [`db569fa`](https://github.com/PostHog/posthog-js/commit/db569fa952b4536280602db87bc12a0fa51923fa) Thanks [@lucasheriques](https://github.com/lucasheriques)! - - Fix surveys loading with advanced_enable_surveys config
+- [#2178](https://github.com/PostHog/agrid-js/pull/2178) [`db569fa`](https://github.com/PostHog/agrid-js/commit/db569fa952b4536280602db87bc12a0fa51923fa) Thanks [@lucasheriques](https://github.com/lucasheriques)! - - Fix surveys loading with advanced_enable_surveys config
 
 ## 1.258.4
 
 ### Patch Changes
 
-- [#2172](https://github.com/PostHog/posthog-js/pull/2172) [`ac254d9`](https://github.com/PostHog/posthog-js/commit/ac254d945be598314c365310ed7c13047edc9ead) Thanks [@lucasheriques](https://github.com/lucasheriques)! - Adds a new config, `advanced_enable_surveys`, to always enable surveys funcionality in the SDK
+- [#2172](https://github.com/PostHog/agrid-js/pull/2172) [`ac254d9`](https://github.com/PostHog/agrid-js/commit/ac254d945be598314c365310ed7c13047edc9ead) Thanks [@lucasheriques](https://github.com/lucasheriques)! - Adds a new config, `advanced_enable_surveys`, to always enable surveys funcionality in the SDK
 
 ## 1.258.3
 
 ### Patch Changes
 
-- [#2171](https://github.com/PostHog/posthog-js/pull/2171) [`14adc01`](https://github.com/PostHog/posthog-js/commit/14adc01875c87f6be10e70204307003d9d0f941c) Thanks [@lucasheriques](https://github.com/lucasheriques)! - Fix early access features accumulation in persistence
+- [#2171](https://github.com/PostHog/agrid-js/pull/2171) [`14adc01`](https://github.com/PostHog/agrid-js/commit/14adc01875c87f6be10e70204307003d9d0f941c) Thanks [@lucasheriques](https://github.com/lucasheriques)! - Fix early access features accumulation in persistence
 
-- [#2170](https://github.com/PostHog/posthog-js/pull/2170) [`262cc5c`](https://github.com/PostHog/posthog-js/commit/262cc5cc9364605e31788e5370b0663507e4c832) Thanks [@lucasheriques](https://github.com/lucasheriques)! - Removes the `_renderExternalSurvey` method which is not needed anymore
+- [#2170](https://github.com/PostHog/agrid-js/pull/2170) [`262cc5c`](https://github.com/PostHog/agrid-js/commit/262cc5cc9364605e31788e5370b0663507e4c832) Thanks [@lucasheriques](https://github.com/lucasheriques)! - Removes the `_renderExternalSurvey` method which is not needed anymore
 
 ## 1.258.2
 
 ### Patch Changes
 
-- [#2111](https://github.com/PostHog/posthog-js/pull/2111) [`7114593`](https://github.com/PostHog/posthog-js/commit/711459317bf807fa1d21be2f7067182952ea2a5e) Thanks [@pauldambra](https://github.com/pauldambra)! - checks for session activity in other windows when timing out in any particular window, avoids a race condition when proactively marking a session as idle
+- [#2111](https://github.com/PostHog/agrid-js/pull/2111) [`7114593`](https://github.com/PostHog/agrid-js/commit/711459317bf807fa1d21be2f7067182952ea2a5e) Thanks [@pauldambra](https://github.com/pauldambra)! - checks for session activity in other windows when timing out in any particular window, avoids a race condition when proactively marking a session as idle
 
 ## 1.258.1
 
 ### Patch Changes
 
-- [#2120](https://github.com/PostHog/posthog-js/pull/2120) [`c7b03cd`](https://github.com/PostHog/posthog-js/commit/c7b03cddb621988323238b22acdf8faefd93742e) Thanks [@lucasheriques](https://github.com/lucasheriques)! - Updates the renderSurvey and getActiveMatchingSurveys methods to not take any external surveys into consideration
+- [#2120](https://github.com/PostHog/agrid-js/pull/2120) [`c7b03cd`](https://github.com/PostHog/agrid-js/commit/c7b03cddb621988323238b22acdf8faefd93742e) Thanks [@lucasheriques](https://github.com/lucasheriques)! - Updates the renderSurvey and getActiveMatchingSurveys methods to not take any external surveys into consideration
 
 ## 1.258.0
 
 ### Minor Changes
 
-- [#2089](https://github.com/PostHog/posthog-js/pull/2089) [`0a19df2`](https://github.com/PostHog/posthog-js/commit/0a19df28d6a62b97949f0e99bfadf33b7aadcb45) Thanks [@daibhin](https://github.com/daibhin)! - feat: exclude exceptions autocaptured by extensions
+- [#2089](https://github.com/PostHog/agrid-js/pull/2089) [`0a19df2`](https://github.com/PostHog/agrid-js/commit/0a19df28d6a62b97949f0e99bfadf33b7aadcb45) Thanks [@daibhin](https://github.com/daibhin)! - feat: exclude exceptions autocaptured by extensions
 
 ## 1.257.2 - 2025-07-22
 
@@ -627,7 +627,7 @@
 ## 1.257.1 - 2025-07-21
 
 - return capture results from captureException (#2081)
-- update posthog-js at workspace level (#2096)
+- update agrid-js at workspace level (#2096)
 - chore(tests): use playwright for integration tests (#2093)
 - fix: Sync consent with persistence immediately (#2082)
 - Use posthog consent in next playground (#2083)
@@ -869,7 +869,7 @@
 ## 1.237.0 - 2025-04-29
 
 - fix: prevent survey events to affect multiple surveys (#1924)
-- chore: Add homepage fields and copy LICENSE to posthog-js-react (#1928)
+- chore: Add homepage fields and copy LICENSE to agrid-js-react (#1928)
 - feat: Allow mangling of storage function names (#1927)
 
 ## 1.236.8 - 2025-04-29
@@ -2211,7 +2211,7 @@
 
 ## 1.138.0 - 2024-06-06
 
-- feat(surveys): `posthog-js` changes to support valid HTML question rendering (#1206)
+- feat(surveys): `agrid-js` changes to support valid HTML question rendering (#1206)
 
 ## 1.137.0 - 2024-06-05
 
@@ -2442,7 +2442,7 @@
 
 ## 1.120.1 - 2024-04-08
 
-- chore: Add workflow to update the posthog.com repo with new posthog-js versions (#1120)
+- chore: Add workflow to update the posthog.com repo with new agrid-js versions (#1120)
 
 ## 1.120.0 - 2024-04-08
 
@@ -2462,7 +2462,7 @@
 
 ## 1.118.1 - 2024-04-05
 
-- Fix nextjs playground version of posthog-js (#1117)
+- Fix nextjs playground version of agrid-js (#1117)
 - Fix $is_identified (#1116)
 
 ## 1.118.0 - 2024-04-04
@@ -2541,11 +2541,11 @@
 
 - feat: report browser visibility state in replay (#1071)
 - fix: typo in deny list (#1073)
-- fix(posthog-js): manually bump patch (#1072)
+- fix(agrid-js): manually bump patch (#1072)
 
 ## 1.113.4 - 2024-03-12
 
-- fix(posthog-js): manually bump patch (#1072)
+- fix(agrid-js): manually bump patch (#1072)
 - fix: no empty requests (#1063)
 
 ## 1.113.2 - 2024-03-11
@@ -3062,7 +3062,7 @@ identical to 1.105.1 - bug in CI scripts
 
 ## 1.81.0 - 2023-09-25
 
-- feat(surveys): Make surveys site app native to posthog-js (#801)
+- feat(surveys): Make surveys site app native to agrid-js (#801)
 
 ## 1.80.0 - 2023-09-25
 
@@ -3185,7 +3185,7 @@ identical to 1.105.1 - bug in CI scripts
 
 ## 1.70.2 - 2023-07-11
 
-- feat: allow moving to UUID v7 by config in posthog-js (#731)
+- feat: allow moving to UUID v7 by config in agrid-js (#731)
 
 ## 1.70.1 - 2023-07-10
 
@@ -3561,7 +3561,7 @@ Manual addition of version 1.66.0 because CI failed to automatically bump the ve
 
 - feat: Adds performance capture (#488)
 - fix(options): Add capture_pageleave option (#491)
-- fix(cd): use pnpm to install posthog-js version in main repo (#495)
+- fix(cd): use pnpm to install agrid-js version in main repo (#495)
 
 ## 1.38.1 - 2022-12-15
 
@@ -4119,9 +4119,9 @@ Manual addition of version 1.66.0 because CI failed to automatically bump the ve
 ## 1.8.0 - 2020-12-14
 
 - Using gzip-based compression over lzstring using the fflate library: [fflate](https://github.com/101arrowz/fflate). This reduces the amount of data transferred, and makes posthog servers respond faster (requires posthog 1.19.0). https://github.com/PostHog/posthog/issues/2560
-- Support last touch $referrer and $referring_domain user properties https://github.com/PostHog/posthog-js/pull/139
-- Publish a ES dist file https://github.com/PostHog/posthog-js/pull/157
-- Publish a react integration for feature flags https://github.com/PostHog/posthog-js/pull/154
+- Support last touch $referrer and $referring_domain user properties https://github.com/PostHog/agrid-js/pull/139
+- Publish a ES dist file https://github.com/PostHog/agrid-js/pull/157
+- Publish a react integration for feature flags https://github.com/PostHog/agrid-js/pull/154
 
 ## 1.7.2 - 2020-11-28
 
@@ -4129,8 +4129,8 @@ Manual addition of version 1.66.0 because CI failed to automatically bump the ve
 
 ## 1.7.1 - 2020-11-27
 
-- Force session recording to use lz64 compression (https://github.com/PostHog/posthog-js/pull/134)
-- Bundle module.js in es5 (https://github.com/PostHog/posthog-js/pull/132)
+- Force session recording to use lz64 compression (https://github.com/PostHog/agrid-js/pull/134)
+- Bundle module.js in es5 (https://github.com/PostHog/agrid-js/pull/132)
 
 ## 1.7.0 - 2020-11-26
 
@@ -4144,7 +4144,7 @@ Manual addition of version 1.66.0 because CI failed to automatically bump the ve
 - Fix 'this.people.delete_user is undefined' (issue #39, #113)
 - Update rrweb block class to use `ph-no-capture` and `ph-ignore-input` (#112)
 - Deprecate calling posthog.capture with a callback (#129)
-- Attempted to re-add support for including posthog-js in server-side rendering. (#131)
+- Attempted to re-add support for including agrid-js in server-side rendering. (#131)
 - Bugfix: Don't truncate session recording data (#121)
 - Bugfix: Kill `posthog.capture_links()` and `posthog.capture_forms()`. They were broken since initial release - you can use autocapture instead. (#128)
 
@@ -4159,7 +4159,7 @@ Manual addition of version 1.66.0 because CI failed to automatically bump the ve
 ## 1.5.2 - 2020-10-22
 
 - Autocapture bugfix: Ignore extra spaces in classnames #99
-- Improve typing of posthog-js (#103)
+- Improve typing of agrid-js (#103)
 
 ## 1.5.1 - 2020-10-22
 
@@ -4199,8 +4199,8 @@ Manual addition of version 1.66.0 because CI failed to automatically bump the ve
 
 - Have `.onFeatureFlags(callback)` register multiple callbacks, which get called when feature flags are loaded or updated
 - Update feature flags when `identify` is called.
-- Add option `.reloadFeatureFlags()`. Call it to trigger a reload of feature flags. (See [#71](https://github.com/PostHog/posthog-js/pull/71))
-- Add config option `sanitize_properties` that accepts a function which sanitizes parameters of events (See [#75](https://github.com/PostHog/posthog-js/issues/75))
+- Add option `.reloadFeatureFlags()`. Call it to trigger a reload of feature flags. (See [#71](https://github.com/PostHog/agrid-js/pull/71))
+- Add config option `sanitize_properties` that accepts a function which sanitizes parameters of events (See [#75](https://github.com/PostHog/agrid-js/issues/75))
 
 ## 1.3.8 - 2020-08-07
 
@@ -4262,7 +4262,7 @@ Manual addition of version 1.66.0 because CI failed to automatically bump the ve
 
 ## 1.1.2 - 2020-06-04
 
-- Fix another error when using a new posthog-js version with an old posthog version
+- Fix another error when using a new agrid-js version with an old posthog version
 
 ## 1.1.1 - 2020-06-04
 

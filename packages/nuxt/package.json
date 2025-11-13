@@ -1,10 +1,10 @@
 {
-  "name": "@posthog/nuxt",
+  "name": "@agrid/nuxt",
   "version": "1.1.5",
   "description": "Nuxt module for Posthog 🦔",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PostHog/posthog-js.git",
+    "url": "https://github.com/agrid/agrid-js.git",
     "directory": "packages/nuxt"
   },
   "license": "MIT",
@@ -28,9 +28,9 @@
   "dependencies": {
     "@posthog/cli": "catalog:",
     "@nuxt/kit": ">=3.7.0",
-    "posthog-node": "workspace:*",
-    "@posthog/core": "workspace:*",
-    "posthog-js": "workspace:*"
+    "agrid-node": "workspace:*",
+    "@agrid/core": "workspace:*",
+    "agrid-js": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

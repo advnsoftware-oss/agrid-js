@@ -7,14 +7,14 @@ Initial Typescript SDK for LLM Observability
 ## Installation
 
 ```bash
-npm install @posthog/ai
+npm install @agrid/ai
 ```
 
 ## Usage
 
 ```typescript
-import { OpenAI } from '@posthog/ai'
-import { PostHog } from 'posthog-node'
+import { OpenAI } from '@agrid/ai'
+import { PostHog } from 'agrid-node'
 
 const phClient = new PostHog('<YOUR_PROJECT_API_KEY>', { host: 'https://us.i.posthog.com' })
 

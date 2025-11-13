@@ -11,10 +11,8 @@ CLI will prompt questions about the changes you've made and will generate a chan
 
 Add a `release` label to your PR to publish automatically your changes when it's merged.
 
-# for posthog-js browser sdk
+# for agrid-js browser sdk
 
-When we run post-merge actions for the browser SDK we publish to NPM
+When we run post-merge actions for the browser SDK we publish to NPM.
 
-But then we automagically open a PR against the main PostHog repo. We don't update the CDN with the new version until that PR merges. So if it fails you can end up with html snippet users on version N and npm install on version N+1
-
-PostHoggers can join the [#alerts-posthog-js channel in slack](https://posthog.slack.com/archives/C07HTMN9X47) which gets notified when those PRs fail
+For detailed publishing instructions, see [docs/PUBLISH_NPM.md](./docs/PUBLISH_NPM.md).

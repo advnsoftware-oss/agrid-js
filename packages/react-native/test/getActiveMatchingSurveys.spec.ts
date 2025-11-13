@@ -1,6 +1,6 @@
 import { getActiveMatchingSurveys } from '../src/surveys/getActiveMatchingSurveys'
-import { Survey, SurveyMatchType, SurveyType } from '@posthog/core'
-import { FeatureFlagValue } from '@posthog/core'
+import { Survey, SurveyMatchType, SurveyType } from '@agrid/core'
+import { FeatureFlagValue } from '@agrid/core'
 
 // Mock the native-deps module
 jest.mock('../src/native-deps', () => ({

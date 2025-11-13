@@ -7,7 +7,7 @@ import type {
   LanguageModelV2StreamPart,
 } from '@ai-sdk/provider'
 import { v4 as uuidv4 } from 'uuid'
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import {
   CostOverride,
   sendEventToPosthog,

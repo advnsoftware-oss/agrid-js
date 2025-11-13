@@ -1,4 +1,4 @@
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import { PostHogAzureOpenAI } from '../src/openai/azure'
 import openaiModule from 'openai'
 

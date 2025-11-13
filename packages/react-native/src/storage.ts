@@ -1,4 +1,4 @@
-import { isPromise } from '@posthog/core'
+import { isPromise } from '@agrid/core'
 import { PostHogCustomStorage } from './types'
 
 const POSTHOG_STORAGE_KEY = '.posthog-rn.json'

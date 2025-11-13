@@ -99,7 +99,7 @@ import {
     isEmptyObject,
     isObject,
     isBoolean,
-} from '@posthog/core'
+} from '@agrid/core'
 import { uuidv7 } from './uuidv7'
 import { WebExperiments } from './web-experiments'
 import { ExternalIntegrations } from './extensions/external-integration'

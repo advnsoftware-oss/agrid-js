@@ -1,5 +1,5 @@
 {
-  "name": "posthog-react-native",
+  "name": "agrid-react-native",
   "version": "4.11.0",
   "license": "MIT",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PostHog/posthog-js.git",
+    "url": "git+https://github.com/agrid/agrid-js.git",
     "directory": "packages/react-native"
   },
   "scripts": {
@@ -24,13 +24,13 @@
     "generate-references": "pnpm exec api-extractor run --config ./api-extractor.json --local && node scripts/generate-docs.js"
   },
   "dependencies": {
-    "@posthog/core": "workspace:*"
+    "@agrid/core": "workspace:*"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/plugin-transform-private-property-in-object": "^7.27.1",
-    "@posthog-tooling/rollup-utils": "workspace:*",
-    "@posthog-tooling/tsconfig-base": "workspace:*",
+    "@agrid-tooling/rollup-utils": "workspace:*",
+    "@agrid-tooling/tsconfig-base": "workspace:*",
     "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native/babel-preset": "^0.80.1",
     "@react-navigation/native": "^5.0.10",

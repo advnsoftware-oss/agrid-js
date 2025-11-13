@@ -12,11 +12,11 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@posthog/nextjs-config": "*",
-        "@posthog/react": "*",
-        "posthog-node": "*",
+        "@agrid/nextjs-config": "*",
+        "@agrid/react": "*",
+        "agrid-node": "*",
         "next": "^15.5",
-        "posthog-js": "*",
+        "agrid-js": "*",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },

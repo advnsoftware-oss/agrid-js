@@ -24,7 +24,7 @@ import {
     FLAG_CALL_REPORTED,
 } from './constants'
 
-import { isUndefined, isArray } from '@posthog/core'
+import { isUndefined, isArray } from '@agrid/core'
 import { createLogger } from './utils/logger'
 import { getTimezone } from './utils/event-utils'
 

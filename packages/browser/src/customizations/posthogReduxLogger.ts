@@ -1,4 +1,4 @@
-import { BucketedRateLimiter, isEmptyObject, isNullish, isObject, isUndefined, Logger } from '@posthog/core'
+import { BucketedRateLimiter, isEmptyObject, isNullish, isObject, isUndefined, Logger } from '@agrid/core'
 import { createLogger } from '../utils/logger'
 import type { PostHog } from '../posthog-core'
 

@@ -4,7 +4,7 @@ import { uuidv7 } from '../uuidv7'
 import { defaultPostHog } from './helpers/posthog-instance'
 import { CaptureResult, PostHogConfig } from '../types'
 import { PostHog } from '../posthog-core'
-import { knownUnsafeEditableEvent } from '@posthog/core'
+import { knownUnsafeEditableEvent } from '@agrid/core'
 
 const rejectingEventFn = () => {
     return null

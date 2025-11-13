@@ -1,4 +1,4 @@
-import { isNull } from '@posthog/core'
+import { isNull } from '@agrid/core'
 
 export function _base64Encode(data: null): null
 export function _base64Encode(data: undefined): undefined

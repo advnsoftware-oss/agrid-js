@@ -1,4 +1,4 @@
-import { resolve, typescript, commonjs, dts } from '@posthog-tooling/rollup-utils'
+import { resolve, typescript, commonjs, dts } from '@agrid-tooling/rollup-utils'
 import copy from 'rollup-plugin-copy'
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']

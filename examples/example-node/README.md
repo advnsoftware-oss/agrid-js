@@ -45,7 +45,7 @@ POSTHOG_HOST=https://app.posthog.com
 
 ### 3. Install Dependencies
 
-From the workspace root (`/path/to/posthog-js/`):
+From the workspace root (`/path/to/agrid-js/`):
 
 ```bash
 # Build and package the SDK

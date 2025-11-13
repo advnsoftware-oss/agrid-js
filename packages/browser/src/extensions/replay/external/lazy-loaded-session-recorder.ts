@@ -46,7 +46,7 @@ import {
     isObject,
     isString,
     isUndefined,
-} from '@posthog/core'
+} from '@agrid/core'
 import {
     SESSION_RECORDING_EVENT_TRIGGER_ACTIVATED_SESSION,
     SESSION_RECORDING_IS_SAMPLED,

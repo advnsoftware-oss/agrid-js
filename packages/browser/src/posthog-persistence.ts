@@ -12,7 +12,7 @@ import {
     PERSISTENCE_RESERVED_PROPERTIES,
 } from './constants'
 
-import { isUndefined } from '@posthog/core'
+import { isUndefined } from '@agrid/core'
 import {
     getCampaignParams,
     getInitialPersonPropsFromInfo,
@@ -21,7 +21,7 @@ import {
     getSearchInfo,
 } from './utils/event-utils'
 import { logger } from './utils/logger'
-import { stripLeadingDollar, isEmptyObject, isObject } from '@posthog/core'
+import { stripLeadingDollar, isEmptyObject, isObject } from '@agrid/core'
 
 const CASE_INSENSITIVE_PERSISTENCE_TYPES: readonly Lowercase<PostHogConfig['persistence']>[] = [
     'cookie',

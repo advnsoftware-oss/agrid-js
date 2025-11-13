@@ -50,7 +50,7 @@ The `evaluation-tags-example.js` demonstrates what the API would look like once 
 
 - The browser SDK sends `evaluation_environments` in the `/flags/` API call
 - The Node.js SDK doesn't have this implementation yet
-- The feature needs to be added to `@posthog/core` and `posthog-node` packages
+- The feature needs to be added to `@agrid/core` and `agrid-node` packages
 
 **Running the example (shows warning message):**
 

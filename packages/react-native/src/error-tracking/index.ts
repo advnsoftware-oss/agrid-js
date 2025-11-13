@@ -1,5 +1,5 @@
 import type { PostHog } from '../posthog-rn'
-import { Logger, PostHogEventProperties, ErrorTracking as CoreErrorTracking } from '@posthog/core'
+import { Logger, PostHogEventProperties, ErrorTracking as CoreErrorTracking } from '@agrid/core'
 import { trackConsole, trackUncaughtExceptions, trackUnhandledRejections } from './utils'
 
 type LogLevel = 'debug' | 'log' | 'info' | 'warn' | 'error'

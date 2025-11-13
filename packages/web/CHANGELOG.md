@@ -1,72 +1,72 @@
-# posthog-js-lite
+# agrid-js-lite
 
 ## 4.1.10
 
 ### Patch Changes
 
-- Updated dependencies [[`87f9604`](https://github.com/PostHog/posthog-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
-  - @posthog/core@1.5.2
+- Updated dependencies [[`87f9604`](https://github.com/PostHog/agrid-js/commit/87f96047739e67b847fe22137b97fc57f405b8d9)]:
+  - @agrid/core@1.5.2
 
 ## 4.1.9
 
 ### Patch Changes
 
-- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/posthog-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
-  - @posthog/core@1.5.1
+- Updated dependencies [[`d8d98c9`](https://github.com/PostHog/agrid-js/commit/d8d98c95f24b612110dbf52d228c0c3bd248cd58)]:
+  - @agrid/core@1.5.1
 
 ## 4.1.8
 
 ### Patch Changes
 
-- Updated dependencies [[`068d55e`](https://github.com/PostHog/posthog-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
-  - @posthog/core@1.5.0
+- Updated dependencies [[`068d55e`](https://github.com/PostHog/agrid-js/commit/068d55ed4193e82729cd34b42d9e433f85b6e606)]:
+  - @agrid/core@1.5.0
 
 ## 4.1.7
 
 ### Patch Changes
 
-- Updated dependencies [[`751b440`](https://github.com/PostHog/posthog-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
-  - @posthog/core@1.4.0
+- Updated dependencies [[`751b440`](https://github.com/PostHog/agrid-js/commit/751b44040c4c0c55a19df2ad0e5f215943620e51)]:
+  - @agrid/core@1.4.0
 
 ## 4.1.6
 
 ### Patch Changes
 
-- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/posthog-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
-  - @posthog/core@1.3.1
+- Updated dependencies [[`e0a6fe0`](https://github.com/PostHog/agrid-js/commit/e0a6fe013b5a1e92a6e7685f35f715199b716b34)]:
+  - @agrid/core@1.3.1
 
 ## 4.1.5
 
 ### Patch Changes
 
-- Updated dependencies [[`daf919b`](https://github.com/PostHog/posthog-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/posthog-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
-  - @posthog/core@1.3.0
+- Updated dependencies [[`daf919b`](https://github.com/PostHog/agrid-js/commit/daf919be225527ee4ad026d806dec195b75e44aa), [`7d45a7a`](https://github.com/PostHog/agrid-js/commit/7d45a7a52c44ba768913d66a4c4363d107042682)]:
+  - @agrid/core@1.3.0
 
 ## 4.1.4
 
 ### Patch Changes
 
-- Updated dependencies [[`10da2ee`](https://github.com/PostHog/posthog-js/commit/10da2ee0b8862ad0e32b68e452fae1bc77620bbf)]:
-  - @posthog/core@1.2.4
+- Updated dependencies [[`10da2ee`](https://github.com/PostHog/agrid-js/commit/10da2ee0b8862ad0e32b68e452fae1bc77620bbf)]:
+  - @agrid/core@1.2.4
 
 ## 4.1.3
 
 ### Patch Changes
 
-- Updated dependencies [[`e19a384`](https://github.com/PostHog/posthog-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b)]:
-  - @posthog/core@1.2.3
+- Updated dependencies [[`e19a384`](https://github.com/PostHog/agrid-js/commit/e19a384468d722c12f4ef21feb684da31f9dcd3b)]:
+  - @agrid/core@1.2.3
 
 ## 4.1.2
 
 ### Patch Changes
 
-- [#2403](https://github.com/PostHog/posthog-js/pull/2403) [`162aa86`](https://github.com/PostHog/posthog-js/commit/162aa86bf296dc3046ee7ed6166b94e77e422805) Thanks [@hpouillot](https://github.com/hpouillot)! - fix core dependency
+- [#2403](https://github.com/PostHog/agrid-js/pull/2403) [`162aa86`](https://github.com/PostHog/agrid-js/commit/162aa86bf296dc3046ee7ed6166b94e77e422805) Thanks [@hpouillot](https://github.com/hpouillot)! - fix core dependency
 
 ## 4.1.1
 
 ### Patch Changes
 
-- [#2219](https://github.com/PostHog/posthog-js/pull/2219) [`44d10c4`](https://github.com/PostHog/posthog-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994) Thanks [@daibhin](https://github.com/daibhin)! - update @posthog/core
+- [#2219](https://github.com/PostHog/agrid-js/pull/2219) [`44d10c4`](https://github.com/PostHog/agrid-js/commit/44d10c46c5378fa046320b7c50bd046eb1e75994) Thanks [@daibhin](https://github.com/daibhin)! - update @agrid/core
 
 ## 4.1.0 - 2025-06-12
 
@@ -224,8 +224,8 @@
 
 ## 2.5.0 - 2023-12-04
 
-1. Renamed `personProperties` to `setPersonPropertiesForFlags` to match `posthog-js` and more clearly indicated what it does
-2. Renamed `groupProperties` to `setGroupPropertiesForFlags` to match `posthog-js` and more clearly indicated what it does
+1. Renamed `personProperties` to `setPersonPropertiesForFlags` to match `agrid-js` and more clearly indicated what it does
+2. Renamed `groupProperties` to `setGroupPropertiesForFlags` to match `agrid-js` and more clearly indicated what it does
 
 ## 2.4.0 - 2023-04-20
 

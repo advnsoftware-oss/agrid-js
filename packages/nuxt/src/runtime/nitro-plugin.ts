@@ -1,9 +1,9 @@
-import { PostHog } from 'posthog-node'
+import { PostHog } from 'agrid-node'
 import { uuidv7 } from '@posthog/core/vendor/uuidv7'
 import { defineNitroPlugin } from 'nitropack/runtime'
 import { useRuntimeConfig } from '#imports'
 import type { PostHogCommon, PostHogServerConfig } from '../module'
-import type { JsonType } from '@posthog/core'
+import type { JsonType } from '@agrid/core'
 
 export default defineNitroPlugin((nitroApp) => {
   const runtimeConfig = useRuntimeConfig()

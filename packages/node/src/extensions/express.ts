@@ -1,8 +1,8 @@
 import type * as http from 'node:http'
-import { uuidv7 } from '@posthog/core'
+import { uuidv7 } from '@agrid/core'
 import ErrorTracking from './error-tracking'
 import { PostHogBackendClient } from '../client'
-import { ErrorTracking as CoreErrorTracking } from '@posthog/core'
+import { ErrorTracking as CoreErrorTracking } from '@agrid/core'
 
 type ExpressMiddleware = (req: http.IncomingMessage, res: http.ServerResponse, next: () => void) => void
 

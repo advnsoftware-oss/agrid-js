@@ -51,13 +51,13 @@ export class PostHogCoreTestClient extends PostHogCore {
     return this.mocks.fetch(url, options)
   }
   getLibraryId(): string {
-    return 'posthog-core-tests'
+    return 'agrid-core-tests'
   }
   getLibraryVersion(): string {
     return version
   }
   getCustomUserAgent(): string {
-    return 'posthog-core-tests'
+    return 'agrid-core-tests'
   }
 }
 

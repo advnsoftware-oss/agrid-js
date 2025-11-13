@@ -1,10 +1,10 @@
 import { addUncaughtExceptionListener, addUnhandledRejectionListener } from './autocapture'
 import { PostHogBackendClient } from '@/client'
-import { uuidv7 } from '@posthog/core'
+import { uuidv7 } from '@agrid/core'
 import { EventMessage, PostHogOptions } from '@/types'
-import type { Logger } from '@posthog/core'
-import { BucketedRateLimiter } from '@posthog/core'
-import { ErrorTracking as CoreErrorTracking } from '@posthog/core'
+import type { Logger } from '@agrid/core'
+import { BucketedRateLimiter } from '@agrid/core'
+import { ErrorTracking as CoreErrorTracking } from '@agrid/core'
 
 const SHUTDOWN_TIMEOUT = 2000
 

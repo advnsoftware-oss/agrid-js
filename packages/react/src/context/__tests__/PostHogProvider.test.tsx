@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { render, act } from '@testing-library/react'
 import { PostHogProvider, PostHog } from '..'
-import posthogJs from 'posthog-js'
+import posthogJs from 'agrid-js'
 
 // Mock posthog-js
 jest.mock('posthog-js', () => ({
