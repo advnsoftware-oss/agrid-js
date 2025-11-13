@@ -34,17 +34,17 @@ jobs:
           echo "$changesets"
           echo "no_changesets=false" >> $GITHUB_OUTPUT
           
-          # Check each new changeset for major version bumps to posthog-js
+          # Check each new changeset for major version bumps to agrid-js
           major_found=false
           major_file=""
           
           for changeset in $changesets; do
             echo "Checking $changeset"
             
-            # Check if the file contains 'posthog-js': major
-            if grep -q "'posthog-js':[[:space:]]*major" "$changeset"; then
-              echo "❌ Error: Major version bump detected for 'posthog-js' in $changeset"
-              echo "The 'posthog-js' package is autoloaded by clients and must not have breaking changes."
+            # Check if the file contains 'agrid-js': major
+            if grep -q "'agrid-js':[[:space:]]*major" "$changeset"; then
+              echo "❌ Error: Major version bump detected for 'agrid-js' in $changeset"
+              echo "The 'agrid-js' package is autoloaded by clients and must not have breaking changes."
               major_found=true
               major_file="$changeset"
               break
@@ -56,7 +56,7 @@ jobs:
             echo "changeset_file=$major_file" >> $GITHUB_OUTPUT
             exit 1
           else
-            echo "✅ No major version bumps found for 'posthog-js' in new changesets"
+            echo "✅ No major version bumps found for 'agrid-js' in new changesets"
             echo "major_bump_found=false" >> $GITHUB_OUTPUT
           fi
       
@@ -96,7 +96,7 @@ jobs:
             if (!majorBumpFound) {
               const majorBumpComment = comments.find(comment => 
                 comment.user.type === 'Bot' && 
-                comment.body.includes('Major Version Bump Detected for posthog-js')
+                comment.body.includes('Major Version Bump Detected for agrid-js')
               );
               
               if (majorBumpComment) {
@@ -115,12 +115,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const comment = `## ⚠️ Major Version Bump Detected for posthog-js
+            const comment = `## ⚠️ Major Version Bump Detected for agrid-js
             
-            This PR contains a changeset with a **major version bump** for \`posthog-js\` in file: \`${{ steps.check-major.outputs.changeset_file }}\`
+            This PR contains a changeset with a **major version bump** for \`agrid-js\` in file: \`${{ steps.check-major.outputs.changeset_file }}\`
             
             ### Why is this blocked?
-            The \`posthog-js\` package is autoloaded by clients and **must not have breaking changes**. Major version bumps would break existing client integrations.
+            The \`agrid-js\` package is autoloaded by clients and **must not have breaking changes**. Major version bumps would break existing client integrations.
             
             ### What should you do?
             - If this is a breaking change, please reconsider the implementation to maintain backwards compatibility
@@ -131,7 +131,7 @@ jobs:
             \`\`\`bash
             pnpm changeset
             \`\`\`
-            And select a non-breaking version bump for \`posthog-js\`.`;
+            And select a non-breaking version bump for \`agrid-js\`.`;
             
             // Check if we already commented
             const { data: comments } = await github.rest.issues.listComments({
@@ -142,7 +142,7 @@ jobs:
             
             const botComment = comments.find(comment => 
               comment.user.type === 'Bot' && 
-              comment.body.includes('Major Version Bump Detected for posthog-js')
+              comment.body.includes('Major Version Bump Detected for agrid-js')
             );
             
             if (botComment) {
@@ -180,7 +180,7 @@ jobs:
             pnpm changeset
             \`\`\`
             
-            **Remember:** Never use \`major\` version bumps for \`posthog-js\` as it's autoloaded by clients.`;
+            **Remember:** Never use \`major\` version bumps for \`agrid-js\` as it's autoloaded by clients.`;
             
             // Check if we already commented about missing changeset
             const { data: comments } = await github.rest.issues.listComments({

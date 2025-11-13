@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
-          token: ${{ secrets.POSTHOG_BOT_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - uses: ./.github/actions/setup
@@ -39,4 +39,4 @@ jobs:
           add: "."
           branch: ${{ github.event.pull_request.base.ref }}
           message: "chore: update versions and lockfile"
-          github_token: ${{ secrets.POSTHOG_BOT_PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
