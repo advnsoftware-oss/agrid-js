@@ -162,6 +162,7 @@ This monorepo contains the following packages:
 - [**Contributing Guide**](./CONTRIBUTING.md) - How to contribute to Agrid JS
 - [**Development Guide**](./AGENTS.md) - Detailed development documentation
 - [**Publish to NPM**](./docs/PUBLISH_NPM.md) - Guide for building and publishing packages
+- [**Release Process**](./docs/RELEASE_PROCESS.md) - Step-by-step guide for releasing packages with GitHub Actions
 
 ### API Reference
 - [**Agrid Documentation**](https://agrid.com/docs) - Official Agrid documentation
