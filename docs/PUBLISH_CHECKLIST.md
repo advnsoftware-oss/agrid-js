@@ -247,7 +247,7 @@ Một package.json chuẩn để publish:
     "url": "https://agrid.com"
   },
   "license": "MIT",
-  "homepage": "https://agrid.com/docs/libraries/js",
+  "homepage": "https://github.com/advnsoftware-oss/agrid-js#readme",
   "keywords": [
     "agrid",
     "analytics"

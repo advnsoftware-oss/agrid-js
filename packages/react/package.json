@@ -4,7 +4,7 @@
     "description": "Provides components and hooks for React integrations of Agrid.",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/agrid/agrid-js.git",
+        "url": "git+https://github.com/advnsoftware-oss/agrid-js.git",
         "directory": "packages/react"
     },
     "author": {

@@ -4,7 +4,7 @@
   "description": "Agrid Node.js integration for server-side analytics and feature flags",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agrid/agrid-js.git",
+    "url": "git+https://github.com/advnsoftware-oss/agrid-js.git",
     "directory": "packages/node"
   },
   "scripts": {

@@ -614,7 +614,7 @@ export default ProductCard
 
 ## Tài liệu tham khảo
 
-- [Agrid JS Documentation](https://agrid.com/docs/libraries/js)
+- [Agrid JS Documentation](https://github.com/advnsoftware-oss/agrid-js#readme)
 - [React Integration Guide](https://agrid.com/docs/libraries/react)
 - [API Reference](https://agrid.com/docs/api)
 

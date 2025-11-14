@@ -80,7 +80,7 @@ Nếu bạn cần hỗ trợ:
 
 ## Liên kết hữu ích
 
-- [Agrid JS Documentation](https://agrid.com/docs/libraries/js)
+- [Agrid JS Documentation](https://github.com/advnsoftware-oss/agrid-js#readme)
 - [React Integration](https://agrid.com/docs/libraries/react)
 - [API Reference](https://agrid.com/docs/api)
 - [Publish to NPM Guide](./PUBLISH_NPM.md) - Hướng dẫn build và publish packages

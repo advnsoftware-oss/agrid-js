@@ -10,11 +10,11 @@
   <a href="https://www.npmjs.com/package/agrid-js">
     <img alt="npm version" src="https://img.shields.io/npm/v/agrid-js?style=flat-square">
   </a>
-  <a href="https://github.com/agrid/agrid-js/blob/main/LICENSE">
+  <a href="https://github.com/advnsoftware-oss/agrid-js/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-red.svg?style=flat-square">
   </a>
-  <a href="https://github.com/agrid/agrid-js">
-    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/agrid/agrid-js?style=flat-square">
+  <a href="https://github.com/advnsoftware-oss/agrid-js">
+    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/advnsoftware-oss/agrid-js?style=flat-square">
   </a>
   <a href="http://makeapullrequest.com">
     <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square">
@@ -165,7 +165,7 @@ This monorepo contains the following packages:
 
 ### API Reference
 - [**Agrid Documentation**](https://agrid.com/docs) - Official Agrid documentation
-- [**JavaScript SDK Docs**](https://agrid.com/docs/libraries/js) - Browser SDK documentation
+- [**JavaScript SDK Docs**](https://github.com/advnsoftware-oss/agrid-js#readme) - Browser SDK documentation
 - [**React SDK Docs**](https://agrid.com/docs/libraries/react) - React integration guide
 
 ---
@@ -340,9 +340,9 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 - **Website**: [https://agrid.com](https://agrid.com)
 - **Documentation**: [https://agrid.com/docs](https://agrid.com/docs)
-- **GitHub**: [https://github.com/agrid/agrid-js](https://github.com/agrid/agrid-js)
+- **GitHub**: [https://github.com/advnsoftware-oss/agrid-js](https://github.com/advnsoftware-oss/agrid-js)
 - **npm**: [https://www.npmjs.com/package/agrid-js](https://www.npmjs.com/package/agrid-js)
-- **Issues**: [https://github.com/agrid/agrid-js/issues](https://github.com/agrid/agrid-js/issues)
+- **Issues**: [https://github.com/advnsoftware-oss/agrid-js/issues](https://github.com/advnsoftware-oss/agrid-js/issues)
 
 ---
 

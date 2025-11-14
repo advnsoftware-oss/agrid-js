@@ -4,7 +4,7 @@
   "description": "Agrid Node.js AI integrations for OpenAI, Anthropic, Gemini, and LangChain",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agrid/agrid-js.git",
+    "url": "git+https://github.com/advnsoftware-oss/agrid-js.git",
     "directory": "packages/ai"
   },
   "main": "dist/index.cjs",

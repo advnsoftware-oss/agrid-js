@@ -23,7 +23,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/agrid/agrid-js.git",
+    "url": "https://github.com/advnsoftware-oss/agrid-js.git",
     "directory": "packages/core"
   },
   "files": [

@@ -3,7 +3,7 @@
 [![npm package](https://img.shields.io/npm/v/agrid-js?style=flat-square)](https://www.npmjs.com/package/agrid-js)
 [![MIT License](https://img.shields.io/badge/License-MIT-red.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-For information on using this library in your app, [see Agrid Docs](https://agrid.com/docs/libraries/js).
+For information on using this library in your app, [see GitHub README](https://github.com/advnsoftware-oss/agrid-js#readme).
 This README is intended for developing the library itself.
 
 ## Dependencies
