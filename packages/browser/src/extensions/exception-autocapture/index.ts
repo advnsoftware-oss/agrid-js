@@ -1,5 +1,5 @@
 import { assignableWindow, window } from '../../utils/globals'
-import { PostHog } from '../../posthog-core'
+import { Agrid } from '../../agrid-core'
 import { ExceptionAutoCaptureConfig, RemoteConfig } from '../../types'
 
 import { createLogger } from '../../utils/logger'
@@ -10,7 +10,7 @@ import { ErrorTracking } from '@agrid/core'
 const logger = createLogger('[ExceptionAutocapture]')
 
 export class ExceptionObserver {
-    private _instance: PostHog
+    private _instance: Agrid
     private _rateLimiter: BucketedRateLimiter<string>
     private _remoteEnabled: boolean | undefined
     private _config: Required<ExceptionAutoCaptureConfig>
@@ -18,7 +18,7 @@ export class ExceptionObserver {
     private _unwrapUnhandledRejection: (() => void) | undefined
     private _unwrapConsoleError: (() => void) | undefined
 
-    constructor(instance: PostHog) {
+    constructor(instance: Agrid) {
         this._instance = instance
         this._remoteEnabled = !!this._instance.persistence?.props[EXCEPTION_CAPTURE_ENABLED_SERVER_SIDE]
         this._config = this._requiredConfig()
@@ -69,12 +69,12 @@ export class ExceptionObserver {
     }
 
     private _loadScript(cb: () => void): void {
-        if (assignableWindow.__PosthogExtensions__?.errorWrappingFunctions) {
+        if (assignableWindow.__AgridExtensions__?.errorWrappingFunctions) {
             // already loaded
             cb()
         }
 
-        assignableWindow.__PosthogExtensions__?.loadExternalDependency?.(
+        assignableWindow.__AgridExtensions__?.loadExternalDependency?.(
             this._instance,
             'exception-autocapture',
             (err) => {
@@ -87,14 +87,14 @@ export class ExceptionObserver {
     }
 
     private _startCapturing = () => {
-        if (!window || !this.isEnabled || !assignableWindow.__PosthogExtensions__?.errorWrappingFunctions) {
+        if (!window || !this.isEnabled || !assignableWindow.__AgridExtensions__?.errorWrappingFunctions) {
             return
         }
 
-        const wrapOnError = assignableWindow.__PosthogExtensions__.errorWrappingFunctions.wrapOnError
+        const wrapOnError = assignableWindow.__AgridExtensions__.errorWrappingFunctions.wrapOnError
         const wrapUnhandledRejection =
-            assignableWindow.__PosthogExtensions__.errorWrappingFunctions.wrapUnhandledRejection
-        const wrapConsoleError = assignableWindow.__PosthogExtensions__.errorWrappingFunctions.wrapConsoleError
+            assignableWindow.__AgridExtensions__.errorWrappingFunctions.wrapUnhandledRejection
+        const wrapConsoleError = assignableWindow.__AgridExtensions__.errorWrappingFunctions.wrapConsoleError
 
         try {
             if (!this._unwrapOnError && this._config.capture_unhandled_errors) {

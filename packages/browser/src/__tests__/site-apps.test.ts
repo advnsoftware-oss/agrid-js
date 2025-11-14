@@ -1,23 +1,23 @@
 import { mockLogger } from './helpers/mock-logger'
 
 import { SiteApps } from '../site-apps'
-import { PostHogPersistence } from '../posthog-persistence'
+import { AgridPersistence } from '../agrid-persistence'
 import { RequestRouter } from '../utils/request-router'
-import { PostHog } from '../posthog-core'
-import { PostHogConfig, Properties, CaptureResult, RemoteConfig } from '../types'
+import { Agrid } from '../agrid-core'
+import { AgridConfig, Properties, CaptureResult, RemoteConfig } from '../types'
 import { assignableWindow } from '../utils/globals'
 import '../entrypoints/external-scripts-loader'
 import { isFunction } from '@agrid/core'
 
 describe('SiteApps', () => {
-    let posthog: PostHog
+    let agrid: Agrid
     let siteAppsInstance: SiteApps
     let emitCaptureEvent: ((eventName: string, eventPayload: CaptureResult) => void) | undefined
     let removeCaptureHook = jest.fn()
 
     const token = 'testtoken'
 
-    const defaultConfig: Partial<PostHogConfig> = {
+    const defaultConfig: Partial<AgridConfig> = {
         token: token,
         api_host: 'https://test.com',
         persistence: 'memory',
@@ -42,17 +42,17 @@ describe('SiteApps', () => {
             }),
         }
 
-        delete assignableWindow._POSTHOG_REMOTE_CONFIG
-        delete assignableWindow.POSTHOG_DEBUG
+        delete assignableWindow._AGRID_REMOTE_CONFIG
+        delete assignableWindow.AGRID_DEBUG
 
         removeCaptureHook = jest.fn()
 
-        posthog = {
+        agrid = {
             config: { ...defaultConfig, opt_in_site_apps: true },
-            persistence: new PostHogPersistence(defaultConfig as PostHogConfig),
-            register: (props: Properties) => posthog.persistence!.register(props),
-            unregister: (key: string) => posthog.persistence!.unregister(key),
-            get_property: (key: string) => posthog.persistence!.props[key],
+            persistence: new AgridPersistence(defaultConfig as AgridConfig),
+            register: (props: Properties) => agrid.persistence!.register(props),
+            unregister: (key: string) => agrid.persistence!.unregister(key),
+            get_property: (key: string) => agrid.persistence!.props[key],
             capture: jest.fn(),
             _addCaptureHook: jest.fn((cb) => {
                 emitCaptureEvent = cb
@@ -66,13 +66,13 @@ describe('SiteApps', () => {
                 setReloadingPaused: jest.fn(),
                 _startReloadTimer: jest.fn(),
             },
-            requestRouter: new RequestRouter({ config: defaultConfig } as unknown as PostHog),
+            requestRouter: new RequestRouter({ config: defaultConfig } as unknown as Agrid),
             _hasBootstrappedFeatureFlags: jest.fn(),
             getGroups: () => ({ organization: '5' }),
             on: jest.fn(),
-        } as unknown as PostHog
+        } as unknown as Agrid
 
-        siteAppsInstance = new SiteApps(posthog)
+        siteAppsInstance = new SiteApps(agrid)
     })
 
     afterEach(() => {
@@ -81,21 +81,21 @@ describe('SiteApps', () => {
 
     describe('constructor', () => {
         it('sets enabled to true when opt_in_site_apps is true', () => {
-            posthog.config = {
+            agrid.config = {
                 ...defaultConfig,
                 opt_in_site_apps: true,
-            } as PostHogConfig
+            } as AgridConfig
 
             expect(siteAppsInstance.isEnabled).toBe(true)
         })
 
         it('sets enabled to false when opt_in_site_apps is false', () => {
-            posthog.config = {
+            agrid.config = {
                 ...defaultConfig,
                 opt_in_site_apps: false,
-            } as PostHogConfig
+            } as AgridConfig
 
-            siteAppsInstance = new SiteApps(posthog)
+            siteAppsInstance = new SiteApps(agrid)
 
             expect(siteAppsInstance.isEnabled).toBe(false)
         })
@@ -111,15 +111,15 @@ describe('SiteApps', () => {
             expect(siteAppsInstance['_stopBuffering']).toBeUndefined()
             siteAppsInstance.init()
 
-            expect(posthog._addCaptureHook).toHaveBeenCalledWith(expect.any(Function))
+            expect(agrid._addCaptureHook).toHaveBeenCalledWith(expect.any(Function))
             expect(siteAppsInstance['_stopBuffering']).toEqual(expect.any(Function))
         })
 
         it('does not add eventCollector as a capture hook if disabled', () => {
-            posthog.config.opt_in_site_apps = false
+            agrid.config.opt_in_site_apps = false
             siteAppsInstance.init()
 
-            expect(posthog._addCaptureHook).not.toHaveBeenCalled()
+            expect(agrid._addCaptureHook).not.toHaveBeenCalled()
             expect(siteAppsInstance['_stopBuffering']).toBeUndefined()
         })
     })
@@ -169,7 +169,7 @@ describe('SiteApps', () => {
         })
 
         it('constructs globals object correctly', () => {
-            jest.spyOn(posthog, 'get_property').mockImplementation((key) => {
+            jest.spyOn(agrid, 'get_property').mockImplementation((key) => {
                 if (key === '$groups') {
                     return { groupType: 'groupId' }
                 } else if (key === '$stored_group_properties') {
@@ -223,12 +223,12 @@ describe('SiteApps', () => {
 
     describe('legacy site apps loading', () => {
         beforeEach(() => {
-            posthog.config.opt_in_site_apps = true
+            agrid.config.opt_in_site_apps = true
             siteAppsInstance.init()
         })
 
         it('loads stops buffering if no site apps', () => {
-            posthog.config.opt_in_site_apps = true
+            agrid.config.opt_in_site_apps = true
             siteAppsInstance.onRemoteConfig({} as RemoteConfig)
 
             expect(removeCaptureHook).toHaveBeenCalled()
@@ -237,7 +237,7 @@ describe('SiteApps', () => {
         })
 
         it('does not loads site apps if disabled', () => {
-            posthog.config.opt_in_site_apps = false
+            agrid.config.opt_in_site_apps = false
             siteAppsInstance.onRemoteConfig({
                 siteApps: [
                     { id: '1', url: '/site_app/1' },
@@ -251,7 +251,7 @@ describe('SiteApps', () => {
         })
 
         it('does not load site apps if new global loader exists', () => {
-            assignableWindow._POSTHOG_REMOTE_CONFIG = {
+            assignableWindow._AGRID_REMOTE_CONFIG = {
                 [token]: {
                     config: {},
                     siteApps: [
@@ -285,12 +285,12 @@ describe('SiteApps', () => {
             expect(siteAppsInstance['_stopBuffering']).toBeUndefined()
             expect(assignableWindow.__PosthogExtensions__?.loadSiteApp).toHaveBeenCalledTimes(2)
             expect(assignableWindow.__PosthogExtensions__?.loadSiteApp).toHaveBeenCalledWith(
-                posthog,
+                agrid,
                 '/site_app/1',
                 expect.any(Function)
             )
             expect(assignableWindow.__PosthogExtensions__?.loadSiteApp).toHaveBeenCalledWith(
-                posthog,
+                agrid,
                 '/site_app/2',
                 expect.any(Function)
             )
@@ -299,12 +299,12 @@ describe('SiteApps', () => {
 
     describe('onRemoteConfig', () => {
         interface AppConfig {
-            posthog: PostHog
+            agrid: Agrid
             callback: (success: boolean) => void
         }
         let appConfigs: (AppConfig & { processEvent: jest.Mock })[] = []
         const init = (onInit?: (appConfig: AppConfig) => void) => {
-            assignableWindow._POSTHOG_REMOTE_CONFIG = {
+            assignableWindow._AGRID_REMOTE_CONFIG = {
                 [token]: {
                     config: {},
                     siteApps: [
@@ -344,19 +344,19 @@ describe('SiteApps', () => {
         it('sets up the eventCaptured listener if site apps', () => {
             init()
             siteAppsInstance.onRemoteConfig({} as RemoteConfig)
-            expect(posthog.on).toHaveBeenCalledWith('eventCaptured', expect.any(Function))
+            expect(agrid.on).toHaveBeenCalledWith('eventCaptured', expect.any(Function))
         })
 
         it('does not sets up the eventCaptured listener if no site apps', () => {
             init()
-            assignableWindow._POSTHOG_REMOTE_CONFIG = {
+            assignableWindow._AGRID_REMOTE_CONFIG = {
                 [token]: {
                     config: {},
                     siteApps: [],
                 },
             } as any
             siteAppsInstance.onRemoteConfig({} as RemoteConfig)
-            expect(posthog.on).not.toHaveBeenCalled()
+            expect(agrid.on).not.toHaveBeenCalled()
         })
 
         it('loads site apps via the window object if defined', () => {
@@ -451,13 +451,13 @@ describe('SiteApps', () => {
 
         it('logs error if site apps are disabled but response contains site apps', () => {
             init()
-            posthog.config.opt_in_site_apps = false
-            assignableWindow.POSTHOG_DEBUG = true
+            agrid.config.opt_in_site_apps = false
+            assignableWindow.AGRID_DEBUG = true
 
             siteAppsInstance.onRemoteConfig({} as RemoteConfig)
 
             expect(mockLogger.error).toHaveBeenCalledWith(
-                'PostHog site apps are disabled. Enable the "opt_in_site_apps" config to proceed.'
+                'Agrid site apps are disabled. Enable the "opt_in_site_apps" config to proceed.'
             )
             expect(siteAppsInstance.apps).toEqual({})
         })

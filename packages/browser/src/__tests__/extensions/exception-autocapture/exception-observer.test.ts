@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { PostHog } from '../../../posthog-core'
+import { Agrid } from '../../../agrid-core'
 import { FlagsResponse } from '../../../types'
 import { ExceptionObserver } from '../../../extensions/exception-autocapture'
 import { assignableWindow, window } from '../../../utils/globals'
-import { createPosthogInstance } from '../../helpers/posthog-instance'
+import { createPosthogInstance } from '../../helpers/agrid-instance'
 import { uuidv7 } from '../../../uuidv7'
 
-import posthogErrorWrappingFunctions from '../../../entrypoints/exception-autocapture'
+import agridErrorWrappingFunctions from '../../../entrypoints/exception-autocapture'
 import { afterEach } from '@jest/globals'
 
 /** help out jsdom */
@@ -33,22 +33,22 @@ export class PromiseRejectionEvent extends Event {
 
 describe('Exception Observer', () => {
     let exceptionObserver: ExceptionObserver
-    let posthog: PostHog
+    let agrid: Agrid
     let sendRequestSpy: jest.SpyInstance
     const beforeSendMock = jest.fn().mockImplementation((e) => e)
     const loadScriptMock = jest.fn()
 
     const addErrorWrappingFlagToWindow = () => {
         // assignableWindow.onerror = jest.fn()
-        // assignableWindow.onerror__POSTHOG_INSTRUMENTED__ = true
+        // assignableWindow.onerror__AGRID_INSTRUMENTED__ = true
 
-        assignableWindow.__PosthogExtensions__.errorWrappingFunctions = posthogErrorWrappingFunctions
+        assignableWindow.__PosthogExtensions__.errorWrappingFunctions = agridErrorWrappingFunctions
     }
 
     const expectNoHandlers = () => {
-        expect((window?.console?.error as any)?.__POSTHOG_INSTRUMENTED__).toBeUndefined()
-        expect((window?.onerror as any)?.__POSTHOG_INSTRUMENTED__).toBeUndefined()
-        expect((window?.onunhandledrejection as any)?.__POSTHOG_INSTRUMENTED__).toBeUndefined()
+        expect((window?.console?.error as any)?.__AGRID_INSTRUMENTED__).toBeUndefined()
+        expect((window?.onerror as any)?.__AGRID_INSTRUMENTED__).toBeUndefined()
+        expect((window?.onunhandledrejection as any)?.__AGRID_INSTRUMENTED__).toBeUndefined()
     }
 
     beforeEach(async () => {
@@ -57,14 +57,14 @@ describe('Exception Observer', () => {
             callback()
         })
 
-        posthog = await createPosthogInstance(uuidv7(), { before_send: beforeSendMock })
+        agrid = await createPosthogInstance(uuidv7(), { before_send: beforeSendMock })
         assignableWindow.__PosthogExtensions__ = {
             loadExternalDependency: loadScriptMock,
         }
 
-        sendRequestSpy = jest.spyOn(posthog, '_send_request')
+        sendRequestSpy = jest.spyOn(agrid, '_send_request')
 
-        exceptionObserver = new ExceptionObserver(posthog)
+        exceptionObserver = new ExceptionObserver(agrid)
     })
 
     afterEach(() => {
@@ -79,9 +79,9 @@ describe('Exception Observer', () => {
         it('should instrument enabled handlers only when started', () => {
             expect(exceptionObserver.isEnabled).toBe(true)
 
-            expect((window?.console?.error as any).__POSTHOG_INSTRUMENTED__).toBeUndefined()
-            expect((window?.onerror as any).__POSTHOG_INSTRUMENTED__).toBe(true)
-            expect((window?.onunhandledrejection as any).__POSTHOG_INSTRUMENTED__).toBe(true)
+            expect((window?.console?.error as any).__AGRID_INSTRUMENTED__).toBeUndefined()
+            expect((window?.onerror as any).__AGRID_INSTRUMENTED__).toBe(true)
+            expect((window?.onunhandledrejection as any).__AGRID_INSTRUMENTED__).toBe(true)
         })
 
         it('should remove instrument handlers when stopped', () => {
@@ -164,8 +164,8 @@ describe('Exception Observer', () => {
         })
 
         it('does not start if disabled locally', () => {
-            posthog.config.capture_exceptions = false
-            exceptionObserver = new ExceptionObserver(posthog)
+            agrid.config.capture_exceptions = false
+            exceptionObserver = new ExceptionObserver(agrid)
             expect(exceptionObserver.isEnabled).toBe(false)
         })
     })

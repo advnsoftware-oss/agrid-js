@@ -72,7 +72,7 @@ describe('request', () => {
         jest.setSystemTime(now)
 
         createRequest = (overrides) => ({
-            url: 'https://any.posthog-instance.com?ver=1.23.45',
+            url: 'https://any.agrid-instance.com?ver=1.23.45',
             data: undefined,
             headers: {},
             callback: mockCallback,
@@ -88,7 +88,7 @@ describe('request', () => {
         it('performs the request with default params', () => {
             request(
                 createRequest({
-                    url: 'https://any.posthog-instance.com/',
+                    url: 'https://any.agrid-instance.com/',
                     headers: {
                         'x-header': 'value',
                     },
@@ -96,7 +96,7 @@ describe('request', () => {
             )
             expect(mockedXHR.open).toHaveBeenCalledWith(
                 'GET',
-                'https://any.posthog-instance.com/?_=1700000000000&ver=1.23.45',
+                'https://any.agrid-instance.com/?_=1700000000000&ver=1.23.45',
                 true
             )
 
@@ -160,7 +160,7 @@ describe('request', () => {
             const headers = mockedFetch.mock.calls[0][1].headers as Headers
             expect(headers.get('x-header')).toEqual('value')
             expect(mockedFetch).toHaveBeenCalledWith(
-                `https://any.posthog-instance.com?ver=1.23.45&_=1700000000000`,
+                `https://any.agrid-instance.com?ver=1.23.45&_=1700000000000`,
                 expect.objectContaining({
                     body: undefined,
                     headers: new Headers(),
@@ -279,7 +279,7 @@ describe('request', () => {
                         })
                     )
                     expect(mockedFetch).toHaveBeenCalledWith(
-                        `https://any.posthog-instance.com?ver=1.23.45&_=1700000000000${expectedURLParams}`,
+                        `https://any.agrid-instance.com?ver=1.23.45&_=1700000000000${expectedURLParams}`,
                         expect.objectContaining({
                             headers: new Headers(),
                             keepalive: expectedKeepAlive,
@@ -300,53 +300,53 @@ describe('request', () => {
             })
         })
 
-        describe('adding query params to posthog API calls', () => {
-            const posthogURL = 'https://any.posthog-instance.com/my-url'
+        describe('adding query params to agrid API calls', () => {
+            const agridURL = 'https://any.agrid-instance.com/my-url'
 
             it('extends params in a url', () => {
-                const newUrl = extendURLParams(posthogURL, {
+                const newUrl = extendURLParams(agridURL, {
                     a: true,
                     b: 1,
                     c: 'encoded string 😘',
                 })
-                expect(newUrl).toEqual(posthogURL + '?a=true&b=1&c=encoded%20string%20%F0%9F%98%98')
+                expect(newUrl).toEqual(agridURL + '?a=true&b=1&c=encoded%20string%20%F0%9F%98%98')
             })
 
             it.each([
                 [
                     'replaces existing params when replace=true (default)',
-                    posthogURL + '?a=old&b=2',
+                    agridURL + '?a=old&b=2',
                     { a: 'new', c: 3 },
                     true,
-                    posthogURL + '?a=new&b=2&c=3',
+                    agridURL + '?a=new&b=2&c=3',
                 ],
                 [
                     'preserves existing params when replace=false',
-                    posthogURL + '?a=old&b=2',
+                    agridURL + '?a=old&b=2',
                     { a: 'new', c: 'encoded string 😘' },
                     false,
-                    posthogURL + '?a=old&b=2&c=encoded%20string%20%F0%9F%98%98',
+                    agridURL + '?a=old&b=2&c=encoded%20string%20%F0%9F%98%98',
                 ],
                 [
                     'replaces multiple existing params when replace=true',
-                    posthogURL + '?retry_count=1&ver=old',
+                    agridURL + '?retry_count=1&ver=old',
                     { retry_count: 2, ver: 'new' },
                     true,
-                    posthogURL + '?retry_count=2&ver=new',
+                    agridURL + '?retry_count=2&ver=new',
                 ],
                 [
                     'preserves multiple existing params when replace=false',
-                    posthogURL + '?retry_count=1&ver=old',
+                    agridURL + '?retry_count=1&ver=old',
                     { retry_count: 2, ver: 'new' },
                     false,
-                    posthogURL + '?retry_count=1&ver=old',
+                    agridURL + '?retry_count=1&ver=old',
                 ],
                 [
                     'does not re-encode already encoded params',
-                    posthogURL + '?a=false&b=1&c=encoded%20string%20%F0%9F%98%98',
+                    agridURL + '?a=false&b=1&c=encoded%20string%20%F0%9F%98%98',
                     { retry_count: 2, ver: 'new' },
                     true,
-                    posthogURL + '?a=false&b=1&c=encoded%20string%20%F0%9F%98%98&retry_count=2&ver=new',
+                    agridURL + '?a=false&b=1&c=encoded%20string%20%F0%9F%98%98&retry_count=2&ver=new',
                 ],
             ])(
                 '%s',
@@ -365,7 +365,7 @@ describe('request', () => {
             it('should send application/json if no compression is set', () => {
                 request(
                     createRequest({
-                        url: 'https://any.posthog-instance.com/',
+                        url: 'https://any.agrid-instance.com/',
                         method: 'POST',
                         data: { foo: 'bar' },
                     })
@@ -377,7 +377,7 @@ describe('request', () => {
             it('should base64 compress data if set', () => {
                 request(
                     createRequest({
-                        url: 'https://any.posthog-instance.com/',
+                        url: 'https://any.agrid-instance.com/',
                         method: 'POST',
                         compression: Compression.Base64,
                         data: { foo: 'bar' },
@@ -393,7 +393,7 @@ describe('request', () => {
             it('should gzip compress data if set', async () => {
                 request(
                     createRequest({
-                        url: 'https://any.posthog-instance.com/',
+                        url: 'https://any.agrid-instance.com/',
                         method: 'POST',
                         compression: Compression.GZipJS,
                         data: { foo: 'bar' },
@@ -423,7 +423,7 @@ describe('request', () => {
             it('converts bigint properties to string without throwing', () => {
                 request(
                     createRequest({
-                        url: 'https://any.posthog-instance.com/',
+                        url: 'https://any.agrid-instance.com/',
                         method: 'POST',
                         compression: Compression.Base64,
                         data: { foo: BigInt('999999999999999999999') },
@@ -447,14 +447,14 @@ describe('request', () => {
             it("should encode data to a string and send it as a blob if it's a POST request", async () => {
                 request(
                     createRequest({
-                        url: 'https://any.posthog-instance.com/',
+                        url: 'https://any.agrid-instance.com/',
                         method: 'POST',
                         data: { foo: 'bar' },
                     })
                 )
 
                 expect(mockedNavigator?.sendBeacon).toHaveBeenCalledWith(
-                    'https://any.posthog-instance.com/?_=1700000000000&ver=1.23.45&beacon=1',
+                    'https://any.agrid-instance.com/?_=1700000000000&ver=1.23.45&beacon=1',
                     expect.any(Blob)
                 )
                 const blob = mockedNavigator?.sendBeacon.mock.calls[0][1] as Blob
@@ -471,7 +471,7 @@ describe('request', () => {
             it('should respect base64 compression', async () => {
                 request(
                     createRequest({
-                        url: 'https://any.posthog-instance.com/',
+                        url: 'https://any.agrid-instance.com/',
                         method: 'POST',
                         compression: Compression.Base64,
                         data: { foo: 'bar' },
@@ -479,7 +479,7 @@ describe('request', () => {
                 )
 
                 expect(mockedNavigator?.sendBeacon).toHaveBeenCalledWith(
-                    'https://any.posthog-instance.com/?_=1700000000000&ver=1.23.45&compression=base64&beacon=1',
+                    'https://any.agrid-instance.com/?_=1700000000000&ver=1.23.45&compression=base64&beacon=1',
                     expect.any(Blob)
                 )
                 const blob = mockedNavigator?.sendBeacon.mock.calls[0][1] as Blob
@@ -496,7 +496,7 @@ describe('request', () => {
             it('should respect gzip compression', async () => {
                 request(
                     createRequest({
-                        url: 'https://any.posthog-instance.com/',
+                        url: 'https://any.agrid-instance.com/',
                         method: 'POST',
                         compression: Compression.GZipJS,
                         data: { foo: 'bar' },
@@ -504,7 +504,7 @@ describe('request', () => {
                 )
 
                 expect(mockedNavigator?.sendBeacon).toHaveBeenCalledWith(
-                    'https://any.posthog-instance.com/?_=1700000000000&ver=1.23.45&compression=gzip-js&beacon=1',
+                    'https://any.agrid-instance.com/?_=1700000000000&ver=1.23.45&compression=gzip-js&beacon=1',
                     expect.any(Blob)
                 )
                 const blob = mockedNavigator?.sendBeacon.mock.calls[0][1] as Blob

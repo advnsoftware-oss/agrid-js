@@ -1,5 +1,5 @@
 import { window } from './utils/globals'
-import { PostHog } from './posthog-core'
+import { Agrid } from './agrid-core'
 import { clampToRange, isUndefined } from '@agrid/core'
 import { extend } from './utils'
 import { logger } from './utils/logger'
@@ -30,9 +30,9 @@ interface PageViewEventProperties {
 
 export class PageViewManager {
     _currentPageview?: { timestamp: Date; pageViewId: string | undefined; pathname: string | undefined }
-    _instance: PostHog
+    _instance: Agrid
 
-    constructor(instance: PostHog) {
+    constructor(instance: Agrid) {
         this._instance = instance
     }
 

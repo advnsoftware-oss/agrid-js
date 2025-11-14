@@ -1,8 +1,8 @@
 import '../helpers/mock-logger'
 
-import { createPosthogInstance } from '../helpers/posthog-instance'
+import { createPosthogInstance } from '../helpers/agrid-instance'
 import { uuidv7 } from '../../uuidv7'
-import { PostHog } from '../../posthog-core'
+import { Agrid } from '../../agrid-core'
 import { FlagsResponse, PerformanceCaptureConfig, RemoteConfig, SupportedWebVitalsMetrics } from '../../types'
 import { assignableWindow } from '../../utils/globals'
 import { DEFAULT_FLUSH_TO_CAPTURE_TIMEOUT_MILLISECONDS, FIFTEEN_MINUTES_IN_MILLIS } from '../../extensions/web-vitals'
@@ -42,7 +42,7 @@ jest.mock('../../utils/globals', () => {
 })
 
 describe('web vitals', () => {
-    let posthog: PostHog
+    let agrid: Agrid
     let beforeSendMock = jest.fn().mockImplementation((e) => e)
     let onLCPCallback: ((metric: Record<string, any>) => void) | undefined = undefined
     let onCLSCallback: ((metric: Record<string, any>) => void) | undefined = undefined
@@ -115,7 +115,7 @@ describe('web vitals', () => {
         ) => {
             beforeEach(async () => {
                 beforeSendMock.mockClear()
-                posthog = await createPosthogInstance(uuidv7(), {
+                agrid = await createPosthogInstance(uuidv7(), {
                     before_send: beforeSendMock,
                     capture_performance: { web_vitals: true, web_vitals_allowed_metrics: clientConfig },
                     // sometimes pageviews sneak in and make asserting on mock capture tricky
@@ -146,11 +146,11 @@ describe('web vitals', () => {
                 assignableWindow.__PosthogExtensions__.loadExternalDependency = loadScriptMock
 
                 // need to force this to get the web vitals script loaded
-                posthog.webVitalsAutocapture!.onRemoteConfig({
+                agrid.webVitalsAutocapture!.onRemoteConfig({
                     capturePerformance: { web_vitals: true },
                 } as unknown as FlagsResponse)
 
-                expect(posthog.webVitalsAutocapture.allowedMetrics).toEqual(expectedAllowedMetrics)
+                expect(agrid.webVitalsAutocapture.allowedMetrics).toEqual(expectedAllowedMetrics)
             })
 
             it('should emit when all allowed metrics are captured', async () => {
@@ -186,7 +186,7 @@ describe('web vitals', () => {
             })
 
             it('should emit after configured timeout even when only 1 to 3 metrics captured', async () => {
-                ;(posthog.config.capture_performance as PerformanceCaptureConfig).web_vitals_delayed_flush_ms = 1000
+                ;(agrid.config.capture_performance as PerformanceCaptureConfig).web_vitals_delayed_flush_ms = 1000
                 onCLSCallback?.({ name: 'CLS', value: 123.45, extra: 'property' })
 
                 expect(beforeSendMock).toBeCalledTimes(0)
@@ -215,7 +215,7 @@ describe('web vitals', () => {
             })
 
             it('can be configured not to ignore a ridiculous value', async () => {
-                posthog.config.capture_performance = { __web_vitals_max_value: 0 }
+                agrid.config.capture_performance = { __web_vitals_max_value: 0 }
                 onCLSCallback?.({ name: 'CLS', value: FIFTEEN_MINUTES_IN_MILLIS, extra: 'property' })
 
                 expect(beforeSendMock).toBeCalledTimes(0)
@@ -247,18 +247,18 @@ describe('web vitals', () => {
             }
 
             beforeSendMock = jest.fn()
-            posthog = await createPosthogInstance(uuidv7(), {
+            agrid = await createPosthogInstance(uuidv7(), {
                 before_send: beforeSendMock,
             })
         })
 
         it('should not be enabled before the flags response', () => {
-            expect(posthog.webVitalsAutocapture!.isEnabled).toBe(false)
+            expect(agrid.webVitalsAutocapture!.isEnabled).toBe(false)
         })
 
         it('should be enabled if client config option is enabled', () => {
-            posthog.config.capture_performance = { web_vitals: true }
-            expect(posthog.webVitalsAutocapture!.isEnabled).toBe(true)
+            agrid.config.capture_performance = { web_vitals: true }
+            expect(agrid.webVitalsAutocapture!.isEnabled).toBe(true)
         })
 
         it.each([
@@ -276,37 +276,37 @@ describe('web vitals', () => {
         ])(
             'when client side config is %p and remote opt in is %p - web vitals enabled should be %p',
             (clientSideOptIn, serverSideOptIn, expected) => {
-                posthog.config.capture_performance = { web_vitals: clientSideOptIn }
-                posthog.webVitalsAutocapture!.onRemoteConfig({
+                agrid.config.capture_performance = { web_vitals: clientSideOptIn }
+                agrid.webVitalsAutocapture!.onRemoteConfig({
                     capturePerformance: { web_vitals: serverSideOptIn },
                 } as FlagsResponse)
-                expect(posthog.webVitalsAutocapture!.isEnabled).toBe(expected)
+                expect(agrid.webVitalsAutocapture!.isEnabled).toBe(expected)
             }
         )
     })
 
     it('should be disabled if capture_performance is set to false', async () => {
-        posthog = await createPosthogInstance(uuidv7(), {
+        agrid = await createPosthogInstance(uuidv7(), {
             before_send: beforeSendMock,
             capture_performance: false,
         })
 
-        expect(posthog.webVitalsAutocapture!.isEnabled).toBe(false)
+        expect(agrid.webVitalsAutocapture!.isEnabled).toBe(false)
     })
 
     it('should be disabled if capture_performance is set to false even if enabled server-side', async () => {
-        posthog = await createPosthogInstance(uuidv7(), {
+        agrid = await createPosthogInstance(uuidv7(), {
             before_send: beforeSendMock,
             capture_performance: false,
         })
 
-        posthog.webVitalsAutocapture!.onRemoteConfig({
+        agrid.webVitalsAutocapture!.onRemoteConfig({
             capturePerformance: {
                 web_vitals: true,
             },
         } as RemoteConfig)
 
-        expect(posthog.webVitalsAutocapture!.isEnabled).toBe(false)
+        expect(agrid.webVitalsAutocapture!.isEnabled).toBe(false)
     })
 
     it('should not run on file:// protocol', async () => {
@@ -319,16 +319,16 @@ describe('web vitals', () => {
             href: 'file:///Users/robbie/Desktop/test.html',
         })
 
-        posthog = await createPosthogInstance(uuidv7(), {
+        agrid = await createPosthogInstance(uuidv7(), {
             before_send: beforeSendMock,
             capture_performance: { web_vitals: true },
         })
 
-        posthog.webVitalsAutocapture!.onRemoteConfig({
+        agrid.webVitalsAutocapture!.onRemoteConfig({
             capturePerformance: { web_vitals: true },
         } as RemoteConfig)
 
-        expect(posthog.webVitalsAutocapture!.isEnabled).toBe(false)
+        expect(agrid.webVitalsAutocapture!.isEnabled).toBe(false)
     })
 
     it.each([
@@ -373,16 +373,16 @@ describe('web vitals', () => {
             href: `${protocol}://localhost/`,
         })
 
-        posthog = await createPosthogInstance(uuidv7(), {
+        agrid = await createPosthogInstance(uuidv7(), {
             before_send: beforeSendMock,
             capture_performance: { web_vitals: true },
         })
 
-        posthog.webVitalsAutocapture!.onRemoteConfig({
+        agrid.webVitalsAutocapture!.onRemoteConfig({
             capturePerformance: { web_vitals: true },
         } as RemoteConfig)
 
-        expect(posthog.webVitalsAutocapture!.isEnabled).toBe(false)
+        expect(agrid.webVitalsAutocapture!.isEnabled).toBe(false)
     })
 
     it.each(['http', 'https'])('should run on %s protocol', async (protocol) => {
@@ -395,16 +395,16 @@ describe('web vitals', () => {
             href: `${protocol}://localhost/`,
         })
 
-        posthog = await createPosthogInstance(uuidv7(), {
+        agrid = await createPosthogInstance(uuidv7(), {
             before_send: beforeSendMock,
             capture_performance: { web_vitals: true },
         })
 
-        posthog.webVitalsAutocapture!.onRemoteConfig({
+        agrid.webVitalsAutocapture!.onRemoteConfig({
             capturePerformance: { web_vitals: true },
         } as FlagsResponse)
 
-        expect(posthog.webVitalsAutocapture!.isEnabled).toBe(true)
+        expect(agrid.webVitalsAutocapture!.isEnabled).toBe(true)
     })
 
     describe.each([
@@ -429,7 +429,7 @@ describe('web vitals', () => {
                 })
 
                 beforeSendMock.mockClear()
-                posthog = await createPosthogInstance(uuidv7(), {
+                agrid = await createPosthogInstance(uuidv7(), {
                     before_send: beforeSendMock,
                     capture_performance: { web_vitals: true },
                     // sometimes pageviews sneak in and make asserting on mock capture tricky
@@ -462,7 +462,7 @@ describe('web vitals', () => {
                 assignableWindow.__PosthogExtensions__.loadExternalDependency = loadScriptMock
 
                 // need to force this to get the web vitals script loaded
-                posthog.webVitalsAutocapture!.onRemoteConfig({
+                agrid.webVitalsAutocapture!.onRemoteConfig({
                     capturePerformance: { web_vitals: true },
                 } as unknown as FlagsResponse)
             })

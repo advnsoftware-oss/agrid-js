@@ -1,24 +1,24 @@
 import { mockLogger } from './helpers/mock-logger'
 
-import { createPosthogInstance } from './helpers/posthog-instance'
+import { createPosthogInstance } from './helpers/agrid-instance'
 import { uuidv7 } from '../uuidv7'
 
 describe('identify', () => {
-    // Note that there are other tests for identify in posthog-core.identify.js
+    // Note that there are other tests for identify in agrid-core.identify.js
     // These are in the old style of tests, if you are feeling helpful you could
     // convert them to the new style in this file.
 
     it('should persist the distinct_id', async () => {
         // arrange
         const token = uuidv7()
-        const posthog = await createPosthogInstance(token)
+        const agrid = await createPosthogInstance(token)
         const distinctId = '123'
 
         // act
-        posthog.identify(distinctId)
+        agrid.identify(distinctId)
 
         // assert
-        expect(posthog.persistence!.properties()['$user_id']).toEqual(distinctId)
+        expect(agrid.persistence!.properties()['$user_id']).toEqual(distinctId)
         expect(mockLogger.error).toBeCalledTimes(0)
         expect(mockLogger.warn).toBeCalledTimes(0)
     })
@@ -26,15 +26,15 @@ describe('identify', () => {
     it('should convert a numeric distinct_id to a string', async () => {
         // arrange
         const token = uuidv7()
-        const posthog = await createPosthogInstance(token)
+        const agrid = await createPosthogInstance(token)
         const distinctIdNum = 123
         const distinctIdString = '123'
 
         // act
-        posthog.identify(distinctIdNum as any)
+        agrid.identify(distinctIdNum as any)
 
         // assert
-        expect(posthog.persistence!.properties()['$user_id']).toEqual(distinctIdString)
+        expect(agrid.persistence!.properties()['$user_id']).toEqual(distinctIdString)
         expect(mockLogger.error).toBeCalledTimes(0)
         expect(mockLogger.warn).toBeCalledTimes(1)
     })
@@ -43,13 +43,13 @@ describe('identify', () => {
         // arrange
         const token = uuidv7()
         const beforeSendMock = jest.fn().mockImplementation((e) => e)
-        const posthog = await createPosthogInstance(token, { before_send: beforeSendMock })
+        const agrid = await createPosthogInstance(token, { before_send: beforeSendMock })
         const distinctId = '123'
 
         // act
-        posthog.capture('custom event before identify')
-        posthog.identify(distinctId)
-        posthog.capture('custom event after identify')
+        agrid.capture('custom event before identify')
+        agrid.identify(distinctId)
+        agrid.capture('custom event after identify')
 
         // assert
         const eventBeforeIdentify = beforeSendMock.mock.calls[0]

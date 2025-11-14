@@ -1,4 +1,4 @@
 import './all-external-dependencies'
-import posthog from './module.es'
+import agrid from './module.es'
 export * from './module.es'
-export default posthog
+export default agrid

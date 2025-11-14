@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/preact'
 import { SurveyPopup } from '../../../extensions/surveys'
 import * as surveyUtils from '../../../extensions/surveys/surveys-extension-utils' // Import all utils
-import { Survey, SurveyQuestionType, SurveyType } from '../../../posthog-surveys-types'
+import { Survey, SurveyQuestionType, SurveyType } from '../../../agrid-surveys-types'
 import * as uuid from '../../../uuidv7' // Import uuidv7
 
 // Mock the utility functions
@@ -16,7 +16,7 @@ jest.mock('../../../extensions/surveys/surveys-extension-utils', () => ({
 // Mock uuidv7
 jest.mock('../../../uuidv7')
 
-// Mock PostHog instance needed by event handlers
+// Mock Agrid instance needed by event handlers
 const mockPosthog = {
     capture: jest.fn(),
     get_session_replay_url: jest.fn().mockReturnValue('http://example.com/replay'),
@@ -104,7 +104,7 @@ describe('SurveyPopup', () => {
                 isPopup={true}
                 onCloseConfirmationMessage={mockOnCloseConfirmationMessage}
                 previewPageIndex={mockSurvey.questions.length} // Force confirmation
-                posthog={mockPosthog as any}
+                agrid={mockPosthog as any}
             />
         )
         const cancelButton = screen.getByRole('button', { name: /close survey/i })
@@ -120,7 +120,7 @@ describe('SurveyPopup', () => {
                 isPopup={true}
                 onCloseConfirmationMessage={mockOnCloseConfirmationMessage}
                 previewPageIndex={mockSurvey.questions.length} // Force confirmation
-                posthog={mockPosthog as any}
+                agrid={mockPosthog as any}
             />
         )
         const closeButton = screen.getByRole('button', { name: /close/i })
@@ -136,7 +136,7 @@ describe('SurveyPopup', () => {
                 survey={mockSurvey}
                 removeSurveyFromFocus={mockRemoveSurveyFromFocus}
                 isPopup={true}
-                posthog={mockPosthog as any}
+                agrid={mockPosthog as any}
             />
         )
         expect(screen.getByText('Question 1')).toBeVisible()
@@ -156,7 +156,7 @@ describe('SurveyPopup', () => {
                 survey={mockSurvey}
                 removeSurveyFromFocus={mockRemoveSurveyFromFocus}
                 isPopup={true}
-                posthog={mockPosthog as any}
+                agrid={mockPosthog as any}
             />
         )
         expect(screen.getByText('Question 1')).toBeVisible()
@@ -180,7 +180,7 @@ describe('SurveyPopup', () => {
                 survey={partialResponsesSurvey}
                 removeSurveyFromFocus={mockRemoveSurveyFromFocus}
                 isPopup={true}
-                posthog={mockPosthog as any}
+                agrid={mockPosthog as any}
             />
         )
 
@@ -198,7 +198,7 @@ describe('SurveyPopup', () => {
             survey: partialResponsesSurvey,
             surveySubmissionId: generatedId,
             isSurveyCompleted: false,
-            posthog: mockPosthog,
+            agrid: mockPosthog,
         })
         expect(screen.getByText('Question 2')).toBeVisible()
     })
@@ -215,7 +215,7 @@ describe('SurveyPopup', () => {
                 survey={mockSurvey}
                 removeSurveyFromFocus={mockRemoveSurveyFromFocus}
                 isPopup={true}
-                posthog={mockPosthog as any}
+                agrid={mockPosthog as any}
             />
         )
 
@@ -241,7 +241,7 @@ describe('SurveyPopup', () => {
             survey: mockSurvey,
             surveySubmissionId: existingState.surveySubmissionId,
             isSurveyCompleted: true,
-            posthog: mockPosthog,
+            agrid: mockPosthog,
         })
 
         // *** Manually dispatch the event that the real function would dispatch ***
@@ -269,7 +269,7 @@ describe('SurveyPopup', () => {
                 survey={mockSurvey}
                 removeSurveyFromFocus={mockRemoveSurveyFromFocus}
                 isPopup={true}
-                posthog={mockPosthog as any}
+                agrid={mockPosthog as any}
             />
         )
 
@@ -296,7 +296,7 @@ describe('SurveyPopup', () => {
                 survey={survey}
                 removeSurveyFromFocus={mockRemoveSurveyFromFocus}
                 isPopup={true}
-                posthog={mockPosthog as any}
+                agrid={mockPosthog as any}
             />
         )
         expect(screen.getByRole('textbox')).toBeVisible()

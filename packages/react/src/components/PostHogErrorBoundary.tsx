@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { PostHogContext } from '../context'
+import { AgridContext } from '../context'
 import { isFunction } from '../utils/type-utils'
 
 export type Properties = Record<string, any>
@@ -34,7 +34,7 @@ export const __POSTHOG_ERROR_MESSAGES = {
 }
 
 export class PostHogErrorBoundary extends React.Component<PostHogErrorBoundaryProps, PostHogErrorBoundaryState> {
-    static contextType = PostHogContext
+    static contextType = AgridContext
 
     constructor(props: PostHogErrorBoundaryProps) {
         super(props)

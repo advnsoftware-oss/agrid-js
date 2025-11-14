@@ -1,5 +1,5 @@
 import { assignableWindow, LazyLoadedDeadClicksAutocaptureInterface } from '../utils/globals'
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import { isNull, isNumber, isUndefined } from '@agrid/core'
 import { autocaptureCompatibleElements, getEventTarget } from '../autocapture-utils'
 import { DeadClickCandidate, DeadClicksAutoCaptureConfig, Properties } from '../types'
@@ -55,7 +55,7 @@ class LazyLoadedDeadClicksAutocapture implements LazyLoadedDeadClicksAutocapture
     }
 
     constructor(
-        readonly instance: PostHog,
+        readonly instance: Agrid,
         config?: DeadClicksAutoCaptureConfig
     ) {
         this._config = this._asRequiredConfig(config)
@@ -271,8 +271,8 @@ class LazyLoadedDeadClicksAutocapture implements LazyLoadedDeadClicksAutocapture
     }
 }
 
-assignableWindow.__PosthogExtensions__ = assignableWindow.__PosthogExtensions__ || {}
-assignableWindow.__PosthogExtensions__.initDeadClicksAutocapture = (ph, config) =>
+assignableWindow.__AgridExtensions__ = assignableWindow.__AgridExtensions__ || {}
+assignableWindow.__AgridExtensions__.initDeadClicksAutocapture = (ph, config) =>
     new LazyLoadedDeadClicksAutocapture(ph, config)
 
 export default LazyLoadedDeadClicksAutocapture

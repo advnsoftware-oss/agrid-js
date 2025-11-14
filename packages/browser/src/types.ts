@@ -1,10 +1,10 @@
 import type { recordOptions } from './extensions/replay/types/rrweb'
 import type { SegmentAnalytics } from './extensions/segment-integration'
-import { PostHog } from './posthog-core'
+import { Agrid } from './agrid-core'
 import { KnownUnsafeEditableEvent } from '@agrid/core'
-import { Survey, SurveyConfig } from './posthog-surveys-types'
+import { Survey, SurveyConfig } from './agrid-surveys-types'
 // only importing types here, so won't affect the bundle
-// eslint-disable-next-line posthog-js/no-external-replay-imports
+// eslint-disable-next-line agrid-js/no-external-replay-imports
 import type { SAMPLED } from './extensions/replay/external/triggerMatching'
 
 export type Property = any
@@ -13,9 +13,9 @@ export type Properties = Record<string, Property>
 export const COPY_AUTOCAPTURE_EVENT = '$copy_autocapture'
 
 /**
- * These are known events PostHog events that can be processed by the `beforeCapture` function
- * That means PostHog functionality does not rely on receiving 100% of these for calculations
- * So, it is safe to sample them to reduce the volume of events sent to PostHog
+ * These are known events Agrid events that can be processed by the `beforeCapture` function
+ * That means Agrid functionality does not rely on receiving 100% of these for calculations
+ * So, it is safe to sample them to reduce the volume of events sent to Agrid
  */
 export type KnownEventName =
     | '$heatmaps_data'
@@ -222,21 +222,21 @@ export interface DeadClickCandidate {
 
 export type ExceptionAutoCaptureConfig = {
     /**
-     * Determines whether PostHog should capture unhandled errors.
+     * Determines whether Agrid should capture unhandled errors.
      *
      * @default true
      */
     capture_unhandled_errors: boolean
 
     /**
-     * Determines whether PostHog should capture unhandled promise rejections.
+     * Determines whether Agrid should capture unhandled promise rejections.
      *
      * @default true
      */
     capture_unhandled_rejections: boolean
 
     /**
-     * Determines whether PostHog should capture console errors.
+     * Determines whether Agrid should capture console errors.
      *
      * @default false
      */
@@ -293,13 +293,13 @@ export type ConfigDefaults = '2025-11-30' | '2025-05-24' | 'unset'
 export type ExternalIntegrationKind = 'intercom' | 'crispChat'
 
 /**
- * Configuration options for the PostHog JavaScript SDK.
- * @see https://posthog.com/docs/libraries/js#config
+ * Configuration options for the Agrid JavaScript SDK.
+ * @see https://agrid.com/docs/libraries/js#config
  */
-export interface PostHogConfig {
-    /** URL of your PostHog instance.
+export interface AgridConfig {
+    /** URL of your Agrid instance.
      *
-     * @default 'https://us.i.posthog.com'
+     * @default 'https://us.i.agrid.com'
      */
     api_host: string
 
@@ -313,8 +313,8 @@ export interface PostHogConfig {
     flags_api_host?: string | null
 
     /**
-     * If using a reverse proxy for `api_host` then this should be the actual PostHog app URL (e.g. https://us.posthog.com).
-     * This ensures that links to PostHog point to the correct host.
+     * If using a reverse proxy for `api_host` then this should be the actual Agrid app URL (e.g. https://us.agrid.com).
+     * This ensures that links to Agrid point to the correct host.
      *
      * @default null
      */
@@ -328,8 +328,8 @@ export interface PostHogConfig {
     api_transport?: 'XHR' | 'fetch'
 
     /**
-     * The token for your PostHog project.
-     * It should NOT be provided manually in the config, but rather passed as the first parameter to `posthog.init()`.
+     * The token for your Agrid project.
+     * It should NOT be provided manually in the config, but rather passed as the first parameter to `agrid.init()`.
      */
     token: string
 
@@ -338,12 +338,12 @@ export interface PostHogConfig {
      * You don't need to set this most of the time,
      * but can be useful if you have several Posthog instances running at the same time.
      *
-     * @default 'posthog'
+     * @default 'agrid'
      */
     name: string
 
     /**
-     * Determines whether PostHog should autocapture events.
+     * Determines whether Agrid should autocapture events.
      * This setting does not affect capturing pageview events (see `capture_pageview`).
      *
      * by default autocapture is ignored on elements that match a `ph-no-capture` css class on the element or a parent
@@ -352,7 +352,7 @@ export interface PostHogConfig {
     autocapture: boolean | AutocaptureConfig
 
     /**
-     * Determines whether PostHog should capture rage clicks.
+     * Determines whether Agrid should capture rage clicks.
      *
      * by default rageclicks are ignored on elements that match a `ph-no-capture` or `ph-no-rageclick` css class on the element or a parent
      * @default true
@@ -361,7 +361,7 @@ export interface PostHogConfig {
 
     /**
      * Determines if cookie should be set on the top level domain (example.com).
-     * If PostHog-js is loaded on a subdomain (test.example.com), and `cross_subdomain_cookie` is set to false,
+     * If Agrid-js is loaded on a subdomain (test.example.com), and `cross_subdomain_cookie` is set to false,
      * it'll set the cookie on the subdomain only (test.example.com).
      *
      * NOTE: It will be set to `false` if we detect that the domain is a subdomain of a platform that is excluded from cross-subdomain cookie setting.
@@ -373,7 +373,7 @@ export interface PostHogConfig {
     cross_subdomain_cookie: boolean
 
     /**
-     * Determines how PostHog stores information about the user. See [persistence](https://posthog.com/docs/libraries/js#persistence) for details.
+     * Determines how Agrid stores information about the user. See [persistence](https://agrid.com/docs/libraries/js#persistence) for details.
      *
      * @default 'localStorage+cookie'
      */
@@ -390,21 +390,21 @@ export interface PostHogConfig {
     cookie_name?: string
 
     /**
-     * A function to be called once the PostHog scripts have loaded successfully.
+     * A function to be called once the Agrid scripts have loaded successfully.
      *
-     * @param posthog_instance - The PostHog instance that has been loaded.
+     * @param agrid_instance - The Agrid instance that has been loaded.
      */
-    loaded: (posthog_instance: PostHog) => void
+    loaded: (agrid_instance: Agrid) => void
 
     /**
-     * Determines whether PostHog should save referrer information.
+     * Determines whether Agrid should save referrer information.
      *
      * @default true
      */
     save_referrer: boolean
 
     /**
-     * Determines whether PostHog should save marketing parameters.
+     * Determines whether Agrid should save marketing parameters.
      * These are `utm_*` paramaters and friends.
      *
      * @see {CAMPAIGN_PARAMS} from './utils/event-utils' - Default campaign parameters like utm_source, utm_medium, etc.
@@ -432,11 +432,11 @@ export interface PostHogConfig {
     custom_blocked_useragents: string[]
 
     /**
-     * Determines whether PostHog should be in debug mode.
+     * Determines whether Agrid should be in debug mode.
      * You can enable this to get more detailed logging.
      *
-     * You can also enable this on your website by appending `?__posthog_debug=true` at the end of your URL
-     * You can also call `posthog.debug()` in your code to enable debug mode
+     * You can also enable this on your website by appending `?__agrid_debug=true` at the end of your URL
+     * You can also call `agrid.debug()` in your code to enable debug mode
      *
      * @default false
      */
@@ -446,7 +446,7 @@ export interface PostHogConfig {
     verbose?: boolean
 
     /**
-     * Determines whether PostHog should capture pageview events automatically.
+     * Determines whether Agrid should capture pageview events automatically.
      * Can be:
      * - `true`: Capture regular pageviews (default)
      * - `false`: Don't capture any pageviews
@@ -457,7 +457,7 @@ export interface PostHogConfig {
     capture_pageview: boolean | 'history_change'
 
     /**
-     * Determines whether PostHog should capture pageleave events.
+     * Determines whether Agrid should capture pageleave events.
      * If set to `true`, it will capture pageleave events for all pages.
      * If set to `'if_capture_pageview'`, it will only capture pageleave events if `capture_pageview` is also set to `true` or `'history_change'`.
      *
@@ -473,7 +473,7 @@ export interface PostHogConfig {
     cookie_expiration: number
 
     /**
-     * Determines whether PostHog should upgrade old cookies.
+     * Determines whether Agrid should upgrade old cookies.
      * If set to `true`, the library will check for a cookie from our old js library and import super properties from it, then the old cookie is deleted.
      * This option only works in the initialization, so make sure you set it when you create the library.
      *
@@ -482,14 +482,14 @@ export interface PostHogConfig {
     upgrade: boolean
 
     /**
-     * Determines whether PostHog should disable session recording.
+     * Determines whether Agrid should disable session recording.
      *
      * @default false
      */
     disable_session_recording: boolean
 
     /**
-     * Determines whether PostHog should disable persistence.
+     * Determines whether Agrid should disable persistence.
      * If set to `true`, the library will not save any data to the browser. It will also delete any data previously saved to the browser.
      *
      * @default false
@@ -500,14 +500,14 @@ export interface PostHogConfig {
     disable_cookie?: boolean
 
     /**
-     * Determines whether PostHog should disable all surveys functionality.
+     * Determines whether Agrid should disable all surveys functionality.
      *
      * @default false
      */
     disable_surveys: boolean
 
     /**
-     * Determines whether PostHog should disable automatic display of surveys. If this is true, popup or widget surveys will not be shown when display conditions are met.
+     * Determines whether Agrid should disable automatic display of surveys. If this is true, popup or widget surveys will not be shown when display conditions are met.
      *
      * @default false
      */
@@ -521,7 +521,7 @@ export interface PostHogConfig {
     surveys?: SurveyConfig
 
     /**
-     * Determines whether PostHog should disable web experiments.
+     * Determines whether Agrid should disable web experiments.
      *
      * Currently disabled while we're in BETA. It will be toggled to `true` in a future release.
      *
@@ -530,8 +530,8 @@ export interface PostHogConfig {
     disable_web_experiments: boolean
 
     /**
-     * Determines whether PostHog should disable any external dependency loading.
-     * This will prevent PostHog from requesting any external scripts such as those needed for Session Replay, Surveys or Site Apps.
+     * Determines whether Agrid should disable any external dependency loading.
+     * This will prevent Agrid from requesting any external scripts such as those needed for Session Replay, Surveys or Site Apps.
      *
      * @default false
      */
@@ -558,7 +558,7 @@ export interface PostHogConfig {
     prepare_external_dependency_stylesheet?: (stylesheet: HTMLStyleElement) => HTMLStyleElement | null
 
     /**
-     * Determines whether PostHog should enable recording console logs.
+     * Determines whether Agrid should enable recording console logs.
      * When undefined, it falls back to the remote config setting.
      *
      * @default undefined
@@ -566,8 +566,8 @@ export interface PostHogConfig {
     enable_recording_console_log?: boolean
 
     /**
-     * Determines whether PostHog should use secure cookies.
-     * If this is `true`, PostHog cookies will be marked as secure,
+     * Determines whether Agrid should use secure cookies.
+     * If this is `true`, Agrid cookies will be marked as secure,
      * meaning they will only be transmitted over HTTPS.
      *
      * @default window.location.protocol === 'https:'
@@ -575,8 +575,8 @@ export interface PostHogConfig {
     secure_cookie: boolean
 
     /**
-     * Determines if users should be opted out of PostHog tracking by default,
-     * requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing()`.
+     * Determines if users should be opted out of Agrid tracking by default,
+     * requiring additional logic to opt them into capturing by calling `agrid.opt_in_capturing()`.
      *
      * @default false
      */
@@ -590,8 +590,8 @@ export interface PostHogConfig {
     opt_out_capturing_persistence_type: 'localStorage' | 'cookie'
 
     /**
-     * Determines if users should be opted out of browser data storage by this PostHog instance by default,
-     * requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing()`.
+     * Determines if users should be opted out of browser data storage by this Agrid instance by default,
+     * requiring additional logic to opt them into capturing by calling `agrid.opt_in_capturing()`.
      *
      * @default false
      */
@@ -599,7 +599,7 @@ export interface PostHogConfig {
 
     /**
      * Determines if users should be opted out of user agent filtering such as googlebot or other bots.
-     * If this is set to `true`, PostHog will set `$browser_type` to either `bot` or `browser` for all events,
+     * If this is set to `true`, Agrid will set `$browser_type` to either `bot` or `browser` for all events,
      * but will process all events as if they were from a browser.
      *
      * @default false
@@ -626,7 +626,7 @@ export interface PostHogConfig {
     opt_in_site_apps: boolean
 
     /**
-     * Determines whether PostHog should respect the Do Not Track header when computing
+     * Determines whether Agrid should respect the Do Not Track header when computing
      * consent in `ConsentManager`.
      *
      * @see `ConsentManager`
@@ -645,7 +645,7 @@ export interface PostHogConfig {
     property_blacklist?: string[]
 
     /**
-     * A list of headers that should be sent with requests to the PostHog API.
+     * A list of headers that should be sent with requests to the Agrid API.
      *
      * @default {}
      */
@@ -655,7 +655,7 @@ export interface PostHogConfig {
     xhr_headers?: { [header_name: string]: string }
 
     /**
-     * A function that is called when a request to the PostHog API fails.
+     * A function that is called when a request to the Agrid API fails.
      *
      * @param error - The `RequestResponse` object that occurred.
      */
@@ -665,7 +665,7 @@ export interface PostHogConfig {
     on_xhr_error?: (failedRequest: XMLHttpRequest) => void
 
     /**
-     * Determines whether PostHog should batch requests to the PostHog API.
+     * Determines whether Agrid should batch requests to the Agrid API.
      *
      * @default true
      */
@@ -749,7 +749,7 @@ export interface PostHogConfig {
      * custom properties to mask with `custom_personal_data_properties`.
      * @default false
      * @see {PERSONAL_DATA_CAMPAIGN_PARAMS} - Default campaign parameters that are masked by default.
-     * @see {PostHogConfig.custom_personal_data_properties} - Custom list of personal data properties to mask.
+     * @see {AgridConfig.custom_personal_data_properties} - Custom list of personal data properties to mask.
      */
     mask_personal_data_properties: boolean
 
@@ -760,14 +760,14 @@ export interface PostHogConfig {
      * https://www.example.com/login?email=john.doe%40example.com => https://www.example.com/login?email=<MASKED>
      *
      * @default []
-     * @see {PostHogConfig.mask_personal_data_properties} - Must be enabled for this to take effect.
+     * @see {AgridConfig.mask_personal_data_properties} - Must be enabled for this to take effect.
      */
     custom_personal_data_properties: string[]
 
     /**
-     * One of the very first things the PostHog library does when init() is called
-     * is make a request to the /flags endpoint on PostHog's backend.
-     * This endpoint contains information on how to run the PostHog library
+     * One of the very first things the Agrid library does when init() is called
+     * is make a request to the /flags endpoint on Agrid's backend.
+     * This endpoint contains information on how to run the Agrid library
      * so events are properly received in the backend, and it also contains
      * feature flag evaluation information for the current user.
      *
@@ -778,7 +778,7 @@ export interface PostHogConfig {
      *
      * WARNING: Disabling this will also prevent remote configuration from loading,
      * which could mean features like web vitals, surveys, and other features configured
-     * in PostHog settings are disabled unless explicitly enabled via client-side config.
+     * in Agrid settings are disabled unless explicitly enabled via client-side config.
      * When setting this to true, make sure to explicitly configure any features you
      * want to use (e.g., capture_performance, autocapture, etc.) in your SDK's init config.
      *
@@ -789,9 +789,9 @@ export interface PostHogConfig {
     /**
      * @deprecated Use `advanced_disable_flags` instead. This will be removed in a future major version.
      *
-     * One of the very first things the PostHog library does when init() is called
-     * is make a request to the /decide endpoint on PostHog's backend.
-     * This endpoint contains information on how to run the PostHog library
+     * One of the very first things the Agrid library does when init() is called
+     * is make a request to the /decide endpoint on Agrid's backend.
+     * This endpoint contains information on how to run the Agrid library
      * so events are properly received in the backend.
      *
      * This endpoint is required to run most features of the library.
@@ -835,7 +835,7 @@ export interface PostHogConfig {
     evaluation_environments?: readonly string[]
 
     /**
-     * Determines whether PostHog should disable toolbar metrics.
+     * Determines whether Agrid should disable toolbar metrics.
      * This is our internal instrumentation for our toolbar in your website.
      *
      * @default false
@@ -843,7 +843,7 @@ export interface PostHogConfig {
     advanced_disable_toolbar_metrics: boolean
 
     /**
-     * Determines whether PostHog should only evaluate feature flags for surveys.
+     * Determines whether Agrid should only evaluate feature flags for surveys.
      * Useful for when you want to use this library to evaluate feature flags for surveys only but you have additional feature flags
      * that you evaluate on the server side.
      *
@@ -923,15 +923,15 @@ export interface PostHogConfig {
      * An object containing the `distinctID`, `isIdentifiedID`, and `featureFlags` keys,
      * where `distinctID` is a string, and `featureFlags` is an object of key-value pairs.
      *
-     * Since there is a delay between initializing PostHog and fetching feature flags,
+     * Since there is a delay between initializing Agrid and fetching feature flags,
      * feature flags are not always available immediately.
      * This makes them unusable if you want to do something like redirecting a user
      * to a different page based on a feature flag.
      *
      * You can, therefore, fetch the feature flags in your server and pre-fill them here,
-     * allowing PostHog to know the feature flag values immediately.
+     * allowing Agrid to know the feature flag values immediately.
      *
-     * After the SDK fetches feature flags from PostHog, it will use those flag values instead of bootstrapped ones.
+     * After the SDK fetches feature flags from Agrid, it will use those flag values instead of bootstrapped ones.
      *
      * @default {}
      */
@@ -940,7 +940,7 @@ export interface PostHogConfig {
     /**
      * The segment analytics object.
      *
-     * @see https://posthog.com/docs/libraries/segment
+     * @see https://agrid.com/docs/libraries/segment
      */
     segment?: SegmentAnalytics
 
@@ -986,11 +986,11 @@ export interface PostHogConfig {
     scroll_root_selector?: string | string[]
 
     /**
-     * You can control whether events from PostHog-js have person processing enabled with the `person_profiles` config setting.
+     * You can control whether events from Agrid-js have person processing enabled with the `person_profiles` config setting.
      * There are three options:
      * - `person_profiles: 'always'` - we will process persons data for all events
      * - `person_profiles: 'never'` - we won't process persons for any event. This means that anonymous users will not be merged once they sign up or login, so you lose the ability to create funnels that track users from anonymous to identified. All events (including `$identify`) will be sent with `$process_person_profile: False`.
-     * - `person_profiles: 'identified_only'` _(default)_ - we will only process persons when you call `posthog.identify`, `posthog.alias`, `posthog.setPersonProperties`, `posthog.group`, `posthog.setPersonPropertiesForFlags` or `posthog.setGroupPropertiesForFlags` Anonymous users won't get person profiles.
+     * - `person_profiles: 'identified_only'` _(default)_ - we will only process persons when you call `agrid.identify`, `agrid.alias`, `agrid.setPersonProperties`, `agrid.group`, `agrid.setPersonPropertiesForFlags` or `agrid.setGroupPropertiesForFlags` Anonymous users won't get person profiles.
      *
      * @default 'identified_only'
      */
@@ -1037,17 +1037,17 @@ export interface PostHogConfig {
     request_queue_config?: RequestQueueConfig
 
     /**
-     * Used to set-up external integrations with PostHog data - such as session replays, distinct id, etc.
+     * Used to set-up external integrations with Agrid data - such as session replays, distinct id, etc.
      */
     integrations?: Record<ExternalIntegrationKind, boolean>
 
     /**
-     * Enables cookieless mode. In this mode, PostHog will not set any cookies, or use session or local storage. User
-     * identity is handled by generating a privacy-preserving hash on PostHog's servers.
+     * Enables cookieless mode. In this mode, Agrid will not set any cookies, or use session or local storage. User
+     * identity is handled by generating a privacy-preserving hash on Agrid's servers.
      * - 'always' - enable cookieless mode immediately on startup, use this if you do not intend to show a cookie banner
-     * - 'on_reject' - enable cookieless mode only if the user rejects cookies, use this if you want to show a cookie banner. If the user accepts cookies, cookieless mode will not be used, and PostHog will use cookies and local storage as usual.
+     * - 'on_reject' - enable cookieless mode only if the user rejects cookies, use this if you want to show a cookie banner. If the user accepts cookies, cookieless mode will not be used, and Agrid will use cookies and local storage as usual.
      *
-     * Note that you MUST enable cookieless mode in your PostHog project's settings, otherwise all your cookieless events will be ignored. We plan to remove this requirement in the future.
+     * Note that you MUST enable cookieless mode in your Agrid project's settings, otherwise all your cookieless events will be ignored. We plan to remove this requirement in the future.
      * */
     cookieless_mode?: 'always' | 'on_reject'
 
@@ -1055,8 +1055,8 @@ export interface PostHogConfig {
 
     /**
      * PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION
-     * A list of hostnames for which to inject PostHog tracing headers to all requests
-     * (X-POSTHOG-DISTINCT-ID, X-POSTHOG-SESSION-ID, X-POSTHOG-WINDOW-ID)
+     * A list of hostnames for which to inject Agrid tracing headers to all requests
+     * (X-AGRID-DISTINCT-ID, X-AGRID-SESSION-ID, X-AGRID-WINDOW-ID)
      * */
     __add_tracing_headers?: string[]
 
@@ -1073,7 +1073,7 @@ export interface PostHogConfig {
     __preview_flags_v2?: boolean
 
     /**
-     * PREVIEW - MAY CHANGE WITHOUT WARNING - ONLY USE WHEN TALKING TO POSTHOG SUPPORT
+     * PREVIEW - MAY CHANGE WITHOUT WARNING - ONLY USE WHEN TALKING TO AGRID SUPPORT
      * Enables deprecated eager loading of session recording code, not just rrweb and network plugin
      * we are switching the default to lazy loading because the bundle will ultimately be 18% smaller then
      * keeping this around for a few days in case there are unexpected consequences that testing did not uncover
@@ -1081,7 +1081,7 @@ export interface PostHogConfig {
     __preview_eager_load_replay?: boolean
 
     /**
-     * Prevents posthog-js from using the `navigator.sendBeacon` API to send events.
+     * Prevents agrid-js from using the `navigator.sendBeacon` API to send events.
      * Enabling this option may hurt the reliability of sending $pageleave events
      */
     __preview_disable_beacon?: boolean
@@ -1102,7 +1102,7 @@ export interface PostHogConfig {
 
     /**
      * @deprecated - does nothing
-     * was present only for PostHog testing of replay lazy loading
+     * was present only for Agrid testing of replay lazy loading
      * */
     __preview_lazy_load_replay?: boolean
 
@@ -1117,7 +1117,7 @@ export interface PostHogConfig {
 
     /**
      * @deprecated - THIS OPTION HAS NO EFFECT, kept here for backwards compatibility reasons.
-     * Use a custom transformation or "Discard IP data" project setting instead: @see https://posthog.com/tutorials/web-redact-properties#hiding-customer-ip-address.
+     * Use a custom transformation or "Discard IP data" project setting instead: @see https://agrid.com/tutorials/web-redact-properties#hiding-customer-ip-address.
      */
     ip: boolean
 }
@@ -1131,15 +1131,15 @@ export interface ErrorTrackingOptions {
     captureExtensionExceptions?: boolean
 
     /**
-     * UNSTABLE: determines whether exception caused by the PostHog SDK will be captured
+     * UNSTABLE: determines whether exception caused by the Agrid SDK will be captured
      *
      * @default false
      */
-    __capturePostHogExceptions?: boolean
+    __captureAgridExceptions?: boolean
 
     /**
      * ADVANCED: alters the refill rate for the token bucket mutation throttling
-     * Normally only altered alongside posthog support guidance.
+     * Normally only altered alongside agrid support guidance.
      * Accepts values between 0 and 100
      *
      * @default 1
@@ -1148,7 +1148,7 @@ export interface ErrorTrackingOptions {
 
     /**
      * ADVANCED: alters the bucket size for the token bucket mutation throttling
-     * Normally only altered alongside posthog support guidance.
+     * Normally only altered alongside agrid support guidance.
      * Accepts values between 0 and 100
      *
      * @default 10
@@ -1298,7 +1298,7 @@ export interface SessionRecordingOptions {
 
     /**
      * ADVANCED: alters the refill rate for the token bucket mutation throttling
-     * Normally only altered alongside posthog support guidance.
+     * Normally only altered alongside agrid support guidance.
      * Accepts values between 0 and 100
      *
      * @default 10
@@ -1307,7 +1307,7 @@ export interface SessionRecordingOptions {
 
     /**
      * ADVANCED: alters the bucket size for the token bucket mutation throttling
-     * Normally only altered alongside posthog support guidance.
+     * Normally only altered alongside agrid support guidance.
      * Accepts values between 0 and 100
      *
      * @default 100
@@ -1386,7 +1386,7 @@ export interface RetriableRequestWithOptions extends QueuedRequestWithOptions {
 // so instead we call them config
 export interface RequestQueueConfig {
     /**
-     *  ADVANCED - alters the frequency which PostHog sends events to the server.
+     *  ADVANCED - alters the frequency which Agrid sends events to the server.
      *  generally speaking this is only set when apps have automatic page refreshes, or very short visits.
      *  Defaults to 3 seconds when not set
      *  Allowed values between 250 and 5000
@@ -1524,9 +1524,9 @@ export type SessionRecordingRemoteConfig = SessionRecordingCanvasOptions & {
 }
 
 /**
- * Remote configuration for the PostHog instance
+ * Remote configuration for the Agrid instance
  *
- * All of these settings can be configured directly in your PostHog instance
+ * All of these settings can be configured directly in your Agrid instance
  * Any configuration set in the client overrides the information from the server
  */
 export interface RemoteConfig {
@@ -1666,7 +1666,7 @@ export type SiteAppGlobals = {
 
 export type SiteAppLoader = {
     id: string
-    init: (config: { posthog: PostHog; callback: (success: boolean) => void }) => {
+    init: (config: { agrid: Agrid; callback: (success: boolean) => void }) => {
         processEvent?: (globals: SiteAppGlobals) => void
     }
 }
@@ -1740,9 +1740,9 @@ export type ToolbarUserIntent = 'add-action' | 'edit-action'
 export type ToolbarSource = 'url' | 'localstorage'
 export type ToolbarVersion = 'toolbar'
 
-/* sync with posthog */
+/* sync with agrid */
 export interface ToolbarParams {
-    token?: string /** public posthog-js token */
+    token?: string /** public agrid-js token */
     temporaryToken?: string /** private temporary user token */
     actionId?: number
     userIntent?: ToolbarUserIntent

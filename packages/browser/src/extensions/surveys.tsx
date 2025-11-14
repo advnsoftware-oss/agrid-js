@@ -1,6 +1,6 @@
 import * as Preact from 'preact'
 import { useContext, useEffect, useMemo, useRef, useState } from 'preact/hooks'
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import {
     Survey,
     SurveyCallback,
@@ -14,7 +14,7 @@ import {
     SurveyType,
     SurveyWidgetType,
     SurveyWithTypeAndAppearance,
-} from '../posthog-surveys-types'
+} from '../agrid-surveys-types'
 import { addEventListener } from '../utils'
 import { document as _document, window as _window } from '../utils/globals'
 import {
@@ -218,11 +218,11 @@ function getNextToTriggerPosition(target: HTMLElement, surveyWidth: number): Rea
     }
 }
 
-// Keep in sync with posthog/constants.py on main repo
+// Keep in sync with agrid/constants.py on main repo
 const SURVEY_TARGETING_FLAG_PREFIX = 'survey-targeting-'
 
 export class SurveyManager {
-    private _posthog: PostHog
+    private _agrid: Agrid
     private _surveyInFocus: string | null
     private _surveyTimeouts: Map<string, NodeJS.Timeout> = new Map()
     private _autoSubmitTimeout?: NodeJS.Timeout
@@ -230,8 +230,8 @@ export class SurveyManager {
         new Map()
     private _prefillHandledSurveys: Set<string> = new Set()
 
-    constructor(posthog: PostHog) {
-        this._posthog = posthog
+    constructor(agrid: Agrid) {
+        this._agrid = agrid
         // This is used to track the survey that is currently in focus. We only show one survey at a time.
         this._surveyInFocus = null
     }
@@ -248,11 +248,11 @@ export class SurveyManager {
         this._clearSurveyTimeout(survey.id)
         this._addSurveyToFocus(survey)
         const delaySeconds = survey.appearance?.surveyPopupDelaySeconds || 0
-        const { shadow } = retrieveSurveyShadow(survey, this._posthog)
+        const { shadow } = retrieveSurveyShadow(survey, this._agrid)
         if (delaySeconds <= 0) {
             return Preact.render(
                 <SurveyPopup
-                    posthog={this._posthog}
+                    agrid={this._agrid}
                     survey={survey}
                     removeSurveyFromFocus={this._removeSurveyFromFocus}
                 />,
@@ -266,7 +266,7 @@ export class SurveyManager {
             // rendering with surveyPopupDelaySeconds = 0 because we're already handling the timeout here
             Preact.render(
                 <SurveyPopup
-                    posthog={this._posthog}
+                    agrid={this._agrid}
                     survey={{ ...survey, appearance: { ...survey.appearance, surveyPopupDelaySeconds: 0 } }}
                     removeSurveyFromFocus={this._removeSurveyFromFocus}
                 />,
@@ -278,14 +278,14 @@ export class SurveyManager {
 
     private _handleWidget = (survey: Survey): void => {
         // Ensure widget container exists if it doesn't
-        const { shadow, isNewlyCreated } = retrieveSurveyShadow(survey, this._posthog)
+        const { shadow, isNewlyCreated } = retrieveSurveyShadow(survey, this._agrid)
 
         // If the widget is already rendered, do nothing. Otherwise the widget will be re-rendered every second
         if (!isNewlyCreated) {
             return
         }
 
-        Preact.render(<FeedbackWidget posthog={this._posthog} survey={survey} key={survey.id} />, shadow)
+        Preact.render(<FeedbackWidget agrid={this._agrid} survey={survey} key={survey.id} />, shadow)
     }
 
     private _removeWidgetSelectorListener = (survey: Pick<Survey, 'id' | 'type' | 'appearance'>): void => {
@@ -382,21 +382,21 @@ export class SurveyManager {
     }
 
     public renderPopover = (survey: Survey): void => {
-        const { shadow } = retrieveSurveyShadow(survey, this._posthog)
+        const { shadow } = retrieveSurveyShadow(survey, this._agrid)
         Preact.render(
-            <SurveyPopup posthog={this._posthog} survey={survey} removeSurveyFromFocus={this._removeSurveyFromFocus} />,
+            <SurveyPopup agrid={this._agrid} survey={survey} removeSurveyFromFocus={this._removeSurveyFromFocus} />,
             shadow
         )
     }
 
     public renderSurvey = (survey: Survey, selector: Element): void => {
-        if (this._posthog.config?.surveys?.prefillFromUrl) {
+        if (this._agrid.config?.surveys?.prefillFromUrl) {
             this._handleUrlPrefill(survey)
         }
 
         Preact.render(
             <SurveyPopup
-                posthog={this._posthog}
+                agrid={this._agrid}
                 survey={survey}
                 removeSurveyFromFocus={this._removeSurveyFromFocus}
                 isPopup={false}
@@ -439,7 +439,7 @@ export class SurveyManager {
 
             const shouldAutoSubmit =
                 autoSubmit &&
-                this._posthog.config.surveys?.autoSubmitIfComplete &&
+                this._agrid.config.surveys?.autoSubmitIfComplete &&
                 allRequiredQuestionsFilled(survey, responses)
 
             if (shouldAutoSubmit) {
@@ -454,7 +454,7 @@ export class SurveyManager {
     }
 
     private _scheduleAutoSubmit(survey: Survey, responses: Record<string, any>, submissionId: string): void {
-        const delay = this._posthog.config.surveys?.autoSubmitDelay ?? 800
+        const delay = this._agrid.config.surveys?.autoSubmitDelay ?? 800
 
         logger.info('[Survey Prefill] Auto-submit scheduled')
 
@@ -465,7 +465,7 @@ export class SurveyManager {
                 responses,
                 survey,
                 surveySubmissionId: submissionId,
-                posthog: this._posthog,
+                agrid: this._agrid,
                 isSurveyCompleted: true,
             })
         }, delay)
@@ -475,12 +475,12 @@ export class SurveyManager {
         if (!flagKey) {
             return true
         }
-        const isFeatureEnabled = !!this._posthog.featureFlags.isFeatureEnabled(flagKey, {
+        const isFeatureEnabled = !!this._agrid.featureFlags.isFeatureEnabled(flagKey, {
             send_event: !flagKey.startsWith(SURVEY_TARGETING_FLAG_PREFIX),
         })
         let flagVariantCheck = true
         if (flagVariant) {
-            const flagVariantValue = this._posthog.featureFlags.getFeatureFlag(flagKey, { send_event: false })
+            const flagVariantValue = this._agrid.featureFlags.getFeatureFlag(flagKey, { send_event: false })
             flagVariantCheck = flagVariantValue === flagVariant || flagVariant === 'any'
         }
         return isFeatureEnabled && flagVariantCheck
@@ -566,7 +566,7 @@ export class SurveyManager {
             return true
         }
         const surveysActivatedByEventsOrActions: string[] | undefined =
-            this._posthog.surveys._surveyEventReceiver?.getSurveys()
+            this._agrid.surveys._surveyEventReceiver?.getSurveys()
         return !!surveysActivatedByEventsOrActions?.includes(survey.id)
     }
 
@@ -584,7 +584,7 @@ export class SurveyManager {
     }
 
     public getActiveMatchingSurveys = (callback: SurveyCallback, forceReload = false): void => {
-        this._posthog?.surveys.getSurveys((surveys) => {
+        this._agrid?.surveys.getSurveys((surveys) => {
             const targetingMatchedSurveys = surveys.filter((survey) => {
                 const eligibility = this.checkSurveyEligibility(survey)
                 return (
@@ -720,7 +720,7 @@ export const renderSurveysPreview = ({
     previewPageIndex: number
     forceDisableHtml?: boolean
     onPreviewSubmit?: (res: string | string[] | number | null) => void
-    posthog?: PostHog
+    agrid?: Agrid
     positionStyles?: React.CSSProperties
 }) => {
     const currentStyle = parentElement.querySelector('style[data-ph-survey-style]')
@@ -764,14 +764,14 @@ export const renderFeedbackWidgetPreview = ({
 }
 
 // This is the main exported function
-export function generateSurveys(posthog: PostHog, isSurveysEnabled: boolean | undefined) {
+export function generateSurveys(agrid: Agrid, isSurveysEnabled: boolean | undefined) {
     // NOTE: Important to ensure we never try and run surveys without a window environment
     if (!document || !window) {
         return
     }
 
-    const surveyManager = new SurveyManager(posthog)
-    if (posthog.config.disable_surveys_automatic_display) {
+    const surveyManager = new SurveyManager(agrid)
+    if (agrid.config.disable_surveys_automatic_display) {
         logger.info('Surveys automatic display is disabled. Skipping call surveys and evaluate display logic.')
         return surveyManager
     }
@@ -826,7 +826,7 @@ type UseHideSurveyOnURLChangeProps = {
 
 /**
  * This hook handles URL-based survey visibility after the initial mount.
- * The initial URL check is handled by the `getActiveMatchingSurveys` method in  the `PostHogSurveys` class,
+ * The initial URL check is handled by the `getActiveMatchingSurveys` method in  the `AgridSurveys` class,
  * which ensures the URL matches before displaying a survey for the first time.
  * That is the method that is called every second to see if there's a matching survey.
  *
@@ -894,7 +894,7 @@ export function useHideSurveyOnURLChange({
 
 export function usePopupVisibility(
     survey: Survey,
-    posthog: PostHog | undefined,
+    agrid: Agrid | undefined,
     millisecondDelay: number,
     isPreviewMode: boolean,
     removeSurveyFromFocus: (survey: SurveyWithTypeAndAppearance) => void,
@@ -937,8 +937,8 @@ export function usePopupVisibility(
     }
 
     useEffect(() => {
-        if (!posthog) {
-            logger.error('usePopupVisibility hook called without a PostHog instance.')
+        if (!agrid) {
+            logger.error('usePopupVisibility hook called without a Agrid instance.')
             return
         }
         if (isPreviewMode) {
@@ -967,12 +967,12 @@ export function usePopupVisibility(
             }
             setIsPopupVisible(true)
             window.dispatchEvent(new Event('PHSurveyShown'))
-            posthog.capture(SurveyEventName.SHOWN, {
+            agrid.capture(SurveyEventName.SHOWN, {
                 [SurveyEventProperties.SURVEY_NAME]: survey.name,
                 [SurveyEventProperties.SURVEY_ID]: survey.id,
                 [SurveyEventProperties.SURVEY_ITERATION]: survey.current_iteration,
                 [SurveyEventProperties.SURVEY_ITERATION_START_DATE]: survey.current_iteration_start_date,
-                sessionRecordingUrl: posthog.get_session_replay_url?.(),
+                sessionRecordingUrl: agrid.get_session_replay_url?.(),
             })
             localStorage.setItem('lastSeenSurveyDate', new Date().toISOString())
         }
@@ -1012,7 +1012,7 @@ export function usePopupVisibility(
 interface SurveyPopupProps {
     survey: Survey
     forceDisableHtml?: boolean
-    posthog?: PostHog
+    agrid?: Agrid
     style?: React.CSSProperties
     previewPageIndex?: number | undefined
     removeSurveyFromFocus?: (survey: SurveyWithTypeAndAppearance) => void
@@ -1060,7 +1060,7 @@ function getPopoverPosition(
 export function SurveyPopup({
     survey,
     forceDisableHtml,
-    posthog,
+    agrid,
     style = {},
     previewPageIndex,
     removeSurveyFromFocus = () => {},
@@ -1077,7 +1077,7 @@ export function SurveyPopup({
         : 0
     const { isPopupVisible, isSurveySent, hidePopupWithViewTransition } = usePopupVisibility(
         survey,
-        posthog,
+        agrid,
         surveyPopupDelayMilliseconds,
         isPreviewMode,
         removeSurveyFromFocus,
@@ -1091,15 +1091,15 @@ export function SurveyPopup({
             isPreviewMode,
             previewPageIndex: previewPageIndex,
             onPopupSurveyDismissed: () => {
-                dismissedSurveyEvent(survey, posthog, isPreviewMode)
+                dismissedSurveyEvent(survey, agrid, isPreviewMode)
                 onPopupSurveyDismissed()
             },
             isPopup: isPopup || false,
             surveySubmissionId: getInProgressSurvey?.surveySubmissionId || uuidv7(),
             onPreviewSubmit,
-            posthog,
+            agrid,
         }
-    }, [isPreviewMode, previewPageIndex, isPopup, posthog, survey, onPopupSurveyDismissed, onPreviewSubmit])
+    }, [isPreviewMode, previewPageIndex, isPopup, agrid, survey, onPopupSurveyDismissed, onPreviewSubmit])
 
     if (!isPopupVisible) {
         return null
@@ -1116,7 +1116,7 @@ export function SurveyPopup({
                 ref={surveyContainerRef}
             >
                 {!shouldShowConfirmation ? (
-                    <Questions survey={survey} forceDisableHtml={!!forceDisableHtml} posthog={posthog} />
+                    <Questions survey={survey} forceDisableHtml={!!forceDisableHtml} agrid={agrid} />
                 ) : (
                     <ConfirmationMessage
                         header={survey.appearance?.thankYouMessageHeader || 'Thank you!'}
@@ -1138,11 +1138,11 @@ export function SurveyPopup({
 export function Questions({
     survey,
     forceDisableHtml,
-    posthog,
+    agrid,
 }: {
     survey: Survey
     forceDisableHtml: boolean
-    posthog?: PostHog
+    agrid?: Agrid
 }) {
     // Initialize responses from localStorage or empty object
     const [questionsResponses, setQuestionsResponses] = useState(() => {
@@ -1176,8 +1176,8 @@ export function Questions({
         displayQuestionIndex: number
         questionId?: string
     }) => {
-        if (!posthog) {
-            logger.error('onNextButtonClick called without a PostHog instance.')
+        if (!agrid) {
+            logger.error('onNextButtonClick called without a Agrid instance.')
             return
         }
 
@@ -1211,7 +1211,7 @@ export function Questions({
                 survey,
                 surveySubmissionId,
                 isSurveyCompleted,
-                posthog,
+                agrid,
             })
         }
     }
@@ -1256,12 +1256,12 @@ export function Questions({
 export function FeedbackWidget({
     survey,
     forceDisableHtml,
-    posthog,
+    agrid,
     readOnly,
 }: {
     survey: Survey
     forceDisableHtml?: boolean
-    posthog?: PostHog
+    agrid?: Agrid
     readOnly?: boolean
 }): JSX.Element | null {
     const [isFeedbackButtonVisible, setIsFeedbackButtonVisible] = useState(true)
@@ -1273,8 +1273,8 @@ export function FeedbackWidget({
     }
 
     useEffect(() => {
-        if (!posthog) {
-            logger.error('FeedbackWidget called without a PostHog instance.')
+        if (!agrid) {
+            logger.error('FeedbackWidget called without a Agrid instance.')
             return
         }
         if (readOnly) {
@@ -1304,7 +1304,7 @@ export function FeedbackWidget({
             window.removeEventListener(DISPATCH_FEEDBACK_WIDGET_EVENT, handleShowSurvey)
         }
     }, [
-        posthog,
+        agrid,
         readOnly,
         survey.id,
         survey.appearance?.widgetType,
@@ -1341,7 +1341,7 @@ export function FeedbackWidget({
             )}
             {showSurvey && (
                 <SurveyPopup
-                    posthog={posthog}
+                    agrid={agrid}
                     survey={survey}
                     forceDisableHtml={forceDisableHtml}
                     style={styleOverrides}

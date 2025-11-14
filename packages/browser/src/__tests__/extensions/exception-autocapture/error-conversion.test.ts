@@ -2,7 +2,7 @@
 
 import { isNull, ErrorTracking } from '@agrid/core'
 import { expect } from '@jest/globals'
-import { buildErrorPropertiesBuilder } from '../../../posthog-exceptions'
+import { buildErrorPropertiesBuilder } from '../../../agrid-exceptions'
 
 // ugh, jest
 // can't reference PromiseRejectionEvent to construct it 🤷

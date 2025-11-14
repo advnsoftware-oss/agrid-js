@@ -9,23 +9,23 @@ const version = packageJson.version;
 
 const config = {
     packageDir: path.resolve(__dirname, '..'),  // packages/browser
-    apiJsonPath: path.resolve(__dirname, '../docs/posthog-js.api.json'),
-    outputPath: path.resolve(__dirname, `../references/posthog-js-references-${version}.json`),
+    apiJsonPath: path.resolve(__dirname, '../docs/agrid-js.api.json'),
+    outputPath: path.resolve(__dirname, `../references/agrid-js-references-${version}.json`),
     version: version,
-    id: 'posthog-js',
+    id: 'agrid-js',
     hogRef: HOG_REF,
     specInfo: {
-        id: 'posthog-js',
-        title: 'PostHog JavaScript Web SDK',
-        description: 'Posthog-js allows you to automatically capture usage and send events to PostHog.',
-        slugPrefix: 'posthog-js',
-        specUrl: 'https://github.com/PostHog/posthog-js'
+        id: 'agrid-js',
+        title: 'Agrid JavaScript Web SDK',
+        description: 'Agrid-js allows you to automatically capture usage and send events to Agrid.',
+        slugPrefix: 'agrid-js',
+        specUrl: 'https://github.com/agrid/agrid-js'
     },
     typeExamples: {
         Properties: PROPERTIES_EXAMPLE,
         Property: PROPERTY_EXAMPLE
     },
-    parentClass: 'PostHog'
+    parentClass: 'Agrid'
 };
 
 // Ensure references directory exists
@@ -38,9 +38,9 @@ if (!fs.existsSync(referencesDir)) {
 const output = generateApiSpecs(config);
 
 // Write versioned file
-const versionedPath = path.resolve(__dirname, `../references/posthog-js-references-${version}.json`);
+const versionedPath = path.resolve(__dirname, `../references/agrid-js-references-${version}.json`);
 fs.writeFileSync(versionedPath, JSON.stringify(output, null, 2));
 
 // Copy to latest file
-const latestPath = path.resolve(__dirname, '../references/posthog-js-references-latest.json');
+const latestPath = path.resolve(__dirname, '../references/agrid-js-references-latest.json');
 fs.writeFileSync(latestPath, JSON.stringify(output, null, 2));

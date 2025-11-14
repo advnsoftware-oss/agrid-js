@@ -1,16 +1,16 @@
-import { PostHogFeatureFlags } from '../posthog-featureflags'
-import { PostHog } from '../posthog-core'
-import { PostHogConfig } from '../types'
+import { AgridFeatureFlags } from '../agrid-featureflags'
+import { Agrid } from '../agrid-core'
+import { AgridConfig } from '../types'
 
 describe('Evaluation Tags/Environments', () => {
-    let posthog: PostHog
-    let featureFlags: PostHogFeatureFlags
+    let agrid: Agrid
+    let featureFlags: AgridFeatureFlags
     let mockSendRequest: jest.Mock
 
     beforeEach(() => {
-        // Create a mock PostHog instance
-        posthog = {
-            config: {} as PostHogConfig,
+        // Create a mock Agrid instance
+        agrid = {
+            config: {} as AgridConfig,
             persistence: {
                 get_distinct_id: jest.fn().mockReturnValue('test-distinct-id'),
                 get_initial_props: jest.fn().mockReturnValue({}),
@@ -25,26 +25,26 @@ describe('Evaluation Tags/Environments', () => {
             _shouldDisableFlags: jest.fn().mockReturnValue(false),
         } as any
 
-        mockSendRequest = posthog._send_request as jest.Mock
+        mockSendRequest = agrid._send_request as jest.Mock
 
-        featureFlags = new PostHogFeatureFlags(posthog)
+        featureFlags = new AgridFeatureFlags(agrid)
     })
 
     describe('_getValidEvaluationEnvironments', () => {
         it('should return empty array when no environments configured', () => {
-            posthog.config.evaluation_environments = undefined
+            agrid.config.evaluation_environments = undefined
             const result = (featureFlags as any)._getValidEvaluationEnvironments()
             expect(result).toEqual([])
         })
 
         it('should return empty array when environments is empty', () => {
-            posthog.config.evaluation_environments = []
+            agrid.config.evaluation_environments = []
             const result = (featureFlags as any)._getValidEvaluationEnvironments()
             expect(result).toEqual([])
         })
 
         it('should filter out invalid environments', () => {
-            posthog.config.evaluation_environments = [
+            agrid.config.evaluation_environments = [
                 'production',
                 '',
                 'staging',
@@ -60,7 +60,7 @@ describe('Evaluation Tags/Environments', () => {
 
         it('should handle readonly array of valid environments', () => {
             const environments: readonly string[] = ['production', 'staging', 'development']
-            posthog.config.evaluation_environments = environments
+            agrid.config.evaluation_environments = environments
 
             const result = (featureFlags as any)._getValidEvaluationEnvironments()
             expect(result).toEqual(['production', 'staging', 'development'])
@@ -69,13 +69,13 @@ describe('Evaluation Tags/Environments', () => {
 
     describe('_shouldIncludeEvaluationEnvironments', () => {
         it('should return false when no valid environments', () => {
-            posthog.config.evaluation_environments = ['', '   ']
+            agrid.config.evaluation_environments = ['', '   ']
             const result = (featureFlags as any)._shouldIncludeEvaluationEnvironments()
             expect(result).toBe(false)
         })
 
         it('should return true when valid environments exist', () => {
-            posthog.config.evaluation_environments = ['production']
+            agrid.config.evaluation_environments = ['production']
             const result = (featureFlags as any)._shouldIncludeEvaluationEnvironments()
             expect(result).toBe(true)
         })
@@ -83,7 +83,7 @@ describe('Evaluation Tags/Environments', () => {
 
     describe('_callFlagsEndpoint', () => {
         it('should include evaluation_environments in request when configured', () => {
-            posthog.config.evaluation_environments = ['production', 'experiment-A']
+            agrid.config.evaluation_environments = ['production', 'experiment-A']
             ;(featureFlags as any)._callFlagsEndpoint()
 
             expect(mockSendRequest).toHaveBeenCalledWith(
@@ -96,7 +96,7 @@ describe('Evaluation Tags/Environments', () => {
         })
 
         it('should not include evaluation_environments when not configured', () => {
-            posthog.config.evaluation_environments = undefined
+            agrid.config.evaluation_environments = undefined
             ;(featureFlags as any)._callFlagsEndpoint()
 
             expect(mockSendRequest).toHaveBeenCalledWith(
@@ -109,7 +109,7 @@ describe('Evaluation Tags/Environments', () => {
         })
 
         it('should not include evaluation_environments when empty array', () => {
-            posthog.config.evaluation_environments = []
+            agrid.config.evaluation_environments = []
             ;(featureFlags as any)._callFlagsEndpoint()
 
             expect(mockSendRequest).toHaveBeenCalledWith(
@@ -122,7 +122,7 @@ describe('Evaluation Tags/Environments', () => {
         })
 
         it('should filter out invalid environments before sending', () => {
-            posthog.config.evaluation_environments = ['production', '', null as any, 'staging']
+            agrid.config.evaluation_environments = ['production', '', null as any, 'staging']
             ;(featureFlags as any)._callFlagsEndpoint()
 
             expect(mockSendRequest).toHaveBeenCalledWith(

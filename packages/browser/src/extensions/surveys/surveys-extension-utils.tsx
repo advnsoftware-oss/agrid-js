@@ -1,5 +1,5 @@
 import { VNode, cloneElement, createContext } from 'preact'
-import { PostHog } from '../../posthog-core'
+import { Agrid } from '../../agrid-core'
 import {
     MultipleSurveyQuestion,
     Survey,
@@ -11,7 +11,7 @@ import {
     SurveySchedule,
     SurveyType,
     SurveyWidgetType,
-} from '../../posthog-surveys-types'
+} from '../../agrid-surveys-types'
 import { document as _document, window as _window, userAgent } from '../../utils/globals'
 import {
     getSurveyInteractionProperty,
@@ -332,15 +332,15 @@ function getContrastingTextColor(color: string = defaultSurveyAppearance.backgro
     return BLACK_TEXT_COLOR
 }
 
-export function getSurveyStylesheet(posthog?: PostHog) {
-    const stylesheet = prepareStylesheet(document, typeof surveyStyles === 'string' ? surveyStyles : '', posthog)
+export function getSurveyStylesheet(agrid?: Agrid) {
+    const stylesheet = prepareStylesheet(document, typeof surveyStyles === 'string' ? surveyStyles : '', agrid)
     stylesheet?.setAttribute('data-ph-survey-style', 'true')
     return stylesheet
 }
 
 export const retrieveSurveyShadow = (
     survey: Pick<Survey, 'id' | 'appearance' | 'type'>,
-    posthog?: PostHog,
+    agrid?: Agrid,
     element?: Element
 ) => {
     const widgetClassName = getSurveyContainerClass(survey)
@@ -358,7 +358,7 @@ export const retrieveSurveyShadow = (
     addSurveyCSSVariablesToElement(div, survey.type, survey.appearance)
     div.className = widgetClassName
     const shadow = div.attachShadow({ mode: 'open' })
-    const stylesheet = getSurveyStylesheet(posthog)
+    const stylesheet = getSurveyStylesheet(agrid)
     if (stylesheet) {
         const existingStylesheet = shadow.querySelector('style')
         if (existingStylesheet) {
@@ -378,7 +378,7 @@ interface SendSurveyEventArgs {
     survey: Survey
     surveySubmissionId: string
     isSurveyCompleted: boolean
-    posthog?: PostHog
+    agrid?: Agrid
 }
 
 const getSurveyResponseValue = (responses: Record<string, string | number | string[] | null>, questionId?: string) => {
@@ -396,15 +396,15 @@ export const sendSurveyEvent = ({
     responses,
     survey,
     surveySubmissionId,
-    posthog,
+    agrid,
     isSurveyCompleted,
 }: SendSurveyEventArgs) => {
-    if (!posthog) {
-        logger.error('[survey sent] event not captured, PostHog instance not found.')
+    if (!agrid) {
+        logger.error('[survey sent] event not captured, Agrid instance not found.')
         return
     }
     setSurveySeenOnLocalStorage(survey)
-    posthog.capture(SurveyEventName.SENT, {
+    agrid.capture(SurveyEventName.SENT, {
         [SurveyEventProperties.SURVEY_NAME]: survey.name,
         [SurveyEventProperties.SURVEY_ID]: survey.id,
         [SurveyEventProperties.SURVEY_ITERATION]: survey.current_iteration,
@@ -416,7 +416,7 @@ export const sendSurveyEvent = ({
         })),
         [SurveyEventProperties.SURVEY_SUBMISSION_ID]: surveySubmissionId,
         [SurveyEventProperties.SURVEY_COMPLETED]: isSurveyCompleted,
-        sessionRecordingUrl: posthog.get_session_replay_url?.(),
+        sessionRecordingUrl: agrid.get_session_replay_url?.(),
         ...responses,
         $set: {
             [getSurveyInteractionProperty(survey, 'responded')]: true,
@@ -429,9 +429,9 @@ export const sendSurveyEvent = ({
     }
 }
 
-export const dismissedSurveyEvent = (survey: Survey, posthog?: PostHog, readOnly?: boolean) => {
-    if (!posthog) {
-        logger.error('[survey dismissed] event not captured, PostHog instance not found.')
+export const dismissedSurveyEvent = (survey: Survey, agrid?: Agrid, readOnly?: boolean) => {
+    if (!agrid) {
+        logger.error('[survey dismissed] event not captured, Agrid instance not found.')
         return
     }
     if (readOnly) {
@@ -439,7 +439,7 @@ export const dismissedSurveyEvent = (survey: Survey, posthog?: PostHog, readOnly
     }
 
     const inProgressSurvey = getInProgressSurveyState(survey)
-    posthog.capture(SurveyEventName.DISMISSED, {
+    agrid.capture(SurveyEventName.DISMISSED, {
         [SurveyEventProperties.SURVEY_NAME]: survey.name,
         [SurveyEventProperties.SURVEY_ID]: survey.id,
         [SurveyEventProperties.SURVEY_ITERATION]: survey.current_iteration,
@@ -447,7 +447,7 @@ export const dismissedSurveyEvent = (survey: Survey, posthog?: PostHog, readOnly
         // check if the survey is partially completed
         [SurveyEventProperties.SURVEY_PARTIALLY_COMPLETED]:
             Object.values(inProgressSurvey?.responses || {}).filter((resp) => !isNullish(resp)).length > 0,
-        sessionRecordingUrl: posthog.get_session_replay_url?.(),
+        sessionRecordingUrl: agrid.get_session_replay_url?.(),
         ...inProgressSurvey?.responses,
         [SurveyEventProperties.SURVEY_SUBMISSION_ID]: inProgressSurvey?.surveySubmissionId,
         [SurveyEventProperties.SURVEY_QUESTIONS]: survey.questions.map((question) => ({
@@ -692,6 +692,6 @@ export const clearInProgressSurveyState = (survey: Pick<Survey, 'id' | 'current_
 }
 
 export function getSurveyContainerClass(survey: Pick<Survey, 'id'>, asSelector = false): string {
-    const className = `PostHogSurvey-${survey.id}`
+    const className = `AgridSurvey-${survey.id}`
     return asSelector ? `.${className}` : className
 }

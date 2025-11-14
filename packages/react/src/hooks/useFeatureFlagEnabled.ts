@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
-import { PostHogContext } from '../context'
+import { AgridContext } from '../context'
 import { isUndefined } from '../utils/type-utils'
 
 export function useFeatureFlagEnabled(flag: string): boolean | undefined {
-    const { client, bootstrap } = useContext(PostHogContext)
+    const { client, bootstrap } = useContext(AgridContext)
 
     const [featureEnabled, setFeatureEnabled] = useState<boolean | undefined>(() => client.isFeatureEnabled(flag))
 

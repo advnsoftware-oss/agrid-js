@@ -1,7 +1,7 @@
 import { SessionPropsManager } from '../session-props'
 import { SessionIdManager } from '../sessionid'
-import { PostHogPersistence } from '../posthog-persistence'
-import { PostHog } from '../posthog-core'
+import { AgridPersistence } from '../agrid-persistence'
+import { Agrid } from '../agrid-core'
 
 describe('Session Props Manager', () => {
     const createSessionPropsManager = () => {
@@ -14,14 +14,14 @@ describe('Session Props Manager', () => {
         const persistence = {
             register: persistenceRegister,
             props: {},
-        } as unknown as PostHogPersistence
-        const posthog = {
+        } as unknown as AgridPersistence
+        const agrid = {
             sessionManager: sessionIdManager,
             persistence,
             config: {},
-        } as unknown as PostHog
+        } as unknown as Agrid
 
-        const sessionPropsManager = new SessionPropsManager(posthog, sessionIdManager, persistence, generateProps)
+        const sessionPropsManager = new SessionPropsManager(agrid, sessionIdManager, persistence, generateProps)
 
         return {
             onSessionId,

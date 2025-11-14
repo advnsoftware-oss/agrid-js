@@ -1,6 +1,6 @@
-import { useFeatureFlagPayload, useFeatureFlagVariantKey, usePostHog } from '../hooks'
+import { useFeatureFlagPayload, useFeatureFlagVariantKey, useAgrid } from '../hooks'
 import React from 'react'
-import { PostHog } from '../context'
+import { Agrid } from '../context'
 import { isFunction, isUndefined } from '../utils/type-utils'
 import { VisibilityAndClickTrackers } from './internal/VisibilityAndClickTrackers'
 
@@ -26,7 +26,7 @@ export function PostHogFeature({
 }: PostHogFeatureProps): JSX.Element | null {
     const payload = useFeatureFlagPayload(flag)
     const variant = useFeatureFlagVariantKey(flag)
-    const posthog = usePostHog()
+    const agrid = useAgrid()
 
     const shouldTrackInteraction = trackInteraction ?? true
     const shouldTrackView = trackView ?? true
@@ -39,8 +39,8 @@ export function PostHogFeature({
                 options={visibilityObserverOptions}
                 trackInteraction={shouldTrackInteraction}
                 trackView={shouldTrackView}
-                onInteract={() => captureFeatureInteraction({ flag, posthog, flagVariant: variant })}
-                onView={() => captureFeatureView({ flag, posthog, flagVariant: variant })}
+                onInteract={() => captureFeatureInteraction({ flag, agrid, flagVariant: variant })}
+                onView={() => captureFeatureView({ flag, agrid, flagVariant: variant })}
                 {...props}
             >
                 {childNode}
@@ -52,11 +52,11 @@ export function PostHogFeature({
 
 export function captureFeatureInteraction({
     flag,
-    posthog,
+    agrid,
     flagVariant,
 }: {
     flag: string
-    posthog: PostHog
+    agrid: Agrid
     flagVariant?: string | boolean
 }) {
     const properties: Record<string, any> = {
@@ -66,16 +66,16 @@ export function captureFeatureInteraction({
     if (typeof flagVariant === 'string') {
         properties.feature_flag_variant = flagVariant
     }
-    posthog.capture('$feature_interaction', properties)
+    agrid.capture('$feature_interaction', properties)
 }
 
 export function captureFeatureView({
     flag,
-    posthog,
+    agrid,
     flagVariant,
 }: {
     flag: string
-    posthog: PostHog
+    agrid: Agrid
     flagVariant?: string | boolean
 }) {
     const properties: Record<string, any> = {
@@ -85,5 +85,5 @@ export function captureFeatureView({
     if (typeof flagVariant === 'string') {
         properties.feature_flag_variant = flagVariant
     }
-    posthog.capture('$feature_view', properties)
+    agrid.capture('$feature_view', properties)
 }

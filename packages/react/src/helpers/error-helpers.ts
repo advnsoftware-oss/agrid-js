@@ -1,9 +1,9 @@
 import type { ErrorInfo } from 'react'
-import { PostHog } from '../context'
+import { Agrid } from '../context'
 import { CaptureResult } from 'agrid-js'
 
 export const setupReactErrorHandler = (
-    client: PostHog,
+    client: Agrid,
     callback?: (event: CaptureResult | undefined, error: any, errorInfo: ErrorInfo) => void
 ) => {
     return (error: any, errorInfo: ErrorInfo): void => {

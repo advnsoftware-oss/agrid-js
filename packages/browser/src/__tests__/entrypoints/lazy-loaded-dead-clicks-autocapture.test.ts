@@ -1,4 +1,4 @@
-import { PostHog } from '../../posthog-core'
+import { Agrid } from '../../agrid-core'
 import LazyLoadedDeadClicksAutocapture from '../../entrypoints/dead-clicks-autocapture'
 import { assignableWindow, document } from '../../utils/globals'
 import { autocaptureCompatibleElements } from '../../autocapture-utils'
@@ -17,7 +17,7 @@ const triggerMouseEvent = function (node: Node, eventType: string) {
 }
 
 describe('LazyLoadedDeadClicksAutocapture', () => {
-    let fakeInstance: PostHog
+    let fakeInstance: Agrid
     let lazyLoadedDeadClicksAutocapture: LazyLoadedDeadClicksAutocapture
 
     beforeEach(async () => {
@@ -26,7 +26,7 @@ describe('LazyLoadedDeadClicksAutocapture', () => {
         assignableWindow.__PosthogExtensions__ = assignableWindow.__PosthogExtensions__ || {}
         assignableWindow.__PosthogExtensions__.loadExternalDependency = jest
             .fn()
-            .mockImplementation(() => (_ph: PostHog, _name: string, cb: (err?: Error) => void) => {
+            .mockImplementation(() => (_ph: Agrid, _name: string, cb: (err?: Error) => void) => {
                 cb()
             })
 
@@ -38,7 +38,7 @@ describe('LazyLoadedDeadClicksAutocapture', () => {
                 props: {},
             },
             capture: jest.fn(),
-        } as unknown as Partial<PostHog> as PostHog
+        } as unknown as Partial<Agrid> as Agrid
 
         lazyLoadedDeadClicksAutocapture = new LazyLoadedDeadClicksAutocapture(fakeInstance)
         lazyLoadedDeadClicksAutocapture.start(document)

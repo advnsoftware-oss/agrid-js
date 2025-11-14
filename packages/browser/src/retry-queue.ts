@@ -3,7 +3,7 @@ import { RetriableRequestWithOptions } from './types'
 import { isNumber, isUndefined } from '@agrid/core'
 import { logger } from './utils/logger'
 import { window } from './utils/globals'
-import { PostHog } from './posthog-core'
+import { Agrid } from './agrid-core'
 import { extendURLParams } from './request'
 import { addEventListener } from './utils'
 
@@ -42,7 +42,7 @@ export class RetryQueue {
     private _onlineListener: (() => void) | undefined
     private _offlineListener: (() => void) | undefined
 
-    constructor(private _instance: PostHog) {
+    constructor(private _instance: Agrid) {
         this._queue = []
         this._areWeOnline = true
 

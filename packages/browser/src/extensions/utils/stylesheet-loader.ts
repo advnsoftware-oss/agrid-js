@@ -1,15 +1,15 @@
-import { PostHog } from '../../posthog-core'
+import { Agrid } from '../../agrid-core'
 import { createLogger } from '../../utils/logger'
 
 const logger = createLogger('[Stylesheet Loader]')
 
-export const prepareStylesheet = (document: Document, innerText: string, posthog?: PostHog) => {
+export const prepareStylesheet = (document: Document, innerText: string, agrid?: Agrid) => {
     // Forcing the existence of `document` requires this function to be called in a browser environment
     let stylesheet: HTMLStyleElement | null = document.createElement('style')
     stylesheet.innerText = innerText
 
-    if (posthog?.config?.prepare_external_dependency_stylesheet) {
-        stylesheet = posthog.config.prepare_external_dependency_stylesheet(stylesheet)
+    if (agrid?.config?.prepare_external_dependency_stylesheet) {
+        stylesheet = agrid.config.prepare_external_dependency_stylesheet(stylesheet)
     }
 
     if (!stylesheet) {

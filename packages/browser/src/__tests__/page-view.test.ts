@@ -1,5 +1,5 @@
 import { PageViewManager } from '../page-view'
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import { ScrollManager } from '../scroll-manager'
 
 const mockWindowGetter = jest.fn()
@@ -18,7 +18,7 @@ describe('PageView ID manager', () => {
     const pageviewId2 = 'pageview-id-2'
 
     describe('doPageView', () => {
-        let instance: PostHog
+        let instance: Agrid
         let pageViewIdManager: PageViewManager
 
         beforeEach(() => {

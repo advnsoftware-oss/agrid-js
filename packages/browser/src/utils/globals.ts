@@ -1,4 +1,4 @@
-import type { PostHog } from '../posthog-core'
+import type { Agrid } from '../agrid-core'
 import { SessionIdManager } from '../sessionid'
 import {
     DeadClicksAutoCaptureConfig,
@@ -9,7 +9,7 @@ import {
     SessionStartReason,
 } from '../types'
 // only importing types here, so won't affect the bundle
-// eslint-disable-next-line posthog-js/no-external-replay-imports
+// eslint-disable-next-line agrid-js/no-external-replay-imports
 import type { SessionRecordingStatus, TriggerType } from '../extensions/replay/external/triggerMatching'
 import { eventWithTime } from '../extensions/replay/types/rrweb-types'
 import { ErrorTracking } from '@agrid/core'
@@ -30,20 +30,20 @@ const win: (Window & typeof globalThis) | undefined = typeof window !== 'undefin
 export type AssignableWindow = Window &
     typeof globalThis & {
         /*
-         * Main PostHog instance
+         * Main Agrid instance
          */
-        posthog: any
+        agrid: any
 
         /*
          * This is our contract between (potentially) lazily loaded extensions and the SDK
          */
-        __PosthogExtensions__?: PostHogExtensions
+        __AgridExtensions__?: AgridExtensions
 
         /**
          * When loading remote config, we assign it to this global configuration
          * for ease of sharing it with the rest of the SDK
          */
-        _POSTHOG_REMOTE_CONFIG?: Record<
+        _AGRID_REMOTE_CONFIG?: Record<
             string,
             {
                 config: RemoteConfig
@@ -57,13 +57,13 @@ export type AssignableWindow = Window &
          *
          * @see {Config.DEBUG} from config.ts
          */
-        POSTHOG_DEBUG: any
+        AGRID_DEBUG: any
 
         // Exposed by the browser
         doNotTrack: any
 
         // See entrypoints/customizations.full.ts
-        posthogCustomizations: any
+        agridCustomizations: any
 
         /**
          * This is a legacy way to expose these functions, but we still need to support it for backwards compatibility
@@ -71,17 +71,17 @@ export type AssignableWindow = Window &
          *
          * See entrypoints/exception-autocapture.ts
          *
-         * @deprecated use `__PosthogExtensions__.errorWrappingFunctions` instead
+         * @deprecated use `__AgridExtensions__.errorWrappingFunctions` instead
          */
-        posthogErrorWrappingFunctions: any
+        agridErrorWrappingFunctions: any
 
         /**
          * This is a legacy way to expose these functions, but we still need to support it for backwards compatibility
          * Can be removed once we drop support for 1.161.1
          *
-         * See entrypoints/posthog-recorder.ts
+         * See entrypoints/agrid-recorder.ts
          *
-         * @deprecated use `__PosthogExtensions__.rrweb` instead
+         * @deprecated use `__AgridExtensions__.rrweb` instead
          */
         rrweb: any
 
@@ -89,9 +89,9 @@ export type AssignableWindow = Window &
          * This is a legacy way to expose these functions, but we still need to support it for backwards compatibility
          * Can be removed once we drop support for 1.161.1
          *
-         * See entrypoints/posthog-recorder.ts
+         * See entrypoints/agrid-recorder.ts
          *
-         * @deprecated use `__PosthogExtensions__.rrwebConsoleRecord` instead
+         * @deprecated use `__AgridExtensions__.rrwebConsoleRecord` instead
          */
         rrwebConsoleRecord: any
 
@@ -99,9 +99,9 @@ export type AssignableWindow = Window &
          * This is a legacy way to expose these functions, but we still need to support it for backwards compatibility
          * Can be removed once we drop support for 1.161.1
          *
-         * See entrypoints/posthog-recorder.ts
+         * See entrypoints/agrid-recorder.ts
          *
-         * @deprecated use `__PosthogExtensions__.getRecordNetworkPlugin` instead
+         * @deprecated use `__AgridExtensions__.getRecordNetworkPlugin` instead
          */
         getRecordNetworkPlugin: any
 
@@ -111,7 +111,7 @@ export type AssignableWindow = Window &
          *
          * See entrypoints/web-vitals.ts
          *
-         * @deprecated use `__PosthogExtensions__.postHogWebVitalsCallbacks` instead
+         * @deprecated use `__AgridExtensions__.postHogWebVitalsCallbacks` instead
          */
         postHogWebVitalsCallbacks: any
 
@@ -121,7 +121,7 @@ export type AssignableWindow = Window &
          *
          * See entrypoints/tracing-headers.ts
          *
-         * @deprecated use `__PosthogExtensions__.postHogTracingHeadersPatchFns` instead
+         * @deprecated use `__AgridExtensions__.postHogTracingHeadersPatchFns` instead
          */
         postHogTracingHeadersPatchFns: any
 
@@ -131,9 +131,9 @@ export type AssignableWindow = Window &
          *
          * See entrypoints/surveys.ts
          *
-         * @deprecated use `__PosthogExtensions__.generateSurveys` instead
+         * @deprecated use `__AgridExtensions__.generateSurveys` instead
          */
-        extendPostHogWithSurveys: any
+        extendAgridWithSurveys: any
 
         /*
          * These are used to handle our toolbar state.
@@ -151,7 +151,7 @@ export type AssignableWindow = Window &
 
 export type ExternalExtensionKind = 'intercom-integration' | 'crisp-chat-integration'
 
-export type PostHogExtensionKind =
+export type AgridExtensionKind =
     | 'toolbar'
     | 'exception-autocapture'
     | 'web-vitals'
@@ -183,14 +183,14 @@ export interface LazyLoadedDeadClicksAutocaptureInterface {
     stop: () => void
 }
 
-interface PostHogExtensions {
+interface AgridExtensions {
     loadExternalDependency?: (
-        posthog: PostHog,
-        kind: PostHogExtensionKind,
+        agrid: Agrid,
+        kind: AgridExtensionKind,
         callback: (error?: string | Event, event?: Event) => void
     ) => void
 
-    loadSiteApp?: (posthog: PostHog, appUrl: string, callback: (error?: string | Event, event?: Event) => void) => void
+    loadSiteApp?: (agrid: Agrid, appUrl: string, callback: (error?: string | Event, event?: Event) => void) => void
 
     errorWrappingFunctions?: {
         wrapOnError: (captureFn: (props: ErrorTracking.ErrorProperties) => void) => () => void
@@ -199,7 +199,7 @@ interface PostHogExtensions {
     }
     rrweb?: { record: any; version: string }
     rrwebPlugins?: { getRecordConsolePlugin: any; getRecordNetworkPlugin?: any }
-    generateSurveys?: (posthog: PostHog, isSurveysEnabled: boolean) => any | undefined
+    generateSurveys?: (agrid: Agrid, isSurveysEnabled: boolean) => any | undefined
     postHogWebVitalsCallbacks?: {
         onLCP: (metric: any) => void
         onCLS: (metric: any) => void
@@ -211,13 +211,13 @@ interface PostHogExtensions {
         _patchXHR: (hostnames: string[], distinctId: string, sessionManager?: SessionIdManager) => () => void
     }
     initDeadClicksAutocapture?: (
-        ph: PostHog,
+        ph: Agrid,
         config: DeadClicksAutoCaptureConfig
     ) => LazyLoadedDeadClicksAutocaptureInterface
     integrations?: {
-        [K in ExternalIntegrationKind]?: { start: (posthog: PostHog) => void; stop: () => void }
+        [K in ExternalIntegrationKind]?: { start: (agrid: Agrid) => void; stop: () => void }
     }
-    initSessionRecording?: (ph: PostHog) => LazyLoadedSessionRecordingInterface
+    initSessionRecording?: (ph: Agrid) => LazyLoadedSessionRecordingInterface
 }
 
 const global: typeof globalThis | undefined = typeof globalThis !== 'undefined' ? globalThis : win

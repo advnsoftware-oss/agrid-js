@@ -1,10 +1,10 @@
 import { window } from '../../../utils/globals'
 
-import { SurveyAppearance } from '../../../posthog-surveys-types'
+import { SurveyAppearance } from '../../../agrid-surveys-types'
 
 import { useContext } from 'preact/hooks'
 import { SurveyContext } from '../surveys-extension-utils'
-import { PostHogLogo } from './PostHogLogo'
+import { AgridLogo } from './AgridLogo'
 
 export function BottomSection({
     text,
@@ -46,7 +46,7 @@ export function BottomSection({
                     {text}
                 </button>
             )}
-            {!appearance.whiteLabel && <PostHogLogo />}
+            {!appearance.whiteLabel && <AgridLogo />}
         </div>
     )
 }

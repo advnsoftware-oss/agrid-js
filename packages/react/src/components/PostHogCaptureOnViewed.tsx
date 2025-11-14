@@ -1,5 +1,5 @@
 import React, { Children, useCallback, useRef } from 'react'
-import { usePostHog } from '../hooks'
+import { useAgrid } from '../hooks'
 import { VisibilityAndClickTracker } from './internal/VisibilityAndClickTracker'
 
 export type PostHogCaptureOnViewedProps = React.HTMLProps<HTMLDivElement> & {
@@ -23,12 +23,12 @@ function TrackedChild({
     observerOptions?: IntersectionObserverInit
 }): JSX.Element {
     const trackedRef = useRef(false)
-    const posthog = usePostHog()
+    const agrid = useAgrid()
 
     const onIntersect = useCallback(
         (entry: IntersectionObserverEntry) => {
             if (entry.isIntersecting && !trackedRef.current) {
-                posthog.capture('$element_viewed', {
+                agrid.capture('$element_viewed', {
                     element_name: name,
                     child_index: index,
                     ...properties,
@@ -36,7 +36,7 @@ function TrackedChild({
                 trackedRef.current = true
             }
         },
-        [posthog, name, index, properties]
+        [agrid, name, index, properties]
     )
 
     return (
@@ -84,19 +84,19 @@ export function PostHogCaptureOnViewed({
     ...props
 }: PostHogCaptureOnViewedProps): JSX.Element {
     const trackedRef = useRef(false)
-    const posthog = usePostHog()
+    const agrid = useAgrid()
 
     const onIntersect = useCallback(
         (entry: IntersectionObserverEntry) => {
             if (entry.isIntersecting && !trackedRef.current) {
-                posthog.capture('$element_viewed', {
+                agrid.capture('$element_viewed', {
                     element_name: name,
                     ...properties,
                 })
                 trackedRef.current = true
             }
         },
-        [posthog, name, properties]
+        [agrid, name, properties]
     )
 
     // If trackAllChildren is enabled, wrap each child individually

@@ -5,7 +5,7 @@
 import { assignableWindow } from '../utils/globals'
 import { LazyLoadedSessionRecording } from '../extensions/replay/external/lazy-loaded-session-recorder'
 
-assignableWindow.__PosthogExtensions__ = assignableWindow.__PosthogExtensions__ || {}
-assignableWindow.__PosthogExtensions__.initSessionRecording = (ph) => new LazyLoadedSessionRecording(ph)
+assignableWindow.__AgridExtensions__ = assignableWindow.__AgridExtensions__ || {}
+assignableWindow.__AgridExtensions__.initSessionRecording = (ph) => new LazyLoadedSessionRecording(ph)
 
 export * from './recorder'

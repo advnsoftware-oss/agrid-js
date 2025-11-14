@@ -1,4 +1,4 @@
-import { PostHog } from '../../posthog-core'
+import { Agrid } from '../../agrid-core'
 import { RemoteConfig, SupportedWebVitalsMetrics } from '../../types'
 import { createLogger } from '../../utils/logger'
 import { isBoolean, isNullish, isNumber, isUndefined, isObject } from '@agrid/core'
@@ -25,7 +25,7 @@ export class WebVitalsAutocapture {
     private _buffer: WebVitalsEventBuffer = { url: undefined, metrics: [], firstMetricTimestamp: undefined }
     private _delayedFlushTimer: ReturnType<typeof setTimeout> | undefined
 
-    constructor(private readonly _instance: PostHog) {
+    constructor(private readonly _instance: Agrid) {
         this._enabledServerSide = !!this._instance.persistence?.props[WEB_VITALS_ENABLED_SERVER_SIDE]
 
         this.startIfEnabled()
@@ -107,11 +107,11 @@ export class WebVitalsAutocapture {
     }
 
     private _loadScript(cb: () => void): void {
-        if (assignableWindow.__PosthogExtensions__?.postHogWebVitalsCallbacks) {
+        if (assignableWindow.__AgridExtensions__?.postHogWebVitalsCallbacks) {
             // already loaded
             cb()
         }
-        assignableWindow.__PosthogExtensions__?.loadExternalDependency?.(this._instance, 'web-vitals', (err) => {
+        assignableWindow.__AgridExtensions__?.loadExternalDependency?.(this._instance, 'web-vitals', (err) => {
             if (err) {
                 logger.error('failed to load script', err)
                 return
@@ -232,9 +232,9 @@ export class WebVitalsAutocapture {
         let onFCP: WebVitalsMetricCallback | undefined
         let onINP: WebVitalsMetricCallback | undefined
 
-        const posthogExtensions = assignableWindow.__PosthogExtensions__
-        if (!isUndefined(posthogExtensions) && !isUndefined(posthogExtensions.postHogWebVitalsCallbacks)) {
-            ;({ onLCP, onCLS, onFCP, onINP } = posthogExtensions.postHogWebVitalsCallbacks)
+        const agridExtensions = assignableWindow.__AgridExtensions__
+        if (!isUndefined(agridExtensions) && !isUndefined(agridExtensions.postHogWebVitalsCallbacks)) {
+            ;({ onLCP, onCLS, onFCP, onINP } = agridExtensions.postHogWebVitalsCallbacks)
         }
 
         if (!onLCP || !onCLS || !onFCP || !onINP) {

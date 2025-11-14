@@ -1,4 +1,4 @@
-import { Survey, SurveyQuestion, SurveyQuestionType } from '../posthog-surveys-types'
+import { Survey, SurveyQuestion, SurveyQuestionType } from '../agrid-surveys-types'
 import { getSurveyResponseKey } from '../extensions/surveys/surveys-extension-utils'
 import { logger } from './logger'
 import { isUndefined } from '@agrid/core'

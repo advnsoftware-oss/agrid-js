@@ -18,7 +18,7 @@ import {
 
 import RageClick from './extensions/rageclick'
 import { AutocaptureConfig, COPY_AUTOCAPTURE_EVENT, EventName, Properties, RemoteConfig } from './types'
-import { PostHog } from './posthog-core'
+import { Agrid } from './agrid-core'
 import { AUTOCAPTURE_DISABLED_SERVER_SIDE } from './constants'
 
 import { isBoolean, isFunction, isNull, isObject } from '@agrid/core'
@@ -231,14 +231,14 @@ export function autocapturePropertiesForElement(
 }
 
 export class Autocapture {
-    instance: PostHog
+    instance: Agrid
     _initialized: boolean = false
     _isDisabledServerSide: boolean | null = null
     _elementSelectors: Set<string> | null
     rageclicks: RageClick
     _elementsChainAsString = false
 
-    constructor(instance: PostHog) {
+    constructor(instance: Agrid) {
         this.instance = instance
         this.rageclicks = new RageClick(instance.config.rageclick)
         this._elementSelectors = null

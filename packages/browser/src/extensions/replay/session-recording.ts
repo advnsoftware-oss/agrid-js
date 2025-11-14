@@ -6,7 +6,7 @@ import {
     SESSION_RECORDING_OVERRIDE_URL_TRIGGER,
     SESSION_RECORDING_REMOTE_CONFIG,
 } from '../../constants'
-import { PostHog } from '../../posthog-core'
+import { Agrid } from '../../agrid-core'
 import { Properties, RemoteConfig, SessionRecordingPersistedConfig, SessionStartReason } from '../../types'
 import { type eventWithTime } from './types/rrweb-types'
 
@@ -15,7 +15,7 @@ import { createLogger } from '../../utils/logger'
 import {
     assignableWindow,
     LazyLoadedSessionRecordingInterface,
-    PostHogExtensionKind,
+    AgridExtensionKind,
     window,
 } from '../../utils/globals'
 import { DISABLED, LAZY_LOADING, SessionRecordingStatus, TriggerType } from './external/triggerMatching'
@@ -51,7 +51,7 @@ export class SessionRecording {
         return LAZY_LOADING
     }
 
-    constructor(private readonly _instance: PostHog) {
+    constructor(private readonly _instance: Agrid) {
         if (!this._instance.sessionManager) {
             logger.error('started without valid sessionManager')
             throw new Error(LOGGER_PREFIX + ' started without valid sessionManager. This is a bug.')
@@ -104,13 +104,13 @@ export class SessionRecording {
             return
         }
 
-        // If recorder.js is already loaded (if array.full.js snippet is used or posthog-js/dist/recorder is
+        // If recorder.js is already loaded (if array.full.js snippet is used or agrid-js/dist/recorder is
         // imported), don't load the script. Otherwise, remotely import recorder.js from cdn since it hasn't been loaded.
         if (
-            !assignableWindow?.__PosthogExtensions__?.rrweb?.record ||
-            !assignableWindow.__PosthogExtensions__?.initSessionRecording
+            !assignableWindow?.__AgridExtensions__?.rrweb?.record ||
+            !assignableWindow.__AgridExtensions__?.initSessionRecording
         ) {
-            assignableWindow.__PosthogExtensions__?.loadExternalDependency?.(
+            assignableWindow.__AgridExtensions__?.loadExternalDependency?.(
                 this._instance,
                 this._scriptName,
                 (err) => {
@@ -211,20 +211,20 @@ export class SessionRecording {
         }
     }
 
-    private get _scriptName(): PostHogExtensionKind {
+    private get _scriptName(): AgridExtensionKind {
         const remoteConfig: SessionRecordingPersistedConfig | undefined = this._instance?.persistence?.get_property(
             SESSION_RECORDING_REMOTE_CONFIG
         )
-        return (remoteConfig?.scriptConfig?.script as PostHogExtensionKind) || 'lazy-recorder'
+        return (remoteConfig?.scriptConfig?.script as AgridExtensionKind) || 'lazy-recorder'
     }
 
     private _onScriptLoaded(startReason?: SessionStartReason) {
-        if (!assignableWindow.__PosthogExtensions__?.initSessionRecording) {
+        if (!assignableWindow.__AgridExtensions__?.initSessionRecording) {
             throw Error('Called on script loaded before session recording is available')
         }
 
         if (!this._lazyLoadedSessionRecording) {
-            this._lazyLoadedSessionRecording = assignableWindow.__PosthogExtensions__?.initSessionRecording(
+            this._lazyLoadedSessionRecording = assignableWindow.__AgridExtensions__?.initSessionRecording(
                 this._instance
             )
             ;(this._lazyLoadedSessionRecording as any)._forceAllowLocalhostNetworkCapture =
@@ -247,7 +247,7 @@ export class SessionRecording {
      * this ignores the linked flag config and (if other conditions are met) causes capture to start
      *
      * It is not usual to call this directly,
-     * instead call `posthog.startSessionRecording({linked_flag: true})`
+     * instead call `agrid.startSessionRecording({linked_flag: true})`
      * */
     public overrideLinkedFlag() {
         if (!this._lazyLoadedSessionRecording) {
@@ -263,7 +263,7 @@ export class SessionRecording {
      * this ignores the sampling config and (if other conditions are met) causes capture to start
      *
      * It is not usual to call this directly,
-     * instead call `posthog.startSessionRecording({sampling: true})`
+     * instead call `agrid.startSessionRecording({sampling: true})`
      * */
     public overrideSampling() {
         if (!this._lazyLoadedSessionRecording) {
@@ -279,7 +279,7 @@ export class SessionRecording {
      * this ignores the URL/Event trigger config and (if other conditions are met) causes capture to start
      *
      * It is not usual to call this directly,
-     * instead call `posthog.startSessionRecording({trigger: 'url' | 'event'})`
+     * instead call `agrid.startSessionRecording({trigger: 'url' | 'event'})`
      * */
     public overrideTrigger(triggerType: TriggerType) {
         if (!this._lazyLoadedSessionRecording) {
@@ -312,7 +312,7 @@ export class SessionRecording {
      * It is not intended for arbitrary public use - playback only displays known custom events
      * And is exposed on the public interface only so that other parts of the SDK are able to use it
      *
-     * if you are calling this from client code, you're probably looking for `posthog.capture('$custom_event', {...})`
+     * if you are calling this from client code, you're probably looking for `agrid.capture('$custom_event', {...})`
      */
     tryAddCustomEvent(tag: string, payload: any): boolean {
         return !!this._lazyLoadedSessionRecording?.tryAddCustomEvent(tag, payload)

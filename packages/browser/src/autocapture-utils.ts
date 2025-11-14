@@ -1,4 +1,4 @@
-import { AutocaptureConfig, PostHogConfig, Properties } from './types'
+import { AutocaptureConfig, AgridConfig, Properties } from './types'
 import { each, entries } from './utils'
 
 import { isNullish, isString, isUndefined, isArray, isBoolean } from '@agrid/core'
@@ -175,7 +175,7 @@ export function getParentElement(curEl: Element): Element | false {
 // autocapture check will already filter for ph-no-capture,
 // but we include it here to protect against future changes accidentally removing that check
 const DEFAULT_RAGE_CLICK_IGNORE_LIST = ['.ph-no-rageclick', '.ph-no-capture']
-export function shouldCaptureRageclick(el: Element | null, _config: PostHogConfig['rageclick']) {
+export function shouldCaptureRageclick(el: Element | null, _config: AgridConfig['rageclick']) {
     if (!window || cannotCheckForAutocapture(el)) {
         return false
     }
@@ -340,7 +340,7 @@ export function shouldCaptureElement(el: Element): boolean {
 
     // filter out data from fields that look like sensitive fields
     const name = (el as HTMLInputElement).name || el.id || ''
-    // See https://github.com/posthog/posthog-js/issues/165
+    // See https://github.com/agrid/agrid-js/issues/165
     // Under specific circumstances a bug caused .replace to be called on a DOM element
     // instead of a string, removing the element from the page. Ensure this issue is mitigated.
     if (isString(name)) {
@@ -485,7 +485,7 @@ export function getElementsChainString(elements: Properties[]): string {
     return elementsToString(extractElements(elements))
 }
 
-// This interface is called 'Element' in plugin-scaffold https://github.com/PostHog/plugin-scaffold/blob/b07d3b879796ecc7e22deb71bf627694ba05386b/src/types.ts#L200
+// This interface is called 'Element' in plugin-scaffold https://github.com/Agrid/plugin-scaffold/blob/b07d3b879796ecc7e22deb71bf627694ba05386b/src/types.ts#L200
 // However 'Element' is a DOM Element when run in the browser, so we have to rename it
 interface PHElement {
     text?: string

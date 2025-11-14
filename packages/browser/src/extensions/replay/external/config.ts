@@ -1,4 +1,4 @@
-import { CapturedNetworkRequest, NetworkRecordOptions, PostHogConfig } from '../../../types'
+import { CapturedNetworkRequest, NetworkRecordOptions, AgridConfig } from '../../../types'
 import { isFunction, isNullish, isString, isUndefined } from '@agrid/core'
 import { convertToURL } from '../../../utils/request-utils'
 import { logger } from '../../../utils/logger'
@@ -101,12 +101,12 @@ const removeAuthorizationHeader = (data: CapturedNetworkRequest): CapturedNetwor
     return data
 }
 
-const POSTHOG_PATHS_TO_IGNORE = ['/s/', '/e/', '/i/']
-// want to ignore posthog paths when capturing requests, or we can get trapped in a loop
-// because calls to PostHog would be reported using a call to PostHog which would be reported....
-const ignorePostHogPaths = (
+const AGRID_PATHS_TO_IGNORE = ['/s/', '/e/', '/i/']
+// want to ignore agrid paths when capturing requests, or we can get trapped in a loop
+// because calls to Agrid would be reported using a call to Agrid which would be reported....
+const ignoreAgridPaths = (
     data: CapturedNetworkRequest,
-    apiHostConfig: PostHogConfig['api_host']
+    apiHostConfig: AgridConfig['api_host']
 ): CapturedNetworkRequest | undefined => {
     const url = convertToURL(data.name)
 
@@ -117,7 +117,7 @@ const ignorePostHogPaths = (
     }
     const pathname = url?.pathname.replace(replaceValue || '', '')
 
-    if (url && pathname && POSTHOG_PATHS_TO_IGNORE.some((path) => pathname.indexOf(path) === 0)) {
+    if (url && pathname && AGRID_PATHS_TO_IGNORE.some((path) => pathname.indexOf(path) === 0)) {
         return undefined
     }
     return data
@@ -205,7 +205,7 @@ function scrubPayloads(capturedRequest: CapturedNetworkRequest | undefined): Cap
  *  if someone complains then we'll add an opt-in to let them override it
  */
 export const buildNetworkRequestOptions = (
-    instanceConfig: PostHogConfig,
+    instanceConfig: AgridConfig,
     remoteNetworkOptions: Pick<
         NetworkRecordOptions,
         'recordHeaders' | 'recordBody' | 'recordPerformance' | 'payloadHostDenyList'
@@ -230,7 +230,7 @@ export const buildNetworkRequestOptions = (
     const payloadLimiter = limitPayloadSize(config)
 
     const enforcedCleaningFn: NetworkRecordOptions['maskRequestFn'] = (d: CapturedNetworkRequest) =>
-        payloadLimiter(ignorePostHogPaths(removeAuthorizationHeader(d), instanceConfig.api_host))
+        payloadLimiter(ignoreAgridPaths(removeAuthorizationHeader(d), instanceConfig.api_host))
 
     const hasDeprecatedMaskFunction = isFunction(instanceConfig.session_recording.maskNetworkRequestFn)
 

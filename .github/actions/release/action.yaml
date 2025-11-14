@@ -43,7 +43,9 @@ runs:
     - name: Publish package to NPM
       shell: bash
       run: |
-        pnpm publish --filter=${{ inputs.package_name }} --access public
+        # Use --no-git-checks to handle first publish (when package doesn't exist on npm)
+        # This flag prevents ERR_PNPM_NO_VERSIONS error for new packages
+        pnpm publish --filter=${{ inputs.package_name }} --access public --no-git-checks
       env:
         NODE_AUTH_TOKEN: ${{ inputs.npm_token }}
 
@@ -71,7 +73,7 @@ runs:
           --method POST \
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          /repos/posthog/posthog-js/releases \
+          /repos/agrid/agrid-js/releases \
           -f tag_name="${{ inputs.package_name }}@${{ inputs.package_version }}" \
         -f target_commitish='main' \
         -f name="${{ inputs.package_name }}@${{ inputs.package_version }}" \

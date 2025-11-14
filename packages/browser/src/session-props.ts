@@ -10,9 +10,9 @@
  */
 import { getPersonInfo, getPersonPropsFromInfo } from './utils/event-utils'
 import type { SessionIdManager } from './sessionid'
-import type { PostHogPersistence } from './posthog-persistence'
+import type { AgridPersistence } from './agrid-persistence'
 import { CLIENT_SESSION_PROPS } from './constants'
-import type { PostHog } from './posthog-core'
+import type { Agrid } from './agrid-core'
 import { each, stripEmptyProperties } from './utils'
 import { stripLeadingDollar } from '@agrid/core'
 
@@ -36,23 +36,23 @@ interface StoredSessionSourceProps {
     props: LegacySessionSourceProps | CurrentSessionSourceProps
 }
 
-const generateSessionSourceParams = (posthog?: PostHog): LegacySessionSourceProps | CurrentSessionSourceProps => {
-    return getPersonInfo(posthog?.config.mask_personal_data_properties, posthog?.config.custom_personal_data_properties)
+const generateSessionSourceParams = (agrid?: Agrid): LegacySessionSourceProps | CurrentSessionSourceProps => {
+    return getPersonInfo(agrid?.config.mask_personal_data_properties, agrid?.config.custom_personal_data_properties)
 }
 
 export class SessionPropsManager {
-    private readonly _instance: PostHog
+    private readonly _instance: Agrid
     private readonly _sessionIdManager: SessionIdManager
-    private readonly _persistence: PostHogPersistence
+    private readonly _persistence: AgridPersistence
     private readonly _sessionSourceParamGenerator: (
-        instance?: PostHog
+        instance?: Agrid
     ) => LegacySessionSourceProps | CurrentSessionSourceProps
 
     constructor(
-        instance: PostHog,
+        instance: Agrid,
         sessionIdManager: SessionIdManager,
-        persistence: PostHogPersistence,
-        sessionSourceParamGenerator?: (instance?: PostHog) => LegacySessionSourceProps | CurrentSessionSourceProps
+        persistence: AgridPersistence,
+        sessionSourceParamGenerator?: (instance?: Agrid) => LegacySessionSourceProps | CurrentSessionSourceProps
     ) {
         this._instance = instance
         this._sessionIdManager = sessionIdManager

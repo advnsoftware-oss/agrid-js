@@ -1,4 +1,4 @@
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import {
     CAMPAIGN_PARAMS,
     getCampaignParams,
@@ -9,17 +9,17 @@ import {
 import { each, extend } from '../utils'
 import { includes } from '@agrid/core'
 
-export const setAllPersonProfilePropertiesAsPersonPropertiesForFlags = (posthog: PostHog): void => {
+export const setAllPersonProfilePropertiesAsPersonPropertiesForFlags = (agrid: Agrid): void => {
     const allProperties = extend(
         {},
         getEventProperties(
-            posthog.config.mask_personal_data_properties,
-            posthog.config.custom_personal_data_properties
+            agrid.config.mask_personal_data_properties,
+            agrid.config.custom_personal_data_properties
         ),
         getCampaignParams(
-            posthog.config.custom_campaign_params,
-            posthog.config.mask_personal_data_properties,
-            posthog.config.custom_personal_data_properties
+            agrid.config.custom_campaign_params,
+            agrid.config.mask_personal_data_properties,
+            agrid.config.custom_personal_data_properties
         ),
         getReferrerInfo()
     )
@@ -30,5 +30,5 @@ export const setAllPersonProfilePropertiesAsPersonPropertiesForFlags = (posthog:
         }
     })
 
-    posthog.setPersonPropertiesForFlags(personProperties)
+    agrid.setPersonPropertiesForFlags(personProperties)
 }

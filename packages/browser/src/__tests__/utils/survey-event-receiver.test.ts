@@ -6,16 +6,16 @@ import {
     Survey,
     SurveyActionType,
     ActionStepStringMatching,
-} from '../../posthog-surveys-types'
-import { PostHogPersistence } from '../../posthog-persistence'
-import { PostHog } from '../../posthog-core'
-import { CaptureResult, PostHogConfig, PropertyMatchType } from '../../types'
+} from '../../agrid-surveys-types'
+import { AgridPersistence } from '../../agrid-persistence'
+import { Agrid } from '../../agrid-core'
+import { CaptureResult, AgridConfig, PropertyMatchType } from '../../types'
 import { SurveyEventReceiver } from '../../utils/survey-event-receiver'
 
 describe('survey-event-receiver', () => {
     describe('event based surveys', () => {
-        let config: PostHogConfig
-        let instance: PostHog
+        let config: AgridConfig
+        let instance: Agrid
         let mockAddCaptureHook: jest.Mock
 
         const surveysWithEvents: Survey[] = [
@@ -79,16 +79,16 @@ describe('survey-event-receiver', () => {
             mockAddCaptureHook = jest.fn()
             config = {
                 token: 'testtoken',
-                api_host: 'https://app.posthog.com',
+                api_host: 'https://app.agrid.com',
                 persistence: 'memory',
-            } as unknown as PostHogConfig
+            } as unknown as AgridConfig
 
             instance = {
                 config: config,
-                persistence: new PostHogPersistence(config),
+                persistence: new AgridPersistence(config),
                 _addCaptureHook: mockAddCaptureHook,
                 getSurveys: jest.fn((callback) => callback(surveysWithEvents)),
-            } as unknown as PostHog
+            } as unknown as Agrid
         })
 
         afterEach(() => {
@@ -172,8 +172,8 @@ describe('survey-event-receiver', () => {
     })
 
     describe('property filter based surveys', () => {
-        let config: PostHogConfig
-        let instance: PostHog
+        let config: AgridConfig
+        let instance: Agrid
         let mockAddCaptureHook: jest.Mock
 
         const createEventPayload = (eventName: string, properties: Record<string, any> = {}): CaptureResult => ({
@@ -212,16 +212,16 @@ describe('survey-event-receiver', () => {
             mockAddCaptureHook = jest.fn()
             config = {
                 token: 'testtoken',
-                api_host: 'https://app.posthog.com',
+                api_host: 'https://app.agrid.com',
                 persistence: 'memory',
-            } as unknown as PostHogConfig
+            } as unknown as AgridConfig
 
             instance = {
                 config: config,
-                persistence: new PostHogPersistence(config),
+                persistence: new AgridPersistence(config),
                 _addCaptureHook: mockAddCaptureHook,
                 getSurveys: jest.fn((callback) => callback([])),
-            } as unknown as PostHog
+            } as unknown as Agrid
         })
 
         afterEach(() => {
@@ -365,22 +365,22 @@ describe('survey-event-receiver', () => {
     })
 
     describe('action based surveys', () => {
-        let config: PostHogConfig
-        let instance: PostHog
+        let config: AgridConfig
+        let instance: Agrid
 
         beforeEach(() => {
             config = {
                 token: 'testtoken',
-                api_host: 'https://app.posthog.com',
+                api_host: 'https://app.agrid.com',
                 persistence: 'memory',
-            } as unknown as PostHogConfig
+            } as unknown as AgridConfig
 
             instance = {
                 config: config,
-                persistence: new PostHogPersistence(config),
+                persistence: new AgridPersistence(config),
                 _addCaptureHook: jest.fn(),
                 getSurveys: jest.fn((callback) => callback([])),
-            } as unknown as PostHog
+            } as unknown as Agrid
         })
 
         afterEach(() => {
@@ -470,35 +470,35 @@ describe('survey-event-receiver', () => {
         })
 
         it('can match action on current_url exact', () => {
-            autoCaptureSurvey.conditions.actions.values = [createAction(2, '$autocapture', 'https://us.posthog.com')]
+            autoCaptureSurvey.conditions.actions.values = [createAction(2, '$autocapture', 'https://us.agrid.com')]
             const surveyEventReceiver = new SurveyEventReceiver(instance)
             surveyEventReceiver.register([autoCaptureSurvey, pageViewSurvey])
             surveyEventReceiver
                 ._getActionMatcher()
-                .on('$autocapture', createCaptureResult('$autocapture', 'https://eu.posthog.com'))
+                .on('$autocapture', createCaptureResult('$autocapture', 'https://eu.agrid.com'))
             expect(surveyEventReceiver.getSurveys()).not.toEqual(['first-survey'])
             surveyEventReceiver
                 ._getActionMatcher()
-                .on('$autocapture', createCaptureResult('$autocapture', 'https://us.posthog.com'))
+                .on('$autocapture', createCaptureResult('$autocapture', 'https://us.agrid.com'))
             expect(surveyEventReceiver.getSurveys()).toEqual(['first-survey'])
         })
 
         it('can match action on current_url regexp', () => {
             autoCaptureSurvey.conditions.actions.values = [
-                createAction(2, '$current_url_regexp', '[a-z][a-z].posthog.*', 'regex'),
+                createAction(2, '$current_url_regexp', '[a-z][a-z].agrid.*', 'regex'),
             ]
             let surveyEventReceiver = new SurveyEventReceiver(instance)
             surveyEventReceiver.register([autoCaptureSurvey, pageViewSurvey])
             surveyEventReceiver
                 ._getActionMatcher()
-                .on('$autocapture', createCaptureResult('$current_url_regexp', 'https://eu.posthog.com'))
+                .on('$autocapture', createCaptureResult('$current_url_regexp', 'https://eu.agrid.com'))
             expect(surveyEventReceiver.getSurveys()).toEqual(['first-survey'])
 
             surveyEventReceiver = new SurveyEventReceiver(instance)
             surveyEventReceiver.register([autoCaptureSurvey, pageViewSurvey])
             surveyEventReceiver
                 ._getActionMatcher()
-                .on('$autocapture', createCaptureResult('$autocapture', 'https://us.posthog.com'))
+                .on('$autocapture', createCaptureResult('$autocapture', 'https://us.agrid.com'))
             expect(surveyEventReceiver.getSurveys()).toEqual(['first-survey'])
         })
 
@@ -506,7 +506,7 @@ describe('survey-event-receiver', () => {
             const action = createAction(2, '$autocapture')
             action.steps[0].selector = '* > #__next .flex > button:nth-child(2)'
             autoCaptureSurvey.conditions.actions.values = [action]
-            const result = createCaptureResult('$autocapture', 'https://eu.posthog.com')
+            const result = createCaptureResult('$autocapture', 'https://eu.agrid.com')
             result.properties.$element_selectors = ['* > #__next .flex > button:nth-child(2)']
             const surveyEventReceiver = new SurveyEventReceiver(instance)
             surveyEventReceiver.register([autoCaptureSurvey, pageViewSurvey])

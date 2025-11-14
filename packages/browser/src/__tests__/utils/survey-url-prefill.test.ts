@@ -4,7 +4,7 @@ import {
     allRequiredQuestionsFilled,
     PrefillParams,
 } from '../../utils/survey-url-prefill'
-import { Survey, SurveyQuestion, SurveyQuestionType, SurveyType } from '../../posthog-surveys-types'
+import { Survey, SurveyQuestion, SurveyQuestionType, SurveyType } from '../../agrid-surveys-types'
 
 describe('extractPrefillParamsFromUrl', () => {
     describe('empty and invalid inputs', () => {

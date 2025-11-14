@@ -5,18 +5,18 @@
  * currently not supported in the browser lib).
  */
 
-import { PostHog } from '../posthog-core'
-import { defaultPostHog } from './helpers/posthog-instance'
+import { Agrid } from '../agrid-core'
+import { defaultAgrid } from './helpers/agrid-instance'
 
 import sinon from 'sinon'
 import { assignableWindow, window } from '../utils/globals'
 
 describe(`Module-based loader in Node env`, () => {
-    const posthog = defaultPostHog()
+    const agrid = defaultAgrid()
 
     beforeEach(() => {
         // NOTE: Temporary change whilst testing remote config
-        assignableWindow._POSTHOG_REMOTE_CONFIG = {
+        assignableWindow._AGRID_REMOTE_CONFIG = {
             'test-token': {
                 config: {},
                 siteApps: [],
@@ -25,16 +25,16 @@ describe(`Module-based loader in Node env`, () => {
         // assignableWindow.__PosthogExtensions__ = {}
 
         jest.useFakeTimers()
-        jest.spyOn(posthog, '_send_request').mockReturnValue()
+        jest.spyOn(agrid, '_send_request').mockReturnValue()
         jest.spyOn(window!.console, 'log').mockImplementation()
     })
 
     it('should load and capture the pageview event', () => {
         const sandbox = sinon.createSandbox()
         let loaded = false
-        const _originalCapture = posthog.capture
-        posthog.capture = sandbox.spy()
-        posthog.init(`test-token`, {
+        const _originalCapture = agrid.capture
+        agrid.capture = sandbox.spy()
+        agrid.init(`test-token`, {
             disable_surveys: true,
             debug: true,
             persistence: `localStorage`,
@@ -46,40 +46,40 @@ describe(`Module-based loader in Node env`, () => {
 
         jest.runOnlyPendingTimers()
 
-        sinon.assert.calledOnce(posthog.capture as sinon.SinonSpy<any>)
-        const captureArgs = (posthog.capture as sinon.SinonSpy<any>).args[0]
+        sinon.assert.calledOnce(agrid.capture as sinon.SinonSpy<any>)
+        const captureArgs = (agrid.capture as sinon.SinonSpy<any>).args[0]
         const event = captureArgs[0]
         expect(event).toBe('$pageview')
         expect(loaded).toBe(true)
 
-        posthog.capture = _originalCapture
+        agrid.capture = _originalCapture
     })
 
     it(`supports identify()`, () => {
-        expect(() => posthog.identify(`Pat`)).not.toThrow()
+        expect(() => agrid.identify(`Pat`)).not.toThrow()
     })
 
     it(`supports capture()`, () => {
-        expect(() => posthog.capture(`Pat`)).not.toThrow()
+        expect(() => agrid.capture(`Pat`)).not.toThrow()
     })
 
-    it(`always returns posthog from init`, () => {
+    it(`always returns agrid from init`, () => {
         console.error = jest.fn()
         console.warn = jest.fn()
 
-        expect(posthog.init(`my-test`, { disable_surveys: true }, 'sdk-1')).toBeInstanceOf(PostHog)
-        expect(posthog.init(``, { disable_surveys: true }, 'sdk-2')).toBeInstanceOf(PostHog)
+        expect(agrid.init(`my-test`, { disable_surveys: true }, 'sdk-1')).toBeInstanceOf(Agrid)
+        expect(agrid.init(``, { disable_surveys: true }, 'sdk-2')).toBeInstanceOf(Agrid)
 
         expect(console.error).toHaveBeenCalledWith(
-            '[PostHog.js]',
-            'PostHog was initialized without a token. This likely indicates a misconfiguration. Please check the first argument passed to posthog.init()'
+            '[Agrid.js]',
+            'Agrid was initialized without a token. This likely indicates a misconfiguration. Please check the first argument passed to agrid.init()'
         )
 
         // Already loaded logged even when not debug
-        expect(posthog.init(`my-test`, { disable_surveys: true }, 'sdk-1')).toBeInstanceOf(PostHog)
+        expect(agrid.init(`my-test`, { disable_surveys: true }, 'sdk-1')).toBeInstanceOf(Agrid)
         expect(console.warn).toHaveBeenCalledWith(
-            '[PostHog.js]',
-            'You have already initialized PostHog! Re-initializing is a no-op'
+            '[Agrid.js]',
+            'You have already initialized Agrid! Re-initializing is a no-op'
         )
     })
 })

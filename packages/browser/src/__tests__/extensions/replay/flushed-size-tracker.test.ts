@@ -1,19 +1,19 @@
 import { FlushedSizeTracker } from '../../../extensions/replay/external/flushed-size-tracker'
-import { PostHog } from '../../../posthog-core'
+import { Agrid } from '../../../agrid-core'
 import { jest } from '@jest/globals'
-import { PostHogPersistence } from '../../../posthog-persistence'
-import { PostHogConfig } from '../../../types'
+import { AgridPersistence } from '../../../agrid-persistence'
+import { AgridConfig } from '../../../types'
 
 describe('FlushedSizeTracker', () => {
-    let mockPostHog: PostHog
+    let mockAgrid: Agrid
     let tracker: FlushedSizeTracker
-    let persistence: PostHogPersistence
+    let persistence: AgridPersistence
 
     beforeEach(() => {
-        persistence = new PostHogPersistence(
+        persistence = new AgridPersistence(
             {
                 persistence: 'memory',
-            } as unknown as PostHogConfig,
+            } as unknown as AgridConfig,
             false
         )
 
@@ -21,12 +21,12 @@ describe('FlushedSizeTracker', () => {
         persistence.get_property = persistence.get_property.bind(persistence)
         persistence.set_property = persistence.set_property.bind(persistence)
 
-        mockPostHog = {
+        mockAgrid = {
             get_property: persistence.get_property,
             persistence,
-        } as unknown as PostHog
+        } as unknown as Agrid
 
-        tracker = new FlushedSizeTracker(mockPostHog)
+        tracker = new FlushedSizeTracker(mockAgrid)
     })
 
     afterEach(() => {
@@ -40,23 +40,23 @@ describe('FlushedSizeTracker', () => {
         })
 
         it('throws error when persistence is missing', () => {
-            const invalidPostHog = {
+            const invalidAgrid = {
                 get_property: () => {},
                 persistence: undefined,
-            } as unknown as PostHog
+            } as unknown as Agrid
 
-            expect(() => new FlushedSizeTracker(invalidPostHog)).toThrow(
+            expect(() => new FlushedSizeTracker(invalidAgrid)).toThrow(
                 'it is not valid to not have persistence and be this far into setting up the application'
             )
         })
 
         it('throws error when persistence is null', () => {
-            const invalidPostHog = {
+            const invalidAgrid = {
                 get_property: () => {},
                 persistence: null,
-            } as unknown as PostHog
+            } as unknown as Agrid
 
-            expect(() => new FlushedSizeTracker(invalidPostHog)).toThrow(
+            expect(() => new FlushedSizeTracker(invalidAgrid)).toThrow(
                 'it is not valid to not have persistence and be this far into setting up the application'
             )
         })

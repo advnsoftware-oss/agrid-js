@@ -1,4 +1,4 @@
-import { PostHog } from './posthog-core'
+import { Agrid } from './agrid-core'
 import { navigator, window } from './utils/globals'
 import {
     WebExperiment,
@@ -32,7 +32,7 @@ export const webExperimentUrlValidationMap: Record<
 export class WebExperiments {
     private _flagToExperiments?: Map<string, WebExperiment>
 
-    constructor(private _instance: PostHog) {
+    constructor(private _instance: Agrid) {
         this._instance.onFeatureFlags((flags: string[]) => {
             this.onFeatureFlags(flags)
         })

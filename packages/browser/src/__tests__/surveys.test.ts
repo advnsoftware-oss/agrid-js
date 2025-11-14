@@ -8,9 +8,9 @@ import {
     getDisplayOrderChoices,
     getDisplayOrderQuestions,
 } from '../extensions/surveys/surveys-extension-utils'
-import { PostHog } from '../posthog-core'
-import { PostHogPersistence } from '../posthog-persistence'
-import { PostHogSurveys } from '../posthog-surveys'
+import { Agrid } from '../agrid-core'
+import { AgridPersistence } from '../agrid-persistence'
+import { AgridSurveys } from '../agrid-surveys'
 import {
     MultipleSurveyQuestion,
     RatingSurveyQuestion,
@@ -19,8 +19,8 @@ import {
     SurveyQuestionBranchingType,
     SurveyQuestionType,
     SurveyType,
-} from '../posthog-surveys-types'
-import { FlagsResponse, PostHogConfig, Properties, RemoteConfig } from '../types'
+} from '../agrid-surveys-types'
+import { FlagsResponse, AgridConfig, Properties, RemoteConfig } from '../types'
 import * as globals from '../utils/globals'
 import { assignableWindow, window } from '../utils/globals'
 import { RequestRouter } from '../utils/request-router'
@@ -28,9 +28,9 @@ import { SurveyEventReceiver } from '../utils/survey-event-receiver'
 import { SURVEY_LOGGER as logger } from '../utils/survey-utils'
 
 describe('surveys', () => {
-    let config: PostHogConfig
-    let instance: PostHog
-    let surveys: PostHogSurveys
+    let config: AgridConfig
+    let instance: Agrid
+    let surveys: AgridSurveys
     let surveysResponse: { status?: number; surveys?: Survey[] }
     const originalWindowLocation = assignableWindow.location
 
@@ -184,14 +184,14 @@ describe('surveys', () => {
 
         config = {
             token: 'testtoken',
-            api_host: 'https://app.posthog.com',
+            api_host: 'https://app.agrid.com',
             persistence: 'memory',
             surveys_request_timeout_ms: SURVEYS_REQUEST_TIMEOUT_MS,
-        } as unknown as PostHogConfig
+        } as unknown as AgridConfig
 
         instance = {
             config: config,
-            persistence: new PostHogPersistence(config),
+            persistence: new AgridPersistence(config),
             requestRouter: new RequestRouter({ config } as any),
             _addCaptureHook: jest.fn(),
             register: (props: Properties) => instance.persistence?.register(props),
@@ -209,19 +209,19 @@ describe('surveys', () => {
                     .fn()
                     .mockImplementation((featureFlag) => flagsResponse.featureFlags[featureFlag]),
             },
-        } as unknown as PostHog
+        } as unknown as Agrid
 
         assignableWindow.__PosthogExtensions__ = {
             loadExternalDependency: loadScriptMock,
         }
 
-        surveys = new PostHogSurveys(instance)
+        surveys = new AgridSurveys(instance)
         instance.surveys = surveys
-        // all being squashed into a mock posthog so...
+        // all being squashed into a mock agrid so...
         instance.getActiveMatchingSurveys = instance.surveys.getActiveMatchingSurveys.bind(instance.surveys)
         instance.canRenderSurveyAsync = instance.surveys.canRenderSurveyAsync.bind(instance.surveys)
 
-        // mock loadIfEnabled so posthog.surveys.loadIfEnabled() doesn't call _send_request
+        // mock loadIfEnabled so agrid.surveys.loadIfEnabled() doesn't call _send_request
         // and it instantiates the survey event receiver
         const loadIfEnabledMock = jest.fn()
         loadIfEnabledMock.mockImplementation(() => {
@@ -255,7 +255,7 @@ describe('surveys', () => {
             expect(data).toEqual(firstSurveys)
         })
         expect(instance._send_request).toHaveBeenCalledWith({
-            url: 'https://us.i.posthog.com/api/surveys/?token=testtoken',
+            url: 'https://us.i.agrid.com/api/surveys/?token=testtoken',
             timeout: SURVEYS_REQUEST_TIMEOUT_MS,
             method: 'GET',
             callback: expect.any(Function),
@@ -271,7 +271,7 @@ describe('surveys', () => {
         expect(instance._send_request).toHaveBeenCalledTimes(1)
     })
 
-    it('posthog.reset() removes surveys tracking properties from storage', () => {
+    it('agrid.reset() removes surveys tracking properties from storage', () => {
         localStorage.setItem('seenSurvey_XYZ', '1')
         localStorage.setItem('seenSurvey_ABC', '1')
         localStorage.setItem('lastSeenSurveyDate', 'some date here')
@@ -301,7 +301,7 @@ describe('surveys', () => {
             expect(data).toEqual(firstSurveys)
         })
         expect(instance._send_request).toHaveBeenCalledWith({
-            url: 'https://us.i.posthog.com/api/surveys/?token=testtoken',
+            url: 'https://us.i.agrid.com/api/surveys/?token=testtoken',
             timeout: SURVEYS_REQUEST_TIMEOUT_MS,
             method: 'GET',
             callback: expect.any(Function),
@@ -375,7 +375,7 @@ describe('surveys', () => {
             description: 'survey with url description',
             type: SurveyType.Popover,
             questions: [{ type: SurveyQuestionType.Open, question: 'what is a survey with url?' }],
-            conditions: { url: 'posthog.com' },
+            conditions: { url: 'agrid.com' },
             start_date: new Date().toISOString(),
             end_date: null,
         } as unknown as Survey
@@ -467,7 +467,7 @@ describe('surveys', () => {
             description: 'survey with url does not contain description',
             type: SurveyType.Popover,
             questions: [{ type: SurveyQuestionType.Open, question: 'what is a survey with url does not contain?' }],
-            conditions: { url: 'posthog.com', urlMatchType: 'not_icontains' },
+            conditions: { url: 'agrid.com', urlMatchType: 'not_icontains' },
             start_date: new Date().toISOString(),
             end_date: null,
         } as unknown as Survey
@@ -485,7 +485,7 @@ describe('surveys', () => {
             description: 'survey with url and selector description',
             type: SurveyType.Popover,
             questions: [{ type: SurveyQuestionType.Open, question: 'what is a survey with url and selector?' }],
-            conditions: { url: 'posthogapp.com', selector: '#foo' },
+            conditions: { url: 'agridapp.com', selector: '#foo' },
             start_date: new Date().toISOString(),
             end_date: null,
         } as unknown as Survey
@@ -558,7 +558,7 @@ describe('surveys', () => {
             questions: [{ type: SurveyQuestionType.Open, question: 'what is a survey with everything?' }],
             start_date: new Date().toISOString(),
             end_date: null,
-            conditions: { url: 'posthogapp.com', selector: '.test-selector' },
+            conditions: { url: 'agridapp.com', selector: '.test-selector' },
             linked_flag_key: 'linked-flag-key',
             targeting_flag_key: 'survey-targeting-flag-key',
         } as unknown as Survey
@@ -576,7 +576,7 @@ describe('surveys', () => {
                 surveys: [surveyWithUrl, surveyWithSelector, surveyWithUrlAndSelector],
             }
             // eslint-disable-next-line compat/compat
-            assignableWindow.location = new URL('https://posthog.com') as unknown as Location
+            assignableWindow.location = new URL('https://agrid.com') as unknown as Location
             surveys.getActiveMatchingSurveys((data) => {
                 expect(data).toEqual([surveyWithUrl])
             })
@@ -592,7 +592,7 @@ describe('surveys', () => {
             }
 
             // eslint-disable-next-line compat/compat
-            assignableWindow.location = new URL('https://posthogapp.com') as unknown as Location
+            assignableWindow.location = new URL('https://agridapp.com') as unknown as Location
             document.body.appendChild(document.createElement('div')).id = 'foo'
 
             surveys.getActiveMatchingSurveys((data) => {
@@ -694,9 +694,9 @@ describe('surveys', () => {
             }
 
             // eslint-disable-next-line compat/compat
-            assignableWindow.location = new URL('https://posthog.com') as unknown as Location
+            assignableWindow.location = new URL('https://agrid.com') as unknown as Location
             surveys.getActiveMatchingSurveys((data) => {
-                // returns surveyWithIsNotUrlMatch and surveyWithUrlDoesNotContainRegex because they don't contain posthog.com
+                // returns surveyWithIsNotUrlMatch and surveyWithUrlDoesNotContainRegex because they don't contain agrid.com
                 expect(data).toEqual([surveyWithIsNotUrlMatch, surveyWithUrlDoesNotContainRegex])
             })
             assignableWindow.location = originalWindowLocation
@@ -769,7 +769,7 @@ describe('surveys', () => {
 
         it('returns surveys that inclusively matches any of the above', () => {
             // eslint-disable-next-line compat/compat
-            assignableWindow.location = new URL('https://posthogapp.com') as unknown as Location
+            assignableWindow.location = new URL('https://agridapp.com') as unknown as Location
             document.body.appendChild(document.createElement('div')).className = 'test-selector'
             surveysResponse = { surveys: [activeSurvey, surveyWithSelector, surveyWithEverything] }
             // activeSurvey returns because there are no restrictions on conditions or flags on it

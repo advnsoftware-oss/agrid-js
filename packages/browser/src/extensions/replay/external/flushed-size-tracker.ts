@@ -1,4 +1,4 @@
-import { PostHog } from '../../../posthog-core'
+import { Agrid } from '../../../agrid-core'
 import { Property } from '../../../types'
 
 const SESSION_RECORDING_FLUSHED_SIZE = '$sess_rec_flush_size'
@@ -7,13 +7,13 @@ export class FlushedSizeTracker {
     private readonly _getProperty: (property_name: string) => Property | undefined
     private readonly _setProperty: (prop: string, to: any) => void
 
-    constructor(posthog: PostHog) {
-        if (!posthog.persistence) {
+    constructor(agrid: Agrid) {
+        if (!agrid.persistence) {
             throw new Error('it is not valid to not have persistence and be this far into setting up the application')
         }
 
-        this._getProperty = posthog.get_property.bind(posthog)
-        this._setProperty = posthog.persistence.set_property.bind(posthog.persistence)
+        this._getProperty = agrid.get_property.bind(agrid)
+        this._setProperty = agrid.persistence.set_property.bind(agrid.persistence)
     }
 
     trackSize(size: number) {

@@ -1,15 +1,15 @@
 import { WebExperiments } from '../web-experiments'
-import { PostHog } from '../posthog-core'
-import { PostHogConfig } from '../types'
-import { PostHogPersistence } from '../posthog-persistence'
+import { Agrid } from '../agrid-core'
+import { AgridConfig } from '../types'
+import { AgridPersistence } from '../agrid-persistence'
 import { WebExperiment } from '../web-experiments-types'
 import { RequestRouter } from '../utils/request-router'
 import { ConsentManager } from '../consent'
 
 describe('Web Experimentation', () => {
     let webExperiment: WebExperiments
-    let posthog: PostHog
-    let persistence: PostHogPersistence
+    let agrid: Agrid
+    let persistence: AgridPersistence
     let experimentsResponse: { status?: number; experiments?: WebExperiment[] }
 
     const signupButtonWebExperimentWithFeatureFlag = {
@@ -109,15 +109,15 @@ describe('Web Experimentation', () => {
 
     beforeEach(() => {
         let cachedFlags = {}
-        persistence = { props: {}, register: jest.fn() } as unknown as PostHogPersistence
-        posthog = makePostHog({
+        persistence = { props: {}, register: jest.fn() } as unknown as AgridPersistence
+        agrid = makeAgrid({
             config: {
                 disable_web_experiments: false,
                 api_host: 'https://test.com',
                 token: 'testtoken',
                 autocapture: true,
                 region: 'us-east-1',
-            } as unknown as PostHogConfig,
+            } as unknown as AgridConfig,
             persistence: persistence,
             get_property: jest.fn(),
             capture: jest.fn(),
@@ -136,8 +136,8 @@ describe('Web Experimentation', () => {
             webExperiment.onFeatureFlags(Object.keys(flags))
         })
 
-        posthog.requestRouter = new RequestRouter(posthog)
-        webExperiment = new WebExperiments(posthog)
+        agrid.requestRouter = new RequestRouter(agrid)
+        webExperiment = new WebExperiments(agrid)
     })
 
     function createTestDocument() {
@@ -153,7 +153,7 @@ describe('Web Experimentation', () => {
         experimentsResponse = {
             experiments: [buttonWebExperimentWithUrlConditions],
         }
-        const webExperiment = new WebExperiments(posthog)
+        const webExperiment = new WebExperiments(agrid)
         const elParent = createTestDocument()
 
         WebExperiments.getWindowLocation = () => {
@@ -167,7 +167,7 @@ describe('Web Experimentation', () => {
 
     function assertElementChanged(variant: string, expectedProperty: string, value: string) {
         const elParent = createTestDocument()
-        webExperiment = new WebExperiments(posthog)
+        webExperiment = new WebExperiments(agrid)
 
         simulateFeatureFlags({
             'signup-button-test': variant,
@@ -188,7 +188,7 @@ describe('Web Experimentation', () => {
             experimentsResponse = {
                 experiments: [buttonWebExperimentWithUrlConditions],
             }
-            const webExperiment = new WebExperiments(posthog)
+            const webExperiment = new WebExperiments(agrid)
             webExperiment._is_bot = () => true
             const elParent = createTestDocument()
 
@@ -246,14 +246,14 @@ describe('Web Experimentation', () => {
             const expResponse = {
                 experiments: [signupButtonWebExperimentWithFeatureFlag],
             }
-            const disabledPostHog = makePostHog({
+            const disabledAgrid = makeAgrid({
                 config: {
                     api_host: 'https://test.com',
                     token: 'testtoken',
                     autocapture: true,
                     region: 'us-east-1',
                     // no disable_web_experiments set to false here, so it’s implicitly enabled
-                } as unknown as PostHogConfig,
+                } as unknown as AgridConfig,
                 persistence: persistence,
                 get_property: jest.fn(),
                 _send_request: jest
@@ -263,8 +263,8 @@ describe('Web Experimentation', () => {
                 onFeatureFlags: jest.fn(),
             })
 
-            posthog.requestRouter = new RequestRouter(disabledPostHog)
-            webExperiment = new WebExperiments(disabledPostHog)
+            agrid.requestRouter = new RequestRouter(disabledAgrid)
+            webExperiment = new WebExperiments(disabledAgrid)
             assertElementChanged('control', 'innerHTML', 'original')
         })
 
@@ -274,7 +274,7 @@ describe('Web Experimentation', () => {
             }
             // control => do nothing
             assertElementChanged('control', 'innerHTML', 'original')
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
         })
 
         it('can render previews based on URL params', () => {
@@ -282,7 +282,7 @@ describe('Web Experimentation', () => {
                 experiments: [buttonWebExperimentWithUrlConditions],
             }
 
-            const webExperiment = new WebExperiments(posthog)
+            const webExperiment = new WebExperiments(agrid)
             const elParent = createTestDocument()
             const original = WebExperiments.getWindowLocation
 
@@ -298,7 +298,7 @@ describe('Web Experimentation', () => {
 
             WebExperiments.getWindowLocation = original
             expect(elParent.innerHTML).toEqual('Sign me up')
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
         })
 
         it('can set text of a <span> element', async () => {
@@ -307,7 +307,7 @@ describe('Web Experimentation', () => {
             }
             // 'variant-sign-up' => "Sign me up"
             assertElementChanged('variant-sign-up', 'innerHTML', 'Sign me up')
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
         })
 
         it('can set child element of a <span> element', async () => {
@@ -327,12 +327,12 @@ describe('Web Experimentation', () => {
         })
     })
 
-    function makePostHog(ph: Partial<PostHog>): PostHog {
+    function makeAgrid(ph: Partial<Agrid>): Agrid {
         return {
             get_distinct_id() {
                 return 'distinctid'
             },
             ...ph,
-        } as unknown as PostHog
+        } as unknown as Agrid
     }
 })

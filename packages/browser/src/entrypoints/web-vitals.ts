@@ -8,10 +8,10 @@ const postHogWebVitalsCallbacks = {
     onINP,
 }
 
-assignableWindow.__PosthogExtensions__ = assignableWindow.__PosthogExtensions__ || {}
-assignableWindow.__PosthogExtensions__.postHogWebVitalsCallbacks = postHogWebVitalsCallbacks
+assignableWindow.__AgridExtensions__ = assignableWindow.__AgridExtensions__ || {}
+assignableWindow.__AgridExtensions__.postHogWebVitalsCallbacks = postHogWebVitalsCallbacks
 
-// we used to put posthogWebVitalsCallbacks on window, and now we put it on __PosthogExtensions__
+// we used to put agridWebVitalsCallbacks on window, and now we put it on __AgridExtensions__
 // but that means that old clients which lazily load this extension are looking in the wrong place
 // yuck,
 // so we also put it directly on the window

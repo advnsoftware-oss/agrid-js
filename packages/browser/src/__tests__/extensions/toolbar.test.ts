@@ -1,7 +1,7 @@
 import { Toolbar } from '../../extensions/toolbar'
 import { isString, isUndefined } from '@agrid/core'
-import { PostHog } from '../../posthog-core'
-import { PostHogConfig, ToolbarParams } from '../../types'
+import { Agrid } from '../../agrid-core'
+import { AgridConfig, ToolbarParams } from '../../types'
 import { assignableWindow, window } from '../../utils/globals'
 import { RequestRouter } from '../../utils/request-router'
 import { TOOLBAR_ID } from '../../constants'
@@ -13,7 +13,7 @@ const makeToolbarParams = (overrides: Partial<ToolbarParams>): ToolbarParams => 
 
 describe('Toolbar', () => {
     let toolbar: Toolbar
-    let instance: PostHog
+    let instance: Agrid
     const toolbarParams = makeToolbarParams({})
 
     beforeEach(() => {
@@ -21,11 +21,11 @@ describe('Toolbar', () => {
             config: {
                 api_host: 'http://api.example.com',
                 token: 'test_token',
-            } as unknown as PostHogConfig,
+            } as unknown as AgridConfig,
             requestRouter: new RequestRouter(instance),
 
             set_config: jest.fn(),
-        } as unknown as PostHog
+        } as unknown as Agrid
 
         assignableWindow.__PosthogExtensions__ = {
             loadExternalDependency: jest.fn((_ph, _path: any, callback: any) => callback()),
@@ -137,9 +137,9 @@ describe('Toolbar', () => {
             expect(toolbar.loadToolbar).not.toHaveBeenCalled()
         })
 
-        it('should work if calling toolbar params `__posthog`', () => {
+        it('should work if calling toolbar params `__agrid`', () => {
             toolbar.maybeLoadToolbar(
-                aLocation(withHash(withHashParamsFrom(defaultHashState, '__posthog'))),
+                aLocation(withHash(withHashParamsFrom(defaultHashState, '__agrid'))),
                 storage,
                 history
             )

@@ -41,7 +41,7 @@ export const cancelSVG = (
         />
     </svg>
 )
-export const IconPosthogLogo = (
+export const IconAgridLogo = (
     <svg width="77" height="14" viewBox="0 0 77 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_2415_6911)">
             <mask

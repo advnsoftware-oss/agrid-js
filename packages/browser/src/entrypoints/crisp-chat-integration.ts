@@ -1,17 +1,17 @@
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import { assignableWindow } from '../utils/globals'
 import { createLogger } from '../utils/logger'
 
-const logger = createLogger('[PostHog Crisp Chat]')
+const logger = createLogger('[Agrid Crisp Chat]')
 
 const reportedSessionIds = new Set<string>()
 let sessionIdListenerUnsubscribe: undefined | (() => void) = undefined
 
-assignableWindow.__PosthogExtensions__ = assignableWindow.__PosthogExtensions__ || {}
-assignableWindow.__PosthogExtensions__.integrations = assignableWindow.__PosthogExtensions__.integrations || {}
-assignableWindow.__PosthogExtensions__.integrations.crispChat = {
-    start: (posthog: PostHog) => {
-        if (!posthog.config.integrations?.crispChat) {
+assignableWindow.__AgridExtensions__ = assignableWindow.__AgridExtensions__ || {}
+assignableWindow.__AgridExtensions__.integrations = assignableWindow.__AgridExtensions__.integrations || {}
+assignableWindow.__AgridExtensions__.integrations.crispChat = {
+    start: (agrid: Agrid) => {
+        if (!agrid.config.integrations?.crispChat) {
             return
         }
 
@@ -22,10 +22,10 @@ assignableWindow.__PosthogExtensions__.integrations.crispChat = {
         }
 
         const updateCrispChat = () => {
-            const replayUrl = posthog.get_session_replay_url()
-            const personUrl = posthog.requestRouter.endpointFor(
+            const replayUrl = agrid.get_session_replay_url()
+            const personUrl = agrid.requestRouter.endpointFor(
                 'ui',
-                `/project/${posthog.config.token}/person/${posthog.get_distinct_id()}`
+                `/project/${agrid.config.token}/person/${agrid.get_distinct_id()}`
             )
 
             crispChat.push([
@@ -33,8 +33,8 @@ assignableWindow.__PosthogExtensions__.integrations.crispChat = {
                 'session:data',
                 [
                     [
-                        ['posthogSessionURL', replayUrl],
-                        ['posthogPersonURL', personUrl],
+                        ['agridSessionURL', replayUrl],
+                        ['agridPersonURL', personUrl],
                     ],
                 ],
             ])
@@ -42,7 +42,7 @@ assignableWindow.__PosthogExtensions__.integrations.crispChat = {
 
         // this is called immediately if there's a session id
         // and then again whenever the session id changes
-        sessionIdListenerUnsubscribe = posthog.onSessionId((sessionId) => {
+        sessionIdListenerUnsubscribe = agrid.onSessionId((sessionId) => {
             if (!reportedSessionIds.has(sessionId)) {
                 updateCrispChat()
                 reportedSessionIds.add(sessionId)

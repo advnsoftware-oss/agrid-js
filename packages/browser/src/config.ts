@@ -1,6 +1,6 @@
 import packageInfo from '../package.json'
 
-// overridden in posthog-core,
+// overridden in agrid-core,
 // e.g.     Config.DEBUG = Config.DEBUG || instance.config.debug
 const Config = {
     DEBUG: false,

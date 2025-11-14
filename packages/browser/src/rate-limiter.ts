@@ -1,5 +1,5 @@
 import { CAPTURE_RATE_LIMIT } from './constants'
-import type { PostHog } from './posthog-core'
+import type { Agrid } from './agrid-core'
 import { RequestResponse } from './types'
 import { createLogger } from './utils/logger'
 
@@ -13,14 +13,14 @@ interface CaptureResponse {
 }
 
 export class RateLimiter {
-    instance: PostHog
+    instance: Agrid
     serverLimits: Record<string, number> = {}
 
     captureEventsPerSecond: number
     captureEventsBurstLimit: number
     lastEventRateLimited = false
 
-    constructor(instance: PostHog) {
+    constructor(instance: Agrid) {
         this.instance = instance
 
         this.captureEventsPerSecond = instance.config.rate_limiting?.events_per_second || 10
@@ -61,7 +61,7 @@ export class RateLimiter {
             this.instance.capture(
                 RATE_LIMIT_EVENT,
                 {
-                    $$client_ingestion_warning_message: `posthog-js client rate limited. Config is set to ${this.captureEventsPerSecond} events per second and ${this.captureEventsBurstLimit} events burst limit.`,
+                    $$client_ingestion_warning_message: `agrid-js client rate limited. Config is set to ${this.captureEventsPerSecond} events per second and ${this.captureEventsBurstLimit} events burst limit.`,
                 },
                 {
                     skip_client_rate_limiting: true,

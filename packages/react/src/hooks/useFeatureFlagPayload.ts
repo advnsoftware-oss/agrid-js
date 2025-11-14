@@ -1,9 +1,9 @@
 import { JsonType } from 'agrid-js'
 import { useContext, useEffect, useState } from 'react'
-import { PostHogContext } from '../context'
+import { AgridContext } from '../context'
 
 export function useFeatureFlagPayload(flag: string): JsonType {
-    const { client, bootstrap } = useContext(PostHogContext)
+    const { client, bootstrap } = useContext(AgridContext)
 
     const [featureFlagPayload, setFeatureFlagPayload] = useState<JsonType>(() => client.getFeatureFlagPayload(flag))
 

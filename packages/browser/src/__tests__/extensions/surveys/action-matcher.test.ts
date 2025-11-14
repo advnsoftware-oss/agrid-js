@@ -1,27 +1,27 @@
 /// <reference lib="dom" />
 
-import { SurveyActionType, ActionStepStringMatching } from '../../../posthog-surveys-types'
-import { PostHogPersistence } from '../../../posthog-persistence'
-import { PostHog } from '../../../posthog-core'
-import { CaptureResult, PostHogConfig } from '../../../types'
+import { SurveyActionType, ActionStepStringMatching } from '../../../agrid-surveys-types'
+import { AgridPersistence } from '../../../agrid-persistence'
+import { Agrid } from '../../../agrid-core'
+import { CaptureResult, AgridConfig } from '../../../types'
 import { ActionMatcher } from '../../../extensions/surveys/action-matcher'
 
 describe('action-matcher', () => {
-    let config: PostHogConfig
-    let instance: PostHog
+    let config: AgridConfig
+    let instance: Agrid
 
     beforeEach(() => {
         config = {
             token: 'testtoken',
-            api_host: 'https://app.posthog.com',
+            api_host: 'https://app.agrid.com',
             persistence: 'memory',
-        } as unknown as PostHogConfig
+        } as unknown as AgridConfig
 
         instance = {
             config: config,
-            persistence: new PostHogPersistence(config),
+            persistence: new AgridPersistence(config),
             _addCaptureHook: jest.fn(),
-        } as unknown as PostHog
+        } as unknown as Agrid
     })
 
     afterEach(() => {
@@ -86,7 +86,7 @@ describe('action-matcher', () => {
     })
 
     it('can match action on current_url exact', () => {
-        const pageViewAction = createAction(2, '$autocapture', 'https://us.posthog.com')
+        const pageViewAction = createAction(2, '$autocapture', 'https://us.agrid.com')
         const actionMatcher = new ActionMatcher(instance)
         actionMatcher.register([pageViewAction])
 
@@ -99,15 +99,15 @@ describe('action-matcher', () => {
         }
 
         actionMatcher._addActionHook(onAction)
-        actionMatcher.on('$autocapture', createCaptureResult('$autocapture', 'https://eu.posthog.com'))
+        actionMatcher.on('$autocapture', createCaptureResult('$autocapture', 'https://eu.agrid.com'))
         expect(pageViewActionMatched).toBeFalsy()
 
-        actionMatcher.on('$autocapture', createCaptureResult('$autocapture', 'https://us.posthog.com'))
+        actionMatcher.on('$autocapture', createCaptureResult('$autocapture', 'https://us.agrid.com'))
         expect(pageViewActionMatched).toBeTruthy()
     })
 
     it('can match action on current_url regexp', () => {
-        const pageViewAction = createAction(2, '$current_url_regexp', '[a-z][a-z].posthog.*', 'regex')
+        const pageViewAction = createAction(2, '$current_url_regexp', '[a-z][a-z].agrid.*', 'regex')
         const actionMatcher = new ActionMatcher(instance)
         actionMatcher.register([pageViewAction])
 
@@ -120,11 +120,11 @@ describe('action-matcher', () => {
         }
 
         actionMatcher._addActionHook(onAction)
-        actionMatcher.on('$autocapture', createCaptureResult('$current_url_regexp', 'https://eu.posthog.com'))
+        actionMatcher.on('$autocapture', createCaptureResult('$current_url_regexp', 'https://eu.agrid.com'))
         expect(pageViewActionMatched).toBeTruthy()
         pageViewActionMatched = false
 
-        actionMatcher.on('$autocapture', createCaptureResult('$current_url_regexp', 'https://us.posthog.com'))
+        actionMatcher.on('$autocapture', createCaptureResult('$current_url_regexp', 'https://us.agrid.com'))
         expect(pageViewActionMatched).toBeTruthy()
     })
 
@@ -145,7 +145,7 @@ describe('action-matcher', () => {
         }
         actionMatcher._addActionHook(onAction)
 
-        const result = createCaptureResult('$autocapture', 'https://eu.posthog.com')
+        const result = createCaptureResult('$autocapture', 'https://eu.agrid.com')
         result.properties.$element_selectors = []
         actionMatcher.on('$autocapture', result)
         expect(buttonClickedActionMatched).toBeFalsy()

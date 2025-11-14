@@ -7,7 +7,7 @@ import {
     RatingSurveyQuestion,
     SurveyAppearance,
     SurveyQuestionType,
-} from '../../../posthog-surveys-types'
+} from '../../../agrid-surveys-types'
 import { isArray, isNull, isNumber, isString } from '@agrid/core'
 import { dissatisfiedEmoji, neutralEmoji, satisfiedEmoji, veryDissatisfiedEmoji, verySatisfiedEmoji } from '../icons'
 import { getDisplayOrderChoices, useSurveyContext } from '../surveys-extension-utils'

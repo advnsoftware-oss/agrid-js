@@ -2,10 +2,10 @@ import { DEFAULT_SESSION_IDLE_TIMEOUT_SECONDS, MAX_SESSION_IDLE_TIMEOUT_SECONDS,
 import { SESSION_ID } from '../constants'
 import { sessionStore } from '../storage'
 import { uuid7ToTimestampMs, uuidv7 } from '../uuidv7'
-import { BootstrapConfig, PostHogConfig, Properties } from '../types'
-import { PostHogPersistence } from '../posthog-persistence'
+import { BootstrapConfig, AgridConfig, Properties } from '../types'
+import { AgridPersistence } from '../agrid-persistence'
 import { assignableWindow } from '../utils/globals'
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 
 jest.mock('../uuidv7')
 jest.mock('../storage')
@@ -16,19 +16,19 @@ describe('Session ID manager', () => {
     let timestampOfSessionStart: number
     let registerMock: jest.Mock
 
-    const config: Partial<PostHogConfig> = {
+    const config: Partial<AgridConfig> = {
         persistence_name: 'persistance-name',
     }
 
-    let persistence: { props: Properties } & Partial<PostHogPersistence>
+    let persistence: { props: Properties } & Partial<AgridPersistence>
 
-    const sessionIdMgr = (phPersistence: Partial<PostHogPersistence>) => {
+    const sessionIdMgr = (phPersistence: Partial<AgridPersistence>) => {
         registerMock = jest.fn()
         return new SessionIdManager({
             config,
-            persistence: phPersistence as PostHogPersistence,
+            persistence: phPersistence as AgridPersistence,
             register: registerMock,
-        } as unknown as PostHog)
+        } as unknown as Agrid)
     }
 
     const originalDate = Date
@@ -85,9 +85,9 @@ describe('Session ID manager', () => {
             }
             const sessionIdManager = new SessionIdManager({
                 config: { ...config, bootstrap },
-                persistence: persistence as PostHogPersistence,
+                persistence: persistence as AgridPersistence,
                 register: jest.fn(),
-            } as unknown as PostHog)
+            } as unknown as Agrid)
 
             // act
             const { sessionId, sessionStartTimestamp } = sessionIdManager.checkAndGetSessionAndWindowId(false, now)
@@ -347,16 +347,16 @@ describe('Session ID manager', () => {
                 config: {
                     session_idle_timeout_seconds: timeout,
                 },
-                persistence: persistence as PostHogPersistence,
+                persistence: persistence as AgridPersistence,
                 register: jest.fn(),
-            } as unknown as PostHog)
+            } as unknown as Agrid)
 
         beforeEach(() => {
             console.warn = jest.fn()
         })
 
         it('uses the custom session_idle_timeout_seconds if within bounds', () => {
-            assignableWindow.POSTHOG_DEBUG = true
+            assignableWindow.AGRID_DEBUG = true
             expect(mockSessionManager(61)['_sessionTimeoutMs']).toEqual(61 * 1000)
             expect(console.warn).toHaveBeenCalledTimes(0)
             expect(mockSessionManager(59)['_sessionTimeoutMs']).toEqual(60 * 1000)

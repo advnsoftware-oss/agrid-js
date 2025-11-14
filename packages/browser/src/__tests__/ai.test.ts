@@ -1,5 +1,5 @@
-import { defaultPostHog } from './helpers/posthog-instance'
-import type { PostHogConfig } from '../types'
+import { defaultAgrid } from './helpers/agrid-instance'
+import type { AgridConfig } from '../types'
 import { uuidv7 } from '../uuidv7'
 
 describe('ai', () => {
@@ -7,18 +7,18 @@ describe('ai', () => {
         console.error = jest.fn()
     })
 
-    const setup = (config: Partial<PostHogConfig> = {}, token: string = uuidv7()) => {
+    const setup = (config: Partial<AgridConfig> = {}, token: string = uuidv7()) => {
         const beforeSendMock = jest.fn().mockImplementation((e) => e)
-        const posthog = defaultPostHog().init(token, { ...config, before_send: beforeSendMock }, token)!
-        posthog.debug()
-        return { posthog, beforeSendMock }
+        const agrid = defaultAgrid().init(token, { ...config, before_send: beforeSendMock }, token)!
+        agrid.debug()
+        return { agrid, beforeSendMock }
     }
 
     describe('captureTraceMetric()', () => {
         it('should capture metric', () => {
-            const { posthog, beforeSendMock } = setup()
+            const { agrid, beforeSendMock } = setup()
 
-            posthog.captureTraceMetric('123', 'test', 'test')
+            agrid.captureTraceMetric('123', 'test', 'test')
 
             const { event, properties } = beforeSendMock.mock.calls[0][0]
             expect(event).toBe('$ai_metric')
@@ -28,9 +28,9 @@ describe('ai', () => {
         })
 
         it('should convert numeric values', () => {
-            const { posthog, beforeSendMock } = setup()
+            const { agrid, beforeSendMock } = setup()
 
-            posthog.captureTraceMetric(123, 'test', 1)
+            agrid.captureTraceMetric(123, 'test', 1)
 
             const { event, properties } = beforeSendMock.mock.calls[0][0]
             expect(event).toBe('$ai_metric')
@@ -40,9 +40,9 @@ describe('ai', () => {
         })
 
         it('should convert boolean metric_value', () => {
-            const { posthog, beforeSendMock } = setup()
+            const { agrid, beforeSendMock } = setup()
 
-            posthog.captureTraceMetric('test', 'test', false)
+            agrid.captureTraceMetric('test', 'test', false)
 
             const { event, properties } = beforeSendMock.mock.calls[0][0]
             expect(event).toBe('$ai_metric')
@@ -54,9 +54,9 @@ describe('ai', () => {
 
     describe('captureTraceFeedback()', () => {
         it('should capture feedback', () => {
-            const { posthog, beforeSendMock } = setup()
+            const { agrid, beforeSendMock } = setup()
 
-            posthog.captureTraceFeedback('123', 'feedback')
+            agrid.captureTraceFeedback('123', 'feedback')
 
             const { event, properties } = beforeSendMock.mock.calls[0][0]
             expect(event).toBe('$ai_feedback')
@@ -65,9 +65,9 @@ describe('ai', () => {
         })
 
         it('should convert numeric values', () => {
-            const { posthog, beforeSendMock } = setup()
+            const { agrid, beforeSendMock } = setup()
 
-            posthog.captureTraceFeedback(123, 'feedback')
+            agrid.captureTraceFeedback(123, 'feedback')
 
             const { event, properties } = beforeSendMock.mock.calls[0][0]
             expect(event).toBe('$ai_feedback')

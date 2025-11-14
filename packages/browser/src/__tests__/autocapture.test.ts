@@ -10,10 +10,10 @@ import {
 } from '../autocapture'
 import { shouldCaptureDomEvent } from '../autocapture-utils'
 import { AUTOCAPTURE_DISABLED_SERVER_SIDE } from '../constants'
-import { AutocaptureConfig, FlagsResponse, PostHogConfig } from '../types'
-import { PostHog } from '../posthog-core'
+import { AutocaptureConfig, FlagsResponse, AgridConfig } from '../types'
+import { Agrid } from '../agrid-core'
 import { window } from '../utils/globals'
-import { createPosthogInstance } from './helpers/posthog-instance'
+import { createPosthogInstance } from './helpers/agrid-instance'
 import { uuidv7 } from '../uuidv7'
 import { isUndefined } from '@agrid/core'
 
@@ -62,7 +62,7 @@ describe('Autocapture system', () => {
     const originalWindowLocation = window!.location
 
     let autocapture: Autocapture
-    let posthog: PostHog
+    let agrid: Agrid
     let beforeSendMock: jest.Mock
 
     beforeEach(async () => {
@@ -78,17 +78,17 @@ describe('Autocapture system', () => {
 
         beforeSendMock = jest.fn().mockImplementation((...args) => args)
 
-        posthog = await createPosthogInstance(uuidv7(), {
+        agrid = await createPosthogInstance(uuidv7(), {
             api_host: 'https://test.com',
             token: 'testtoken',
             autocapture: true,
             before_send: beforeSendMock,
         })
 
-        if (isUndefined(posthog.autocapture)) {
+        if (isUndefined(agrid.autocapture)) {
             throw new Error('helping TS by confirming this is created by now')
         }
-        autocapture = posthog.autocapture
+        autocapture = agrid.autocapture
     })
 
     afterEach(() => {
@@ -378,7 +378,7 @@ describe('Autocapture system', () => {
 
     describe('_captureEvent', () => {
         beforeEach(() => {
-            posthog.config.rageclick = true
+            agrid.config.rageclick = true
             // Trigger proper enabling
             autocapture.onRemoteConfig({} as FlagsResponse)
         })
@@ -416,8 +416,8 @@ describe('Autocapture system', () => {
             ],
         ])(
             'autocapture and rageclick testcase: %s',
-            (_title, rageclickConfig: PostHogConfig['rageclick'], parentClassname: string, expectedCaptured) => {
-                posthog.config.rageclick = rageclickConfig
+            (_title, rageclickConfig: AgridConfig['rageclick'], parentClassname: string, expectedCaptured) => {
+                agrid.config.rageclick = rageclickConfig
 
                 const elTarget = document.createElement('img')
                 const elParent = document.createElement('span')
@@ -651,7 +651,7 @@ describe('Autocapture system', () => {
         })
 
         it('should not capture events when config returns false, when an element matching any of the event selectors is clicked', () => {
-            posthog.config.autocapture = false
+            agrid.config.autocapture = false
             autocapture.onRemoteConfig({} as FlagsResponse)
 
             const eventElement1 = document.createElement('div')
@@ -1037,7 +1037,7 @@ describe('Autocapture system', () => {
       </button>
       `
 
-            posthog.config.mask_all_element_attributes = true
+            agrid.config.mask_all_element_attributes = true
 
             document.body.innerHTML = dom
             const button1 = document.getElementById('button1')
@@ -1057,7 +1057,7 @@ describe('Autocapture system', () => {
           Dont capture me!
         </a>
         `
-            posthog.config.mask_all_text = true
+            agrid.config.mask_all_text = true
 
             document.body.innerHTML = dom
             const a = document.getElementById('a1')
@@ -1152,7 +1152,7 @@ describe('Autocapture system', () => {
     describe('_addDomEventHandlers', () => {
         beforeEach(() => {
             document.title = 'test page'
-            posthog.config.mask_all_element_attributes = false
+            agrid.config.mask_all_element_attributes = false
             autocapture.onRemoteConfig({} as FlagsResponse)
         })
 
@@ -1181,17 +1181,17 @@ describe('Autocapture system', () => {
         })
 
         it('should be enabled before the flags response if flags is disabled', () => {
-            posthog.config.advanced_disable_flags = true
+            agrid.config.advanced_disable_flags = true
             expect(autocapture.isEnabled).toBe(true)
         })
 
         it('should be disabled before the flags response if opt out is in persistence', () => {
-            posthog.persistence!.props[AUTOCAPTURE_DISABLED_SERVER_SIDE] = true
+            agrid.persistence!.props[AUTOCAPTURE_DISABLED_SERVER_SIDE] = true
             expect(autocapture.isEnabled).toBe(false)
         })
 
         it('should be disabled before the flags response if client side opted out', () => {
-            posthog.config.autocapture = false
+            agrid.config.autocapture = false
             expect(autocapture.isEnabled).toBe(false)
         })
 
@@ -1205,7 +1205,7 @@ describe('Autocapture system', () => {
         ])(
             'when client side config is %p and remote opt out is %p - autocapture enabled should be %p',
             (clientSideOptIn, serverSideOptOut, expected) => {
-                posthog.config.autocapture = clientSideOptIn
+                agrid.config.autocapture = clientSideOptIn
                 autocapture.onRemoteConfig({
                     autocapture_opt_out: serverSideOptOut,
                 } as FlagsResponse)
@@ -1214,7 +1214,7 @@ describe('Autocapture system', () => {
         )
 
         it('should call _addDomEventHandlders if autocapture is true in client config', () => {
-            posthog.config.autocapture = true
+            agrid.config.autocapture = true
             autocapture.onRemoteConfig({} as FlagsResponse)
             expect(autocapture['_addDomEventHandlers']).toHaveBeenCalled()
         })
@@ -1226,7 +1226,7 @@ describe('Autocapture system', () => {
 
         it('should not call _addDomEventHandlders if autocapture is disabled in client config', () => {
             expect(autocapture['_addDomEventHandlers']).not.toHaveBeenCalled()
-            posthog.config.autocapture = false
+            agrid.config.autocapture = false
 
             autocapture.onRemoteConfig({} as FlagsResponse)
 
@@ -1253,14 +1253,14 @@ describe('Autocapture system', () => {
                 composedPath: () => [button, main_el],
             })
             const autocapture_config = {
-                url_allowlist: ['https://posthog.com/test/*'],
+                url_allowlist: ['https://agrid.com/test/*'],
             }
 
-            window!.location = new URL('https://posthog.com/test/matching') as unknown as string & Location
+            window!.location = new URL('https://agrid.com/test/matching') as unknown as string & Location
 
             expect(shouldCaptureDomEvent(button, e, autocapture_config)).toBe(true)
 
-            window!.location = new URL('https://posthog.com/docs/not-matching') as unknown as string & Location
+            window!.location = new URL('https://agrid.com/docs/not-matching') as unknown as string & Location
             expect(shouldCaptureDomEvent(button, e, autocapture_config)).toBe(false)
         })
 
@@ -1274,14 +1274,14 @@ describe('Autocapture system', () => {
                 composedPath: () => [button, main_el],
             })
             const autocapture_config = {
-                url_ignorelist: ['https://posthog.com/test/*'],
+                url_ignorelist: ['https://agrid.com/test/*'],
             }
 
-            window!.location = new URL('https://posthog.com/test/matching') as unknown as string & Location
+            window!.location = new URL('https://agrid.com/test/matching') as unknown as string & Location
 
             expect(shouldCaptureDomEvent(button, e, autocapture_config)).toBe(false)
 
-            window!.location = new URL('https://posthog.com/docs/not-matching') as unknown as string & Location
+            window!.location = new URL('https://agrid.com/docs/not-matching') as unknown as string & Location
             expect(shouldCaptureDomEvent(button, e, autocapture_config)).toBe(true)
         })
 
@@ -1298,7 +1298,7 @@ describe('Autocapture system', () => {
                 url_allowlist: [],
             }
 
-            window!.location = new URL('https://posthog.com/test/captured') as unknown as string & Location
+            window!.location = new URL('https://agrid.com/test/captured') as unknown as string & Location
 
             expect(shouldCaptureDomEvent(button, e, autocapture_config)).toBe(false)
         })

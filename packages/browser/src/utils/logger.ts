@@ -14,7 +14,7 @@ const _createLogger = (prefix: string): PosthogJsLogger => {
         _log: (level: 'log' | 'warn' | 'error', ...args: any[]) => {
             if (
                 window &&
-                (Config.DEBUG || assignableWindow.POSTHOG_DEBUG) &&
+                (Config.DEBUG || assignableWindow.AGRID_DEBUG) &&
                 !isUndefined(window.console) &&
                 window.console
             ) {
@@ -47,7 +47,7 @@ const _createLogger = (prefix: string): PosthogJsLogger => {
         },
 
         uninitializedWarning: (methodName: string) => {
-            logger.error(`You must initialize PostHog before calling ${methodName}`)
+            logger.error(`You must initialize Agrid before calling ${methodName}`)
         },
 
         createLogger: (additionalPrefix: string) => _createLogger(`${prefix} ${additionalPrefix}`),
@@ -55,6 +55,6 @@ const _createLogger = (prefix: string): PosthogJsLogger => {
     return logger
 }
 
-export const logger = _createLogger('[PostHog.js]')
+export const logger = _createLogger('[Agrid.js]')
 
 export const createLogger = logger.createLogger

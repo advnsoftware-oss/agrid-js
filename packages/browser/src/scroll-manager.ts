@@ -1,5 +1,5 @@
 import { window } from './utils/globals'
-import { PostHog } from './posthog-core'
+import { Agrid } from './agrid-core'
 import { addEventListener } from './utils'
 import { isArray } from '@agrid/core'
 
@@ -20,7 +20,7 @@ export interface ScrollContext {
 export class ScrollManager {
     private _context: ScrollContext | undefined
 
-    constructor(private _instance: PostHog) {}
+    constructor(private _instance: Agrid) {}
 
     getContext(): ScrollContext | undefined {
         return this._context

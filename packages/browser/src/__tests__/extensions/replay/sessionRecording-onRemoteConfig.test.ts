@@ -2,12 +2,12 @@
 
 import '@testing-library/jest-dom'
 
-import { PostHogPersistence } from '../../../posthog-persistence'
+import { AgridPersistence } from '../../../agrid-persistence'
 import { SESSION_RECORDING_REMOTE_CONFIG } from '../../../constants'
 import { SessionIdManager } from '../../../sessionid'
 import { FULL_SNAPSHOT_EVENT_TYPE, META_EVENT_TYPE } from '../../../extensions/replay/external/sessionrecording-utils'
-import { PostHog } from '../../../posthog-core'
-import { FlagsResponse, PostHogConfig, Property } from '../../../types'
+import { Agrid } from '../../../agrid-core'
+import { FlagsResponse, AgridConfig, Property } from '../../../types'
 import { uuidv7 } from '../../../uuidv7'
 import { SessionRecording } from '../../../extensions/replay/session-recording'
 import { assignableWindow, window } from '../../../utils/globals'
@@ -61,11 +61,11 @@ describe('SessionRecording', () => {
     const _addCustomEvent = jest.fn()
     const loadScriptMock = jest.fn()
     let _emit: any
-    let posthog: PostHog
+    let agrid: Agrid
     let sessionRecording: SessionRecording
     let sessionId: string
     let sessionManager: SessionIdManager
-    let config: PostHogConfig
+    let config: AgridConfig
     let sessionIdGeneratorMock: Mock
     let windowIdGeneratorMock: Mock
     let removePageviewCaptureHookMock: Mock
@@ -104,7 +104,7 @@ describe('SessionRecording', () => {
                 compress_events: false,
             },
             persistence: 'memory',
-        } as unknown as PostHogConfig
+        } as unknown as AgridConfig
 
         assignableWindow.__PosthogExtensions__ = {
             rrweb: undefined,
@@ -117,18 +117,18 @@ describe('SessionRecording', () => {
         sessionIdGeneratorMock = jest.fn().mockImplementation(() => sessionId)
         windowIdGeneratorMock = jest.fn().mockImplementation(() => 'windowId')
 
-        const postHogPersistence = new PostHogPersistence(config)
+        const postHogPersistence = new AgridPersistence(config)
         postHogPersistence.clear()
 
         sessionManager = new SessionIdManager(
-            { config, persistence: postHogPersistence, register: jest.fn() } as unknown as PostHog,
+            { config, persistence: postHogPersistence, register: jest.fn() } as unknown as Agrid,
             sessionIdGeneratorMock,
             windowIdGeneratorMock
         )
 
         simpleEventEmitter = new SimpleEventEmitter()
-        // TODO we really need to make this a real posthog instance :cry:
-        posthog = {
+        // TODO we really need to make this a real agrid instance :cry:
+        agrid = {
             get_property: (property_key: string): Property | undefined => {
                 return postHogPersistence?.['props'][property_key]
             },
@@ -151,7 +151,7 @@ describe('SessionRecording', () => {
                 const unsubscribe = simpleEventEmitter.on(event, cb)
                 return removePageviewCaptureHookMock.mockImplementation(unsubscribe)
             }),
-        } as Partial<PostHog> as PostHog
+        } as Partial<Agrid> as Agrid
 
         loadScriptMock.mockImplementation((_ph, _path, callback) => {
             addRRwebToWindow()
@@ -161,10 +161,10 @@ describe('SessionRecording', () => {
         assignableWindow.__PosthogExtensions__.loadExternalDependency = loadScriptMock
 
         assignableWindow.__PosthogExtensions__.initSessionRecording = () => {
-            return new LazyLoadedSessionRecording(posthog)
+            return new LazyLoadedSessionRecording(agrid)
         }
 
-        sessionRecording = new SessionRecording(posthog)
+        sessionRecording = new SessionRecording(agrid)
     })
 
     afterEach(() => {
@@ -183,7 +183,7 @@ describe('SessionRecording', () => {
                     sessionRecording: { endpoint: '/s/', scriptConfig: { script: 'experimental-recorder' } },
                 })
             )
-            expect(loadScriptMock).toHaveBeenCalledWith(posthog, 'experimental-recorder', expect.any(Function))
+            expect(loadScriptMock).toHaveBeenCalledWith(agrid, 'experimental-recorder', expect.any(Function))
         })
 
         it('uses anyMatchSessionRecordingStatus when triggerMatching is "any"', () => {
@@ -294,15 +294,15 @@ describe('SessionRecording', () => {
         })
 
         it('stores true in persistence if recording is enabled from the server', () => {
-            posthog.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
+            agrid.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
 
             sessionRecording.onRemoteConfig(makeFlagsResponse({ sessionRecording: { endpoint: '/s/' } }))
 
-            expect(posthog.get_property(SESSION_RECORDING_REMOTE_CONFIG).enabled).toBe(true)
+            expect(agrid.get_property(SESSION_RECORDING_REMOTE_CONFIG).enabled).toBe(true)
         })
 
         it('stores true in persistence if canvas is enabled from the server', () => {
-            posthog.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
+            agrid.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
 
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
@@ -310,13 +310,13 @@ describe('SessionRecording', () => {
                 })
             )
 
-            expect(posthog.get_property(SESSION_RECORDING_REMOTE_CONFIG).recordCanvas).toBe(true)
-            expect(posthog.get_property(SESSION_RECORDING_REMOTE_CONFIG).canvasFps).toBe(6)
-            expect(posthog.get_property(SESSION_RECORDING_REMOTE_CONFIG).canvasQuality).toBe('0.2')
+            expect(agrid.get_property(SESSION_RECORDING_REMOTE_CONFIG).recordCanvas).toBe(true)
+            expect(agrid.get_property(SESSION_RECORDING_REMOTE_CONFIG).canvasFps).toBe(6)
+            expect(agrid.get_property(SESSION_RECORDING_REMOTE_CONFIG).canvasQuality).toBe('0.2')
         })
 
         it('stores masking config in persistence if set on the server', () => {
-            posthog.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
+            agrid.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
 
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
@@ -324,23 +324,23 @@ describe('SessionRecording', () => {
                 })
             )
 
-            expect(posthog.get_property(SESSION_RECORDING_REMOTE_CONFIG).masking).toEqual({
+            expect(agrid.get_property(SESSION_RECORDING_REMOTE_CONFIG).masking).toEqual({
                 maskAllInputs: true,
                 maskTextSelector: '*',
             })
         })
 
         it('stores nothing in persistence if recording is not returned from the server', () => {
-            posthog.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
+            agrid.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
 
             sessionRecording.onRemoteConfig(makeFlagsResponse({}))
 
-            expect(posthog.get_property(SESSION_RECORDING_REMOTE_CONFIG)).toBe(undefined)
+            expect(agrid.get_property(SESSION_RECORDING_REMOTE_CONFIG)).toBe(undefined)
             expect(sessionRecording.status).toBe('lazy_loading')
         })
 
         it('stores response in persistence if recording is false from the server', () => {
-            posthog.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
+            agrid.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
 
             sessionRecording.onRemoteConfig(makeFlagsResponse({ sessionRecording: false }))
 
@@ -348,7 +348,7 @@ describe('SessionRecording', () => {
         })
 
         it('stores sample rate', () => {
-            posthog.persistence?.register({ SESSION_RECORDING_REMOTE_CONFIG: undefined })
+            agrid.persistence?.register({ SESSION_RECORDING_REMOTE_CONFIG: undefined })
 
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
@@ -356,12 +356,12 @@ describe('SessionRecording', () => {
                 })
             )
 
-            expect(posthog.get_property(SESSION_RECORDING_REMOTE_CONFIG).sampleRate).toBe(0.7)
+            expect(agrid.get_property(SESSION_RECORDING_REMOTE_CONFIG).sampleRate).toBe(0.7)
             expect(sessionRecording['_lazyLoadedSessionRecording']['_sampleRate']).toBe(0.7)
         })
 
         it('starts session recording, saves setting and endpoint when enabled', () => {
-            posthog.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
+            agrid.persistence?.register({ [SESSION_RECORDING_REMOTE_CONFIG]: undefined })
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
                     sessionRecording: { endpoint: '/ses/' },
@@ -370,7 +370,7 @@ describe('SessionRecording', () => {
 
             expect(sessionRecording.startIfEnabledOrStop).toHaveBeenCalled()
             expect(loadScriptMock).toHaveBeenCalled()
-            expect(posthog.get_property(SESSION_RECORDING_REMOTE_CONFIG).enabled).toBe(true)
+            expect(agrid.get_property(SESSION_RECORDING_REMOTE_CONFIG).enabled).toBe(true)
             expect(sessionRecording['_lazyLoadedSessionRecording']['_endpoint']).toEqual('/ses/')
         })
     })

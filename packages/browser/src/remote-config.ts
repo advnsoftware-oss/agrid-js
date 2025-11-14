@@ -1,4 +1,4 @@
-import { PostHog } from './posthog-core'
+import { Agrid } from './agrid-core'
 import { RemoteConfig } from './types'
 
 import { createLogger } from './utils/logger'
@@ -7,19 +7,19 @@ import { assignableWindow } from './utils/globals'
 const logger = createLogger('[RemoteConfig]')
 
 export class RemoteConfigLoader {
-    constructor(private readonly _instance: PostHog) {}
+    constructor(private readonly _instance: Agrid) {}
 
     get remoteConfig(): RemoteConfig | undefined {
-        return assignableWindow._POSTHOG_REMOTE_CONFIG?.[this._instance.config.token]?.config
+        return assignableWindow._AGRID_REMOTE_CONFIG?.[this._instance.config.token]?.config
     }
 
     private _loadRemoteConfigJs(cb: (config?: RemoteConfig) => void): void {
-        if (assignableWindow.__PosthogExtensions__?.loadExternalDependency) {
-            assignableWindow.__PosthogExtensions__?.loadExternalDependency?.(this._instance, 'remote-config', () => {
+        if (assignableWindow.__AgridExtensions__?.loadExternalDependency) {
+            assignableWindow.__AgridExtensions__?.loadExternalDependency?.(this._instance, 'remote-config', () => {
                 return cb(this.remoteConfig)
             })
         } else {
-            logger.error('PostHog Extensions not found. Cannot load remote config.')
+            logger.error('Agrid Extensions not found. Cannot load remote config.')
             cb()
         }
     }
@@ -70,7 +70,7 @@ export class RemoteConfigLoader {
     private _onRemoteConfig(config?: RemoteConfig): void {
         // NOTE: Once this is rolled out we will remove the /flags related code above. Until then the code duplication is fine.
         if (!config) {
-            logger.error('Failed to fetch remote config from PostHog.')
+            logger.error('Failed to fetch remote config from Agrid.')
             return
         }
 

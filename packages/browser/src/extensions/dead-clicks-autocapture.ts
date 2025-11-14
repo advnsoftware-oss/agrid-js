@@ -1,4 +1,4 @@
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import { DEAD_CLICKS_ENABLED_SERVER_SIDE } from '../constants'
 import { isBoolean, isObject } from '@agrid/core'
 import { assignableWindow, document, LazyLoadedDeadClicksAutocaptureInterface } from '../utils/globals'
@@ -24,7 +24,7 @@ export class DeadClicksAutocapture {
     private _lazyLoadedDeadClicksAutocapture: LazyLoadedDeadClicksAutocaptureInterface | undefined
 
     constructor(
-        readonly instance: PostHog,
+        readonly instance: Agrid,
         readonly isEnabled: (dca: DeadClicksAutocapture) => boolean,
         readonly onCapture?: DeadClicksAutoCaptureConfig['__onCapture']
     ) {
@@ -49,11 +49,11 @@ export class DeadClicksAutocapture {
     }
 
     private _loadScript(cb: () => void): void {
-        if (assignableWindow.__PosthogExtensions__?.initDeadClicksAutocapture) {
+        if (assignableWindow.__AgridExtensions__?.initDeadClicksAutocapture) {
             // already loaded
             cb()
         }
-        assignableWindow.__PosthogExtensions__?.loadExternalDependency?.(
+        assignableWindow.__AgridExtensions__?.loadExternalDependency?.(
             this.instance,
             'dead-clicks-autocapture',
             (err) => {
@@ -74,14 +74,14 @@ export class DeadClicksAutocapture {
 
         if (
             !this._lazyLoadedDeadClicksAutocapture &&
-            assignableWindow.__PosthogExtensions__?.initDeadClicksAutocapture
+            assignableWindow.__AgridExtensions__?.initDeadClicksAutocapture
         ) {
             const config = isObject(this.instance.config.capture_dead_clicks)
                 ? this.instance.config.capture_dead_clicks
                 : {}
             config.__onCapture = this.onCapture
 
-            this._lazyLoadedDeadClicksAutocapture = assignableWindow.__PosthogExtensions__.initDeadClicksAutocapture(
+            this._lazyLoadedDeadClicksAutocapture = assignableWindow.__AgridExtensions__.initDeadClicksAutocapture(
                 this.instance,
                 config
             )

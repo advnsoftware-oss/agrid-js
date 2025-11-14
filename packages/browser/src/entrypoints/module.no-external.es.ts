@@ -1,6 +1,6 @@
-import { init_as_module } from '../posthog-core'
-export { PostHog } from '../posthog-core'
+import { init_as_module } from '../agrid-core'
+export { Agrid } from '../agrid-core'
 export * from '../types'
-export * from '../posthog-surveys-types'
-export const posthog = init_as_module()
-export default posthog
+export * from '../agrid-surveys-types'
+export const agrid = init_as_module()
+export default agrid

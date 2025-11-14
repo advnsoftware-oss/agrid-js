@@ -1,9 +1,9 @@
 /*eslint @typescript-eslint/no-empty-function: "off" */
 
-import { filterActiveFeatureFlags, parseFlagsResponse, PostHogFeatureFlags } from '../posthog-featureflags'
-import { PostHogPersistence } from '../posthog-persistence'
+import { filterActiveFeatureFlags, parseFlagsResponse, AgridFeatureFlags } from '../agrid-featureflags'
+import { AgridPersistence } from '../agrid-persistence'
 import { RequestRouter } from '../utils/request-router'
-import { PostHogConfig } from '../types'
+import { AgridConfig } from '../types'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
@@ -15,8 +15,8 @@ describe('featureflags', () => {
     const config = {
         token: 'random fake token',
         persistence: 'memory',
-        api_host: 'https://app.posthog.com',
-    } as PostHogConfig
+        api_host: 'https://app.agrid.com',
+    } as AgridConfig
 
     let mockWarn
 
@@ -25,7 +25,7 @@ describe('featureflags', () => {
             config: { ...config },
             get_distinct_id: () => 'blah id',
             getGroups: () => {},
-            persistence: new PostHogPersistence(config),
+            persistence: new AgridPersistence(config),
             requestRouter: new RequestRouter({ config } as any),
             register: (props) => instance.persistence.register(props),
             unregister: (key) => instance.persistence.unregister(key),
@@ -44,7 +44,7 @@ describe('featureflags', () => {
                 instance.config.advanced_disable_flags || instance.config.advanced_disable_decide || false,
         }
 
-        featureFlags = new PostHogFeatureFlags(instance)
+        featureFlags = new AgridFeatureFlags(instance)
 
         jest.spyOn(instance, 'capture').mockReturnValue(undefined)
         mockWarn = jest.spyOn(window.console, 'warn').mockImplementation()
@@ -126,7 +126,7 @@ describe('featureflags', () => {
     })
 
     it('should warn if /flags endpoint was not hit and no flags exist', () => {
-        ;(window as any).POSTHOG_DEBUG = true
+        ;(window as any).AGRID_DEBUG = true
         featureFlags._hasLoadedFlags = false
         instance.persistence.unregister('$enabled_feature_flags')
         instance.persistence.unregister('$active_feature_flags')
@@ -134,7 +134,7 @@ describe('featureflags', () => {
         expect(featureFlags.getFlags()).toEqual([])
         expect(featureFlags.isFeatureEnabled('beta-feature')).toEqual(undefined)
         expect(window.console.warn).toHaveBeenCalledWith(
-            '[PostHog.js] [FeatureFlags]',
+            '[Agrid.js] [FeatureFlags]',
             'isFeatureEnabled for key "beta-feature" failed. Feature flags didn\'t load in time.'
         )
 
@@ -142,7 +142,7 @@ describe('featureflags', () => {
 
         expect(featureFlags.getFeatureFlag('beta-feature')).toEqual(undefined)
         expect(window.console.warn).toHaveBeenCalledWith(
-            '[PostHog.js] [FeatureFlags]',
+            '[Agrid.js] [FeatureFlags]',
             'getFeatureFlag for key "beta-feature" failed. Feature flags didn\'t load in time.'
         )
     })
@@ -285,7 +285,7 @@ describe('featureflags', () => {
                     'alpha-feature-2': true,
                 })
                 expect(window.console.warn).toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     ' Overriding feature flags!',
                     expect.any(Object)
                 )
@@ -300,7 +300,7 @@ describe('featureflags', () => {
                 )
 
                 expect(window.console.warn).not.toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     ' Overriding feature flags!'
                 )
                 expect(featureFlags.getFlagVariants()).toEqual({
@@ -312,7 +312,7 @@ describe('featureflags', () => {
             it('shows deprecation warning', () => {
                 featureFlags.override({ 'beta-feature': false })
                 expect(window.console.warn).toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     'override is deprecated. Please use overrideFeatureFlags instead.'
                 )
             })
@@ -332,7 +332,7 @@ describe('featureflags', () => {
                     'alpha-feature-2': true,
                 })
                 expect(window.console.warn).toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     ' Overriding feature flags!',
                     expect.any(Object)
                 )
@@ -347,7 +347,7 @@ describe('featureflags', () => {
                 })
 
                 expect(window.console.warn).not.toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     ' Overriding feature flags!'
                 )
                 expect(featureFlags.getFlagVariants()).toEqual({
@@ -401,7 +401,7 @@ describe('featureflags', () => {
                     metadata: undefined,
                 })
                 expect(window.console.warn).toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     ' Overriding feature flags!',
                     expect.any(Object)
                 )
@@ -416,7 +416,7 @@ describe('featureflags', () => {
                 })
 
                 expect(window.console.warn).not.toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     ' Overriding feature flags!'
                 )
                 expect(featureFlags.getFeatureFlagDetails('alpha-feature-2')).toEqual({
@@ -445,7 +445,7 @@ describe('featureflags', () => {
                 })
 
                 expect(window.console.warn).not.toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     ' Overriding feature flag payloads!'
                 )
 
@@ -462,7 +462,7 @@ describe('featureflags', () => {
                     'alpha-feature-2': 123,
                 })
                 expect(window.console.warn).toHaveBeenCalledWith(
-                    '[PostHog.js] [FeatureFlags]',
+                    '[Agrid.js] [FeatureFlags]',
                     ' Overriding feature flag payloads!',
                     expect.any(Object)
                 )
@@ -909,7 +909,7 @@ describe('featureflags', () => {
             })
 
             expect(instance._send_request).toHaveBeenCalledWith({
-                url: 'https://us.i.posthog.com/api/early_access_features/?token=random fake token',
+                url: 'https://us.i.agrid.com/api/early_access_features/?token=random fake token',
                 method: 'GET',
                 callback: expect.any(Function),
             })
@@ -939,7 +939,7 @@ describe('featureflags', () => {
             })
 
             expect(instance._send_request).toHaveBeenCalledWith({
-                url: 'https://us.i.posthog.com/api/early_access_features/?token=random fake token',
+                url: 'https://us.i.agrid.com/api/early_access_features/?token=random fake token',
                 method: 'GET',
                 callback: expect.any(Function),
             })
@@ -973,7 +973,7 @@ describe('featureflags', () => {
             )
 
             expect(instance._send_request).toHaveBeenCalledWith({
-                url: 'https://us.i.posthog.com/api/early_access_features/?token=random fake token&stage=concept&stage=beta',
+                url: 'https://us.i.agrid.com/api/early_access_features/?token=random fake token&stage=concept&stage=beta',
                 method: 'GET',
                 callback: expect.any(Function),
             })
@@ -1853,8 +1853,8 @@ describe('parseFlagsResponse', () => {
             $feature_flag_details: {},
         })
         expect(window.console.warn).toHaveBeenCalledWith(
-            '[PostHog.js] [FeatureFlags]',
-            'Using an older version of the feature flags endpoint. Please upgrade your PostHog server to the latest version'
+            '[Agrid.js] [FeatureFlags]',
+            'Using an older version of the feature flags endpoint. Please upgrade your Agrid server to the latest version'
         )
     })
 
@@ -1888,8 +1888,8 @@ describe('parseFlagsResponse', () => {
             $feature_flag_details: {},
         })
         expect(window.console.warn).toHaveBeenCalledWith(
-            '[PostHog.js] [FeatureFlags]',
-            'Using an older version of the feature flags endpoint. Please upgrade your PostHog server to the latest version'
+            '[Agrid.js] [FeatureFlags]',
+            'Using an older version of the feature flags endpoint. Please upgrade your Agrid server to the latest version'
         )
     })
 
@@ -2058,7 +2058,7 @@ describe('parseFlagsResponse', () => {
             $enabled_feature_flags: { 'beta-feature': true, 'alpha-feature-2': true },
         })
         expect(window.console.warn).toHaveBeenCalledWith(
-            '[PostHog.js] [FeatureFlags]',
+            '[Agrid.js] [FeatureFlags]',
             'v1 of the feature flags endpoint is deprecated. Please use the latest version.'
         )
     })
@@ -2088,8 +2088,8 @@ describe('parseFlagsResponse', () => {
             $feature_flag_request_id: 'test-request-id-123',
         })
         expect(window.console.warn).toHaveBeenCalledWith(
-            '[PostHog.js] [FeatureFlags]',
-            'Using an older version of the feature flags endpoint. Please upgrade your PostHog server to the latest version'
+            '[Agrid.js] [FeatureFlags]',
+            'Using an older version of the feature flags endpoint. Please upgrade your Agrid server to the latest version'
         )
     })
 
@@ -2169,23 +2169,23 @@ describe('filterActiveFeatureFlags', () => {
 })
 
 describe('getRemoteConfigPayload', () => {
-    let instance: PostHog
-    let featureFlags: PostHogFeatureFlags
+    let instance: Agrid
+    let featureFlags: AgridFeatureFlags
 
     beforeEach(() => {
         instance = {
             config: {
                 token: 'test-token',
                 api_host: 'https://test.com',
-            } as PostHogConfig,
+            } as AgridConfig,
             get_distinct_id: () => 'test-distinct-id',
             _send_request: jest.fn(),
             requestRouter: {
                 endpointFor: jest.fn().mockImplementation((endpoint, path) => `${endpoint}${path}`),
             },
-        } as unknown as PostHog
+        } as unknown as Agrid
 
-        featureFlags = new PostHogFeatureFlags(instance)
+        featureFlags = new AgridFeatureFlags(instance)
     })
 
     it('should include evaluation_environments when configured', () => {
@@ -2250,20 +2250,20 @@ describe('getRemoteConfigPayload', () => {
     describe('flags_api_host configuration', () => {
         it('should use flags_api_host when configured', () => {
             const apiConfig = {
-                api_host: 'https://app.posthog.com',
+                api_host: 'https://app.agrid.com',
                 flags_api_host: 'https://example.com/feature-flags',
             }
             const customInstance = {
                 config: {
                     token: 'test-token',
                     ...apiConfig,
-                } as PostHogConfig,
+                } as AgridConfig,
                 get_distinct_id: () => 'test-distinct-id',
                 _send_request: jest.fn(),
                 requestRouter: new RequestRouter({ config: apiConfig } as any),
-            } as unknown as PostHog
+            } as unknown as Agrid
 
-            const customFeatureFlags = new PostHogFeatureFlags(customInstance)
+            const customFeatureFlags = new AgridFeatureFlags(customInstance)
             const callback = jest.fn()
             customFeatureFlags.getRemoteConfigPayload('test-flag', callback)
 
@@ -2279,25 +2279,25 @@ describe('getRemoteConfigPayload', () => {
             const customInstance = {
                 config: {
                     token: 'test-token',
-                    api_host: 'https://app.posthog.com',
-                } as PostHogConfig,
+                    api_host: 'https://app.agrid.com',
+                } as AgridConfig,
                 get_distinct_id: () => 'test-distinct-id',
                 _send_request: jest.fn(),
                 requestRouter: new RequestRouter({
                     config: {
-                        api_host: 'https://app.posthog.com',
+                        api_host: 'https://app.agrid.com',
                     },
                 } as any),
-            } as unknown as PostHog
+            } as unknown as Agrid
 
-            const customFeatureFlags = new PostHogFeatureFlags(customInstance)
+            const customFeatureFlags = new AgridFeatureFlags(customInstance)
             const callback = jest.fn()
             customFeatureFlags.getRemoteConfigPayload('test-flag', callback)
 
             expect(customInstance._send_request).toHaveBeenCalledWith(
                 expect.objectContaining({
                     method: 'POST',
-                    url: 'https://us.i.posthog.com/flags/?v=2&config=true',
+                    url: 'https://us.i.agrid.com/flags/?v=2&config=true',
                 })
             )
         })

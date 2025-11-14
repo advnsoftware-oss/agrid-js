@@ -27,11 +27,11 @@ const addTracingHeaders = (
 
     if (sessionManager) {
         const { sessionId, windowId } = sessionManager.checkAndGetSessionAndWindowId(true)
-        req.headers.set('X-POSTHOG-SESSION-ID', sessionId)
-        req.headers.set('X-POSTHOG-WINDOW-ID', windowId)
+        req.headers.set('X-AGRID-SESSION-ID', sessionId)
+        req.headers.set('X-AGRID-WINDOW-ID', windowId)
     }
     if (distinctId !== COOKIELESS_SENTINEL_VALUE) {
-        req.headers.set('X-POSTHOG-DISTINCT-ID', distinctId)
+        req.headers.set('X-AGRID-DISTINCT-ID', distinctId)
     }
 }
 
@@ -83,14 +83,14 @@ const patchXHR = (hostnames: string[], distinctId: string, sessionManager?: Sess
     )
 }
 
-assignableWindow.__PosthogExtensions__ = assignableWindow.__PosthogExtensions__ || {}
+assignableWindow.__AgridExtensions__ = assignableWindow.__AgridExtensions__ || {}
 const patchFns = {
     _patchFetch: patchFetch,
     _patchXHR: patchXHR,
 }
-assignableWindow.__PosthogExtensions__.tracingHeadersPatchFns = patchFns
+assignableWindow.__AgridExtensions__.tracingHeadersPatchFns = patchFns
 
-// we used to put tracingHeadersPatchFns on window, and now we put it on __PosthogExtensions__
+// we used to put tracingHeadersPatchFns on window, and now we put it on __AgridExtensions__
 // but that means that old clients which lazily load this extension are looking in the wrong place
 // yuck,
 // so we also put it directly on the window

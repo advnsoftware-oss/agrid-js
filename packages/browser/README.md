@@ -1,9 +1,9 @@
-# PostHog Browser JS Library
+# Agrid Browser JS Library
 
 [![npm package](https://img.shields.io/npm/v/agrid-js?style=flat-square)](https://www.npmjs.com/package/agrid-js)
 [![MIT License](https://img.shields.io/badge/License-MIT-red.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-For information on using this library in your app, [see PostHog Docs](https://posthog.com/docs/libraries/js).
+For information on using this library in your app, [see Agrid Docs](https://agrid.com/docs/libraries/js).
 This README is intended for developing the library itself.
 
 ## Dependencies
@@ -39,11 +39,10 @@ These dependencies are marked as optional to reduce installation size for users 
 Testing on IE11 requires a bit more setup. TestCafe tests will use the
 playground application to test the locally built array.full.js bundle. It will
 also verify that the events emitted during the testing of playground are loaded
-into the PostHog app. By default it uses https://us.i.posthog.com and the
+into the Agrid app. By default it uses https://us.i.agrid.com and the
 project with ID 11213. See the testcafe tests to see how to override these if
-needed. For PostHog internal users ask @benjackwhite or @hazzadous to invite you
-to the Project. You'll need to set `POSTHOG_API_KEY` to your personal API key, and
-`POSTHOG_PROJECT_KEY` to the key for the project you are using.
+needed. You'll need to set `AGRID_API_KEY` to your personal API key, and
+`AGRID_PROJECT_KEY` to the key for the project you are using.
 
 You'll also need to sign up to [BrowserStack](https://www.browserstack.com/).
 Note that if you are using CodeSpaces, these variables will already be available
@@ -59,18 +58,18 @@ After all this, you'll be able to run through the below steps:
 
 You can use the create react app setup in `packages/browser/playground/nextjs` to test agrid-js as an npm module in a Nextjs application.
 
-1. Run `posthog` locally on port 8000 (`DEBUG=1 TEST=1 ./bin/start`).
-1. Run `python manage.py setup_dev --no-data` on posthog repo, which sets up a demo account.
+1. Run `agrid` locally on port 8000 (`DEBUG=1 TEST=1 ./bin/start`).
+1. Run `python manage.py setup_dev --no-data` on agrid repo, which sets up a demo account.
 1. Copy Project API key found in `http://localhost:8000/project/settings` and save it for the last step.
 1. Run `cd packages/browser/playground/nextjs`.
 1. Run `pnpm install-deps` to install dependencies.
-1. Run `NEXT_PUBLIC_POSTHOG_KEY='<your-local-api-key>' NEXT_PUBLIC_POSTHOG_HOST='http://localhost:8000' pnpm dev` to start the application.
+1. Run `NEXT_PUBLIC_AGRID_KEY='<your-local-api-key>' NEXT_PUBLIC_AGRID_HOST='http://localhost:8000' pnpm dev` to start the application.
 
 ### Tiers of testing
 
 1. Unit tests - this verifies the behavior of the library in bite-sized chunks. Keep this coverage close to 100%, test corner cases and internal behavior here
 2. Browser tests - run in real browsers and so capable of testing timing, browser requests, etc. Useful for testing high-level library behavior, ordering and verifying requests. We shouldn't aim for 100% coverage here as it's impossible to test all possible combinations.
-3. TestCafe E2E tests - integrates with a real posthog instance sends data to it. Hardest to write and maintain - keep these very high level
+3. TestCafe E2E tests - integrates with a real agrid instance sends data to it. Hardest to write and maintain - keep these very high level
 
 ## Developing together with another project
 
@@ -83,14 +82,14 @@ We have 2 options for linking this project to your local version: via [pnpm link
 #### local paths (preferred)
 
 - run `pnpm build` and `pnpm package` in the root of this repo to generate a tarball of this project.
-- run `pnpm -r update agrid-js@file:[ABSOLUTE_PATH_TO_POSTHOG_JS_REPO]/target/agrid-js.tgz` in the root of the repo that you want to link to (e.g. the posthog main repo).
+- run `pnpm -r update agrid-js@file:[ABSOLUTE_PATH_TO_AGRID_JS_REPO]/target/agrid-js.tgz` in the root of the repo that you want to link to (e.g. the agrid main repo).
 - run `pnpm install` in that same repo
-- run `cd frontend && pnpm run copy-scripts` if the repo that you want to link to is the posthog main repo.
+- run `cd frontend && pnpm run copy-scripts` if the repo that you want to link to is the agrid main repo.
 
 Then, once this link has been created, any time you need to make a change to `agrid-js`, you can run `pnpm build && pnpm package` from the `agrid-js` root and the changes will appear in the other repo.
 
 #### `pnpm link`
 
 - In the `agrid-js` directory: `pnpm link --global`
-- (for `posthog` this means: `pnpm link --global agrid-js && pnpm i && pnpm copy-scripts`)
-- You can then remove the link by, e.g., running `pnpm link --global agrid-js` from within `posthog`
+- (for `agrid` this means: `pnpm link --global agrid-js && pnpm i && pnpm copy-scripts`)
+- You can then remove the link by, e.g., running `pnpm link --global agrid-js` from within `agrid`

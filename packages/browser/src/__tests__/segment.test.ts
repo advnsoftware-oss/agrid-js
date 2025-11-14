@@ -4,24 +4,24 @@
  *
  *   - Set the distinct_id to the user's ID if available.
  *   - Set the distinct_id to the anonymous ID if the user's ID is not available.
- *   - Enrich Segment events with PostHog event properties.
+ *   - Enrich Segment events with Agrid event properties.
  */
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals'
 
 import { USER_STATE } from '../constants'
 import { SegmentContext, SegmentPlugin } from '../extensions/segment-integration'
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import { assignableWindow } from '../utils/globals'
-import { PostHogConfig } from '../types'
+import { AgridConfig } from '../types'
 
-const initPostHogInAPromise = (
+const initAgridInAPromise = (
     segment: any,
-    posthogName: string,
-    config?: Partial<PostHogConfig>
-): Promise<PostHog> => {
+    agridName: string,
+    config?: Partial<AgridConfig>
+): Promise<Agrid> => {
     return new Promise((resolve) => {
-        return new PostHog().init(
+        return new Agrid().init(
             `test-token`,
             {
                 debug: true,
@@ -34,7 +34,7 @@ const initPostHogInAPromise = (
                 advanced_disable_feature_flags: true,
                 ...(config || {}),
             },
-            posthogName
+            agridName
         )
     })
 }
@@ -45,12 +45,12 @@ jest.retryTimes(6)
 describe(`Segment integration`, () => {
     let segment: any
     let segmentIntegration: SegmentPlugin
-    let posthogName: string
+    let agridName: string
 
     jest.setTimeout(500)
 
     beforeEach(() => {
-        assignableWindow._POSTHOG_REMOTE_CONFIG = {
+        assignableWindow._AGRID_REMOTE_CONFIG = {
             'test-token': {
                 config: {},
                 siteApps: [],
@@ -88,17 +88,17 @@ describe(`Segment integration`, () => {
     })
 
     it('should call loaded after the segment integration has been set up', async () => {
-        const loadPromise = initPostHogInAPromise(segment, posthogName)
+        const loadPromise = initAgridInAPromise(segment, agridName)
         expect(segmentIntegration).toBeUndefined()
         await loadPromise
         expect(segmentIntegration).toBeDefined()
     })
 
     it('should set properties from the segment user', async () => {
-        const posthog = await initPostHogInAPromise(segment, posthogName)
+        const agrid = await initAgridInAPromise(segment, agridName)
 
-        expect(posthog.get_distinct_id()).toBe('test-id')
-        expect(posthog.get_property('$device_id')).toBe('test-anonymous-id')
+        expect(agrid.get_distinct_id()).toBe('test-id')
+        expect(agrid.get_property('$device_id')).toBe('test-anonymous-id')
     })
 
     it('should handle the segment user being a promise', async () => {
@@ -108,10 +108,10 @@ describe(`Segment integration`, () => {
                 id: () => 'test-id',
             })
 
-        const posthog = await initPostHogInAPromise(segment, posthogName)
+        const agrid = await initAgridInAPromise(segment, agridName)
 
-        expect(posthog.get_distinct_id()).toBe('test-id')
-        expect(posthog.get_property('$device_id')).toBe('test-anonymous-id')
+        expect(agrid.get_distinct_id()).toBe('test-id')
+        expect(agrid.get_property('$device_id')).toBe('test-anonymous-id')
     })
 
     it('should handle segment.identify after bootstrap', async () => {
@@ -120,10 +120,10 @@ describe(`Segment integration`, () => {
             id: () => '',
         })
 
-        const posthog = await initPostHogInAPromise(segment, posthogName, { persistence: 'memory' })
+        const agrid = await initAgridInAPromise(segment, agridName, { persistence: 'memory' })
 
-        expect(posthog.get_distinct_id()).not.toEqual('test-id')
-        expect(posthog.persistence?.get_property(USER_STATE)).toEqual('anonymous')
+        expect(agrid.get_distinct_id()).not.toEqual('test-id')
+        expect(agrid.persistence?.get_property(USER_STATE)).toEqual('anonymous')
 
         if (segmentIntegration && segmentIntegration.identify) {
             segmentIntegration.identify({
@@ -134,8 +134,8 @@ describe(`Segment integration`, () => {
                 },
             } as unknown as SegmentContext)
 
-            expect(posthog.get_distinct_id()).toEqual('distinguished user')
-            expect(posthog.persistence?.get_property(USER_STATE)).toEqual('identified')
+            expect(agrid.get_distinct_id()).toEqual('distinguished user')
+            expect(agrid.persistence?.get_property(USER_STATE)).toEqual('identified')
         }
     })
 })

@@ -1,4 +1,4 @@
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import { window } from '../utils/globals'
 import { addEventListener } from '../utils'
 import { logger } from '../utils/logger'
@@ -12,11 +12,11 @@ import { patch } from './replay/rrweb-plugins/patch'
  * - When set to `'history_change'`, this class will capture pageviews on history API changes
  */
 export class HistoryAutocapture {
-    private _instance: PostHog
+    private _instance: Agrid
     private _popstateListener: (() => void) | undefined
     private _lastPathname: string
 
-    constructor(instance: PostHog) {
+    constructor(instance: Agrid) {
         this._instance = instance
         this._lastPathname = window?.location?.pathname || ''
     }
@@ -49,7 +49,7 @@ export class HistoryAutocapture {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         const self = this
 
-        if (!(window.history.pushState as any)?.__posthog_wrapped__) {
+        if (!(window.history.pushState as any)?.__agrid_wrapped__) {
             patch(window.history, 'pushState', (originalPushState) => {
                 return function patchedPushState(
                     this: History,
@@ -63,7 +63,7 @@ export class HistoryAutocapture {
             })
         }
 
-        if (!(window.history.replaceState as any)?.__posthog_wrapped__) {
+        if (!(window.history.replaceState as any)?.__agrid_wrapped__) {
             patch(window.history, 'replaceState', (originalReplaceState) => {
                 return function patchedReplaceState(
                     this: History,

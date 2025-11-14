@@ -6,7 +6,7 @@ import {
     hasEvents,
     hasWaitPeriodPassed,
 } from '../../extensions/surveys/surveys-extension-utils'
-import { Survey, SurveySchedule, SurveyType } from '../../posthog-surveys-types'
+import { Survey, SurveySchedule, SurveyType } from '../../agrid-surveys-types'
 import { SURVEY_IN_PROGRESS_PREFIX, SURVEY_SEEN_PREFIX } from '../../utils/survey-utils'
 
 describe('hasWaitPeriodPassed', () => {

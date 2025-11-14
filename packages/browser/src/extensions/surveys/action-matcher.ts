@@ -1,5 +1,5 @@
-import { PostHog } from '../../posthog-core'
-import { ActionStepStringMatching, ActionStepType, SurveyActionType, SurveyElement } from '../../posthog-surveys-types'
+import { Agrid } from '../../agrid-core'
+import { ActionStepStringMatching, ActionStepType, SurveyActionType, SurveyElement } from '../../agrid-surveys-types'
 import { SimpleEventEmitter } from '../../utils/simple-event-emitter'
 import { CaptureResult } from '../../types'
 import { isUndefined } from '@agrid/core'
@@ -8,11 +8,11 @@ import { isMatchingRegex } from '../../utils/regex-utils'
 
 export class ActionMatcher {
     private readonly _actionRegistry?: Set<SurveyActionType>
-    private readonly _instance?: PostHog
+    private readonly _instance?: Agrid
     private readonly _actionEvents: Set<string>
     private _debugEventEmitter = new SimpleEventEmitter()
 
-    constructor(instance?: PostHog) {
+    constructor(instance?: Agrid) {
         this._instance = instance
         this._actionEvents = new Set<string>()
         this._actionRegistry = new Set<SurveyActionType>()

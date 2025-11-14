@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import { PostHog, PostHogContext } from '../context'
+import { Agrid, AgridContext } from '../context'
 
-export const usePostHog = (): PostHog => {
-    const { client } = useContext(PostHogContext)
+export const useAgrid = (): Agrid => {
+    const { client } = useContext(AgridContext)
     return client
 }

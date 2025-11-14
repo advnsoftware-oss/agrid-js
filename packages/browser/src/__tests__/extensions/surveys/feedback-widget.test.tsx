@@ -2,10 +2,10 @@
 import '@testing-library/jest-dom'
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/preact'
 import { FeedbackWidget } from '../../../extensions/surveys'
-import { PostHog } from '../../../posthog-core' // Import PostHog type for mocking
-import { Survey, SurveyQuestionType, SurveyType, SurveyWidgetType } from '../../../posthog-surveys-types'
+import { Agrid } from '../../../agrid-core' // Import Agrid type for mocking
+import { Survey, SurveyQuestionType, SurveyType, SurveyWidgetType } from '../../../agrid-surveys-types'
 
-// Mock PostHog instance
+// Mock Agrid instance
 const mockPosthog = {
     capture: jest.fn(),
     getActiveMatchingSurveys: jest.fn(),
@@ -13,7 +13,7 @@ const mockPosthog = {
         isFeatureEnabled: jest.fn().mockReturnValue(true),
     },
     get_session_replay_url: jest.fn().mockReturnValue('http://example.com/replay'),
-} as unknown as PostHog
+} as unknown as Agrid
 
 // Base mock survey for widget type
 const baseWidgetSurvey: Survey = {
@@ -116,7 +116,7 @@ describe('FeedbackWidget', () => {
     }
 
     test('renders feedback tab and opens survey on click', () => {
-        render(<FeedbackWidget survey={baseWidgetSurvey} posthog={mockPosthog} />)
+        render(<FeedbackWidget survey={baseWidgetSurvey} agrid={mockPosthog} />)
 
         // Check if the tab is visible
         const tab = screen.getByText('Feedback')
@@ -134,7 +134,7 @@ describe('FeedbackWidget', () => {
     })
 
     test('submits survey response and shows thank you message', async () => {
-        render(<FeedbackWidget survey={baseWidgetSurvey} posthog={mockPosthog} />)
+        render(<FeedbackWidget survey={baseWidgetSurvey} agrid={mockPosthog} />)
 
         // Open the survey
         const tab = screen.getByText('Feedback')
@@ -180,7 +180,7 @@ describe('FeedbackWidget', () => {
             writable: true,
         })
 
-        render(<FeedbackWidget survey={urlConditionWidgetSurvey} posthog={mockPosthog} />)
+        render(<FeedbackWidget survey={urlConditionWidgetSurvey} agrid={mockPosthog} />)
 
         // Initially, the tab should be visible because the URL matches
         expect(screen.getByText('Feedback')).toBeVisible()
@@ -230,7 +230,7 @@ describe('FeedbackWidget', () => {
     })
 
     test('does not render tab for selector widget type initially', () => {
-        render(<FeedbackWidget survey={selectorWidgetSurvey} posthog={mockPosthog} />)
+        render(<FeedbackWidget survey={selectorWidgetSurvey} agrid={mockPosthog} />)
 
         // Selector type should not render the tab or the form initially
         expect(screen.queryByText('Feedback')).not.toBeInTheDocument()
@@ -239,7 +239,7 @@ describe('FeedbackWidget', () => {
     })
 
     test('shows survey popup for selector widget when event is dispatched', async () => {
-        render(<FeedbackWidget survey={selectorWidgetSurvey} posthog={mockPosthog} />)
+        render(<FeedbackWidget survey={selectorWidgetSurvey} agrid={mockPosthog} />)
 
         // Initially, no survey form
         expect(screen.queryByRole('form')).not.toBeInTheDocument()
@@ -274,7 +274,7 @@ describe('FeedbackWidget', () => {
     })
 
     test('closes survey popup when cancel button is clicked', async () => {
-        render(<FeedbackWidget survey={baseWidgetSurvey} posthog={mockPosthog} />)
+        render(<FeedbackWidget survey={baseWidgetSurvey} agrid={mockPosthog} />)
 
         // Open the survey
         fireEvent.click(screen.getByText('Feedback'))

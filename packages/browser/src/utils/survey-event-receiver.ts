@@ -1,8 +1,8 @@
 import { SURVEYS_ACTIVATED } from '../constants'
-import { Survey, SurveyEventName } from '../posthog-surveys-types'
+import { Survey, SurveyEventName } from '../agrid-surveys-types'
 
 import { ActionMatcher } from '../extensions/surveys/action-matcher'
-import { PostHog } from '../posthog-core'
+import { Agrid } from '../agrid-core'
 import { CaptureResult } from '../types'
 import { SURVEY_LOGGER as logger } from './survey-utils'
 import { propertyComparisons } from './property-utils'
@@ -15,9 +15,9 @@ export class SurveyEventReceiver {
     private readonly _actionToSurveys: Map<string, string[]>
     // actionMatcher can look at CaptureResult payloads and match an event to its corresponding action.
     private _actionMatcher?: ActionMatcher | null
-    private readonly _instance?: PostHog
+    private readonly _instance?: Agrid
 
-    constructor(instance: PostHog) {
+    constructor(instance: Agrid) {
         this._instance = instance
         this._eventToSurveys = new Map<string, string[]>()
         this._actionToSurveys = new Map<string, string[]>()

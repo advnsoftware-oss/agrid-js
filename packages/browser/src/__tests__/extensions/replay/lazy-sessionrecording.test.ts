@@ -2,7 +2,7 @@
 
 import '@testing-library/jest-dom'
 
-import { PostHogPersistence } from '../../../posthog-persistence'
+import { AgridPersistence } from '../../../agrid-persistence'
 import {
     CONSOLE_LOG_RECORDING_ENABLED_SERVER_SIDE,
     SESSION_RECORDING_ENABLED_SERVER_SIDE,
@@ -15,11 +15,11 @@ import {
     INCREMENTAL_SNAPSHOT_EVENT_TYPE,
     META_EVENT_TYPE,
 } from '../../../extensions/replay/external/sessionrecording-utils'
-import { PostHog } from '../../../posthog-core'
+import { Agrid } from '../../../agrid-core'
 import {
     FlagsResponse,
     PerformanceCaptureConfig,
-    PostHogConfig,
+    AgridConfig,
     Property,
     SessionIdChangedCallback,
     SessionRecordingOptions,
@@ -175,11 +175,11 @@ describe('Lazy SessionRecording', () => {
     const _addCustomEvent = jest.fn()
     const loadScriptMock = jest.fn()
     let _emit: any
-    let posthog: PostHog
+    let agrid: Agrid
     let sessionRecording: SessionRecording
     let sessionId: string
     let sessionManager: SessionIdManager
-    let config: PostHogConfig
+    let config: AgridConfig
     let sessionIdGeneratorMock: Mock
     let windowIdGeneratorMock: Mock
     let onFeatureFlagsCallback: ((flags: string[], variants: Record<string, string | boolean>) => void) | null
@@ -205,7 +205,7 @@ describe('Lazy SessionRecording', () => {
         }
 
         assignableWindow.__PosthogExtensions__.initSessionRecording = () => {
-            return new LazyLoadedSessionRecording(posthog)
+            return new LazyLoadedSessionRecording(agrid)
         }
     }
 
@@ -224,7 +224,7 @@ describe('Lazy SessionRecording', () => {
                 compress_events: false,
             },
             persistence: 'memory',
-        } as unknown as PostHogConfig
+        } as unknown as AgridConfig
 
         assignableWindow.__PosthogExtensions__ = {
             rrweb: undefined,
@@ -237,18 +237,18 @@ describe('Lazy SessionRecording', () => {
         sessionIdGeneratorMock = jest.fn().mockImplementation(() => sessionId)
         windowIdGeneratorMock = jest.fn().mockImplementation(() => 'windowId')
 
-        const postHogPersistence = new PostHogPersistence(config)
+        const postHogPersistence = new AgridPersistence(config)
         postHogPersistence.clear()
 
         sessionManager = new SessionIdManager(
-            { config, persistence: postHogPersistence, register: jest.fn() } as unknown as PostHog,
+            { config, persistence: postHogPersistence, register: jest.fn() } as unknown as Agrid,
             sessionIdGeneratorMock,
             windowIdGeneratorMock
         )
 
         simpleEventEmitter = new SimpleEventEmitter()
-        // TODO we really need to make this a real posthog instance :cry:
-        posthog = {
+        // TODO we really need to make this a real agrid instance :cry:
+        agrid = {
             get_property: (property_key: string): Property | undefined => {
                 return postHogPersistence?.props[property_key]
             },
@@ -274,7 +274,7 @@ describe('Lazy SessionRecording', () => {
                 const unsubscribe = simpleEventEmitter.on(event, cb)
                 return removePageviewCaptureHookMock.mockImplementation(unsubscribe)
             }),
-        } as Partial<PostHog> as PostHog
+        } as Partial<Agrid> as Agrid
 
         loadScriptMock.mockImplementation((_ph, _path, callback) => {
             addRRwebToWindow()
@@ -284,13 +284,13 @@ describe('Lazy SessionRecording', () => {
         assignableWindow.__PosthogExtensions__.loadExternalDependency = loadScriptMock
 
         // defaults
-        posthog.persistence?.register({
+        agrid.persistence?.register({
             [SESSION_RECORDING_ENABLED_SERVER_SIDE]: true,
             [CONSOLE_LOG_RECORDING_ENABLED_SERVER_SIDE]: false,
             [SESSION_RECORDING_IS_SAMPLED]: undefined,
         })
 
-        sessionRecording = new SessionRecording(posthog)
+        sessionRecording = new SessionRecording(agrid)
     })
 
     afterEach(() => {
@@ -304,7 +304,7 @@ describe('Lazy SessionRecording', () => {
         })
 
         it('does not load script if disable_session_recording passed', () => {
-            posthog.config.disable_session_recording = true
+            agrid.config.disable_session_recording = true
 
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
@@ -335,7 +335,7 @@ describe('Lazy SessionRecording', () => {
             })
 
             it('is disabled if the server is disabled', () => {
-                posthog.persistence?.register({
+                agrid.persistence?.register({
                     [SESSION_RECORDING_REMOTE_CONFIG]: {
                         enabled: false,
                     },
@@ -344,7 +344,7 @@ describe('Lazy SessionRecording', () => {
             })
 
             it('is disabled if the client config is disabled', () => {
-                posthog.config.disable_session_recording = true
+                agrid.config.disable_session_recording = true
                 expect(sessionRecording['_isRecordingEnabled']).toBe(false)
             })
         })
@@ -368,8 +368,8 @@ describe('Lazy SessionRecording', () => {
                     clientSide: boolean | undefined,
                     expected: boolean
                 ) => {
-                    posthog.persistence?.register({ [CONSOLE_LOG_RECORDING_ENABLED_SERVER_SIDE]: serverSide })
-                    posthog.config.enable_recording_console_log = clientSide
+                    agrid.persistence?.register({ [CONSOLE_LOG_RECORDING_ENABLED_SERVER_SIDE]: serverSide })
+                    agrid.config.enable_recording_console_log = clientSide
                     expect(sessionRecording['_lazyLoadedSessionRecording']['_isConsoleLogCaptureEnabled']).toBe(
                         expected
                     )
@@ -396,12 +396,12 @@ describe('Lazy SessionRecording', () => {
                     clientSide: boolean | undefined,
                     expected: boolean
                 ) => {
-                    posthog.persistence?.register({
+                    agrid.persistence?.register({
                         [SESSION_RECORDING_REMOTE_CONFIG]: {
                             canvasRecording: { enabled: serverSide, fps: 4, quality: '0.1' },
                         },
                     })
-                    posthog.config.session_recording.captureCanvas = { recordCanvas: clientSide }
+                    agrid.config.session_recording.captureCanvas = { recordCanvas: clientSide }
                     expect(sessionRecording['_lazyLoadedSessionRecording']['_canvasRecording']).toMatchObject({
                         enabled: expected,
                         fps: 4,
@@ -427,7 +427,7 @@ describe('Lazy SessionRecording', () => {
                     expectedFps: number,
                     expectedQuality: number
                 ) => {
-                    posthog.persistence?.register({
+                    agrid.persistence?.register({
                         [SESSION_RECORDING_REMOTE_CONFIG]: {
                             canvasRecording: { enabled: true, fps, quality },
                         },
@@ -485,12 +485,12 @@ describe('Lazy SessionRecording', () => {
                     clientSide: boolean | PerformanceCaptureConfig | undefined,
                     expected: boolean | undefined
                 ) => {
-                    posthog.persistence?.register({
+                    agrid.persistence?.register({
                         [SESSION_RECORDING_REMOTE_CONFIG]: {
                             networkPayloadCapture: { capturePerformance: serverSide },
                         },
                     })
-                    posthog.config.capture_performance = clientSide
+                    agrid.config.capture_performance = clientSide
                     expect(
                         sessionRecording['_lazyLoadedSessionRecording']['_networkPayloadCapture']?.recordPerformance
                     ).toBe(expected)
@@ -567,15 +567,15 @@ describe('Lazy SessionRecording', () => {
                         | undefined,
                     expected: { maskAllInputs: boolean; maskTextSelector?: string; blockSelector?: string } | undefined
                 ) => {
-                    posthog.persistence?.register({
+                    agrid.persistence?.register({
                         [SESSION_RECORDING_REMOTE_CONFIG]: {
                             masking: serverConfig,
                         },
                     })
 
-                    posthog.config.session_recording.maskAllInputs = clientConfig?.maskAllInputs
-                    posthog.config.session_recording.maskTextSelector = clientConfig?.maskTextSelector
-                    posthog.config.session_recording.blockSelector = clientConfig?.blockSelector
+                    agrid.config.session_recording.maskAllInputs = clientConfig?.maskAllInputs
+                    agrid.config.session_recording.maskTextSelector = clientConfig?.maskTextSelector
+                    agrid.config.session_recording.blockSelector = clientConfig?.blockSelector
 
                     expect(sessionRecording['_lazyLoadedSessionRecording']['_masking']).toEqual(expected)
                 }
@@ -666,7 +666,7 @@ describe('Lazy SessionRecording', () => {
 
                 _emit(createFullSnapshot({}), 'unknown')
                 expect(sessionRecording['_lazyLoadedSessionRecording']['_isIdle']).toEqual('unknown')
-                expect(posthog.capture).not.toHaveBeenCalled()
+                expect(agrid.capture).not.toHaveBeenCalled()
 
                 const d = emitActiveEvent(startingTimestamp + 200)
                 expect(sessionRecording['_lazyLoadedSessionRecording']['_isIdle']).toEqual(false)
@@ -751,7 +751,7 @@ describe('Lazy SessionRecording', () => {
                 // return from idle
 
                 // we did not capture
-                expect(posthog.capture).not.toHaveBeenCalled()
+                expect(agrid.capture).not.toHaveBeenCalled()
             })
 
             it('drops full snapshots when idle - so we must make sure not to take them while idle!', () => {
@@ -917,7 +917,7 @@ describe('Lazy SessionRecording', () => {
                     size: 0,
                     windowId: expect.any(String),
                 })
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [firstSnapshotEvent, secondSnapshot],
@@ -1017,7 +1017,7 @@ describe('Lazy SessionRecording', () => {
                 })
 
                 // the buffer is flushed on switch to idle
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [firstSnapshotEvent, secondSnapshot],
@@ -1045,7 +1045,7 @@ describe('Lazy SessionRecording', () => {
                 expect(endingSessionId).toEqual(rotatedSessionId)
 
                 // the buffer is flushed, and a full snapshot is taken
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [firstSnapshotEvent, secondSnapshot],
@@ -1107,7 +1107,7 @@ describe('Lazy SessionRecording', () => {
         describe('when pageview capture is disabled', () => {
             beforeEach(() => {
                 jest.spyOn(sessionRecording, 'tryAddCustomEvent')
-                posthog.config.capture_pageview = false
+                agrid.config.capture_pageview = false
                 sessionRecording.onRemoteConfig(
                     makeFlagsResponse({
                         sessionRecording: {
@@ -1156,7 +1156,7 @@ describe('Lazy SessionRecording', () => {
 
         describe('when pageview capture is enabled', () => {
             beforeEach(() => {
-                posthog.config.capture_pageview = true
+                agrid.config.capture_pageview = true
                 sessionRecording.onRemoteConfig(
                     makeFlagsResponse({
                         sessionRecording: {
@@ -1183,7 +1183,7 @@ describe('Lazy SessionRecording', () => {
             }
 
             beforeEach(() => {
-                posthog.config.session_recording.compress_events = true
+                agrid.config.session_recording.compress_events = true
                 sessionRecording.onRemoteConfig(makeFlagsResponse({ sessionRecording: { endpoint: '/s/' } }))
                 sessionRecording.onRemoteConfig(
                     makeFlagsResponse({
@@ -1207,7 +1207,7 @@ describe('Lazy SessionRecording', () => {
                 )
                 sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [
@@ -1231,7 +1231,7 @@ describe('Lazy SessionRecording', () => {
                 _emit(createIncrementalMutationEvent({ texts: [Array(30).fill(uuidv7()).join('')] }))
                 sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [
@@ -1262,7 +1262,7 @@ describe('Lazy SessionRecording', () => {
                 _emit(createIncrementalStyleSheetEvent({ adds: [Array(30).fill(uuidv7()).join('')] }))
                 sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [
@@ -1297,7 +1297,7 @@ describe('Lazy SessionRecording', () => {
                 _emit(mouseEvent)
                 sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [mouseEvent],
@@ -1315,7 +1315,7 @@ describe('Lazy SessionRecording', () => {
                 _emit(createCustomSnapshot(undefined, { tag: 'wat' }))
                 sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [
@@ -1341,7 +1341,7 @@ describe('Lazy SessionRecording', () => {
                 _emit(createMetaSnapshot())
                 sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-                expect(posthog.capture).toHaveBeenCalledWith(
+                expect(agrid.capture).toHaveBeenCalledWith(
                     '$snapshot',
                     {
                         $snapshot_data: [
@@ -1404,7 +1404,7 @@ describe('Lazy SessionRecording', () => {
             expect(loadScriptMock).toHaveBeenCalled()
 
             _emit(createIncrementalSnapshot({ data: { source: 1 } }))
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
 
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer']).toEqual({
                 data: [
@@ -1431,8 +1431,8 @@ describe('Lazy SessionRecording', () => {
             sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer'].data.length).toEqual(0)
 
-            expect(posthog.capture).toHaveBeenCalledTimes(1)
-            expect(posthog.capture).toHaveBeenCalledWith(
+            expect(agrid.capture).toHaveBeenCalledTimes(1)
+            expect(agrid.capture).toHaveBeenCalledWith(
                 '$snapshot',
                 {
                     $snapshot_bytes: 60,
@@ -1468,14 +1468,14 @@ describe('Lazy SessionRecording', () => {
             _emit(createIncrementalSnapshot({ data: { source: 1 } }))
             _emit(createIncrementalSnapshot({ data: { source: 2 } }))
 
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_flushBufferTimer']).not.toBeUndefined()
 
             sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_flushBufferTimer']).toBeUndefined()
 
-            expect(posthog.capture).toHaveBeenCalledTimes(1)
-            expect(posthog.capture).toHaveBeenCalledWith(
+            expect(agrid.capture).toHaveBeenCalledTimes(1)
+            expect(agrid.capture).toHaveBeenCalledWith(
                 '$snapshot',
                 {
                     $session_id: sessionId,
@@ -1513,12 +1513,12 @@ describe('Lazy SessionRecording', () => {
             _emit(createIncrementalSnapshot({ data: { source: 1, payload: 1 } }))
             _emit(createIncrementalSnapshot({ data: { source: 1, payload: 2 } }))
 
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer']).toMatchObject({ size: 755101 })
 
             // Another big event means the old data will be flushed
             _emit(createIncrementalSnapshot({ data: { source: 1, payload: bigData } }))
-            expect(posthog.capture).toHaveBeenCalled()
+            expect(agrid.capture).toHaveBeenCalled()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer'].data.length).toEqual(1) // The new event
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer']).toMatchObject({ size: 755017 })
         })
@@ -1543,14 +1543,14 @@ describe('Lazy SessionRecording', () => {
             _emit(createIncrementalSnapshot({ data: { source: 1, payload: 1 } }))
             _emit(createIncrementalSnapshot({ data: { source: 1, payload: 2 } }))
 
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer']).toMatchObject({ size: 755101 })
 
             // Another big event means the old data will be flushed
             _emit(createIncrementalSnapshot({ data: { source: 1, payload: bigData } }))
             // but the recording is still buffering
             expect(sessionRecording.status).toBe('buffering')
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer'].data.length).toEqual(4) // + the new event
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer']).toMatchObject({
                 size: 755017 + 755101,
@@ -1571,7 +1571,7 @@ describe('Lazy SessionRecording', () => {
 
             _emit(createIncrementalSnapshot({ emit: 1 }))
 
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer'].sessionId).not.toEqual(null)
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer'].data).toEqual([
                 { data: { source: 1 }, emit: 1, type: 3 },
@@ -1583,7 +1583,7 @@ describe('Lazy SessionRecording', () => {
             sessionRecording['_lazyLoadedSessionRecording']['_buffer']!.sessionId = 'otherSessionId'
             _emit(createIncrementalSnapshot({ emit: 2 }))
 
-            expect(posthog.capture).toHaveBeenCalledWith(
+            expect(agrid.capture).toHaveBeenCalledWith(
                 '$snapshot',
                 {
                     $session_id: 'otherSessionId',
@@ -1734,10 +1734,10 @@ describe('Lazy SessionRecording', () => {
                 beforeEach(() => {
                     sessionManager = new SessionIdManager({
                         config,
-                        persistence: new PostHogPersistence(config),
+                        persistence: new AgridPersistence(config),
                         register: jest.fn(),
-                    } as unknown as PostHog)
-                    posthog.sessionManager = sessionManager
+                    } as unknown as Agrid)
+                    agrid.sessionManager = sessionManager
 
                     mockCallback = jest.fn()
                     unsubscribeCallback = sessionManager.onSessionId(mockCallback)
@@ -1830,10 +1830,10 @@ describe('Lazy SessionRecording', () => {
                 beforeEach(() => {
                     sessionManager = new SessionIdManager({
                         config,
-                        persistence: new PostHogPersistence(config),
+                        persistence: new AgridPersistence(config),
                         register: jest.fn(),
-                    } as unknown as PostHog)
-                    posthog.sessionManager = sessionManager
+                    } as unknown as Agrid)
+                    agrid.sessionManager = sessionManager
 
                     sessionRecording.onRemoteConfig(
                         makeFlagsResponse({
@@ -1950,7 +1950,7 @@ describe('Lazy SessionRecording', () => {
             // Simulate URL change to blocked URL
             fakeNavigateTo('https://test.com/blocked')
 
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
 
             // Verify subsequent events are not captured while on blocked URL
             _emit(createIncrementalSnapshot({ data: { source: 3 } }))
@@ -2025,7 +2025,7 @@ describe('Lazy SessionRecording', () => {
             // check is trigger by rrweb emit, not the navigation per se, so...
             _emit(createFullSnapshot({ data: { source: 1 } }))
 
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
             expect(sessionRecording.status).toBe('paused')
             expect(sessionRecording['_lazyLoadedSessionRecording']['_urlTriggerMatching']['urlBlocked']).toBe(true)
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer'].data).toHaveLength(0)
@@ -2138,7 +2138,7 @@ describe('Lazy SessionRecording', () => {
         })
 
         it('never sends data when sampling is false regardless of event triggers', async () => {
-            // this is a regression test for https://posthoghelp.zendesk.com/agent/tickets/24373
+            // this is a regression test for https://agridhelp.zendesk.com/agent/tickets/24373
             // where the buffered data was sent to capture when the event trigger fired
             // before the sample rate was taken into account
             // and then would immediately stop
@@ -2163,11 +2163,11 @@ describe('Lazy SessionRecording', () => {
 
             simpleEventEmitter.emit('eventCaptured', { event: '$exception' })
             expect(sessionRecording.status).toBe('disabled')
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
         })
 
         it('sends data when sampling is false and there is an event triggers in OR mode', async () => {
-            // this is a regression test for https://posthoghelp.zendesk.com/agent/tickets/24373
+            // this is a regression test for https://agridhelp.zendesk.com/agent/tickets/24373
             // where the buffered data was sent to capture when the event trigger fired
             // before the sample rate was taken into account
             // and then would immediately stop
@@ -2192,7 +2192,7 @@ describe('Lazy SessionRecording', () => {
 
             simpleEventEmitter.emit('eventCaptured', { event: '$exception' })
             expect(sessionRecording.status).toBe('active')
-            expect(posthog.capture).toHaveBeenCalled()
+            expect(agrid.capture).toHaveBeenCalled()
         })
 
         it('clears buffer but keeps most recent meta event when trigger pending and receiving full snapshot', () => {
@@ -2253,7 +2253,7 @@ describe('Lazy SessionRecording', () => {
             )
 
             expect(sessionRecording['_lazyLoadedSessionRecording']['_removePageViewCaptureHook']).not.toBeUndefined()
-            expect(posthog.on).toHaveBeenCalledTimes(1)
+            expect(agrid.on).toHaveBeenCalledTimes(1)
 
             // calling a second time doesn't add another capture hook
             sessionRecording.onRemoteConfig(
@@ -2263,7 +2263,7 @@ describe('Lazy SessionRecording', () => {
                     },
                 })
             )
-            expect(posthog.on).toHaveBeenCalledTimes(1)
+            expect(agrid.on).toHaveBeenCalledTimes(1)
         })
 
         it('removes the pageview capture hook on stop', () => {
@@ -2402,7 +2402,7 @@ describe('Lazy SessionRecording', () => {
         })
 
         it('call stopRecording if its not enabled', () => {
-            posthog.config.disable_session_recording = true
+            agrid.config.disable_session_recording = true
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
                     sessionRecording: {
@@ -2424,7 +2424,7 @@ describe('Lazy SessionRecording', () => {
             expect(sessionRecording.status).toBe('disabled')
 
             _emit(createIncrementalSnapshot({ data: { source: 1 } }))
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
             expect(sessionRecording.status).toBe('disabled')
         })
 
@@ -2450,7 +2450,7 @@ describe('Lazy SessionRecording', () => {
 
         it('does emit to capture if the sample rate is 1', () => {
             _emit(createIncrementalSnapshot({ data: { source: 1 } }))
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
 
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
@@ -2466,7 +2466,7 @@ describe('Lazy SessionRecording', () => {
             sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
             _emit(createIncrementalSnapshot({ data: { source: 1 } }))
-            expect(posthog.capture).toHaveBeenCalled()
+            expect(agrid.capture).toHaveBeenCalled()
         })
 
         it('sets emit as expected when sample rate is 0.5', () => {
@@ -2501,7 +2501,7 @@ describe('Lazy SessionRecording', () => {
                 makeFlagsResponse({ sessionRecording: { endpoint: '/s/', sampleRate: '0.00' } })
             )
             // then check that a session is sampled (i.e. storage is false not true or null)
-            expect(posthog.get_property(SESSION_RECORDING_IS_SAMPLED)).toBe(false)
+            expect(agrid.get_property(SESSION_RECORDING_IS_SAMPLED)).toBe(false)
             expect(sessionRecording.status).toBe('disabled')
 
             // then turn sample rate to null
@@ -2510,14 +2510,14 @@ describe('Lazy SessionRecording', () => {
             )
 
             // then check that a session is no longer sampled out (i.e. storage is cleared not false)
-            expect(posthog.get_property(SESSION_RECORDING_IS_SAMPLED)).toBe(undefined)
+            expect(agrid.get_property(SESSION_RECORDING_IS_SAMPLED)).toBe(undefined)
             expect(sessionRecording.status).toBe('active')
         })
     })
 
     describe('masking', () => {
         it('passes remote masking options to rrweb', () => {
-            posthog.config.session_recording.maskAllInputs = undefined
+            agrid.config.session_recording.maskAllInputs = undefined
 
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
@@ -2546,7 +2546,7 @@ describe('Lazy SessionRecording', () => {
                 ['password set to true', { maskInputOptions: { password: true } } as SessionRecordingOptions, true],
                 ['password set to false', { maskInputOptions: { password: false } } as SessionRecordingOptions, false],
             ])('%s', (_name: string, session_recording: SessionRecordingOptions, expected: boolean) => {
-                posthog.config.session_recording = session_recording
+                agrid.config.session_recording = session_recording
                 sessionRecording.onRemoteConfig(
                     makeFlagsResponse({
                         sessionRecording: {
@@ -2565,7 +2565,7 @@ describe('Lazy SessionRecording', () => {
 
     describe('console logs', () => {
         it('if not enabled, plugin is not used', () => {
-            posthog.config.enable_recording_console_log = false
+            agrid.config.enable_recording_console_log = false
 
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
@@ -2579,7 +2579,7 @@ describe('Lazy SessionRecording', () => {
         })
 
         it('if enabled, plugin is used', () => {
-            posthog.config.enable_recording_console_log = true
+            agrid.config.enable_recording_console_log = true
 
             sessionRecording.onRemoteConfig(
                 makeFlagsResponse({
@@ -2880,7 +2880,7 @@ describe('Lazy SessionRecording', () => {
             // call the private method to avoid waiting for the timer
             sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
         })
 
         it('does flush if session duration is negative', () => {
@@ -2905,7 +2905,7 @@ describe('Lazy SessionRecording', () => {
             // call the private method to avoid waiting for the timer
             sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-            expect(posthog.capture).toHaveBeenCalled()
+            expect(agrid.capture).toHaveBeenCalled()
         })
 
         it('does not stay buffering after the minimum duration', () => {
@@ -2925,7 +2925,7 @@ describe('Lazy SessionRecording', () => {
             // call the private method to avoid waiting for the timer
             sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-            expect(posthog.capture).not.toHaveBeenCalled()
+            expect(agrid.capture).not.toHaveBeenCalled()
 
             _emit(createIncrementalSnapshot({ data: { source: 1 }, timestamp: sessionStartTimestamp + 1501 }))
 
@@ -2933,7 +2933,7 @@ describe('Lazy SessionRecording', () => {
             // call the private method to avoid waiting for the timer
             sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-            expect(posthog.capture).toHaveBeenCalled()
+            expect(agrid.capture).toHaveBeenCalled()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer'].data.length).toBe(0)
             expect(sessionRecording['_lazyLoadedSessionRecording']['_sessionDuration']).toBe(null)
             _emit(createIncrementalSnapshot({ data: { source: 1 }, timestamp: sessionStartTimestamp + 1502 }))
@@ -2942,7 +2942,7 @@ describe('Lazy SessionRecording', () => {
             // call the private method to avoid waiting for the timer
             sessionRecording['_lazyLoadedSessionRecording']['_flushBuffer']()
 
-            expect(posthog.capture).toHaveBeenCalled()
+            expect(agrid.capture).toHaveBeenCalled()
             expect(sessionRecording['_lazyLoadedSessionRecording']['_buffer'].data.length).toBe(0)
         })
     })

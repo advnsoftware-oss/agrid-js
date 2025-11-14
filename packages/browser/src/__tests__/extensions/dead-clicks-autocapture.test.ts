@@ -1,6 +1,6 @@
-import { PostHog } from '../../posthog-core'
+import { Agrid } from '../../agrid-core'
 import { assignableWindow } from '../../utils/globals'
-import { createPosthogInstance } from '../helpers/posthog-instance'
+import { createPosthogInstance } from '../helpers/agrid-instance'
 import { uuidv7 } from '../../uuidv7'
 import { DeadClicksAutocapture } from '../../extensions/dead-clicks-autocapture'
 import { DEAD_CLICKS_ENABLED_SERVER_SIDE } from '../../constants'
@@ -17,7 +17,7 @@ describe('DeadClicksAutocapture', () => {
         })
         assignableWindow.__PosthogExtensions__.loadExternalDependency = jest
             .fn()
-            .mockImplementation(() => (_ph: PostHog, _name: string, cb: (err?: Error) => void) => {
+            .mockImplementation(() => (_ph: Agrid, _name: string, cb: (err?: Error) => void) => {
                 cb()
             })
     })
@@ -72,7 +72,7 @@ describe('DeadClicksAutocapture', () => {
     })
 
     describe('config', () => {
-        let instance: PostHog
+        let instance: Agrid
 
         beforeEach(async () => {
             instance = await createPosthogInstance(uuidv7(), {

@@ -1,9 +1,9 @@
-import posthogJs, { BootstrapConfig } from 'agrid-js'
+import agridJs, { BootstrapConfig } from 'agrid-js'
 import { createContext } from 'react'
 
-export type PostHog = typeof posthogJs
+export type Agrid = typeof agridJs
 
-export const PostHogContext = createContext<{ client: PostHog; bootstrap?: BootstrapConfig }>({
-    client: posthogJs,
+export const AgridContext = createContext<{ client: Agrid; bootstrap?: BootstrapConfig }>({
+    client: agridJs,
     bootstrap: undefined,
 })

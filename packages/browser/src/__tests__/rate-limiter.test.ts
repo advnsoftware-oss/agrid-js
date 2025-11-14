@@ -6,7 +6,7 @@ describe('Rate Limiter', () => {
     let rateLimiter: RateLimiter
     let systemTime: number
     let persistedBucket = {}
-    let mockPostHog: any
+    let mockAgrid: any
 
     const moveTimeForward = (milliseconds: number) => {
         systemTime += milliseconds
@@ -25,7 +25,7 @@ describe('Rate Limiter', () => {
 
         persistedBucket = {}
 
-        mockPostHog = {
+        mockAgrid = {
             config: {
                 rate_limiting: {
                     events_per_second: 10,
@@ -41,7 +41,7 @@ describe('Rate Limiter', () => {
             capture: jest.fn(),
         }
 
-        rateLimiter = new RateLimiter(mockPostHog as any)
+        rateLimiter = new RateLimiter(mockAgrid as any)
 
         clearLoggerMocks()
     })
@@ -120,12 +120,12 @@ describe('Rate Limiter', () => {
                 rateLimiter.clientRateLimitContext()
             })
 
-            expect(mockPostHog.capture).toBeCalledTimes(1)
-            expect(mockPostHog.capture).toHaveBeenCalledWith(
+            expect(mockAgrid.capture).toBeCalledTimes(1)
+            expect(mockAgrid.capture).toHaveBeenCalledWith(
                 '$$client_ingestion_warning',
                 {
                     $$client_ingestion_warning_message:
-                        'posthog-js client rate limited. Config is set to 10 events per second and 100 events burst limit.',
+                        'agrid-js client rate limited. Config is set to 10 events per second and 100 events burst limit.',
                 },
                 {
                     skip_client_rate_limiting: true,
@@ -138,16 +138,16 @@ describe('Rate Limiter', () => {
                 rateLimiter.clientRateLimitContext()
             })
 
-            expect(mockPostHog.capture).toBeCalledTimes(1)
-            mockPostHog.capture.mockClear()
+            expect(mockAgrid.capture).toBeCalledTimes(1)
+            mockAgrid.capture.mockClear()
 
-            const newRateLimiter = new RateLimiter(mockPostHog as any)
+            const newRateLimiter = new RateLimiter(mockAgrid as any)
 
             range(200).forEach(() => {
                 newRateLimiter.clientRateLimitContext()
             })
 
-            expect(mockPostHog.capture).toBeCalledTimes(0)
+            expect(mockAgrid.capture).toBeCalledTimes(0)
         })
     })
 
