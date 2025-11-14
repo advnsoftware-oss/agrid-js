@@ -3,15 +3,168 @@
 [![npm package](https://img.shields.io/npm/v/agrid-js?style=flat-square)](https://www.npmjs.com/package/agrid-js)
 [![MIT License](https://img.shields.io/badge/License-MIT-red.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-For information on using this library in your app, [see GitHub README](https://github.com/advnsoftware-oss/agrid-js#readme).
-This README is intended for developing the library itself.
+**Agrid JS** is a comprehensive JavaScript SDK for product analytics, feature flags, session recording, heatmaps, and surveys. This is the main browser SDK package that provides full-featured tracking capabilities for web applications.
 
-## Dependencies
+For complete documentation and examples, see the [main repository README](https://github.com/advnsoftware-oss/agrid-js#readme).
 
-we use pnpm.
+---
 
-it's best to install using `npm install -g pnpm@latest-9`
-and then `pnpm` commands as usual
+## 📦 Agrid JS Packages
+
+This repository contains multiple packages for different platforms and frameworks:
+
+| Package | npm Package | Description | Use Case |
+|---------|-------------|-------------|----------|
+| **Browser SDK** | [`agrid-js`](https://www.npmjs.com/package/agrid-js) | Full-featured browser SDK (this package) | Web applications, SPAs |
+| **Lite SDK** | [`agrid-js-lite`](https://www.npmjs.com/package/agrid-js-lite) | Lightweight browser SDK | Size-conscious applications |
+| **React SDK** | [`@agrid/react`](https://www.npmjs.com/package/@agrid/react) | React components and hooks | React applications |
+| **Node.js SDK** | [`agrid-node`](https://www.npmjs.com/package/agrid-node) | Server-side SDK | Node.js backend (Node >= 20) |
+| **React Native** | [`agrid-react-native`](https://www.npmjs.com/package/agrid-react-native) | Mobile SDK | React Native apps |
+| **Core** | [`@agrid/core`](https://www.npmjs.com/package/@agrid/core) | Shared core functionality | Internal use by other SDKs |
+| **Nuxt Module** | [`@agrid/nuxt`](https://www.npmjs.com/package/@agrid/nuxt) | Nuxt.js integration | Nuxt.js applications |
+| **Next.js Config** | [`@agrid/nextjs-config`](https://www.npmjs.com/package/@agrid/nextjs-config) | Next.js helper | Next.js applications |
+| **AI Integration** | [`@agrid/ai`](https://www.npmjs.com/package/@agrid/ai) | AI integrations | OpenAI, Anthropic, LangChain |
+
+---
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+npm install agrid-js
+# or
+yarn add agrid-js
+# or
+pnpm add agrid-js
+```
+
+### Basic Usage
+
+```javascript
+import agrid from 'agrid-js'
+
+// Initialize
+agrid.init('YOUR_PROJECT_API_KEY', {
+  api_host: 'https://us.i.agrid.com'
+})
+
+// Track events
+agrid.capture('button_clicked', {
+  button_name: 'Sign Up',
+  page: 'homepage'
+})
+
+// Identify users
+agrid.identify('user_123', {
+  email: 'user@example.com',
+  name: 'John Doe'
+})
+
+// Feature flags
+if (agrid.isFeatureEnabled('new-feature')) {
+  // Feature is enabled
+}
+
+const flagValue = agrid.getFeatureFlag('button-color')
+```
+
+### CDN Usage
+
+```html
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.agrid=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="agrid",u.people=u.people||[],u.toString=function(t){var e="agrid";return"agrid"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getSurveys getActiveMatchingSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.agrid||[]);
+
+  agrid.init('YOUR_PROJECT_API_KEY', {
+    api_host: 'https://us.i.agrid.com'
+  })
+</script>
+```
+
+### React Integration
+
+```bash
+npm install agrid-js @agrid/react
+```
+
+```jsx
+import { AgridProvider } from '@agrid/react'
+import { useAgrid } from '@agrid/react'
+
+function App() {
+  return (
+    <AgridProvider
+      apiKey="YOUR_PROJECT_API_KEY"
+      options={{ api_host: 'https://us.i.agrid.com' }}
+    >
+      <YourApp />
+    </AgridProvider>
+  )
+}
+
+function MyComponent() {
+  const agrid = useAgrid()
+
+  const handleClick = () => {
+    agrid?.capture('button_clicked')
+  }
+
+  return <button onClick={handleClick}>Click me</button>
+}
+```
+
+---
+
+## ✨ Features
+
+### 📊 Product Analytics
+- **Event Tracking** - Capture user events with custom properties
+- **User Identification** - Identify and track users across sessions
+- **User Properties** - Set and update user properties
+- **Group Analytics** - Track groups (organizations, teams, etc.)
+- **Autocapture** - Automatically capture clicks, form submissions, and pageviews
+
+### 🚩 Feature Flags
+- **Boolean Flags** - Simple on/off feature toggles
+- **Multivariate Flags** - A/B testing with multiple variants
+- **Local Evaluation** - Fast flag evaluation without server round-trips
+- **Flag Dependencies** - Chain flags together for complex logic
+
+### 🎥 Session Recording
+- **Full Session Replay** - Record complete user sessions
+- **Privacy Controls** - Mask sensitive data and inputs
+- **Performance Metrics** - Track page load times and performance
+
+### 📝 Surveys
+- **In-App Surveys** - Display surveys to users
+- **Targeting** - Show surveys to specific user segments
+- **Multiple Question Types** - Rating, multiple choice, open text, and more
+
+### 🔥 Heatmaps
+- **Click Heatmaps** - See where users click
+- **Scroll Heatmaps** - Understand scroll behavior
+- **Movement Heatmaps** - Track mouse movement patterns
+
+---
+
+## 📚 Documentation
+
+- **Main Repository**: [https://github.com/advnsoftware-oss/agrid-js](https://github.com/advnsoftware-oss/agrid-js)
+- **npm Package**: [https://www.npmjs.com/package/agrid-js](https://www.npmjs.com/package/agrid-js)
+- **Issues**: [https://github.com/advnsoftware-oss/agrid-js/issues](https://github.com/advnsoftware-oss/agrid-js/issues)
+
+---
+
+## 🛠️ Development
+
+This section is for developers working on the library itself.
+
+### Dependencies
+
+We use pnpm. It's best to install using:
+```bash
+npm install -g pnpm@latest-9
+```
 
 ### Optional Dependencies
 
@@ -22,31 +175,32 @@ This package has the following optional peer dependencies:
 
 These dependencies are marked as optional to reduce installation size for users who don't need these specific features.
 
-##
+### Setup
 
-## Testing
+```bash
+# Install dependencies
+pnpm install
+
+# Build the package
+pnpm build
+
+# Run tests
+pnpm test
+```
+
+### Testing
 
 > [!NOTE]
 > Run `pnpm build` at least once before running tests.
 
-
-- Unit tests: run `pnpm test`.
-- Cypress: run `pnpm start` to have a test server running and separately `pnpm cypress` to launch Cypress test engine.
-- Playwright: run e.g. `pnpm exec playwright test --ui --project webkit --project firefox` to run with UI and in webkit and firefox
+- **Unit tests**: run `pnpm test`
+- **Playwright**: run `pnpm exec playwright test --ui --project webkit --project firefox --project chromium`
 
 ### Running TestCafe E2E tests with BrowserStack
 
-Testing on IE11 requires a bit more setup. TestCafe tests will use the
-playground application to test the locally built array.full.js bundle. It will
-also verify that the events emitted during the testing of playground are loaded
-into the Agrid app. By default it uses https://us.i.agrid.com and the
-project with ID 11213. See the testcafe tests to see how to override these if
-needed. You'll need to set `AGRID_API_KEY` to your personal API key, and
-`AGRID_PROJECT_KEY` to the key for the project you are using.
+Testing on IE11 requires a bit more setup. TestCafe tests will use the playground application to test the locally built array.full.js bundle. It will also verify that the events emitted during the testing of playground are loaded into the Agrid app. By default it uses https://us.i.agrid.com and the project with ID 11213. See the testcafe tests to see how to override these if needed. You'll need to set `AGRID_API_KEY` to your personal API key, and `AGRID_PROJECT_KEY` to the key for the project you are using.
 
-You'll also need to sign up to [BrowserStack](https://www.browserstack.com/).
-Note that if you are using CodeSpaces, these variables will already be available
-in your shell env variables.
+You'll also need to sign up to [BrowserStack](https://www.browserstack.com/). Note that if you are using CodeSpaces, these variables will already be available in your shell env variables.
 
 After all this, you'll be able to run through the below steps:
 
@@ -93,3 +247,15 @@ Then, once this link has been created, any time you need to make a change to `ag
 - In the `agrid-js` directory: `pnpm link --global`
 - (for `agrid` this means: `pnpm link --global agrid-js && pnpm i && pnpm copy-scripts`)
 - You can then remove the link by, e.g., running `pnpm link --global agrid-js` from within `agrid`
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](https://github.com/advnsoftware-oss/agrid-js/blob/main/LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+Agrid JS is a fork of PostHog JS, adapted for the Agrid platform. We thank the PostHog team for their excellent work.
