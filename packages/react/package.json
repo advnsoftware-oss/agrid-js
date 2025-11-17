@@ -13,7 +13,7 @@
         "url": "https://agrid.com"
     },
     "license": "MIT",
-    "homepage": "https://agrid.com/docs/libraries/react",
+    "homepage": "https://github.com/advnsoftware-oss/agrid-js#readme",
     "keywords": [
         "agrid",
         "react",
@@ -39,6 +39,8 @@
     "module": "dist/esm/index.js",
     "types": "dist/types/index.d.ts",
     "files": [
+        "README.md",
+        "LICENSE",
         "dist",
         "src"
     ],
