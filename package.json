@@ -15,7 +15,8 @@
         "dev": "turbo dev",
         "package": "export PACKAGE_DEST=$(pwd)/target && turbo package",
         "package:watch": "export PACKAGE_DEST=$(pwd)/target && turbo watch package",
-        "generate-references": "turbo agrid-js#generate-references agrid-node#generate-references agrid-react-native#generate-references"
+        "generate-references": "turbo agrid-js#generate-references agrid-node#generate-references agrid-react-native#generate-references",
+        "check:publish-deps": "node scripts/check-publish-dependencies.js"
     },
     "pnpm": {
         "patchedDependencies": {

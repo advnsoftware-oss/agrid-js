@@ -81,10 +81,15 @@ npm view agrid-js version
 
 #### 5. Dependencies Check
 ```bash
+# Kiểm tra dependencies của tất cả packages
+node scripts/check-publish-dependencies.js
+
 # Đảm bảo workspace dependencies đúng
 # Các packages nên dùng workspace:* trong dev
 # Và version cụ thể hoặc ^ trong dependencies khi publish
 ```
+
+**⚠️ Quan trọng:** Kiểm tra xem có packages nào đã publish nhưng dependencies chưa publish không. Điều này sẽ gây lỗi 404 khi người dùng cài đặt.
 
 ### Publish Process
 
@@ -219,6 +224,18 @@ npm owner add your-username agrid-js
 - Đảm bảo build output tồn tại
 - Chạy `pnpm build` trước khi publish
 
+### Lỗi: "404 Not Found - Scope not found" (cho scoped packages)
+- Scope `@agrid` chưa được tạo trên npm
+- Cần tạo npm organization `agrid` tại https://www.npmjs.com/org/create
+- Thêm tài khoản của bạn vào organization với quyền Owner/Admin
+- Sau đó thử publish lại
+
+### Lỗi: "404 Not Found - Package not found" (dependency)
+- Package dependency chưa được publish
+- Chạy `node scripts/check-publish-dependencies.js` để kiểm tra
+- Publish dependencies trước khi publish package phụ thuộc
+- Ví dụ: Phải publish `@agrid/core` trước khi publish `agrid-js`
+
 ## 📝 Package.json Template
 
 Một package.json chuẩn để publish:
@@ -258,10 +275,81 @@ Một package.json chuẩn để publish:
 }
 ```
 
+## 📦 Dependencies và Thứ Tự Publish
+
+### Kiểm tra Dependencies
+
+Chạy script để kiểm tra dependencies và trạng thái publish:
+
+```bash
+node scripts/check-publish-dependencies.js
+```
+
+Script này sẽ:
+- ✅ Kiểm tra packages nào đã publish
+- ❌ Kiểm tra packages nào chưa publish
+- 🚨 Phát hiện packages có dependencies chưa publish (có thể gây lỗi)
+- 📋 Đề xuất thứ tự publish
+
+### Thứ Tự Publish Đề Xuất
+
+**Quan trọng:** Phải publish dependencies trước khi publish packages phụ thuộc vào chúng.
+
+#### Bước 1: Core Package (Ưu tiên cao nhất)
+```bash
+# @agrid/core phải được publish trước tất cả
+cd packages/core
+pnpm build
+pnpm publish --access public --no-git-checks
+```
+
+#### Bước 2: Base Packages (Sau khi @agrid/core đã publish)
+```bash
+# Các packages chỉ phụ thuộc vào @agrid/core
+pnpm --filter=agrid-js-lite build && pnpm --filter=agrid-js-lite publish --access public
+pnpm --filter=agrid-node build && pnpm --filter=agrid-node publish --access public
+pnpm --filter=@agrid/nextjs-config build && pnpm --filter=@agrid/nextjs-config publish --access public
+```
+
+#### Bước 3: Framework Packages
+```bash
+# @agrid/react chỉ cần agrid-js (đã publish)
+pnpm --filter=@agrid/react build && pnpm --filter=@agrid/react publish --access public
+
+# @agrid/ai cần agrid-node (phải publish ở bước 2)
+pnpm --filter=@agrid/ai build && pnpm --filter=@agrid/ai publish --access public
+```
+
+#### Bước 4: Complex Packages (Sau khi tất cả dependencies đã publish)
+```bash
+# @agrid/nuxt cần agrid-node, @agrid/core, và agrid-js
+pnpm --filter=@agrid/nuxt build && pnpm --filter=@agrid/nuxt publish --access public
+```
+
+### Dependencies Graph
+
+```
+@agrid/core (base)
+    ├── agrid-js-lite
+    ├── agrid-node
+    ├── agrid-js
+    ├── @agrid/nextjs-config
+    └── agrid-react-native
+
+agrid-js (đã publish)
+    └── @agrid/react
+
+agrid-node (cần publish)
+    ├── @agrid/nuxt
+    └── @agrid/ai (peer dependency)
+```
+
 ## ✅ Final Checklist
 
 Trước khi publish, đảm bảo:
 
+- [ ] Đã chạy `node scripts/check-publish-dependencies.js` để kiểm tra dependencies
+- [ ] Tất cả dependencies đã được publish (hoặc sẽ publish trước)
 - [ ] Tất cả packages đã được build thành công
 - [ ] Tests đã pass
 - [ ] Lint không có lỗi
@@ -274,7 +362,8 @@ Trước khi publish, đảm bảo:
 - [ ] `publishConfig.access: "public"` đã có
 - [ ] `files` field đã chỉ định đúng
 - [ ] NPM đã đăng nhập
-- [ ] Có quyền publish packages
+- [ ] Có quyền publish packages (đặc biệt cho scoped packages `@agrid/*`)
+- [ ] NPM organization `agrid` đã được tạo (cho scoped packages)
 - [ ] Đã test install package locally
 
 ---
