@@ -117,7 +117,7 @@ client.capture({
 
 ### React Native (`agrid-react-native`)
 
-- Install: `npm install agrid-react-native`
+- Install: `npm install @agrid/agrid-react-native`
 - Optional integrations with common RN packages (AsyncStorage, DeviceInfo, Navigation, SafeArea, etc.).
 - Supports mobile autocapture, surveys, and feature flags.
 

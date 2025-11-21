@@ -1,22 +1,48 @@
-# @agrid/agrid-react-native
+# Agrid React Native
 
-React Native SDK for Agrid analytics and feature flags, scoped as `@agrid/agrid-react-native`. Supports React Native and Expo apps with optional integrations (AsyncStorage, DeviceInfo, Navigation, SafeArea, etc.).
+Thư viện Agrid React Native cho phép bạn tích hợp analytics vào ứng dụng React Native của mình. Thư viện này được xây dựng dựa trên PostHog và hỗ trợ đầy đủ cho ứng dụng React Native.
 
-## Installation
+## Mục lục
+
+- [Cài đặt](#cài-đặt)
+- [Cấu hình](#cấu-hình)
+- [Ghi nhận sự kiện](#ghi-nhận-sự-kiện)
+- [Tự động ghi nhận (Autocapture)](#tự-động-ghi-nhận-autocapture)
+- [Nhận diện người dùng](#nhận-diện-người-dùng)
+- [Super Properties](#super-properties)
+- [Feature Flags](#feature-flags)
+- [Tùy chọn nâng cao](#tùy-chọn-nâng-cao)
+
+## Cài đặt
+
+### Ứng dụng React Native
 
 ```bash
-npx expo install @agrid/agrid-react-native expo-file-system expo-application expo-device expo-localization
-# or
-npm install @agrid/agrid-react-native @react-native-async-storage/async-storage react-native-device-info react-native-localize
+yarn add @agrid/agrid-react-native @react-native-async-storage/async-storage react-native-device-info react-native-localize
+# hoặc
+npm i -s @agrid/agrid-react-native @react-native-async-storage/async-storage react-native-device-info react-native-localize
 ```
 
-On iOS:
+Đối với iOS, chạy thêm:
 
 ```bash
+bundle install
 cd ios && pod install && cd ..
 ```
 
-## Quick Start
+## Thông tin mặc định
+
+Để bắt đầu nhanh, bạn có thể sử dụng các giá trị mặc định sau:
+
+- **Host mặc định**: `https://gw.track-asia.vn`
+
+## Cấu hình
+
+### Cấu hình cơ bản
+
+Có hai cách để khởi tạo Agrid trong ứng dụng của bạn:
+
+#### Cách 1: Sử dụng AgridProvider (Khuyến nghị)
 
 ```tsx
 import { AgridProvider } from '@agrid/agrid-react-native'
@@ -24,75 +50,245 @@ import { AgridProvider } from '@agrid/agrid-react-native'
 export function App() {
   return (
     <AgridProvider
-      apiKey="YOUR_PROJECT_API_KEY"
-      options={{ host: 'https://app.agrid.com' }}
+      apiKey="<your_api_key>"
+      options={{
+        host: 'https://gw.track-asia.vn',
+      }}
     >
-      <YourApp />
+      {/* Phần còn lại của ứng dụng */}
     </AgridProvider>
   )
 }
 ```
 
-Manual initialization:
+#### Cách 2: Khởi tạo thủ công
 
-```ts
+```tsx
+// agrid.ts
 import Agrid from '@agrid/agrid-react-native'
 
-export const agrid = new Agrid('YOUR_PROJECT_API_KEY', {
-  host: 'https://app.agrid.com',
+export const agrid = new Agrid('<your_api_key>', {
+  host: 'https://gw.track-asia.vn',
 })
 ```
 
-## Events
+### Các tùy chọn cấu hình
+
+| Tùy chọn | Mô tả | Giá trị mặc định |
+|----------|-------|------------------|
+| `host` | URL của Agrid instance | `https://gw.track-asia.vn` |
+| `flushAt` | Số lượng sự kiện trước khi tự động gửi | `20` |
+| `flushInterval` | Khoảng thời gian (ms) giữa các lần gửi | `10000` |
+| `maxBatchSize` | Số lượng sự kiện tối đa trong một batch | `100` |
+| `maxQueueSize` | Số lượng sự kiện tối đa trong hàng đợi | `1000` |
+| `disabled` | Vô hiệu hóa tracking | `false` |
+| `defaultOptIn` | Người dùng mặc định opt-in tracking | `true` |
+| `captureAppLifecycleEvents` | Tự động ghi nhận vòng đời app | `false` |
+| `persistence` | Loại lưu trữ: `'file'` hoặc `'memory'` | `'file'` |
+| `customStorage` | Custom storage implementation | `null` |
+| `enableSessionReplay` | Bật Session Replay | `false` |
+| `sessionReplayConfig` | Cấu hình Session Replay | `null` |
+
+### Ví dụ cấu hình đầy đủ
+
+```tsx
+<AgridProvider
+  apiKey="<your_api_key>"
+  options={{
+    host: 'https://gw.track-asia.vn',
+    captureAppLifecycleEvents: true, // Tự động track app lifecycle
+    flushAt: 10,
+    flushInterval: 5000,
+    persistence: 'file',
+  }}
+>
+  {/* App content */}
+</AgridProvider>
+```
+
+## Ghi nhận sự kiện
+
+### Ghi nhận sự kiện tùy chỉnh
+
+Sử dụng phương thức `capture` để ghi nhận sự kiện:
 
 ```tsx
 import { useAgrid } from '@agrid/agrid-react-native'
 
 function MyComponent() {
   const agrid = useAgrid()
-  const onPress = () => {
-    agrid?.capture('button_clicked', { button_name: 'sign_up', screen: 'home' })
+
+  const handleButtonPress = () => {
+    agrid?.capture('button_clicked', {
+      button_name: 'sign_up',
+      screen: 'home',
+    })
   }
-  return <Button onPress={onPress} title="Sign Up" />
+
+  return <Button onPress={handleButtonPress} title="Sign Up" />
 }
 ```
 
-## Screen Tracking
+> **💡 Mẹo:** Chúng tôi khuyến nghị sử dụng định dạng `[đối tượng] [hành động]` cho tên sự kiện, ví dụ: `user_signed_up`, `project_created`, `invite_sent`.
 
-For `@react-navigation/native` v6 or below:
+### Thiết lập thuộc tính sự kiện
+
+Bạn có thể thêm thuộc tính bổ sung cho sự kiện:
 
 ```tsx
-import { AgridProvider } from '@agrid/agrid-react-native'
+agrid?.capture('purchase_completed', {
+  product_id: '12345',
+  price: 99.99,
+  currency: 'USD',
+  category: 'electronics',
+})
+```
+
+### Ghi nhận màn hình (Screen Views)
+
+#### Tự động với useEffect
+
+```tsx
+import { useEffect, useState } from 'react'
+import { useAgrid } from '@agrid/agrid-react-native'
+
+function AppContent() {
+  const [activeScreen, setActiveScreen] = useState('HOME')
+  const agrid = useAgrid()
+
+  // Tự động track khi màn hình thay đổi
+  useEffect(() => {
+    if (agrid) {
+      agrid.screen(activeScreen)
+    }
+  }, [activeScreen, agrid])
+
+  return (
+    // UI của bạn
+  )
+}
+```
+
+#### Thủ công
+
+```tsx
+agrid?.screen('ProfileScreen', {
+  user_id: '123',
+  tab: 'settings',
+})
+```
+
+#### Với @react-navigation/native (v6 trở xuống)
+
+Khi sử dụng `@react-navigation/native` v6 hoặc thấp hơn, screen tracking được tự động ghi nhận nếu sử dụng thuộc tính `autocapture`:
+
+```tsx
+import { PostHogProvider } from '@agrid/agrid-react-native'
 import { NavigationContainer } from '@react-navigation/native'
 
 export function App() {
   return (
     <NavigationContainer>
-      <AgridProvider apiKey="YOUR_PROJECT_API_KEY" autocapture>
-        <YourApp />
+      <AgridProvider apiKey="<your_api_key>" autocapture>
+        {/* Rest of app */}
       </AgridProvider>
     </NavigationContainer>
   )
 }
 ```
 
-For v7 and above, track screens manually in `onStateChange`.
+> **⚠️ Lưu ý:** `AgridProvider` phải là con của `NavigationContainer`.
 
-## Autocapture
+#### Với @react-navigation/native (v7 trở lên)
+
+Đối với v7 trở lên, bạn cần ghi nhận màn hình thủ công:
+
+```tsx
+import { useAgrid } from '@agrid/agrid-react-native'
+import { NavigationContainer } from '@react-navigation/native'
+
+export function App() {
+  const agrid = useAgrid()
+
+  return (
+    <NavigationContainer
+      onStateChange={(state) => {
+        const currentRouteName = getCurrentRouteName(state)
+        agrid?.screen(currentRouteName)
+      }}
+    >
+      <AgridProvider
+        apiKey="<your_api_key>"
+        autocapture={{
+          captureScreens: false, // Xử lý riêng cho v7
+          captureTouches: true,
+        }}
+      >
+        {/* Rest of app */}
+      </AgridProvider>
+    </NavigationContainer>
+  )
+}
+```
+
+## Tự động ghi nhận (Autocapture)
+
+Agrid có thể tự động ghi nhận các sự kiện sau:
+
+- **Application Opened** - khi app được mở từ trạng thái đóng
+- **Application Became Active** - khi app chuyển sang foreground
+- **Application Backgrounded** - khi app chuyển sang background
+- **Application Installed** - khi app được cài đặt lần đầu
+- **Application Updated** - khi app được cập nhật
+- **$screen** - khi người dùng điều hướng (nếu sử dụng navigation library)
+- **$autocapture** - sự kiện chạm khi người dùng tương tác với màn hình
+
+### Bật Autocapture
 
 ```tsx
 <AgridProvider
-  apiKey="YOUR_PROJECT_API_KEY"
-  options={{ captureAppLifecycleEvents: true }}
-  autocapture={{ captureScreens: true, captureTouches: true }}
+  apiKey="<your_api_key>"
+  options={{
+    captureAppLifecycleEvents: true, // Bật app lifecycle events
+  }}
+  autocapture={{
+    captureScreens: true,  // Tự động capture screen views
+    captureTouches: true,  // Tự động capture touch events
+  }}
 >
-  <YourApp />
+  {/* App content */}
 </AgridProvider>
 ```
 
-## Links
+### Tùy chỉnh nhãn cho phần tử
 
-- Main repo: https://github.com/advnsoftware-oss/agrid-js
+Agrid sẽ tự động tạo tên cho phần tử được chạm dựa trên `displayName` hoặc `name` của React component. Bạn có thể tùy chỉnh bằng prop `ph-label`:
+
+```tsx
+<View ph-label="my-special-button">
+  <Text>Click me</Text>
+</View>
+```
+
+### Ngăn chặn capture dữ liệu nhạy cảm
+
+Sử dụng prop `ph-no-capture` để ngăn Agrid capture một phần tử cụ thể:
+
+```tsx
+<TextInput
+  ph-no-capture
+  placeholder="Nhập mật khẩu"
+  secureTextEntry
+/>
+```
+
+## Nhận diện người dùng
+
+### Identify
+
+Sử dụng `identify` để liên kết sự kiện với người dùng cụ thể:
+
+```tsx
 agrid?.identify('user_123', {
   email: 'user@example.com',
   name: 'Nguyễn Văn A',
@@ -455,6 +651,10 @@ export default App
 ## Câu hỏi?
 
 - Liên hệ với đội ngũ hỗ trợ Agrid qua email (advn.software@gmail.com) để được giúp đỡ.
+
+## Project ví dụ:
+
+- Ứng dụng React Native: [example-agrid-react-native](https://github.com/advnsoftware-oss/agrid-js/tree/main/examples/example-agrid-react-native)
 
 ## Tài liệu tham khảo
 

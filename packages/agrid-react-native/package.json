@@ -1,6 +1,6 @@
 {
   "name": "@agrid/agrid-react-native",
-  "version": "4.12.6",
+  "version": "4.12.9",
   "description": "Thư viện Agrid React Native cho phép bạn tích hợp analytics vào ứng dụng React Native của mình. Thư viện này được xây dựng dựa trên PostHog và hỗ trợ đầy đủ cho cả ứng dụng React Native thuần túy và ứng dụng Expo.",
   "license": "MIT",
   "author": {
