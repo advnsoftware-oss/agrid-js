@@ -81,6 +81,8 @@ def enableProguardInReleaseBuilds = (findProperty('android.enableProguardInRelea
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
+apply from: "../../node_modules/agrid-react-native/tooling/agrid.gradle"
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 

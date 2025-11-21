@@ -1,13 +1,14 @@
+
 import { Button, StyleSheet } from 'react-native'
 
 import ParallaxScrollView from '@/components/ParallaxScrollView'
 import { ThemedText } from '@/components/ThemedText'
 import { ThemedView } from '@/components/ThemedView'
 import { IconSymbol } from '@/components/ui/IconSymbol'
-import { usePostHog } from 'posthog-react-native'
+import { useAgrid } from 'agrid-react-native'
 
 export default function ErrorTrackingScreen() {
-    const posthog = usePostHog()
+    const agrid = useAgrid()
     return (
         <ParallaxScrollView
             headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -20,7 +21,13 @@ export default function ErrorTrackingScreen() {
             </ThemedView>
             <ThemedText>Examples on how to use error tracking in your app.</ThemedText>
             <Button
-                onPress={() => posthog.captureException(new Error('User clicked Capture Error'))}
+                onPress={() => {
+                    try {
+                        throw new Error('User clicked Capture Error')
+                    } catch (error) {
+                        agrid.captureException(error)
+                    }
+                }}
                 title="Capture error manually"
             />
             <Button
